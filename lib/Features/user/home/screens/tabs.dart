@@ -26,7 +26,7 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
-    Widget activePage = HomeScreen();
+    Widget activePage = FavoritesScreen();
     switch (_selectedPageIndex) {
       case 0:
         activePage = HomeScreen();
