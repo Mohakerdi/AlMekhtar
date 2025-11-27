@@ -26,23 +26,18 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
-    Widget activePage = FavoritesScreen();
+    Widget activePage = HomeScreen();
     switch (_selectedPageIndex) {
       case 0:
-        activePage = HomeScreen();
-        break;
+        activePage = HomeScreen();      break;
       case 1:
-        activePage = BookingsScreen();
-        break;
+        activePage = BookingsScreen();  break;
       case 2:
-        activePage = RentalsScreen();
-        break;
+        activePage = RentalsScreen();   break;
       case 3:
-        activePage = FavoritesScreen();
-        break;
+        activePage = FavoritesScreen(); break;
       case 4:
-        activePage = ProfileScreen();
-        break;
+        activePage = ProfileScreen();   break;
     }
 
     return Scaffold(
@@ -70,10 +65,10 @@ class _TabsState extends State<Tabs> {
           ),
         ],
       ),
+
       body: activePage,
+
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Theme.of(context).colorScheme.surface,
-        backgroundColor: Theme.of(context).colorScheme.primary,
         iconSize: 35,
         onTap: _selectPage,
         currentIndex: _selectedPageIndex,
