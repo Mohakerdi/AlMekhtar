@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         child: SizedBox(
                           width: 200,
                           height: 200,
-                          child: Image.asset(AppImages.kLogoPath),
+                          child: Image.asset(AppImages.kLogoWhitePath),
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -87,11 +87,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   ),
                 );
               },
-            ),
-
-            const SizedBox(height: 60),
-            const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),
           ],
         ),

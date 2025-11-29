@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mabeet/Features/user/bookings/screens/bookings_screen.dart';
 import 'package:mabeet/Features/user/chat/screens/chat_screen.dart';
 import 'package:mabeet/Features/user/favorites/screens/favorites_screen.dart';
 import 'package:mabeet/Features/user/profile/screens/profile_screen.dart';
 import 'package:mabeet/Features/user/rentals/screens/rentals_screen.dart';
+import 'package:mabeet/core/constants/icons.dart';
 
 import '../../notifications/screens/notifications_screen.dart';
 import 'home.dart';
@@ -85,8 +89,8 @@ class _TabsState extends State<Tabs> {
           ),
           BottomNavigationBarItem(icon: Icon(Icons.key), label: 'Bookings'),
           BottomNavigationBarItem(
-            activeIcon: Icon(Icons.add_box),
-            icon: Icon(Icons.add_box_outlined),
+            activeIcon: Icon(AppIcons.rentIcon),
+            icon: Icon(AppIcons.rentIcon),
             label: 'Rentals',
           ),
           BottomNavigationBarItem(
@@ -96,7 +100,7 @@ class _TabsState extends State<Tabs> {
           ),
           BottomNavigationBarItem(
             activeIcon: Icon(Icons.person),
-            icon: Icon(Icons.perm_identity),
+            icon: Icon(Icons.person_outlined),
             label: 'Profile',
           ),
         ],

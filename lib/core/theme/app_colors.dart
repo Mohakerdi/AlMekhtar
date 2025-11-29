@@ -58,7 +58,7 @@ class AppColors {
 
 
   // 5. Utility Colors
-  static const Color background = gray50;
+  static const Color background = Colors.white;
   static const Color card = gray50;
   static const Color lightText = gray500;
   static const Color darkText = gray800;

@@ -73,7 +73,7 @@ ThemeData get lightTheme {
       filled: true,
       fillColor: Colors.white,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray400),
+      hintStyle: AppTextStyles.bodyLarge.copyWith(color: AppColors.gray300),
       errorMaxLines: 1,
 
       border: OutlineInputBorder(
