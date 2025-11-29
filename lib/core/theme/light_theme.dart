@@ -15,6 +15,7 @@ ThemeData get lightTheme {
       onPrimary: Colors.white,
       secondary: AppColors.secondary,
       error: AppColors.errorBase,
+      onError: AppColors.errorBase,
       surface: Colors.white,
       onSurface: AppColors.gray900,
     ),
@@ -70,9 +71,9 @@ ThemeData get lightTheme {
     // Input Fields
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: Colors.white,
+      // fillColor: Colors.white,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      hintStyle: AppTextStyles.bodyMedium,
+      hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray400),
 
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_defaultRadius),

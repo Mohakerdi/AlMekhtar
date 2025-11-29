@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      home: Tabs(),
+      home: CreateAccountScreen(),
       themeMode: ThemeMode.system,
     );
   }

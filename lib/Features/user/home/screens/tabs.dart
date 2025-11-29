@@ -29,15 +29,20 @@ class _TabsState extends State<Tabs> {
     Widget activePage = HomeScreen();
     switch (_selectedPageIndex) {
       case 0:
-        activePage = HomeScreen();      break;
+        activePage = HomeScreen();
+        break;
       case 1:
-        activePage = BookingsScreen();  break;
+        activePage = BookingsScreen();
+        break;
       case 2:
-        activePage = RentalsScreen();   break;
+        activePage = RentalsScreen();
+        break;
       case 3:
-        activePage = FavoritesScreen(); break;
+        activePage = FavoritesScreen();
+        break;
       case 4:
-        activePage = ProfileScreen();   break;
+        activePage = ProfileScreen();
+        break;
     }
 
     return Scaffold(
@@ -56,9 +61,7 @@ class _TabsState extends State<Tabs> {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (builder) => const Chatscreen(),
-                ),
+                MaterialPageRoute(builder: (builder) => const Chatscreen()),
               );
             },
             icon: const Icon(Icons.chat),
@@ -69,40 +72,31 @@ class _TabsState extends State<Tabs> {
       body: activePage,
 
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: 35,
+        iconSize: 32,
         onTap: _selectPage,
         currentIndex: _selectedPageIndex,
         type: BottomNavigationBarType.fixed,
         // selectedItemColor: Theme.of(context).colorScheme.primary,
         items: [
           BottomNavigationBarItem(
-            icon: _selectedPageIndex == 0
-                ? Icon(Icons.home)
-                : Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.key), label: 'Bookings'),
           BottomNavigationBarItem(
-            icon: _selectedPageIndex == 1
-                ? Icon(Icons.key)
-                : Icon(Icons.key_outlined),
-            label: 'Bookings',
-          ),
-          BottomNavigationBarItem(
-            icon: _selectedPageIndex == 2
-                ? Icon(Icons.add_box)
-                : Icon(Icons.add_box_outlined),
+            activeIcon: Icon(Icons.add_box),
+            icon: Icon(Icons.add_box_outlined),
             label: 'Rentals',
           ),
           BottomNavigationBarItem(
-            icon: _selectedPageIndex == 3
-                ? Icon(Icons.favorite)
-                : Icon(Icons.favorite_border),
+            activeIcon: Icon(Icons.favorite),
+            icon: Icon(Icons.favorite_border),
             label: 'Favorites',
           ),
           BottomNavigationBarItem(
-            icon: _selectedPageIndex == 4
-                ? Icon(Icons.person)
-                : Icon(Icons.perm_identity),
+            activeIcon: Icon(Icons.person),
+            icon: Icon(Icons.perm_identity),
             label: 'Profile',
           ),
         ],

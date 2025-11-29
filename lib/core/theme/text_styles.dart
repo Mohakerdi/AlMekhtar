@@ -59,6 +59,6 @@ class AppTextStyles {
   static TextStyle get bodySmallMedium => _style(size: 12.0, weight: FontWeightHelper.medium);
 
   // 5. LABEL & CAPTION STYLES (Buttons, tags, small details)
-  static TextStyle get labelButton => _style(size: 16.0, weight: FontWeightHelper.semiBold, color: AppColors.card);
+  static TextStyle get labelButton => _style(size: 22.0, weight: FontWeightHelper.light, color: AppColors.card);
   static TextStyle get caption => _style(size: 10.0, weight: FontWeightHelper.regular, color: AppColors.lightText);
 }
