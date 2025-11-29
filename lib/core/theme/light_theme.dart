@@ -71,9 +71,10 @@ ThemeData get lightTheme {
     // Input Fields
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      // fillColor: Colors.white,
+      fillColor: Colors.white,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray400),
+      errorMaxLines: 1,
 
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_defaultRadius),

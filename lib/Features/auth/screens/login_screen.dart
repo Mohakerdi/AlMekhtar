@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/auth/screens/create_account_screen.dart';
 
+import '../../../core/constants/images.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/text_styles.dart';
 import '../widgets/auth_button.dart';
@@ -13,7 +14,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final _formKey = GlobalKey<FormState>();
   bool passwordVisible = false;
   bool isChecked = false;
@@ -28,10 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _sendForm(){
-    if (_formKey.currentState!.validate()) {
-
-    }
+  void _sendForm() {
+    if (_formKey.currentState!.validate()) {}
   }
 
   @override
@@ -45,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Center(child: Image.asset(AppImages.kLogoPath, width: 70)),
                 Text('Welcome Back!', style: AppTextStyles.display2Bold),
                 Text(
                   'Sign in with your phone number to continue',
@@ -54,7 +53,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text('Phone Number', style: AppTextStyles.titleMedium),
                 TextFormField(
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(hintText: '963 *** *** ***'),
+                  buildCounter:
+                      (
+                        // make counter invisible
+                        BuildContext context, {
+                        required int currentLength,
+                        required int? maxLength,
+                        required bool isFocused,
+                      }) => null,
+                  decoration: InputDecoration(hintText: '963 *** *** ***', helperText: ' '),
                   initialValue: _phoneNumber,
                   onSaved: (val) {
                     _phoneNumber = val!;
@@ -69,10 +76,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                   },
                 ),
-                SizedBox(height: 20),
                 Text('Password', style: AppTextStyles.titleMedium),
                 TextFormField(
                   decoration: InputDecoration(
+                    helperText: ' ',
                     hintText: 'enter your password',
                     suffixIcon: IconButton(
                       onPressed: () {
@@ -81,7 +88,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         });
                       },
                       icon: Icon(
-                        passwordVisible ? Icons.visibility : Icons.visibility_off,
+                        passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                       ),
                     ),
                   ),
@@ -99,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                   },
                 ),
-                SizedBox(height: 164),
+                SizedBox(height: 161),
                 AuthButton(buttonsText: 'Login', onBtnPressed: _sendForm),
                 SizedBox(height: 40),
                 Center(

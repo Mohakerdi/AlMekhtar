@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mabeet/Features/auth/screens/login_screen.dart';
 import 'package:mabeet/Features/auth/widgets/auth_button.dart';
+import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 
@@ -28,10 +29,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
 
-  void _sendForm(){
-    if (_formKey.currentState!.validate()) {
-
-    }
+  void _sendForm() {
+    if (_formKey.currentState!.validate()) {}
   }
 
   @override
@@ -45,7 +44,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Center(child: Image.asset(AppImages.kLogoPath, width: 70)),
                 Text('Create Account', style: AppTextStyles.display2Bold),
+
                 Text(
                   'Sign in with your phone number to continue',
                   style: AppTextStyles.bodyMedium,
@@ -53,8 +54,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 SizedBox(height: 60),
                 Text('Phone Number', style: AppTextStyles.titleMedium),
                 TextFormField(
+                  buildCounter:
+                      (
+                        BuildContext context, {
+                        required int currentLength,
+                        required int? maxLength,
+                        required bool isFocused,
+                      }) => null,
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(hintText: '963 *** *** ***'),
+                  decoration: InputDecoration(
+                    hintText: '963 *** *** ***',
+                    helperText: ' ',
+                  ),
                   initialValue: _phoneNumber,
                   onSaved: (val) {
                     _phoneNumber = val!;
@@ -70,27 +81,28 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       return null;
                   },
                 ),
-                SizedBox(height: 20),
                 Text('User Name', style: AppTextStyles.titleMedium),
                 TextFormField(
-                  decoration: InputDecoration(hintText: 'Enter your name'),
+                  decoration: InputDecoration(
+                    hintText: 'Enter your name',
+                    helperText: ' ',
+                  ),
                   initialValue: _name,
                   onSaved: (val) {
                     _name = val!;
                   },
                   validator: (value) {
-                    if (value == null ||
-                        value.isEmpty)
+                    if (value == null || value.isEmpty)
                       return 'Enter your name';
                     else
                       return null;
                   },
                 ),
-                SizedBox(height: 20),
                 Text('Password', style: AppTextStyles.titleMedium),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: 'at least 6 characters !',
+                    helperText: ' ',
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -98,7 +110,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         });
                       },
                       icon: Icon(
-                        passwordVisible ? Icons.visibility : Icons.visibility_off,
+                        passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                       ),
                     ),
                   ),

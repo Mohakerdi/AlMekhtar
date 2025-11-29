@@ -28,10 +28,10 @@ class AppTextStyles {
   static TextStyle get display1SemiBold => _style(size: 48.0, weight: FontWeightHelper.semiBold);
   static TextStyle get display1Bold => _style(size: 48.0, weight: FontWeightHelper.bold);
 
-  static TextStyle get display2Regular => _style(size: 38.0, weight: FontWeightHelper.regular);
-  static TextStyle get display2Medium => _style(size: 38.0, weight: FontWeightHelper.medium);
-  static TextStyle get display2SemiBold => _style(size: 38.0, weight: FontWeightHelper.semiBold);
-  static TextStyle get display2Bold => _style(size: 38.0, weight: FontWeightHelper.bold);
+  static TextStyle get display2Regular => _style(size: 38.0, weight: FontWeightHelper.regular, color: AppColors.primary700);
+  static TextStyle get display2Medium => _style(size: 38.0, weight: FontWeightHelper.medium, color: AppColors.primary700);
+  static TextStyle get display2SemiBold => _style(size: 38.0, weight: FontWeightHelper.semiBold, color: AppColors.primary700);
+  static TextStyle get display2Bold => _style(size: 38.0, weight: FontWeightHelper.bold, color: AppColors.primary700);
 
   // 2. HEADING STYLES
   static TextStyle get heading1Regular => _style(size: 28.0, weight: FontWeightHelper.regular);
