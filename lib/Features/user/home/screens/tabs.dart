@@ -30,27 +30,36 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
+
     Widget activePage = HomeScreen();
+    var activePageTitle = 'Home';
+
     switch (_selectedPageIndex) {
       case 0:
         activePage = HomeScreen();
+        activePageTitle = 'Home';
         break;
       case 1:
         activePage = BookingsScreen();
+        activePageTitle = 'Your Bookings';
         break;
       case 2:
         activePage = RentalsScreen();
+        activePageTitle = 'Your Properties';
         break;
       case 3:
         activePage = FavoritesScreen();
+        activePageTitle = 'Your Favorites';
         break;
       case 4:
         activePage = ProfileScreen();
+        activePageTitle = 'Profile';
         break;
     }
 
     return Scaffold(
       appBar: AppBar(
+        title: Text(activePageTitle),
         actions: [
           IconButton(
             onPressed: () {

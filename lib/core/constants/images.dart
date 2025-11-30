@@ -5,4 +5,5 @@ class AppImages{
  static const kSliderImage2 = 'assets/images/slider-image2.png';
  static const kSliderImage3 = 'assets/images/slider-image3.png';
  static const kSliderImage4 = 'assets/images/slider-image4.png';
+ static const kDyarImage = 'assets/images/dyar.png';
 }
