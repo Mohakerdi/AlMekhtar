@@ -35,6 +35,7 @@ class RecommendedHomeProperty extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Card(
+                          shadowColor: Colors.transparent,
                           child: Padding(
                             padding: EdgeInsets.all(5),
                             child: Row(

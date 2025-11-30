@@ -39,20 +39,41 @@ class FilterOverlay extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(16, 0, 16, keyboradSpace),
                     child: Column(
                       children: [
-                        FilledButton(
-                          onPressed: () {},
-                          style: FilledButton.styleFrom(
-                            iconSize: 30,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                        Text('data'),
+                        SizedBox(height: 180,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          spacing: 10,
+                          children: [
+                            FilledButton(
+                              onPressed: () {},
+                              style: FilledButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                backgroundColor: AppColors.gray100,
+                                minimumSize: Size(140, 60),
+                              ),
+                              child: Text(
+                                'Reset',
+                                style: AppTextStyles.labelButton.copyWith(color: AppColors.gray500),
+                              ),
                             ),
-                            backgroundColor: AppColors.primary700,
-                            minimumSize: Size(300, 60),
-                          ),
-                          child: Text(
-                            'Apply Filter',
-                            style: AppTextStyles.labelButton,
-                          ),
+                            FilledButton(
+                              onPressed: () {},
+                              style: FilledButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                backgroundColor: AppColors.primary700,
+                                minimumSize: Size(140, 60),
+                              ),
+                              child: Text(
+                                'Apply',
+                                style: AppTextStyles.labelButton,
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 16),
                       ],
