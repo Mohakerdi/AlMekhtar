@@ -1,26 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/home/screens/property_screen.dart';
 import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/font_weight_helper.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 
-class RecommendedHomeProperty extends StatelessWidget {
-  const RecommendedHomeProperty({super.key}); // edit constructor to recieve property object
+import '../../../../data/models/property.dart';
 
-  //final Property property;
+class RecommendedHomeProperty extends StatelessWidget {
+  const RecommendedHomeProperty({super.key, required this.property}); // edit constructor to recieve property object
+
+  final Property property;
+
+  void _goToPropertyScreen(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (builder) => PropertyScreen(property: property),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final String locationName = '${property.location.name}, ${property.describedLocation}';
+
     return SizedBox(
       width: 240,
       height: 180,
       child: ClipRRect(
         borderRadius: BorderRadiusGeometry.circular(10),
         child: InkWell(
-          onTap: () {},
+          onTap: () {_goToPropertyScreen(context);},
           child: Stack(
             children: [
-              Image.asset(AppImages.kDyarImage, fit: BoxFit.fill, width: double.infinity, height: double.infinity,),
+              Image.asset(property.imageURL, fit: BoxFit.fill, width: double.infinity, height: double.infinity,),
               Padding(
                 padding: EdgeInsets.only(
                   left: 15,
@@ -41,7 +54,7 @@ class RecommendedHomeProperty extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  '\$30',
+                                  property.costPerNight.toString(),
                                   style: AppTextStyles.bodyMedium.copyWith(
                                     color: AppColors.primary700,
                                     fontWeight: FontWeightHelper.bold,
@@ -61,7 +74,9 @@ class RecommendedHomeProperty extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Bit Byte',
+                              property.title.length > 15
+                                  ? '${property.title.substring(0,14,)}...'
+                                  : property.title,
                               style: AppTextStyles.titleLarge.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeightHelper.medium
@@ -71,9 +86,9 @@ class RecommendedHomeProperty extends StatelessWidget {
                               children: [
                                 Icon(Icons.place_outlined, color: AppColors.gray400,),
                                 Text(
-                                  'Damascus, Abo remmaneh'.length > 20
-                                      ? 'Damascus, Abo remmaneh'.substring(0,19,) +'...'
-                                      : 'Damascus, Abo remmaneh',
+                                  locationName.length > 20
+                                      ? '${locationName.substring(0,19,)}...'
+                                      : locationName,
                                   overflow: TextOverflow.ellipsis,
                                   style: AppTextStyles.bodySmall.copyWith(color: AppColors.gray400),
                                 ),

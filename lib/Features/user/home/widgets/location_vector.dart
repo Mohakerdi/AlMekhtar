@@ -3,12 +3,18 @@ import 'package:mabeet/core/theme/text_styles.dart';
 
 import '../../../../core/constants/images.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../screens/search_screen.dart';
 
 class LocationVector extends StatelessWidget {
   const LocationVector({super.key, required this.name, required this.image}); // edit constructor to recieve name & image
 
   final String name;
   final String image;
+
+  void _goToSearchScreen(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (builder) => SearchScreen()));
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,9 @@ class LocationVector extends StatelessWidget {
       shadowColor: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
-        onTap: (){},
+        onTap: (){
+          _goToSearchScreen(context);
+        },
         child: Padding(
           padding: EdgeInsets.all(5),
           child: Row(

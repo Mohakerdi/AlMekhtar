@@ -1,26 +1,32 @@
-import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
-
 import '../../../../core/theme/text_styles.dart';
+
 import '../screens/property_screen.dart';
+import 'package:flutter/material.dart';
 
 class PopularProperty extends StatelessWidget {
   const PopularProperty({super.key, required this.property});
 
   final Property property;
 
+  void _goToPropertyScreen(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (builder) => PropertyScreen(property: property),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // final String locationName = '${property.location.name}, ${property.describedLocation}';
+    final String locationName = property.describedLocation;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (builder) => PropertyScreen(property: property),
-            ),
-          );
+          _goToPropertyScreen(context);
         },
         child: Row(
           spacing: 5,
@@ -48,7 +54,7 @@ class PopularProperty extends StatelessWidget {
                     children: [
                       Text(
                         property.title.length > 13
-                            ? property.title.substring(0, 13) + '...'
+                            ? '${property.title.substring(0, 13)}...'
                             : property.title,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -62,9 +68,9 @@ class PopularProperty extends StatelessWidget {
                             color: AppColors.gray400,
                           ),
                           Text(
-                            property.location.name.length > 15
-                                ? '${property.location.name.substring(0, 15)}...'
-                                : property.location.name,
+                            locationName.length > 15
+                                ? '${locationName.substring(0, 13)}...'
+                                : locationName,
                             style: AppTextStyles.bodySmall.copyWith(
                               color: AppColors.gray400,
                             ),
@@ -95,11 +101,21 @@ class PopularProperty extends StatelessWidget {
                         color: AppColors.warning50,
                         shadowColor: Colors.transparent,
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
                           child: Row(
                             children: [
-                              Icon(Icons.star,size: 18, color: AppColors.warning700,),
-                              Text('${property.avgRate}',style: AppTextStyles.bodyMediumBold,)
+                              Icon(
+                                Icons.star,
+                                size: 18,
+                                color: AppColors.warning700,
+                              ),
+                              Text(
+                                '${property.avgRate}',
+                                style: AppTextStyles.bodyMediumBold,
+                              ),
                             ],
                           ),
                         ),
