@@ -5,7 +5,8 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mabeet/Features/user/bookings/screens/bookings_screen.dart';
 import 'package:mabeet/Features/user/chat/screens/chat_screen.dart';
 import 'package:mabeet/Features/user/favorites/screens/favorites_screen.dart';
-import 'package:mabeet/Features/user/profile/screens/profile_screen.dart';
+import 'package:mabeet/Features/user/profile/screens/main_profile/screens/profile_screen.dart';
+
 import 'package:mabeet/Features/user/rentals/screens/rentals_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
 
