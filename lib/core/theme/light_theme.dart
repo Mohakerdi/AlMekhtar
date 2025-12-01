@@ -15,6 +15,7 @@ ThemeData get lightTheme {
       onPrimary: Colors.white,
       secondary: AppColors.secondary,
       error: AppColors.errorBase,
+      onError: AppColors.errorBase,
       surface: Colors.white,
       onSurface: AppColors.gray900,
     ),
@@ -72,7 +73,8 @@ ThemeData get lightTheme {
       filled: true,
       fillColor: Colors.white,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      hintStyle: AppTextStyles.bodyMedium,
+      hintStyle: AppTextStyles.bodyLarge.copyWith(color: AppColors.gray300),
+      errorMaxLines: 1,
 
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_defaultRadius),

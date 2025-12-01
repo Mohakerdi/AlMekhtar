@@ -28,10 +28,10 @@ class AppTextStyles {
   static TextStyle get display1SemiBold => _style(size: 48.0, weight: FontWeightHelper.semiBold);
   static TextStyle get display1Bold => _style(size: 48.0, weight: FontWeightHelper.bold);
 
-  static TextStyle get display2Regular => _style(size: 38.0, weight: FontWeightHelper.regular);
-  static TextStyle get display2Medium => _style(size: 38.0, weight: FontWeightHelper.medium);
-  static TextStyle get display2SemiBold => _style(size: 38.0, weight: FontWeightHelper.semiBold);
-  static TextStyle get display2Bold => _style(size: 38.0, weight: FontWeightHelper.bold);
+  static TextStyle get display2Regular => _style(size: 38.0, weight: FontWeightHelper.regular, color: AppColors.primary700);
+  static TextStyle get display2Medium => _style(size: 38.0, weight: FontWeightHelper.medium, color: AppColors.primary700);
+  static TextStyle get display2SemiBold => _style(size: 38.0, weight: FontWeightHelper.semiBold, color: AppColors.primary700);
+  static TextStyle get display2Bold => _style(size: 38.0, weight: FontWeightHelper.bold, color: AppColors.primary700);
 
   // 2. HEADING STYLES
   static TextStyle get heading1Regular => _style(size: 28.0, weight: FontWeightHelper.regular);
@@ -59,6 +59,6 @@ class AppTextStyles {
   static TextStyle get bodySmallMedium => _style(size: 12.0, weight: FontWeightHelper.medium);
 
   // 5. LABEL & CAPTION STYLES (Buttons, tags, small details)
-  static TextStyle get labelButton => _style(size: 16.0, weight: FontWeightHelper.semiBold, color: AppColors.card);
+  static TextStyle get labelButton => _style(size: 22.0, weight: FontWeightHelper.light, color: AppColors.card);
   static TextStyle get caption => _style(size: 10.0, weight: FontWeightHelper.regular, color: AppColors.lightText);
 }
