@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
 
 import '../../../../data/repos/Cities.dart';
 import '../screens/search_screen.dart';
@@ -51,11 +52,7 @@ class CityCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      style: AppTextStyles.heading1Regular.copyWith(color: Colors.white)
                     ),
                     const SizedBox(height: 12),
                   ],

@@ -8,19 +8,19 @@ class City {
 }
 
 final List<City> cities = [
-  City(location: Location.AlHasakeh, imageURL: AppImages.kDyarImage),
-  City(location: Location.AlRaqqa, imageURL: AppImages.kDyarImage),
-  City(location: Location.Derezzor, imageURL: AppImages.kDyarImage),
-  City(location: Location.Aleppo, imageURL: AppImages.kDyarImage),
-  City(location: Location.Idleb, imageURL: AppImages.kDyarImage),
-  City(location: Location.Latakia, imageURL: AppImages.kDyarImage),
-  City(location: Location.Tartous, imageURL: AppImages.kDyarImage),
-  City(location: Location.Hama, imageURL: AppImages.kDyarImage),
-  City(location: Location.Homs, imageURL: AppImages.kDyarImage),
-  City(location: Location.Damascus, imageURL: AppImages.kDyarImage),
-  City(location: Location.RefDemasheq, imageURL: AppImages.kDyarImage),
-  City(location: Location.Daraa, imageURL: AppImages.kDyarImage),
-  City(location: Location.AlQonaytera, imageURL: AppImages.kDyarImage),
-  City(location: Location.ALSwieda, imageURL: AppImages.kDyarImage),
+  City(location: Location.AlHasakeh, imageURL: AppImages.kHasakah),
+  City(location: Location.AlRaqqa, imageURL: AppImages.kRaqqa),
+  City(location: Location.Derezzor, imageURL: AppImages.kDerezzor),
+  City(location: Location.Aleppo, imageURL: AppImages.kAleppo),
+  City(location: Location.Idleb, imageURL: AppImages.kIdlib),
+  City(location: Location.Latakia, imageURL: AppImages.kLatakia),
+  City(location: Location.Tartous, imageURL: AppImages.kTartous),
+  City(location: Location.Hama, imageURL: AppImages.kHama),
+  City(location: Location.Homs, imageURL: AppImages.kHoms),
+  City(location: Location.Damascus, imageURL: AppImages.kDamascus),
+  City(location: Location.RefDemasheq, imageURL: AppImages.kRefDemasheq),
+  City(location: Location.Daraa, imageURL: AppImages.kDaraa),
+  City(location: Location.AlQonaytera, imageURL: AppImages.kQonaytera),
+  City(location: Location.ALSwieda, imageURL: AppImages.kSweida),
 
 ];

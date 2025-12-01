@@ -9,7 +9,7 @@ class PropertyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text(property.title),),
       body: SingleChildScrollView(
         child: Center(child: Text('This is Property Screen Nigga')),
       ),

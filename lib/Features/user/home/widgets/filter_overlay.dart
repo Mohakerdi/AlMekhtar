@@ -40,7 +40,6 @@ class FilterOverlay extends StatelessWidget {
                     child: Column(
                       children: [
                         Text('data'),
-                        SizedBox(height: 180,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           spacing: 10,
