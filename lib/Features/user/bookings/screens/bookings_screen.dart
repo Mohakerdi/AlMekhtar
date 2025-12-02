@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/bookings/widgets/booking_property.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class BookingsScreen extends StatelessWidget {
@@ -7,13 +8,14 @@ class BookingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /* body: ListView.builder(
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
         itemCount: dummyProperties.length,
         itemBuilder: (context, index) {
-          final Property = dummyProperties[index];
-          return 
+          final property = dummyProperties[index];
+          return BookingProperty(property: property);
         },
-      ),*/
+      ),
     );
   }
 }

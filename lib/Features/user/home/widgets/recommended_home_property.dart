@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/home/screens/property_screen.dart';
+import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/font_weight_helper.dart';
@@ -8,7 +8,10 @@ import 'package:mabeet/core/theme/text_styles.dart';
 import '../../../../data/models/property.dart';
 
 class RecommendedHomeProperty extends StatelessWidget {
-  const RecommendedHomeProperty({super.key, required this.property}); // edit constructor to recieve property object
+  const RecommendedHomeProperty({
+    super.key,
+    required this.property,
+  }); // edit constructor to recieve property object
 
   final Property property;
 
@@ -22,7 +25,8 @@ class RecommendedHomeProperty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String locationName = '${property.location.name}, ${property.describedLocation}';
+    final String locationName =
+        '${property.location.name}, ${property.describedLocation}';
 
     return SizedBox(
       width: 240,
@@ -30,10 +34,17 @@ class RecommendedHomeProperty extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadiusGeometry.circular(10),
         child: InkWell(
-          onTap: () {_goToPropertyScreen(context);},
+          onTap: () {
+            _goToPropertyScreen(context);
+          },
           child: Stack(
             children: [
-              Image.asset(property.imageURL, fit: BoxFit.fill, width: double.infinity, height: double.infinity,),
+              Image.asset(
+                property.imageURL,
+                fit: BoxFit.fill,
+                width: double.infinity,
+                height: double.infinity,
+              ),
               Padding(
                 padding: EdgeInsets.only(
                   left: 15,
@@ -75,22 +86,27 @@ class RecommendedHomeProperty extends StatelessWidget {
                           children: [
                             Text(
                               property.title.length > 15
-                                  ? '${property.title.substring(0,14,)}...'
+                                  ? '${property.title.substring(0, 14)}...'
                                   : property.title,
                               style: AppTextStyles.titleLarge.copyWith(
                                 color: Colors.white,
-                                fontWeight: FontWeightHelper.medium
+                                fontWeight: FontWeightHelper.medium,
                               ),
                             ),
                             Row(
                               children: [
-                                Icon(Icons.place_outlined, color: AppColors.gray400,),
+                                Icon(
+                                  Icons.place_outlined,
+                                  color: AppColors.gray400,
+                                ),
                                 Text(
                                   locationName.length > 20
-                                      ? '${locationName.substring(0,19,)}...'
+                                      ? '${locationName.substring(0, 19)}...'
                                       : locationName,
                                   overflow: TextOverflow.ellipsis,
-                                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.gray400),
+                                  style: AppTextStyles.bodySmall.copyWith(
+                                    color: AppColors.gray400,
+                                  ),
                                 ),
                               ],
                             ),
