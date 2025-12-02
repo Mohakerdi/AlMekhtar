@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mabeet/Features/user/bookings/screens/bookings_screen.dart';
 import 'package:mabeet/Features/user/chat/screens/chat_screen.dart';
 import 'package:mabeet/Features/user/favorites/screens/favorites_screen.dart';
-import 'package:mabeet/Features/user/profile/screens/profile_screen.dart';
+import 'package:mabeet/Features/user/profile/screens/main_profile/screens/profile_screen.dart';
+
 import 'package:mabeet/Features/user/rentals/screens/rentals_screen.dart';
+import 'package:mabeet/core/constants/icons.dart';
 
 import '../../notifications/screens/notifications_screen.dart';
 import 'home.dart';
@@ -26,22 +31,36 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
+
     Widget activePage = HomeScreen();
+    var activePageTitle = 'Home';
+
     switch (_selectedPageIndex) {
       case 0:
-        activePage = HomeScreen();      break;
+        activePage = HomeScreen();
+        activePageTitle = 'Home';
+        break;
       case 1:
-        activePage = BookingsScreen();  break;
+        activePage = BookingsScreen();
+        activePageTitle = 'Your Bookings';
+        break;
       case 2:
-        activePage = RentalsScreen();   break;
+        activePage = RentalsScreen();
+        activePageTitle = 'Your Properties';
+        break;
       case 3:
-        activePage = FavoritesScreen(); break;
+        activePage = FavoritesScreen();
+        activePageTitle = 'Your Favorites';
+        break;
       case 4:
-        activePage = ProfileScreen();   break;
+        activePage = ProfileScreen();
+        activePageTitle = 'Profile';
+        break;
     }
 
     return Scaffold(
       appBar: AppBar(
+        title: Text(activePageTitle),
         actions: [
           IconButton(
             onPressed: () {
@@ -56,9 +75,7 @@ class _TabsState extends State<Tabs> {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (builder) => const Chatscreen(),
-                ),
+                MaterialPageRoute(builder: (builder) => const Chatscreen()),
               );
             },
             icon: const Icon(Icons.chat),
@@ -69,40 +86,31 @@ class _TabsState extends State<Tabs> {
       body: activePage,
 
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: 35,
+        iconSize: 32,
         onTap: _selectPage,
         currentIndex: _selectedPageIndex,
         type: BottomNavigationBarType.fixed,
         // selectedItemColor: Theme.of(context).colorScheme.primary,
         items: [
           BottomNavigationBarItem(
-            icon: _selectedPageIndex == 0
-                ? Icon(Icons.home)
-                : Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.key), label: 'Bookings'),
           BottomNavigationBarItem(
-            icon: _selectedPageIndex == 1
-                ? Icon(Icons.key)
-                : Icon(Icons.key_outlined),
-            label: 'Bookings',
-          ),
-          BottomNavigationBarItem(
-            icon: _selectedPageIndex == 2
-                ? Icon(Icons.add_box)
-                : Icon(Icons.add_box_outlined),
+            activeIcon: Icon(AppIcons.rentIcon),
+            icon: Icon(AppIcons.rentIcon),
             label: 'Rentals',
           ),
           BottomNavigationBarItem(
-            icon: _selectedPageIndex == 3
-                ? Icon(Icons.favorite)
-                : Icon(Icons.favorite_border),
+            activeIcon: Icon(Icons.favorite),
+            icon: Icon(Icons.favorite_border),
             label: 'Favorites',
           ),
           BottomNavigationBarItem(
-            icon: _selectedPageIndex == 4
-                ? Icon(Icons.person)
-                : Icon(Icons.perm_identity),
+            activeIcon: Icon(Icons.person),
+            icon: Icon(Icons.person_outlined),
             label: 'Profile',
           ),
         ],

@@ -16,6 +16,17 @@ enum Location {
 }
 
 class Property {
+  Property({
+    required this.id,
+    required this.title,
+    required this.imageURL,
+    required this.description,
+    required this.describedLocation,
+    required this.costPerNight,
+    required this.location,
+    required this.avgRate,
+  });
+
   final String id;
   final String title;
   final String imageURL;
@@ -24,14 +35,4 @@ class Property {
   final double costPerNight;
   final Location location;
   final double avgRate;
-
-  Property({
-    required this.title,
-    required this.location,
-    required this.imageURL,
-    required this.costPerNight,
-    required this.avgRate,
-    required this.description,
-    required this.rooms,
-  });
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/auth/screens/create_account_screen.dart';
-import 'package:mabeet/Features/user/home/screens/tabs.dart';
+import 'package:mabeet/Features/auth/screens/on_boarding_screen.dart';
+import 'package:mabeet/Features/splash/splash_screen_handler.dart';
 import 'package:mabeet/core/theme/app_theme.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      home: Tabs(),
+      home: SplashHandler(),
       themeMode: ThemeMode.system,
     );
   }
