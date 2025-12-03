@@ -40,7 +40,7 @@ class RecommendedHomeProperty extends StatelessWidget {
           child: Stack(
             children: [
               Image.asset(
-                property.imageURL,
+                property.imageURLs[0],
                 fit: BoxFit.fill,
                 width: double.infinity,
                 height: double.infinity,

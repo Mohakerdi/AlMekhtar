@@ -5,7 +5,12 @@ final List<Property> dummyProperties = [
   Property(
     id: '1',
     title: 'Eagle Nest',
-    imageURL: AppImages.kEagleNest,
+    imageURLs: [
+      AppImages.kEagleNest,
+      AppImages.kEagleNest,
+      AppImages.kEagleNest,
+      AppImages.kEagleNest,
+    ],
     costPerNight: 22.5,
     location: Location.Damascus,
     describedLocation: 'Berlin, 1944',
@@ -13,10 +18,16 @@ final List<Property> dummyProperties = [
         'Perched high above the city, Eagle Nest offers a serene escape from the hustle and bustle of everyday life. Enjoy breathtaking panoramic views, cozy interiors, and a perfect spot for morning coffee or sunset relaxation. Ideal for couples or solo travelers looking for peace, quiet, and inspiration.',
     avgRate: 3.5,
   ),
+
   Property(
     id: '2',
     title: 'Twin Tower',
-    imageURL: AppImages.kTwinTowers,
+    imageURLs: [
+      AppImages.kTwinTowers,
+      AppImages.kTwinTowers,
+      AppImages.kTwinTowers,
+      AppImages.kTwinTowers,
+    ],
     costPerNight: 15,
     location: Location.ALSwieda,
     describedLocation: 'well, it WAS not is (;',
@@ -24,10 +35,16 @@ final List<Property> dummyProperties = [
         'Twin Tower is a modern apartment designed for comfort and convenience. Featuring spacious rooms, stylish decor, and all the amenities you need for a pleasant stay, it’s perfect for business travelers, friends, or families. Located close to shops, cafes, and public transport, you can explore the city with ease while returning to a peaceful retreat at the end of the day.',
     avgRate: 5.1,
   ),
+
   Property(
     id: '3',
     title: 'CJ\'s House',
-    imageURL: AppImages.kGrooveStreet,
+    imageURLs: [
+      AppImages.kGrooveStreet,
+      AppImages.kGrooveStreet,
+      AppImages.kGrooveStreet,
+      AppImages.kGrooveStreet,
+    ],
     costPerNight: 100,
     location: Location.Tartous,
     describedLocation: 'Groove Street',
@@ -35,98 +52,16 @@ final List<Property> dummyProperties = [
         'CJ\'s House is a vibrant and lively home that combines comfort with character. Located in a friendly neighborhood with easy access to local attractions, this house offers a unique atmosphere full of charm and personality. Enjoy spacious living areas, cozy bedrooms, and a welcoming space perfect for gatherings with friends or family. A true gem for anyone looking to experience the city in a special way.',
     avgRate: 4.4,
   ),
+
   Property(
     id: '4',
     title: 'Foster\'s House for imaginary friends',
-    imageURL: AppImages.kFosterHouse,
-    costPerNight: 35,
-    location: Location.RefDemasheq,
-    describedLocation: 'in our hearts',
-    description:
-        'Step into a whimsical world at Foster\'s House for imaginary friends, where imagination and fun come alive. This playful home is perfect for families, kids, or anyone young at heart. With colorful interiors, unique decorations, and cozy corners for reading or relaxing, every moment here is full of joy. Experience a stay unlike any other, where creativity and comfort blend seamlessly.',
-    avgRate: 3.9,
-  ),
-  Property(
-    id: '1',
-    title: 'Eagle Nest',
-    imageURL: AppImages.kEagleNest,
-    costPerNight: 22.5,
-    location: Location.Damascus,
-    describedLocation: 'Berlin, 1944',
-    description:
-        'Perched high above the city, Eagle Nest offers a serene escape from the hustle and bustle of everyday life. Enjoy breathtaking panoramic views, cozy interiors, and a perfect spot for morning coffee or sunset relaxation. Ideal for couples or solo travelers looking for peace, quiet, and inspiration.',
-    avgRate: 3.5,
-  ),
-  Property(
-    id: '2',
-    title: 'Twin Tower',
-    imageURL: AppImages.kTwinTowers,
-    costPerNight: 15,
-    location: Location.ALSwieda,
-    describedLocation: 'well, it WAS not is (;',
-    description:
-        'Twin Tower is a modern apartment designed for comfort and convenience. Featuring spacious rooms, stylish decor, and all the amenities you need for a pleasant stay, it’s perfect for business travelers, friends, or families. Located close to shops, cafes, and public transport, you can explore the city with ease while returning to a peaceful retreat at the end of the day.',
-    avgRate: 5.1,
-  ),
-  Property(
-    id: '3',
-    title: 'CJ\'s House',
-    imageURL: AppImages.kGrooveStreet,
-    costPerNight: 100,
-    location: Location.Tartous,
-    describedLocation: 'Groove Street',
-    description:
-        'CJ\'s House is a vibrant and lively home that combines comfort with character. Located in a friendly neighborhood with easy access to local attractions, this house offers a unique atmosphere full of charm and personality. Enjoy spacious living areas, cozy bedrooms, and a welcoming space perfect for gatherings with friends or family. A true gem for anyone looking to experience the city in a special way.',
-    avgRate: 4.4,
-  ),
-  Property(
-    id: '4',
-    title: 'Foster\'s House for imaginary friends',
-    imageURL: AppImages.kFosterHouse,
-    costPerNight: 35,
-    location: Location.RefDemasheq,
-    describedLocation: 'in our hearts',
-    description:
-        'Step into a whimsical world at Foster\'s House for imaginary friends, where imagination and fun come alive. This playful home is perfect for families, kids, or anyone young at heart. With colorful interiors, unique decorations, and cozy corners for reading or relaxing, every moment here is full of joy. Experience a stay unlike any other, where creativity and comfort blend seamlessly.',
-    avgRate: 3.9,
-  ),
-  Property(
-    id: '1',
-    title: 'Eagle Nest',
-    imageURL: AppImages.kEagleNest,
-    costPerNight: 22.5,
-    location: Location.Damascus,
-    describedLocation: 'Berlin, 1944',
-    description:
-        'Perched high above the city, Eagle Nest offers a serene escape from the hustle and bustle of everyday life. Enjoy breathtaking panoramic views, cozy interiors, and a perfect spot for morning coffee or sunset relaxation. Ideal for couples or solo travelers looking for peace, quiet, and inspiration.',
-    avgRate: 3.5,
-  ),
-  Property(
-    id: '2',
-    title: 'Twin Tower',
-    imageURL: AppImages.kTwinTowers,
-    costPerNight: 15,
-    location: Location.ALSwieda,
-    describedLocation: 'well, it WAS not is (;',
-    description:
-        'Twin Tower is a modern apartment designed for comfort and convenience. Featuring spacious rooms, stylish decor, and all the amenities you need for a pleasant stay, it’s perfect for business travelers, friends, or families. Located close to shops, cafes, and public transport, you can explore the city with ease while returning to a peaceful retreat at the end of the day.',
-    avgRate: 5.1,
-  ),
-  Property(
-    id: '3',
-    title: 'CJ\'s House',
-    imageURL: AppImages.kGrooveStreet,
-    costPerNight: 100,
-    location: Location.Tartous,
-    describedLocation: 'Groove Street',
-    description:
-        'CJ\'s House is a vibrant and lively home that combines comfort with character. Located in a friendly neighborhood with easy access to local attractions, this house offers a unique atmosphere full of charm and personality. Enjoy spacious living areas, cozy bedrooms, and a welcoming space perfect for gatherings with friends or family. A true gem for anyone looking to experience the city in a special way.',
-    avgRate: 4.4,
-  ),
-  Property(
-    id: '4',
-    title: 'Foster\'s House for imaginary friends',
-    imageURL: AppImages.kFosterHouse,
+    imageURLs: [
+      AppImages.kFosterHouse,
+      AppImages.kFosterHouse,
+      AppImages.kFosterHouse,
+      AppImages.kFosterHouse,
+    ],
     costPerNight: 35,
     location: Location.RefDemasheq,
     describedLocation: 'in our hearts',

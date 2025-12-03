@@ -26,7 +26,7 @@ class PropertyScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
-                  image: AssetImage(property.imageURL),
+                  image: AssetImage(property.imageURLs[0]),
                   fit: BoxFit.cover,
                 ),
               ),

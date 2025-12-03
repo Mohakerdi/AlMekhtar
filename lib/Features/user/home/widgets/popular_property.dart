@@ -36,7 +36,7 @@ class PopularProperty extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
-                  property.imageURL,
+                  property.imageURLs[0],
                   fit: BoxFit.fill,
                   width: double.infinity,
                   height: double.infinity,

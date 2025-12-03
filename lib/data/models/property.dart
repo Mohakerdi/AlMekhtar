@@ -19,7 +19,7 @@ class Property {
   Property({
     required this.id,
     required this.title,
-    required this.imageURL,
+    required this.imageURLs,
     required this.description,
     required this.describedLocation,
     required this.costPerNight,
@@ -29,7 +29,7 @@ class Property {
 
   final String id;
   final String title;
-  final String imageURL;
+  final List<String> imageURLs;
   final String description;
   final String describedLocation;
   final double costPerNight;
