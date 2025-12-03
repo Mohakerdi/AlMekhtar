@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mabeet/Features/user/bookings/screens/bookings_screen.dart';
-import 'package:mabeet/Features/user/chat/screens/chat_screen.dart';
 import 'package:mabeet/Features/user/favorites/screens/favorites_screen.dart';
 import 'package:mabeet/Features/user/profile/screens/main_profile/screens/profile_screen.dart';
-
 import 'package:mabeet/Features/user/rentals/screens/rentals_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
-
-import '../../notifications/screens/notifications_screen.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'home.dart';
 
 class Tabs extends StatefulWidget {
@@ -21,100 +16,76 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-  int _selectedPageIndex = 0;
+  PersistentTabController _controller = PersistentTabController(
+    initialIndex: 0,
+  );
 
-  void _selectPage(int index) {
-    setState(() {
-      _selectedPageIndex = index;
-    });
+  List<Widget> _buildScreens() {
+    return [
+      HomeScreen(),
+      BookingsScreen(),
+      RentalsScreen(),
+      FavoritesScreen(),
+      ProfileScreen(),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.home_outlined),
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+        inactiveColorPrimary: AppColors.gray400
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.key),
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+          inactiveColorPrimary: AppColors.gray400
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(AppIcons.rentIcon),
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+          inactiveColorPrimary: AppColors.gray400
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.favorite_border),
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+          inactiveColorPrimary: AppColors.gray400
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.person_outlined),
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+          inactiveColorPrimary: AppColors.gray400
+      ),
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
-
     Widget activePage = HomeScreen();
     var activePageTitle = 'Home';
 
-    switch (_selectedPageIndex) {
-      case 0:
-        activePage = HomeScreen();
-        activePageTitle = 'Home';
-        break;
-      case 1:
-        activePage = BookingsScreen();
-        activePageTitle = 'Your Bookings';
-        break;
-      case 2:
-        activePage = RentalsScreen();
-        activePageTitle = 'Your Properties';
-        break;
-      case 3:
-        activePage = FavoritesScreen();
-        activePageTitle = 'Your Favorites';
-        break;
-      case 4:
-        activePage = ProfileScreen();
-        activePageTitle = 'Profile';
-        break;
-    }
+    return PersistentTabView(
+      context,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      controller: _controller,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      animationSettings: const NavBarAnimationSettings(
+        navBarItemAnimation: ItemAnimationSettings(
+          duration: Duration(milliseconds: 400),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: ScreenTransitionAnimationSettings(
+          animateTabTransition: true,
+          duration: Duration(milliseconds: 200),
+          screenTransitionAnimationType: ScreenTransitionAnimationType.slide,
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(activePageTitle),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (builder) => const NotificationsScreen(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.notifications_none),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (builder) => const Chatscreen()),
-              );
-            },
-            icon: const Icon(Icons.chat),
-          ),
-        ],
+        ),
       ),
-
-      body: activePage,
-
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 32,
-        onTap: _selectPage,
-        currentIndex: _selectedPageIndex,
-        type: BottomNavigationBarType.fixed,
-        // selectedItemColor: Theme.of(context).colorScheme.primary,
-        items: [
-          BottomNavigationBarItem(
-            activeIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.key), label: 'Bookings'),
-          BottomNavigationBarItem(
-            activeIcon: Icon(AppIcons.rentIcon),
-            icon: Icon(AppIcons.rentIcon),
-            label: 'Rentals',
-          ),
-          BottomNavigationBarItem(
-            activeIcon: Icon(Icons.favorite),
-            icon: Icon(Icons.favorite_border),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            activeIcon: Icon(Icons.person),
-            icon: Icon(Icons.person_outlined),
-            label: 'Profile',
-          ),
-        ],
-      ),
+      confineToSafeArea: true,
+      navBarHeight: 55,
+      navBarStyle: NavBarStyle.style3,
     );
   }
 }

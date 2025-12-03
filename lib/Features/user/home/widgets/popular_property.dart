@@ -1,5 +1,6 @@
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../../core/theme/text_styles.dart';
 
 import '../screens/property_screen.dart';
@@ -11,10 +12,11 @@ class PopularProperty extends StatelessWidget {
   final Property property;
 
   void _goToPropertyScreen(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (builder) => PropertyScreen(property: property),
-      ),
+    PersistentNavBarNavigator.pushNewScreen(
+        context,
+        screen: PropertyScreen(property: property),
+        withNavBar: false,
+        pageTransitionAnimation: PageTransitionAnimation.scale
     );
   }
 
