@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {
             PersistentNavBarNavigator.pushNewScreen(
               context,
-              screen: const NotificationsScreen(),
+              screen: NotificationsScreen(),
               withNavBar: false,
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );

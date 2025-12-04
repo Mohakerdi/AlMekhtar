@@ -12,7 +12,7 @@ class HistoryShowDetails extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.palette, color: Colors.deepPurple),
           title: Text('Switched to Dark Mode'),
-          subtitle: Text('2 hours ago'),
+          subtitle: Text('2 hours ago'), //fawzy
         ),
         ListTile(
           leading: Icon(Icons.person, color: Colors.deepPurple),
