@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/core/theme/text_styles.dart';
 
-class ProfileSectionHeader extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final VoidCallback? onTap;
+class ProfileSectionWidget extends StatelessWidget {
+  final String name;
+  final String phoneNumber;
+  final String imagePath;
 
-  const ProfileSectionHeader({
+  const ProfileSectionWidget({
     super.key,
-    required this.title,
-    required this.icon,
-    this.onTap,
+    required this.name,
+    required this.phoneNumber,
+    required this.imagePath,
   });
 
   @override
   Widget build(BuildContext context) {
-    // الوصول إلى الألوان من Theme.of(context)
-    return ListTile(
-      leading: Icon(icon, size: 30, color: AppColors.primary950),
-
-      title: Text(title, style: TextStyle(fontSize: 24)),
-
-      onTap: onTap,
+    return Column(
+      children: [
+        CircleAvatar(radius: 70, backgroundImage: AssetImage(imagePath)),
+        const SizedBox(height: 10),
+        Text(
+          name,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          phoneNumber,
+          style: const TextStyle(fontSize: 14, color: AppColors.gray700),
+        ),
+      ],
     );
   }
 }
