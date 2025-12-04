@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/property/widgets/cost_widget.dart';
+import 'package:mabeet/Features/user/property/widgets/description_details_widget.dart';
+import 'package:mabeet/Features/user/property/widgets/description_widget.dart';
+import 'package:mabeet/Features/user/property/widgets/images_widget.dart';
+import 'package:mabeet/Features/user/property/widgets/location_widget.dart';
+import 'package:mabeet/Features/user/property/widgets/property_details.dart';
+import 'package:mabeet/Features/user/property/widgets/title_widget.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import '../../../../data/models/property.dart';
 
@@ -20,17 +27,7 @@ class PropertyScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              width: 390,
-              height: 280,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  image: AssetImage(property.imageURLs[0]),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            ImagesWidget(images: property.imageURLs),
             Padding(
               padding: const EdgeInsets.only(
                 left: 16.0,
@@ -41,89 +38,17 @@ class PropertyScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    property.title,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.gray950,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "\$${property.costPerNight.toString()}",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: AppColors.primary700,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "/Night",
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: AppColors.gray400,
-                        ),
-                      ),
-                    ],
-                  ),
+                  TitleWidget(title: property.title),
+                  CostWidget(costPerNight: property.costPerNight),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 13),
-              child: Row(
-                children: [
-                  Icon(Icons.location_on_outlined),
-                  Text(
-                    property.location.toString().split('.').last,
-                    style: TextStyle(color: AppColors.gray400, fontSize: 15),
-                  ),
-                ],
-              ),
-            ),
+            LocationWidget(location: property.location),
             SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Property Details",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.gray950,
-                  ),
-                ),
-              ),
-            ),
+            PropertyDetails(),
             SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Description",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.gray950,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  property.description,
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(fontSize: 15, color: AppColors.gray400),
-                ),
-              ),
-            ),
+            DescriptionWidget(),
+            DescriptionDetailsWidget(description: property.description),
           ],
         ),
       ),
