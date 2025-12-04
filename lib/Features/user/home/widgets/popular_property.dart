@@ -3,8 +3,6 @@ import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../../core/theme/text_styles.dart';
-
-import '../property/screens/property_screen.dart';
 import 'package:flutter/material.dart';
 
 class PopularProperty extends StatelessWidget {

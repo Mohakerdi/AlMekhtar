@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/property/widgets/cost_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_details_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_widget.dart';
-import 'package:mabeet/Features/user/property/widgets/images_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/location_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/property_details.dart';
 import 'package:mabeet/Features/user/property/widgets/title_widget.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import '../../../../data/models/property.dart';
+import '../widgets/details_slider.dart';
 
 class PropertyScreen extends StatelessWidget {
   const PropertyScreen({super.key, required this.property});
@@ -27,7 +27,7 @@ class PropertyScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ImagesWidget(images: property.imageURLs),
+            DetailsSlider(imageAssets: property.imageURLs),
             Padding(
               padding: const EdgeInsets.only(
                 left: 16.0,

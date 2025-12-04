@@ -8,12 +8,16 @@ class TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(
-        fontSize: 25,
-        fontWeight: FontWeight.bold,
-        color: AppColors.gray950,
+    return SizedBox(
+      width: 210,
+      child: Text(
+        title,
+        softWrap: true,
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+          color: AppColors.gray950,
+        ),
       ),
     );
   }

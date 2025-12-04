@@ -25,7 +25,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (builder) => const NotificationsScreen(),
+                  builder: (builder) => NotificationsScreen(),
                 ),
               );
             },
