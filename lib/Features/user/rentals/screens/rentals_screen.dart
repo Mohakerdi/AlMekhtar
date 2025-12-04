@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/rentals/screens/add_property_screen.dart';
 import 'package:mabeet/Features/user/rentals/widgets/rentals_property.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
@@ -17,7 +18,12 @@ class RentalsScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddPropertyScreen()),
+          );
+        },
         //label: Text("add new property"),
         child: Icon(Icons.add),
       ),
