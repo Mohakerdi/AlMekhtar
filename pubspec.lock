@@ -91,6 +91,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: b738e35f8bb4957896c34957baf922f99c5d415b38ddc8b070d14b7fa95715d4
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.9.1"
   init:
     dependency: "direct main"
     description:
@@ -107,14 +115,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.20.2"
-  font_awesome_flutter:
-    dependency: "direct main"
-    description:
-      name: font_awesome_flutter
-      sha256: b738e35f8bb4957896c34957baf922f99c5d415b38ddc8b070d14b7fa95715d4
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.9.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -138,7 +138,7 @@ packages:
       sha256: "8d5a2d49f4a66b49744b23b018848400d23e54caf9463f4eb20df3eb8acb2eb1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   line_awesome_flutter:
     dependency: "direct main"
     description:
