@@ -50,7 +50,8 @@ class _EditProfileShowDetailsState extends State<EditProfileShowDetails> {
           const SizedBox(height: 20),
           // ID Number Field
           TextFormField(
-            initialValue: '123456789',
+            keyboardType: TextInputType.phone,
+            initialValue: '+963 ',
             decoration: const InputDecoration(
               labelText: 'Phone Number',
               prefixIcon: Icon(Icons.badge_outlined),
