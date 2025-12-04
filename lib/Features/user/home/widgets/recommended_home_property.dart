@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/home/screens/property_screen.dart';
+import 'package:mabeet/Features/user/home/property/screens/property_screen.dart';
 import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/font_weight_helper.dart';

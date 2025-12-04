@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import '../../../../data/repos/Cities.dart';
-import '../screens/search_screen.dart';
+import '../../../../../data/repos/Cities.dart';
+import '../../search/screens/search_screen.dart';
 
 class CityCard extends StatelessWidget {
   const CityCard({super.key, required this.city});

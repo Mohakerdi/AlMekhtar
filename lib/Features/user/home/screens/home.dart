@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/home/screens/locations_screen.dart';
-import 'package:mabeet/Features/user/home/screens/search_screen.dart';
+import 'package:mabeet/Features/user/home/locations/screens/locations_screen.dart';
+import 'package:mabeet/Features/user/home/search/screens/search_screen.dart';
 import 'package:mabeet/Features/user/home/widgets/CustomAppBar.dart';
 import 'package:mabeet/Features/user/home/widgets/filter_overlay.dart';
-import 'package:mabeet/Features/user/home/widgets/location_vector.dart';
+import 'package:mabeet/Features/user/home/locations/widgets/location_vector.dart';
 import 'package:mabeet/Features/user/home/widgets/popular_property.dart';
 import 'package:mabeet/Features/user/home/widgets/properties_list.dart';
 import 'package:mabeet/Features/user/home/widgets/recommended_home_property.dart';
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _goToSearchScreen() {
-    PersistentNavBarNavigator.pushNewScreen(
+    PersistentNavBarNavigator .pushNewScreen(
       context,
       screen: SearchScreen(),
       withNavBar: false,

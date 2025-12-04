@@ -6,7 +6,7 @@ import 'package:mabeet/Features/user/rentals/screens/rentals_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-import 'home.dart';
+import 'home/screens/home.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({super.key});

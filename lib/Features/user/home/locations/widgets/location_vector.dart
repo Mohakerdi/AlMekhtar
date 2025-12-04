@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import '../../../../core/constants/images.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../screens/search_screen.dart';
+import '../../../../../core/constants/images.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../search/screens/search_screen.dart';
 
 class LocationVector extends StatelessWidget {
   const LocationVector({

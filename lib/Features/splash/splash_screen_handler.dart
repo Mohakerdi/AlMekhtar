@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'splash_screen.dart';
-import '../user/home/screens/tabs.dart';
+import '../user/tabs.dart';
 
 class SplashHandler extends StatefulWidget {
   const SplashHandler({super.key});

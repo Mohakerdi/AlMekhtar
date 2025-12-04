@@ -3,7 +3,7 @@ import 'package:mabeet/data/models/property.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../../core/theme/text_styles.dart';
 
-import '../screens/property_screen.dart';
+import '../property/screens/property_screen.dart';
 import 'package:flutter/material.dart';
 
 class PopularProperty extends StatelessWidget {
@@ -22,8 +22,8 @@ class PopularProperty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final String locationName = '${property.location.name}, ${property.describedLocation}';
-    final String locationName = property.describedLocation;
+    final String locationName = '${property.location.name}, ${property.describedLocation}';
+    // final String locationName = property.describedLocation;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: InkWell(
