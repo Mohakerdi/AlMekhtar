@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/card_model.dart';
 import 'package:mabeet/data/repos/dummy_card_data.dart';
 
@@ -24,7 +25,16 @@ class NotificationsScreen extends StatelessWidget {
           return Card(
             margin: EdgeInsets.all(10),
             child: ListTile(
-              leading: Icon(Icons.event_note),
+              leading: CircleAvatar(
+                radius: 24,
+                backgroundColor: AppColors.primary700.withAlpha(
+                  30,
+                ), // Light background
+                child: Icon(
+                  Icons.notifications,
+                  color: AppColors.primary600,
+                ), // Dark Icon
+              ),
               title: Text(item.title),
               subtitle: Text("Date: $formattedDate"),
             ),
