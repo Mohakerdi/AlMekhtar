@@ -86,16 +86,6 @@ class RentalsProperty extends StatelessWidget {
                   Column(
                     spacing: 5,
                     children: [
-                      CircleAvatar(
-                        radius: 14,
-                        backgroundColor: Colors.white,
-                        child: IconButton(
-                          onPressed: () {},
-                          color: Colors.red,
-                          icon: Icon(Icons.favorite_border),
-                          padding: EdgeInsets.all(0),
-                        ),
-                      ),
                       SizedBox(height: 20),
                       Card(
                         color: AppColors.warning50,
