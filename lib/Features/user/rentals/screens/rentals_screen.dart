@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/rentals/screens/add_property_screen.dart';
+import 'package:mabeet/Features/user/rentals/widgets/rentals_property.dart';
+import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class RentalsScreen extends StatelessWidget {
   const RentalsScreen({super.key});
@@ -6,11 +9,25 @@ class RentalsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(title: const Text('Rentals Screen'),),
-      body: const SingleChildScrollView(
-        child: Center(child: Text('This is Rentals Page')),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: dummyProperties.length,
+        itemBuilder: (context, index) {
+          final property = dummyProperties[index];
+          return RentalsProperty(property: property);
+        },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddPropertyScreen()),
+          );
+        },
+        //label: Text("add new property"),
+        child: Icon(Icons.add),
+      ),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

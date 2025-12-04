@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/bookings/widgets/booking_property.dart';
+import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class BookingsScreen extends StatelessWidget {
   const BookingsScreen({super.key});
@@ -6,10 +8,13 @@ class BookingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(title: Text('Bookings Screen'),),
-      body: const SingleChildScrollView(
-        child: Center(child: Text('This is Profile Page')),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: dummyProperties.length,
+        itemBuilder: (context, index) {
+          final property = dummyProperties[index];
+          return BookingProperty(property: property);
+        },
       ),
     );
   }
