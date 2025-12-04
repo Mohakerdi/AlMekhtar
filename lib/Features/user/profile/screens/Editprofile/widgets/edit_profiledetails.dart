@@ -13,7 +13,6 @@ class _EditProfileShowDetailsState extends State<EditProfileShowDetails> {
   final TextEditingController _dateController = TextEditingController();
   DateTime? _selectedDate;
 
-  // --- This function shows the date picker dialog ---
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,

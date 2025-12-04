@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/home/screens/locations_screen.dart';
-import 'package:mabeet/Features/user/home/screens/search_screen.dart';
+import 'package:mabeet/Features/user/home/locations/screens/locations_screen.dart';
+import 'package:mabeet/Features/user/home/search/screens/search_screen.dart';
+import 'package:mabeet/Features/user/home/widgets/CustomAppBar.dart';
 import 'package:mabeet/Features/user/home/widgets/filter_overlay.dart';
-import 'package:mabeet/Features/user/home/widgets/location_vector.dart';
+import 'package:mabeet/Features/user/home/locations/widgets/location_vector.dart';
 import 'package:mabeet/Features/user/home/widgets/popular_property.dart';
 import 'package:mabeet/Features/user/home/widgets/properties_list.dart';
 import 'package:mabeet/Features/user/home/widgets/recommended_home_property.dart';
@@ -12,6 +13,7 @@ import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../../core/constants/icons.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -36,31 +38,40 @@ class _HomeScreenState extends State<HomeScreen> {
       useSafeArea: true,
       isScrollControlled: true,
       context: context,
-      builder: (ctx) => ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
-        child: FilterOverlay(),
-      ),
+      builder: (ctx) =>
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+            child: FilterOverlay(),
+          ),
     );
   }
 
   void _goToLocationsScreen() {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (builder) => LocationsScreen()));
+    PersistentNavBarNavigator.pushNewScreen(
+        context,
+        screen: LocationsScreen(),
+        withNavBar: false,
+        pageTransitionAnimation: PageTransitionAnimation.cupertino
+    );
   }
 
   void _goToSearchScreen() {
-    Navigator.of(
+    PersistentNavBarNavigator .pushNewScreen(
       context,
-    ).push(MaterialPageRoute(builder: (builder) => SearchScreen()));
+      screen: SearchScreen(),
+      withNavBar: false,
+      pageTransitionAnimation: PageTransitionAnimation.cupertino
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: CustomAppBar(titleText: 'Home Screen'),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

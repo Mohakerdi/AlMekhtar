@@ -1,11 +1,17 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/home/widgets/search_field.dart';
+import 'package:mabeet/core/constants/images.dart';
+import '../../widgets/filter_overlay.dart';
 
-import '../widgets/filter_overlay.dart';
-
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
   void _showOverlay(BuildContext context) {
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
@@ -27,6 +33,13 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
+  final List<String> imageAssets = [
+    AppImages.kDamascus,
+    AppImages.kRefDemasheq,
+    AppImages.kDaraa,
+    AppImages.kQonaytera,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +53,7 @@ class SearchScreen extends StatelessWidget {
                 _showOverlay(context);
               },
             ),
-            Text('data'),
-            Text('data'),
-            Text('data'),
+            SizedBox(height: 20),
           ],
         ),
       ),
