@@ -31,7 +31,6 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
-
     Widget activePage = HomeScreen();
     var activePageTitle = 'Home';
 
@@ -65,9 +64,7 @@ class _TabsState extends State<Tabs> {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (builder) => const NotificationsScreen(),
-                ),
+                MaterialPageRoute(builder: (builder) => NotificationsScreen()),
               );
             },
             icon: const Icon(Icons.notifications_none),
