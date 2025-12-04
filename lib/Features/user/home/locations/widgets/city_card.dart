@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import '../../../../data/repos/Cities.dart';
-import '../screens/search_screen.dart';
+import '../../../../../data/repos/Cities.dart';
+import '../../search/screens/search_screen.dart';
 
 class CityCard extends StatelessWidget {
   const CityCard({super.key, required this.city});
@@ -10,9 +11,12 @@ class CityCard extends StatelessWidget {
   final City city;
 
   void _goToSearchScreen(BuildContext context) {
-    Navigator.of(
+    PersistentNavBarNavigator.pushNewScreen(
       context,
-    ).push(MaterialPageRoute(builder: (builder) => SearchScreen()));
+      screen: SearchScreen(),
+      withNavBar: false,
+      pageTransitionAnimation: PageTransitionAnimation.cupertino
+    );
   }
 
   @override
@@ -52,7 +56,9 @@ class CityCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.heading1Regular.copyWith(color: Colors.white)
+                      style: AppTextStyles.heading1Regular.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                     const SizedBox(height: 12),
                   ],

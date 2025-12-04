@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/data/repos/Cities.dart';
 
-import '../widgets/city_widget.dart';
+import '../widgets/city_card.dart';
 
 class LocationsScreen extends StatelessWidget {
   const LocationsScreen({super.key});

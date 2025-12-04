@@ -5,8 +5,10 @@ class RentalsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(title: const Text('Rentals Screen'),),
+      body: const SingleChildScrollView(
         child: Center(child: Text('This is Rentals Page')),
       ),
     );
