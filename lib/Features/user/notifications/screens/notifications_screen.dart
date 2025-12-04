@@ -12,18 +12,19 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Notifications"),
-      ), // Added a title for better UI
-      // REMOVED SingleChildScrollView
+      appBar: AppBar(title: Text("Notifications")),
       body: ListView.builder(
         itemCount: cards.length,
         itemBuilder: (context, index) {
           final item = cards[index];
           final formattedDate = DateFormat.yMMMd().format(item.date);
-
           return Card(
             margin: EdgeInsets.all(10),
+            shadowColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: AppColors.gray300, width: 1.5),
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: ListTile(
               leading: CircleAvatar(
                 radius: 24,

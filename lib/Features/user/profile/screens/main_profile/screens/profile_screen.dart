@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/home/widgets/CustomAppBar.dart';
 import 'package:mabeet/Features/user/profile/screens/About%20us/screens/about_us_screen.dart';
 import 'package:mabeet/Features/user/profile/screens/Editprofile/screens/edit_profile_screen.dart';
 import 'package:mabeet/Features/user/profile/screens/history/screens/history_screen.dart';
@@ -42,6 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(titleText: 'Profile Screen'),
       body: ProfileBodyWidget(
         isDarkTheme: _isDarkTheme,
         isEnglish: _isEnglish,
