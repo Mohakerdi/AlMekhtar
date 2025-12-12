@@ -35,36 +35,33 @@ class _TabsState extends State<Tabs> {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home_outlined),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: AppColors.gray400
+        inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.key),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
-          inactiveColorPrimary: AppColors.gray400
+        inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(AppIcons.rentIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
-          inactiveColorPrimary: AppColors.gray400
+        inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.favorite_border),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
-          inactiveColorPrimary: AppColors.gray400
+        inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.person_outlined),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
-          inactiveColorPrimary: AppColors.gray400
+        inactiveColorPrimary: AppColors.gray400,
       ),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget activePage = HomeScreen();
-    var activePageTitle = 'Home';
-
     return PersistentTabView(
       context,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -80,7 +77,6 @@ class _TabsState extends State<Tabs> {
           animateTabTransition: true,
           duration: Duration(milliseconds: 200),
           screenTransitionAnimationType: ScreenTransitionAnimationType.slide,
-
         ),
       ),
       confineToSafeArea: true,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/auth/screens/create_account_screen.dart';
-
+import 'package:mabeet/Features/auth/widgets/switch_screen_text.dart';
 import '../../../core/constants/images.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/text_styles.dart';
 import '../widgets/auth_button.dart';
 
@@ -21,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String _phoneNumber = '';
   String _password = '';
 
-  void _goToSignup(BuildContext ctx) {
+  void _goToSignup() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => CreateAccountScreen()),
@@ -61,7 +60,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         required int? maxLength,
                         required bool isFocused,
                       }) => null,
-                  decoration: InputDecoration(hintText: '963 *** *** ***', helperText: ' '),
+                  decoration: InputDecoration(
+                    hintText: '963 *** *** ***',
+                    helperText: ' ',
+                  ),
                   initialValue: _phoneNumber,
                   onSaved: (val) {
                     _phoneNumber = val!;
@@ -111,24 +113,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 161),
                 AuthButton(buttonsText: 'Login', onBtnPressed: _sendForm),
                 SizedBox(height: 40),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Don\'t have an account ? '),
-                      InkWell(
-                        onTap: () {
-                          _goToSignup(context);
-                        },
-                        child: Text(
-                          'Create Account',
-                          style: AppTextStyles.bodyLarge.copyWith(
-                            color: AppColors.primary700,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                SwitchScreenText(
+                  txt: 'Don\'t have an account ? ',
+                  onPressed: _goToSignup,
                 ),
               ],
             ),

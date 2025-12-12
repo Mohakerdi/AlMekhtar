@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:mabeet/Features/auth/screens/login_screen.dart';
-import 'package:mabeet/Features/auth/widgets/auth_button.dart';
-import 'package:mabeet/core/constants/images.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/core/theme/text_styles.dart';
+import 'login_screen.dart';
+import '../widgets/agree_terms.dart';
+import '../widgets/auth_button.dart';
+import '../widgets/switch_screen_text.dart';
+import '../../../core/constants/images.dart';
+import '../../../core/theme/text_styles.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -16,22 +16,10 @@ class CreateAccountScreen extends StatefulWidget {
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final _formKey = GlobalKey<FormState>();
   bool passwordVisible = false;
-  bool isChecked = false;
 
   String _phoneNumber = '';
   String _name = '';
   String _password = '';
-
-  void _goToLogin(BuildContext ctx) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
-  }
-
-  void _sendForm() {
-    if (_formKey.currentState!.validate()) {}
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +60,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   },
 
                   maxLength: 12,
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.trim().length != 12)
-                      return 'Enter a vailid phone number';
-                    else
-                      return null;
-                  },
+                  validator: _validatePhone,
                 ),
                 Text('User Name', style: AppTextStyles.titleMedium),
                 TextFormField(
@@ -91,39 +72,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   onSaved: (val) {
                     _name = val!;
                   },
-                  validator: (value) {
-                    if (value == null || value.isEmpty)
-                      return 'Enter your name';
-                    else
-                      return null;
-                  },
+                  validator: _validateName,
                 ),
                 Text('Password', style: AppTextStyles.titleMedium),
                 TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'at least 6 characters !',
-                    helperText: ' ',
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          passwordVisible = !passwordVisible;
-                        });
-                      },
-                      icon: Icon(
-                        passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                      ),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.trim().length <= 5)
-                      return 'Must be at least 6 characters';
-                    else
-                      return null;
-                  },
+                  decoration: _passwordDecoration(),
+                  validator: _validatePassword,
                   obscureText: passwordVisible,
                   initialValue: _password,
                   onSaved: (val) {
@@ -131,68 +85,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   },
                 ),
                 SizedBox(height: 10),
-                Row(
-                  children: [
-                    Transform.scale(
-                      scale: 0.8,
-                      child: Checkbox(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        visualDensity: VisualDensity.compact,
-
-                        value: isChecked,
-                        onChanged: (value) {
-                          setState(() {
-                            isChecked = !isChecked;
-                          });
-                        },
-                        splashRadius: 15,
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Agree with',
-                            style: AppTextStyles.bodyLarge,
-                          ),
-                          TextSpan(
-                            text: ' terms',
-                            style: AppTextStyles.bodyLargeSemiBold,
-                          ),
-                          TextSpan(
-                            text: ' and',
-                            style: AppTextStyles.bodyLarge,
-                          ),
-                          TextSpan(
-                            text: ' privacy',
-                            style: AppTextStyles.bodyLargeSemiBold,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                AgreeTerms(),
                 SizedBox(height: 20),
                 AuthButton(buttonsText: 'Sign up', onBtnPressed: _sendForm),
                 SizedBox(height: 40),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Already have an account ? '),
-                      InkWell(
-                        onTap: () {
-                          _goToLogin(context);
-                        },
-                        child: Text(
-                          'Login',
-                          style: AppTextStyles.bodyLarge.copyWith(
-                            color: AppColors.primary700,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                SwitchScreenText(
+                  txt: 'already have an account?',
+                  onPressed: _goToLogin,
                 ),
               ],
             ),
@@ -200,5 +99,52 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         ),
       ),
     );
+  }
+
+  InputDecoration _passwordDecoration() {
+    return InputDecoration(
+      hintText: 'at least 6 characters !',
+      helperText: ' ',
+      suffixIcon: IconButton(
+        onPressed: () {
+          setState(() {
+            passwordVisible = !passwordVisible;
+          });
+        },
+        icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+      ),
+    );
+  }
+
+  String? _validatePhone(value) {
+    if (value == null || value.isEmpty || value.trim().length != 12)
+      return 'Enter a vailid phone number';
+    else
+      return null;
+  }
+
+  String? _validateName(value) {
+    if (value == null || value.isEmpty)
+      return 'Enter your name';
+    else
+      return null;
+  }
+
+  String? _validatePassword(value) {
+    if (value == null || value.isEmpty || value.trim().length <= 5)
+      return 'Must be at least 6 characters';
+    else
+      return null;
+  }
+
+  void _goToLogin() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+  }
+
+  void _sendForm() {
+    if (_formKey.currentState!.validate()) {}
   }
 }

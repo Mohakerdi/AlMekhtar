@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/core/theme/text_styles.dart';
 
 class ProfileNavigationTile extends StatelessWidget {
   final String title;

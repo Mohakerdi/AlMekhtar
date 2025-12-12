@@ -30,4 +30,9 @@ class AppImages{
  static const kDaraa = 'assets/images/daraa.jpg';
  static const kQonaytera = 'assets/images/qonaytera.jpg';
  static const kRefDemasheq = 'assets/images/refdemasheq.jpg';
+
+ //OnBoarding
+ static const kOnBoarding1 = 'assets/images/onBorading1.jpg';
+ static const kOnBoarding2 = 'assets/images/onBorading2.png';
+ static const kOnBoarding3 = 'assets/images/onBorading3.png';
 }
