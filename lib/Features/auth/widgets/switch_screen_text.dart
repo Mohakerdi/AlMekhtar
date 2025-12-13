@@ -7,10 +7,12 @@ class SwitchScreenText extends StatelessWidget {
   const SwitchScreenText({
     super.key,
     required this.txt,
+    required this.logOrSign,
     required this.onPressed,
   });
 
   final String txt;
+  final String logOrSign;
   final Function onPressed;
 
   @override
@@ -19,13 +21,13 @@ class SwitchScreenText extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Already have an account ? '),
+          Text(txt),
           InkWell(
             onTap: () {
               onPressed();
             },
             child: Text(
-              'Login',
+              logOrSign,
               style: AppTextStyles.bodyLarge.copyWith(
                 color: AppColors.primary700,
               ),

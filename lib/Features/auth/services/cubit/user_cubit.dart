@@ -1,9 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
 import 'package:mabeet/core/api/api_consumer.dart';
 import 'package:mabeet/core/api/api_constants.dart';
+import 'package:mabeet/core/errors/exceptions.dart';
+import 'package:mabeet/data/models/sign_up_model.dart';
 
 class UserCubit extends Cubit<UserState> {
   UserCubit(this.api) : super(UserInitial());
@@ -13,28 +16,39 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController signUpEmail = TextEditingController();
   TextEditingController signUpPhone = TextEditingController();
   TextEditingController signUpPassword = TextEditingController();
+  TextEditingController signUpPasswordConfirmation = TextEditingController();
   TextEditingController signUpName = TextEditingController();
 
   TextEditingController logInPhone = TextEditingController();
   TextEditingController logInPassword = TextEditingController();
 
+  SignUpModel? user;
+  XFile? profilePic;
+
+  uploadProfilePic(XFile image) {
+    profilePic = image;
+    emit(UploadProfilePic());
+  }
+
   signUp() async {
     try {
       emit(SignUpLoading());
-      final response = await Dio().post(
-        '${ApiConstants.BaseUrl}/signin',
+      final response = await api.post(
+        ApiConstants.create_account,
         data: {
-          'email': signUpEmail.text,
-          'name': signUpName.text,
-          'phone': signUpPhone.text,
-          'password': signUpPassword.text,
+          ApiKey.email: signUpEmail.text,
+          ApiKey.name: signUpName.text,
+          ApiKey.phone: signUpPhone.text,
+          ApiKey.password: signUpPassword.text,
+          ApiKey.password_confirmation: signUpPasswordConfirmation.text,
         },
       );
+      user = SignUpModel.fromJson(response);
+      // final decodedToken = JwtDecoder.decode(user!.token);
+
       emit(SignUpSuccess());
-      print(response);
-    } on Exception catch (e) {
+    } on ServerException catch (e) {
       emit(SignUpFailure(errorMessage: e.toString()));
-      print(e.toString());
     }
   }
 
@@ -42,14 +56,12 @@ class UserCubit extends Cubit<UserState> {
     try {
       emit(LogInLoading());
       final response = await api.post(
-        '${ApiConstants.BaseUrl}/signin',
-        data: {'phone': logInPhone.text, 'password': logInPassword.text},
+        ApiConstants.login,
+        data: {ApiKey.phone: logInPhone.text, ApiKey.password: logInPassword.text},
       );
       emit(LogInSuccess());
-      print(response);
-    } on Exception catch (e) {
+    } on ServerException catch (e) {
       emit(LogInFailure(errorMessage: e.toString()));
-      print(e.toString());
     }
   }
 }

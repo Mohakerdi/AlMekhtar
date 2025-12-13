@@ -6,6 +6,8 @@ final class SignUpSuccess extends UserState {}
 
 final class SignUpLoading extends UserState {}
 
+final class UploadProfilePic extends UserState {}
+
 final class SignUpFailure extends UserState {
   final String errorMessage;
 

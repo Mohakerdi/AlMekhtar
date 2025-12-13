@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/text_styles.dart';
 
 class AgreeTerms extends StatefulWidget {
-  const AgreeTerms({super.key});
+
+  final ValueChanged<bool> onTermsChanged;
+  const AgreeTerms({super.key, required this.onTermsChanged});
 
   @override
   State<AgreeTerms> createState() => _AgreeTermsState();
@@ -27,6 +29,7 @@ class _AgreeTermsState extends State<AgreeTerms> {
               setState(() {
                 isChecked = !isChecked;
               });
+              widget.onTermsChanged(isChecked);
             },
             splashRadius: 15,
           ),

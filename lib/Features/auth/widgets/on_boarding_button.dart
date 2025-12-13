@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/auth/screens/create_account_screen.dart';
 import 'package:mabeet/Features/auth/screens/login_screen.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 
@@ -29,7 +30,7 @@ class _OnBoardingButtonState extends State<OnBoardingButton> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const LoginScreen();
+                    return const CreateAccountScreen();
                   },
                 ),
               );

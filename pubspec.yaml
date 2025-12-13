@@ -50,6 +50,9 @@ dependencies:
   dio: ^5.9.0
   shared_preferences: ^2.5.3
   get: ^4.7.3
+  jwt_decoder: ^2.0.1
+  dartz: ^0.10.1
+  image_picker: ^1.2.1
 
 dev_dependencies:
   flutter_test:

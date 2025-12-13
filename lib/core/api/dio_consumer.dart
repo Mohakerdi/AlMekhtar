@@ -67,7 +67,7 @@ class DioConsumer extends ApiConsumer {
     bool isFormData = false,
   }) async {
     try {
-      final response = await dio.get(
+      final response = await dio.patch(
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
@@ -86,7 +86,7 @@ class DioConsumer extends ApiConsumer {
     bool isFormData = false,
   }) async {
     try {
-      final response = await dio.get(
+      final response = await dio.post(
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,

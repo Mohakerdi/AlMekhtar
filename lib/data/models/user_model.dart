@@ -1,45 +1,17 @@
-import 'dart:convert';
-
 class UserModel {
-  final String username;
-  final String password;
+  final String name;
+  final String email;
+  final String phone;
+  final String id;
 
-  UserModel({required this.username, required this.password});
+  UserModel({required this.name, required this.email, required this.phone, required this.id});
 
-  UserModel copyWith({String? username, String? password}) {
+  UserModel copyWith({String? email, String? phone}) {
     return UserModel(
-      username: username ?? this.username,
-      password: password ?? this.password,
+      name: name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      id: id
     );
   }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{'username': username, 'password': password};
-  }
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-        username: map['username'] as String,
-        password: map['password'] as String
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'UserModel(username: $username, password: $password)';
-
-  @override
-  bool operator ==(covariant UserModel other) {
-    if (identical(this, other)) return true;
-
-    return
-      other.username == username &&
-          other.password == password;
-  }
-
-  @override
-  int get hashCode => username.hashCode ^ password.hashCode;
 }
