@@ -1,0 +1,99 @@
+import 'package:dio/dio.dart';
+import 'package:mabeet/core/api/api_consumer.dart';
+import 'package:mabeet/core/api/api_interceptors.dart';
+import 'package:mabeet/core/errors/exceptions.dart';
+import 'package:mabeet/core/api/api_constants.dart';
+
+class DioConsumer extends ApiConsumer {
+  DioConsumer({required this.dio}) {
+    dio.options.baseUrl = ApiConstants.BaseUrl;
+    dio.interceptors.add(ApiInterceptor());
+    dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestHeader: true,
+        error: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: true,
+      ),
+    );
+  }
+
+  final Dio dio;
+
+  @override
+  Future delete(
+    String path, {
+    dynamic? data,
+    Map<String, dynamic>? queryParameters,
+    bool isFormData = false,
+  }) async {
+    try {
+      final response = await dio.delete(
+        path,
+        data: isFormData ? FormData.fromMap(data) : data,
+        queryParameters: queryParameters,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      handleDioExceptions(e);
+    }
+  }
+
+  @override
+  Future get(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      final response = await dio.get(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      handleDioExceptions(e);
+    }
+  }
+
+  @override
+  Future patch(
+    String path, {
+    dynamic? data,
+    Map<String, dynamic>? queryParameters,
+    bool isFormData = false,
+  }) async {
+    try {
+      final response = await dio.get(
+        path,
+        data: isFormData ? FormData.fromMap(data) : data,
+        queryParameters: queryParameters,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      handleDioExceptions(e);
+    }
+  }
+
+  @override
+  Future post(
+    String path, {
+    dynamic? data,
+    Map<String, dynamic>? queryParameters,
+    bool isFormData = false,
+  }) async {
+    try {
+      final response = await dio.get(
+        path,
+        data: isFormData ? FormData.fromMap(data) : data,
+        queryParameters: queryParameters,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      handleDioExceptions(e);
+    }
+  }
+}
