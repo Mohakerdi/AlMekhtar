@@ -18,7 +18,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Text("Add new property"),
         actions: [
           IconButton(

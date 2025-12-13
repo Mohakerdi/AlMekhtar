@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/splash/splash_screen_handler.dart';
+import 'package:mabeet/core/theme/bloc/theme_bloc.dart';
+import 'package:mabeet/core/theme/bloc/theme_state.dart';
 import 'Features/auth/screens/on_boarding_screen.dart';
 import 'package:flutter/services.dart';
 import 'core/api/dio_consumer.dart';
@@ -12,12 +15,13 @@ import 'Features/auth/services/cubit/user_cubit.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper().init();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((
-    _,
-  ) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_,) {
     runApp(
-      BlocProvider(
-        create: (context) => UserCubit(DioConsumer(dio: Dio())),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider<UserCubit>(create: (context) => UserCubit(DioConsumer(dio: Dio())),),
+          BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
+        ],
         child: const MyApp(),
       ),
     );
@@ -29,12 +33,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.light,
-      home: OnboardingScreen(),
-      themeMode: ThemeMode.light,
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          home: SplashHandler(),
+          themeMode: state.themeMode,
+        );
+      },
     );
   }
 }

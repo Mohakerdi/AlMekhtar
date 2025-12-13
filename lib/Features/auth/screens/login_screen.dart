@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mabeet/Features/user/tabs.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
+import '../../user/tabs.dart';
+import '../../../core/theme/app_colors.dart';
 import '../services/cubit/user_state.dart';
 import '../services/cubit/user_cubit.dart';
 import 'create_account_screen.dart';
