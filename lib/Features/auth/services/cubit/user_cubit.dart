@@ -7,11 +7,12 @@ import 'package:mabeet/core/api/api_consumer.dart';
 import 'package:mabeet/core/api/api_constants.dart';
 import 'package:mabeet/core/errors/exceptions.dart';
 import 'package:mabeet/data/models/sign_up_model.dart';
+import 'package:mabeet/data/repos/user_repo.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.api) : super(UserInitial());
+  UserCubit(this.userRepository) : super(UserInitial());
 
-  final ApiConsumer api;
+  final UserRepository userRepository;
 
   TextEditingController signUpEmail = TextEditingController();
   TextEditingController signUpPhone = TextEditingController();
@@ -31,37 +32,29 @@ class UserCubit extends Cubit<UserState> {
   }
 
   signUp() async {
-    try {
-      emit(SignUpLoading());
-      final response = await api.post(
-        ApiConstants.create_account,
-        data: {
-          ApiKey.email: signUpEmail.text,
-          ApiKey.name: signUpName.text,
-          ApiKey.phone: signUpPhone.text,
-          ApiKey.password: signUpPassword.text,
-          ApiKey.password_confirmation: signUpPasswordConfirmation.text,
-        },
-      );
-      user = SignUpModel.fromJson(response);
-      // final decodedToken = JwtDecoder.decode(user!.token);
-
-      emit(SignUpSuccess());
-    } on ServerException catch (e) {
-      emit(SignUpFailure(errorMessage: e.toString()));
-    }
+    emit(SignUpLoading());
+    final response = await userRepository.signUp(
+      email: signUpEmail.text,
+      password: signUpPassword.text,
+      name: signUpName.text,
+      phone: signUpPhone.text,
+      passwordConfirmation: signUpPasswordConfirmation.text,
+    );
+    response.fold(
+      (errorMessage) => emit(SignUpFailure(errorMessage: errorMessage)),
+      (model) => emit(SignUpSuccess()),
+    );
   }
 
-  LogIn() async {
-    try {
-      emit(LogInLoading());
-      final response = await api.post(
-        ApiConstants.login,
-        data: {ApiKey.phone: logInPhone.text, ApiKey.password: logInPassword.text},
-      );
-      emit(LogInSuccess());
-    } on ServerException catch (e) {
-      emit(LogInFailure(errorMessage: e.toString()));
-    }
+  logIn() async {
+    emit(LogInLoading());
+    final response = await userRepository.logIn(
+      phone: logInPhone.text,
+      password: logInPassword.text,
+    );
+    response.fold(
+      (errorMessage) => emit(LogInFailure(errorMessage: errorMessage)),
+      (model) => emit(LogInSuccess()),
+    );
   }
 }

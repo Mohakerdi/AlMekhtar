@@ -16,7 +16,7 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-  PersistentTabController _controller = PersistentTabController(
+  final PersistentTabController _controller = PersistentTabController(
     initialIndex: 0,
   );
 
@@ -33,27 +33,32 @@ class _TabsState extends State<Tabs> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.home_outlined),
+        icon: Icon(AppIcons.homeIcon),
+        inactiveIcon: Icon(AppIcons.inactiveHomeIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.key),
+        icon: Icon(AppIcons.bookIcon),
+        inactiveIcon: Icon(AppIcons.inactiveBookIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(AppIcons.rentIcon),
+        inactiveIcon: Icon(AppIcons.inactiveRentIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.favorite_border),
+        icon: Icon(AppIcons.favIcon),
+        inactiveIcon: Icon(AppIcons.inactiveFavIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.person_outlined),
+        icon: Icon(AppIcons.profileIcon),
+        inactiveIcon: Icon(AppIcons.inactiveProfileIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),

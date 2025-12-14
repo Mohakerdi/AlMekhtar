@@ -6,9 +6,7 @@ import '../../Editprofile/screens/edit_profile_screen.dart';
 import '../../history/screens/history_screen.dart';
 import '../widgets/profile_body_widget.dart';
 import '../../../../../../core/theme/bloc/theme_state.dart';
-
-import '../../../../../../core/theme/bloc/theme_bloc.dart';
-import '../../../../../../core/theme/bloc/theme_event.dart';
+import '../../../../../../core/theme/bloc/theme_cubit.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -69,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Navigator.of(screenContext, rootNavigator: true).pop();
     }
     if (mounted) {
-      themeBloc.add(ToggleTheme());
+      themeBloc.toggleTheme();
     }
   }
 

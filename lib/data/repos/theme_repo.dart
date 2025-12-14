@@ -1,17 +1,15 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mabeet/core/cache/cache_helper.dart';
 import 'package:flutter/material.dart';
 
 class ThemeRepo {
   static const _key = 'theme_mode';
 
   Future<void> saveTheme(ThemeMode mode) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(_key, mode.name);
+    CacheHelper().saveData(key: _key, value: mode.name);
   }
 
   Future<ThemeMode> loadTheme() async {
-    final prefs = await SharedPreferences.getInstance();
-    final themeName = prefs.getString(_key);
+    final themeName = CacheHelper().getData(key: _key);
 
     if (themeName == null) return ThemeMode.system;
 

@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _sendForm() async {
     if (_formKey.currentState!.validate()) {
-      await context.read<UserCubit>().LogIn();
+      await context.read<UserCubit>().logIn();
     }
   }
 }
