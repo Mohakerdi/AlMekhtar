@@ -17,5 +17,6 @@ class AppIcons{
  static const inactiveBookIcon = Icons.vpn_key_outlined;
  static const homeIcon = Icons.home;
  static const inactiveHomeIcon = Icons.home_outlined;
+ static const upload = FeatherIcons.uploadCloud;
 
 }

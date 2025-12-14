@@ -11,9 +11,9 @@ class ApiKey{
   static const String email = 'email';
   static const String user = 'user';
   static const String name = 'name';
-  static const String password = 'password';
-  static const String password_confirmation = 'password_confirmation';
   static const String phone = 'phone';
   static const String token = 'token';
   static const String id = 'id';
+  static const String password = 'password';
+  static const String password_confirmation = 'password_confirmation';
 }

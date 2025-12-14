@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/chat/screens/chat_screen.dart';
 import 'package:mabeet/Features/user/notifications/screens/notifications_screen.dart';
+import 'package:mabeet/Features/user/rentals/widgets/select_from_gallery.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 
@@ -17,41 +19,20 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Add new property"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (builder) => NotificationsScreen(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.notifications_none),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (builder) => const Chatscreen()),
-              );
-            },
-            icon: const Icon(Icons.chat),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: Text('Add Your Property!')),
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: "Enter your property title",
-                  labelStyle: TextStyle(color: AppColors.gray400),
-                ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: "Enter your property title",
+                labelStyle: TextStyle(color: AppColors.gray400),
+                suffixIcon: Icon(AppIcons.homeIcon),
               ),
             ),
+            SizedBox(height: 12,),
+            Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Align(
@@ -67,29 +48,46 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: DropdownButton<Location>(
-                value: selectedLocation,
-                hint: const Text("Select Location"),
-                isExpanded: true,
-                underline: const SizedBox(),
-                icon: const Icon(Icons.arrow_drop_down),
-                borderRadius: BorderRadius.circular(12),
-
-                items: Location.values.map((location) {
-                  return DropdownMenuItem(
-                    value: location,
-                    child: Text(location.name),
-                  );
-                }).toList(),
-
-                onChanged: (value) {
-                  setState(() {
-                    selectedLocation = value;
-                  });
-                },
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+              child: Card(
+                child: DropdownButton<Location>(
+                  value: selectedLocation,
+                  hint: const Text("  Select Location"),
+                  isExpanded: true,
+                  underline: const SizedBox(),
+                  icon: const Icon(Icons.arrow_drop_down),
+                  borderRadius: BorderRadius.circular(12),
+                  items: Location.values.map((location) {
+                    return DropdownMenuItem(
+                      value: location,
+                      child: Text("  ${location.name}"),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedLocation = value;
+                    });
+                  },
+                ),
               ),
             ),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Add Photo Or Video",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.gray950,
+                  ),
+                ),
+              ),
+            ),
+            SelectFromGallery(onSelectImage: (image) {}),
+            Divider(),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
@@ -108,6 +106,17 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                 minLines: 3,
                 decoration: InputDecoration(
                   labelText: "Enter your property description",
+                  labelStyle: TextStyle(color: AppColors.gray400),
+                ),
+              ),
+            ),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                maxLines: 1,
+                decoration: InputDecoration(
+                  labelText: "Enter rent cost \$",
                   labelStyle: TextStyle(color: AppColors.gray400),
                 ),
               ),
