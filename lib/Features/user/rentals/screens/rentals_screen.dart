@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/home/widgets/CustomAppBar.dart';
 import 'package:mabeet/Features/user/rentals/screens/add_property_screen.dart';
 import 'package:mabeet/Features/user/rentals/widgets/rentals_property.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
@@ -9,6 +10,7 @@ class RentalsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(titleText: 'Rentals'),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: dummyProperties.length,

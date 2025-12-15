@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/bookings/widgets/booking_property.dart';
+import 'package:mabeet/Features/user/home/widgets/CustomAppBar.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class BookingsScreen extends StatelessWidget {
@@ -8,6 +9,7 @@ class BookingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(titleText: 'Bookings'),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: dummyProperties.length,
