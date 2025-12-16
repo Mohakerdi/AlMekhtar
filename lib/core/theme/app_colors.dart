@@ -33,7 +33,6 @@ class AppColors {
   static const Color gray900 = Color(0xFF111827);
   static const Color gray950 = Color(0xFF070B14);
 
-
   // 4. STATUS COLORS
   // --- Error (Red) ---
   static const Color error50 = Color(0xFFFEF2F2);
@@ -55,7 +54,6 @@ class AppColors {
   static const Color warning700 = Color(0xFFD97706);
   static const Color warning900 = Color(0xFF78350F);
   static const Color warningBase = warning700;
-
 
   // 5. Utility Colors
   static const Color background = Colors.white;

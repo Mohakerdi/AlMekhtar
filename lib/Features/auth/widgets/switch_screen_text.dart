@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+
+import '../../../core/theme/text_styles.dart';
+import '../../../core/theme/app_colors.dart';
+
+class SwitchScreenText extends StatelessWidget {
+  const SwitchScreenText({
+    super.key,
+    required this.txt,
+    required this.logOrSign,
+    required this.onPressed,
+  });
+
+  final String txt;
+  final String logOrSign;
+  final Function onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(txt),
+          InkWell(
+            onTap: () {
+              onPressed();
+            },
+            child: Text(
+              logOrSign,
+              style: AppTextStyles.bodyLarge.copyWith(
+                color: AppColors.primary700,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
