@@ -10,7 +10,7 @@ class UserRepository {
 
   UserRepository({required this.api});
 
-  Future<Either<String, SignUpModel>> signUp({
+  Future<Either<String, String>> signUp({
     required String email,
     required String password,
     required String name,
@@ -28,15 +28,15 @@ class UserRepository {
           ApiKey.password_confirmation: passwordConfirmation,
         },
       );
-      final user = SignUpModel.fromJson(response);
+      // final user = SignUpModel.fromJson(response);
       // final decodedToken = JwtDecoder.decode(user!.token);
-      return Right(user);
+      return Right('Success');
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
   }
 
-  Future<Either<String, LogInModel>> logIn({
+  Future<Either<String, String>> logIn({
     required String phone,
     required String password,
   }) async {
@@ -45,8 +45,8 @@ class UserRepository {
         ApiConstants.login,
         data: {ApiKey.phone: phone, ApiKey.password: password},
       );
-      final model = LogInModel.fromJson(response);
-      return Right(model);
+      // final model = LogInModel.fromJson(response);
+      return Right('Success');
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

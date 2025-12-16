@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
-          home: SplashHandler(),
+          home: OnboardingScreen(),
           themeMode: state.themeMode,
         );
       },
