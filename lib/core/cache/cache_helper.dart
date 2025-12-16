@@ -43,10 +43,7 @@ class CacheHelper {
     return sharedPreferences.clear();
   }
 
-  Future<dynamic> put({
-    required String key,
-    required dynamic value,
-  }) async {
+  Future<dynamic> put({required String key, required dynamic value}) async {
     if (value is String) {
       return await sharedPreferences.setString(key, value);
     } else if (value is bool) {

@@ -9,7 +9,7 @@ class LocationVector extends StatelessWidget {
     super.key,
     required this.name,
     required this.image,
-  }); // edit constructor to recieve name & image
+  });
 
   final String name;
   final String image;

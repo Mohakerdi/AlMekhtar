@@ -169,6 +169,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   String? _validateName(value) {
     if (value == null || value.isEmpty)
       return 'Enter your name';
+    else if (value.length < 8)
+      return 'name must be at least 8 characters';
     else
       return null;
   }

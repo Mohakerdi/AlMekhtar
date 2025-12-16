@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../home/widgets/CustomAppBar.dart';
+import '../../../../CustomAppBar.dart';
 import '../../About%20us/screens/about_us_screen.dart';
 import '../../Editprofile/screens/edit_profile_screen.dart';
 import '../../history/screens/history_screen.dart';

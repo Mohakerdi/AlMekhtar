@@ -1,20 +1,4 @@
-enum Location {
-  AlHasakeh,
-  AlRaqqa,
-  Derezzor,
-  Aleppo,
-  Idleb,
-  Latakia,
-  Tartous,
-  Hama,
-  Homs,
-  Damascus,
-  RefDemasheq,
-  Daraa,
-  AlQonaytera,
-  ALSwieda,
-}
-
+import 'state.dart';
 class Property {
   Property({
     required this.id,
@@ -23,7 +7,8 @@ class Property {
     required this.description,
     required this.describedLocation,
     required this.costPerNight,
-    required this.location,
+    required this.state,
+    required this.area,
     required this.avgRate,
   });
 
@@ -33,6 +18,7 @@ class Property {
   final String description;
   final String describedLocation;
   final double costPerNight;
-  final Location location;
+  final Location state;
+  final String area;
   final double avgRate;
 }

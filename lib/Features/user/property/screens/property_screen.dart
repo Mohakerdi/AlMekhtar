@@ -43,7 +43,7 @@ class PropertyScreen extends StatelessWidget {
                 ],
               ),
             ),
-            LocationWidget(location: property.location),
+            LocationWidget(location: property.state),
             SizedBox(height: 30),
             PropertyDetails(),
             SizedBox(height: 25),
