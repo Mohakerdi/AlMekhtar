@@ -18,6 +18,7 @@ void main() {
   CacheHelper.init();
   //Fix View To Vertical
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_,) {
+
     runApp(
       MultiBlocProvider(
         providers: [

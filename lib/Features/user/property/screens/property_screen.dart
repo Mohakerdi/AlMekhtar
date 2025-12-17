@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/property/screens/payment_screen.dart';
+import 'package:mabeet/Features/user/rentNow/screens/rent_now_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/cost_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_details_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_widget.dart';
@@ -56,9 +57,12 @@ class PropertyScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.of(
+          Navigator.push(
             context,
-          ).push(MaterialPageRoute(builder: (builder) => PaymentScreen()));
+            MaterialPageRoute(
+              builder: (context) => RentNowScreen(property: property),
+            ),
+          );
         },
         label: Text("Rent now"),
         backgroundColor: AppColors.primary700,
