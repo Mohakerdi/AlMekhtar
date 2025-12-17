@@ -15,7 +15,7 @@ import 'Features/auth/services/cubit/user_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  CacheHelper().init();
+  CacheHelper.init();
   //Fix View To Vertical
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_,) {
     runApp(
@@ -25,7 +25,7 @@ void main() {
             create: (context) =>
                 UserCubit(UserRepository(api: DioConsumer(dio: Dio()))),
           ),
-          BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
+          BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()..loadTheme()),
           BlocProvider<PaymentCubit>(create: (context) => PaymentCubit()),
         ],
         child: const MyApp(),

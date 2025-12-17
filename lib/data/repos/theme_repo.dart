@@ -5,11 +5,11 @@ class ThemeRepo {
   static const _key = 'theme_mode';
 
   Future<void> saveTheme(ThemeMode mode) async {
-    CacheHelper().saveData(key: _key, value: mode.name);
+    await CacheHelper.saveData(key: _key, value: mode.name);
   }
 
   Future<ThemeMode> loadTheme() async {
-    final themeName = CacheHelper().getData(key: _key);
+    final themeName = CacheHelper.getData(key: _key );
 
     if (themeName == null) return ThemeMode.system;
 
