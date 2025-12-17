@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
-import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/font_weight_helper.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
@@ -12,7 +11,7 @@ class RecommendedHomeProperty extends StatelessWidget {
   const RecommendedHomeProperty({
     super.key,
     required this.property,
-  }); // edit constructor to recieve property object
+  });
 
   final Property property;
 
@@ -28,7 +27,7 @@ class RecommendedHomeProperty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String locationName =
-        '${property.location.name}, ${property.describedLocation}';
+        '${property.state.name}, ${property.area}';
 
     return SizedBox(
       width: 240,

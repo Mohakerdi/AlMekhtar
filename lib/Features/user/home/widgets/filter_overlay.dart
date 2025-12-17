@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
-import 'package:mabeet/data/models/property.dart';
+import 'package:mabeet/data/models/state.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class FilterOverlay extends StatefulWidget {
@@ -13,7 +13,8 @@ class FilterOverlay extends StatefulWidget {
 
 class _FilterOverlayState extends State<FilterOverlay> {
   Location _selectedGovernorat = Location.Damascus;
-  Location _selectedCity = Location.RefDemasheq;
+  String _selectedArea = "Mazzeh";
+  List<String> availableAreas = syrianStates[0].areas;
   int floor = 0;
   SfRangeValues _costRange = const SfRangeValues(40.0, 60.0);
   SfRangeValues _areaRange = const SfRangeValues(70.0, 120.0);
@@ -25,7 +26,7 @@ class _FilterOverlayState extends State<FilterOverlay> {
     return LayoutBuilder(
       builder: (ctx, constraints) {
         return FractionallySizedBox(
-          heightFactor: 0.6,
+          heightFactor: 0.8,
           child: Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -65,11 +66,18 @@ class _FilterOverlayState extends State<FilterOverlay> {
                           onChanged: (val) {
                             setState(() {
                               _selectedGovernorat = val!;
+                              for(StateModel state in syrianStates){
+                                if(state.name == _selectedGovernorat.name){
+                                  availableAreas = state.areas;
+                                  _selectedArea = availableAreas.isNotEmpty ? availableAreas[0] : '';
+                                  break;
+                                }
+                              }
                             });
                           },
                         ),
                       ),
-                      SizedBox(width: 80),
+                      SizedBox(width: 50),
                     ],
                   ),
                   Divider(),
@@ -78,22 +86,26 @@ class _FilterOverlayState extends State<FilterOverlay> {
                       Text('City:             ',style: AppTextStyles.bodyLarge,),
                       Expanded(
                         child: DropdownButtonFormField(
-                          value: _selectedCity,
+                          value: _selectedArea.isNotEmpty && availableAreas.contains(_selectedArea)
+                              ? _selectedArea
+                              : availableAreas.isNotEmpty
+                              ? availableAreas[0]
+                              : null,
                           items: [
-                            for (final location in Location.values)
+                            for (final area in availableAreas)
                               DropdownMenuItem(
-                                value: location,
-                                child: Row(children: [Text(location.name)]),
+                                value: area,
+                                child: Row(children: [Text(area)]),
                               ),
                           ],
                           onChanged: (val) {
                             setState(() {
-                              _selectedCity = val!;
+                              _selectedArea = val!;
                             });
                           },
                         ),
                       ),
-                      SizedBox(width: 80),
+                      SizedBox(width: 50),
                     ],
                   ),
                   Divider(),

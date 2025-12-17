@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/data/repos/Cities.dart';
-
+import '../../../../../data/models/state.dart';
 import '../widgets/city_card.dart';
 
 class LocationsScreen extends StatelessWidget {
@@ -11,8 +10,8 @@ class LocationsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Discover New Places !!'),),
       body: ListView.builder(
-        itemCount: cities.length,
-        itemBuilder: (context, index) => CityCard(city: cities[index]),
+        itemCount: syrianStates.length,
+        itemBuilder: (context, index) => CityCard(city: syrianStates[index].locationEnum!),
       ),
     );
   }

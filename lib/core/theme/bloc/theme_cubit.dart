@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../data/repos/theme_repo.dart';
 import 'theme_state.dart';
 
-class ThemeBloc extends Cubit<ThemeState> {
-  ThemeBloc() : super(const ThemeInitial());
+class ThemeCubit extends Cubit<ThemeState> {
+  ThemeCubit() : super(const ThemeInitial());
 
   final _repo = ThemeRepo();
 

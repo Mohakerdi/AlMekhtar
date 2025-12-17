@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
+import 'package:mabeet/data/models/state.dart';
 
 class LocationWidget extends StatelessWidget {
   final Location location;

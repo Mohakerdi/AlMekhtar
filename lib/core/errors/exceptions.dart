@@ -1,80 +1,75 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:mabeet/core/errors/error_model.dart';
+
 
 class ServerException implements Exception {
   final ErrorModel errorModel;
 
   ServerException({required this.errorModel});
+
+  @override
+  String toString() => 'ServerException: ${errorModel.errorMessage}';
+}
+
+ErrorModel _handleNonResponseError(DioException e) {
+  if (e.type == DioExceptionType.connectionTimeout ||
+      e.type == DioExceptionType.sendTimeout ||
+      e.type == DioExceptionType.receiveTimeout ||
+      e.type == DioExceptionType.connectionError) {
+    return const ErrorModel(
+      status: 0,
+      errorMessage: 'Connection error. Please check your internet connection and try again.',
+    );
+  }
+
+  return const ErrorModel(
+    status: 0,
+    errorMessage: 'An unexpected error occurred.',
+  );
 }
 
 void handleDioExceptions(DioException e) {
   if (e.response == null) {
     if (e.error is SocketException) {
-      throw ServerException(errorModel: ErrorModel.fromJson(e.response!.data));
+      throw ServerException(
+        errorModel: const ErrorModel(
+          status: 0,
+          errorMessage: 'No Internet Connection. Please connect to the internet and try again.',
+        ),
+      );
     }
-  } else {
+
+    throw ServerException(
+      errorModel: _handleNonResponseError(e),
+    );
+  }
+  else {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
-        throw ServerException(
-          errorModel: ErrorModel.fromJson(e.response!.data),
-        );
       case DioExceptionType.sendTimeout:
-        throw ServerException(
-          errorModel: ErrorModel.fromJson(e.response!.data),
-        );
       case DioExceptionType.receiveTimeout:
-        throw ServerException(
-          errorModel: ErrorModel.fromJson(e.response!.data),
-        );
       case DioExceptionType.badCertificate:
-        throw ServerException(
-          errorModel: ErrorModel.fromJson(e.response!.data),
-        );
       case DioExceptionType.cancel:
-        throw ServerException(
-          errorModel: ErrorModel.fromJson(e.response!.data),
-        );
       case DioExceptionType.connectionError:
-        throw ServerException(
-          errorModel: ErrorModel.fromJson(e.response!.data),
-        );
       case DioExceptionType.unknown:
-        throw ServerException(
-          errorModel: ErrorModel.fromJson(e.response!.data),
-        );
+        break;
+
       case DioExceptionType.badResponse:
-        switch (e.response?.statusCode) {
-          case 400: // Bad request
-            throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data),
-            );
-          case 401: //unauthorized
-            throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data),
-            );
-          case 403: //forbidden
-            throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data),
-            );
-          case 404: //not found
-            throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data),
-            );
-          case 409: //cofficient
-            throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data),
-            );
-          case 422: //  Unprocessable Entity
-            throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data),
-            );
-          case 504: // Server exception
-            throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data),
-            );
+        final statusCode = e.response!.statusCode;
+
+        if (statusCode != null && (statusCode >= 400 && statusCode < 600)) {
+          throw ServerException(
+            errorModel: ErrorModel.fromJson(e.response!.data),
+          );
         }
+
+        throw ServerException(
+          errorModel: const ErrorModel(
+            status: 0,
+            errorMessage: 'Received a bad response from the server.',
+          ),
+        );
     }
   }
 }

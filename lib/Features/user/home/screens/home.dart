@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/home/locations/screens/locations_screen.dart';
 import 'package:mabeet/Features/user/home/search/screens/search_screen.dart';
-import 'package:mabeet/Features/user/home/widgets/CustomAppBar.dart';
+import 'package:mabeet/Features/user/CustomAppBar.dart';
 import 'package:mabeet/Features/user/home/widgets/filter_overlay.dart';
 import 'package:mabeet/Features/user/home/locations/widgets/location_vector.dart';
+import 'package:mabeet/Features/user/home/widgets/locations_slider.dart';
 import 'package:mabeet/Features/user/home/widgets/properties_list.dart';
 import 'package:mabeet/Features/user/home/widgets/recommended_home_property.dart';
 import 'package:mabeet/Features/user/home/widgets/search_field.dart';
 import 'package:mabeet/Features/user/home/widgets/swiper.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
+import 'package:mabeet/data/models/state.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../data/repos/Cities.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -118,26 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    LocationVector(
-                      name: cities[0].location.name,
-                      image: cities[0].imageURL,
-                    ),
-                    LocationVector(
-                      name: cities[3].location.name,
-                      image: cities[3].imageURL,
-                    ),
-                    LocationVector(
-                      name: cities[9].location.name,
-                      image: cities[9].imageURL,
-                    ),
-                  ],
-                ),
-              ),
+              LocationsSlider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

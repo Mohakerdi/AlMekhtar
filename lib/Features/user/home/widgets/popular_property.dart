@@ -21,8 +21,7 @@ class PopularProperty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String locationName = '${property.location.name}, ${property.describedLocation}';
-    // final String locationName = property.describedLocation;
+    final String locationName = '${property.state.name}, ${property.area}';
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: InkWell(

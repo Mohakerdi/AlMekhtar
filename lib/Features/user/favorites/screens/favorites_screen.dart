@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/favorites/widgets/favorites_property.dart';
-import 'package:mabeet/Features/user/home/widgets/CustomAppBar.dart';
+import 'package:mabeet/Features/user/CustomAppBar.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class FavoritesScreen extends StatelessWidget {

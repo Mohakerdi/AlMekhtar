@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
+import 'package:mabeet/data/models/state.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
-import '../../../../../data/repos/Cities.dart';
 import '../../search/screens/search_screen.dart';
 
 class CityCard extends StatelessWidget {
   const CityCard({super.key, required this.city});
 
-  final City city;
+  final Location city;
 
   void _goToSearchScreen(BuildContext context) {
     PersistentNavBarNavigator.pushNewScreen(
@@ -33,7 +32,7 @@ class CityCard extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset(
-              city.imageURL,
+              city.imagePath,
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
@@ -51,7 +50,7 @@ class CityCard extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      city.location.name,
+                      city.name,
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       softWrap: true,

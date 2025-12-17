@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/property/screens/payment_screen.dart';
 import 'package:mabeet/Features/user/rentNow/screens/rent_now_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/cost_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_details_widget.dart';
@@ -44,7 +45,7 @@ class PropertyScreen extends StatelessWidget {
                 ],
               ),
             ),
-            LocationWidget(location: property.location),
+            LocationWidget(location: property.state),
             SizedBox(height: 30),
             PropertyDetails(),
             SizedBox(height: 25),

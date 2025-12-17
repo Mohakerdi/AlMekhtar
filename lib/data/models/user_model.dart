@@ -1,3 +1,5 @@
+import 'package:mabeet/core/api/api_constants.dart';
+
 class UserModel {
   final String name;
   final String email;
