@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/data/models/state.dart';
+import '../../../../../data/models/state.dart';
 import '../widgets/city_card.dart';
 
 class LocationsScreen extends StatelessWidget {

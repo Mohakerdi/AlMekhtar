@@ -163,14 +163,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
           ],
         ),
       ),
-
-      /*floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text("add"),
-        backgroundColor: AppColors.primary700,
-        extendedPadding: EdgeInsets.symmetric(horizontal: 130),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,*/
     );
   }
 }

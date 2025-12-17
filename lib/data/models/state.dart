@@ -44,7 +44,7 @@ class StateModel {
       case 'raqqa':        return Location.Raqqa;
       case 'hasakah':        return Location.Hasakah;
       case 'daraa':        return Location.Daraa;
-      case 'as-suwayda':        return Location.AsSuwayda;
+      case 'assuwayda':        return Location.AsSuwayda;
       case 'quneitra':        return Location.Quneitra;
       default:        return null;
     }

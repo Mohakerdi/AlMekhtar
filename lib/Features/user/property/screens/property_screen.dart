@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/property/screens/payment_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/cost_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_details_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_widget.dart';
@@ -49,12 +50,16 @@ class PropertyScreen extends StatelessWidget {
             SizedBox(height: 25),
             DescriptionWidget(),
             DescriptionDetailsWidget(description: property.description),
-            SizedBox(height: 90,)
+            SizedBox(height: 90),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (builder) => PaymentScreen()));
+        },
         label: Text("Rent now"),
         backgroundColor: AppColors.primary700,
         extendedPadding: EdgeInsets.symmetric(horizontal: 130),

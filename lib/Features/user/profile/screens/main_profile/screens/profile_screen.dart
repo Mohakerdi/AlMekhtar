@@ -20,7 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
+    return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         final isDark = state.themeMode == ThemeMode.dark;
         return Scaffold(
@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _handleThemeChange() async {
-    final themeBloc = context.read<ThemeBloc>();
+    final themeBloc = context.read<ThemeCubit>();
     final screenContext = context;
     showDialog(
       context: screenContext,

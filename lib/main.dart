@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/property/cubit/payment_cubit.dart';
 import 'package:mabeet/data/repos/user_repo.dart';
 import 'Features/splash/splash_screen_handler.dart';
 import 'core/theme/bloc/theme_cubit.dart';
@@ -15,6 +16,7 @@ import 'Features/auth/services/cubit/user_cubit.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper().init();
+  //Fix View To Vertical
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_,) {
     runApp(
       MultiBlocProvider(
@@ -23,7 +25,8 @@ void main() {
             create: (context) =>
                 UserCubit(UserRepository(api: DioConsumer(dio: Dio()))),
           ),
-          BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
+          BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
+          BlocProvider<PaymentCubit>(create: (context) => PaymentCubit()),
         ],
         child: const MyApp(),
       ),
@@ -36,7 +39,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
+    return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
