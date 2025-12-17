@@ -15,7 +15,9 @@ import 'Features/auth/services/cubit/user_cubit.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper().init();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_,) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((
+    _,
+  ) {
     runApp(
       MultiBlocProvider(
         providers: [

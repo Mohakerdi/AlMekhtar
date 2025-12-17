@@ -53,6 +53,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   dartz: ^0.10.1
   image_picker: ^1.2.1
+  syncfusion_flutter_datepicker: 31.1.19
 
 dev_dependencies:
   flutter_test:
