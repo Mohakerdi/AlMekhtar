@@ -1,6 +1,4 @@
-
 class AppImages{
-
  static const kLogoPath = 'assets/images/app-logo.png';
  static const kLogoWhitePath = 'assets/images/app-logo-white.png';
  static const kSliderImage1 = 'assets/images/slider-image1.png';
@@ -33,7 +31,7 @@ class AppImages{
  static const kRefDemasheq = 'assets/images/refdemasheq.jpg';
 
  //OnBoarding
- static const kOnBoarding1 = 'assets/images/onBorading1.jpg';
+ static const kOnBoarding1 = 'assets/images/onBorading1.png';
  static const kOnBoarding2 = 'assets/images/onBorading2.png';
  static const kOnBoarding3 = 'assets/images/onBorading3.png';
 }

@@ -4,9 +4,11 @@ import 'package:mabeet/data/models/property.dart';
 import 'package:mabeet/data/models/state.dart';
 
 class LocationWidget extends StatelessWidget {
-  final Location location;
+  final Location govenorant;
+  final String area;
+  final String detailed;
 
-  const LocationWidget({super.key, required this.location});
+  const LocationWidget({super.key, required this.govenorant, required this.area, required this.detailed});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +17,12 @@ class LocationWidget extends StatelessWidget {
       child: Row(
         children: [
           Icon(Icons.location_on_outlined),
-          Text(
-            location.toString().split('.').last,
-            style: TextStyle(color: AppColors.gray400, fontSize: 15),
+          Expanded(
+            child: Text(
+              softWrap: true,
+              '${govenorant.name}, $area\n$detailed',
+              style: TextStyle(color: AppColors.gray400, fontSize: 15),
+            ),
           ),
         ],
       ),

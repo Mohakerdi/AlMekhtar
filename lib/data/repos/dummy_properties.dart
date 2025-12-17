@@ -16,7 +16,7 @@ final List<Property> dummyProperties = [
     costPerNight: 22.5,
     state: Location.Damascus,
     area: 'Al-Midan',
-    describedLocation: 'Berlin, 1944',
+    describedLocation: 'Berlin, 1944, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
     description:
         'Perched high above the city, Eagle Nest offers a serene escape from the hustle and bustle of everyday life. Enjoy breathtaking panoramic views, cozy interiors, and a perfect spot for morning coffee or sunset relaxation. Ideal for couples or solo travelers looking for peace, quiet, and inspiration.',
     avgRate: 3.5,
