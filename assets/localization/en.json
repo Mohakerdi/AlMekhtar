@@ -1,0 +1,35 @@
+{
+  "home_screen_title": "Home Screen",
+  "recommended_section_title": "Recommended",
+  "see_all_button": "See all",
+  "top_locations_section_title": "Top Locations",
+  "popular_for_you_section_title": "Popular for you",
+  "search_field_hint": "Search Properties",
+
+  "profile_screen_title": "Profile Screen",
+  "menu_history": "History",
+  "menu_edit_profile": "Edit Profile",
+  "menu_about_us": "About us",
+  "theme_light": "Light",
+  "theme_dark": "Dark",
+  "theme_changing_to": "Changing to Theme ",
+  "sign_out_success_message": "User signed out successfully",
+  "locale_changing_to": "Changing Language to ",
+  "locale_arabic": "Arabic",
+  "locale_english": "English",
+  "sign_out_button": "Sign Out",
+  "lang": "Language",
+  "theme": "Theme",
+  "favorites_screen_title": "Favorites",
+  "rentals_screen_title": "Your Properties",
+  "bookings_screen_title": "Bookings",
+
+  "about_us_welcome_title": "Mabeet: The Future of Property",
+  "about_us_welcome_body": "Your trusted partner in finding the perfect home or investment. We are dedicated to making property transactions transparent, efficient, and tailored to your unique needs across the region.",
+  "about_us_mission_title": "Our Mission: Empowering Decisions",
+  "about_us_mission_body": "To empower every user with innovative tools and accurate data, transforming the often-complex process of buying, selling, or renting property into a simple, confident experience.",
+  "about_us_vision_title": "Our Vision: Setting the Standard",
+  "about_us_vision_body": "To be the leading digital property platform, recognized for our commitment to trust, technological excellence, and fostering a seamless connection between properties and people.",
+  "about_us_values_title": "Why Choose Mabeet?"
+
+}

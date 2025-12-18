@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/rentals/widgets/select_from_gallery.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/data/models/state.dart';
 
 class AddPropertyScreen extends StatefulWidget {
@@ -39,11 +40,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Select Location",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.gray950,
-                  ),
+                  style: AppTextStyles.heading2Medium
                 ),
               ),
             ),
@@ -95,7 +92,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                   items: availableAreas.map((area) {
                     return DropdownMenuItem(
                       value: area,
-                      child: Text(area),
+                      child: Text('  $area'),
                     );
                   }).toList(),
                   onChanged: (value) {

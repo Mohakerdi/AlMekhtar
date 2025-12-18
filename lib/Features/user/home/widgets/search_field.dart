@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mabeet/core/constants/strings.dart';
 
 import '../../../../core/constants/icons.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -19,7 +21,7 @@ class SearchField extends StatelessWidget {
             size: 30,
           ),
         ),
-        hintText: 'Search Property',
+        hintText: AppStrings.searchFieldHint.tr(),
         suffixIcon: Padding(
           padding: EdgeInsets.only(right: 10),
           child: IconButton(

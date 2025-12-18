@@ -33,30 +33,35 @@ class _TabsState extends State<Tabs> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
+        iconSize: 30,
         icon: Icon(AppIcons.homeIcon),
         inactiveIcon: Icon(AppIcons.inactiveHomeIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
+        iconSize: 30,
         icon: Icon(AppIcons.bookIcon),
         inactiveIcon: Icon(AppIcons.inactiveBookIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
+        iconSize: 30,
         icon: Icon(AppIcons.rentIcon),
         inactiveIcon: Icon(AppIcons.inactiveRentIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
+        iconSize: 30,
         icon: Icon(AppIcons.favIcon),
         inactiveIcon: Icon(AppIcons.inactiveFavIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: AppColors.gray400,
       ),
       PersistentBottomNavBarItem(
+        iconSize: 30,
         icon: Icon(AppIcons.profileIcon),
         inactiveIcon: Icon(AppIcons.inactiveProfileIcon),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
@@ -75,7 +80,7 @@ class _TabsState extends State<Tabs> {
       items: _navBarsItems(),
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(
-          duration: Duration(milliseconds: 400),
+          duration: Duration(milliseconds: 300),
           curve: Curves.ease,
         ),
         screenTransitionAnimation: ScreenTransitionAnimationSettings(
@@ -85,7 +90,7 @@ class _TabsState extends State<Tabs> {
         ),
       ),
       confineToSafeArea: true,
-      navBarHeight: 55,
+      navBarHeight: 60,
       navBarStyle: NavBarStyle.style3,
     );
   }

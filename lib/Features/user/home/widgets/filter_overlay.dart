@@ -13,7 +13,7 @@ class FilterOverlay extends StatefulWidget {
 
 class _FilterOverlayState extends State<FilterOverlay> {
   Location _selectedGovernorat = Location.Damascus;
-  String _selectedArea = "Mazzeh";
+  String _selectedArea = "";
   List<String> availableAreas = syrianStates[0].areas;
   int floor = 0;
   SfRangeValues _costRange = const SfRangeValues(40.0, 60.0);

@@ -1,0 +1,37 @@
+{
+  "home_screen_title": "الرئيسية",
+  "recommended_section_title": "موصى به",
+  "see_all_button": "مشاهدة الكل",
+  "top_locations_section_title": "أفضل المواقع",
+  "popular_for_you_section_title": "شائع بالنسبة لك",
+  "search_field_hint": "ابحث في الشقق",
+
+  "profile_screen_title": "صفحة الملف الشخصي",
+  "menu_history": "السجل",
+  "menu_edit_profile": "تعديل الملف الشخصي",
+  "menu_about_us": "عنا",
+  "theme_light": "فاتح",
+  "theme_dark": "داكن",
+  "theme_changing_to": "جارٍ التغيير إلى نسق ",
+  "sign_out_success_message": "تم تسجيل خروج المستخدم بنجاح",
+  "locale_changing_to": "جار تغيير اللغة إلى ",
+  "locale_arabic": "العربية",
+  "locale_english": "الإنكليزية",
+  "sign_out_button": "تسجيل الخروج",
+  "lang": "اللغة",
+  "theme": "المظهر",
+
+  "favorites_screen_title": "المفضلة",
+  "rentals_screen_title": "الشقق الخاصة بك",
+  "bookings_screen_title": "الحجوزات",
+
+
+  "about_us_welcome_title": "مبيت: مستقبل العقارات",
+  "about_us_welcome_body": "شريكك الموثوق لإيجاد المنزل أو الاستثمار المثالي. نحن ملتزمون بجعل المعاملات العقارية شفافة وفعالة ومصممة خصيصًا لتلبية احتياجاتك الفريدة في جميع أنحاء المنطقة.",
+  "about_us_mission_title": "مهمتنا: تمكين القرارات",
+  "about_us_mission_body": "تمكين كل مستخدم من الأدوات المبتكرة والبيانات الدقيقة، وتحويل عملية شراء أو بيع أو استئجار العقارات المعقدة غالبًا إلى تجربة بسيطة وواثقة.",
+  "about_us_vision_title": "رؤيتنا: وضع المعايير",
+  "about_us_vision_body": "أن نكون المنصة الرقمية العقارية الرائدة، المعترف بها لالتزامنا بالثقة، التميز التكنولوجي، وتعزيز التواصل السلس بين العقارات والأشخاص.",
+  "about_us_values_title": "لماذا تختار مبيت؟"
+
+}

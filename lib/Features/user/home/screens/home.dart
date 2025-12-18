@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/home/locations/screens/locations_screen.dart';
 import 'package:mabeet/Features/user/home/search/screens/search_screen.dart';
@@ -9,6 +10,7 @@ import 'package:mabeet/Features/user/home/widgets/properties_list.dart';
 import 'package:mabeet/Features/user/home/widgets/recommended_home_property.dart';
 import 'package:mabeet/Features/user/home/widgets/search_field.dart';
 import 'package:mabeet/Features/user/home/widgets/swiper.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/data/models/state.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
@@ -66,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: CustomAppBar(titleText: 'Home Screen'),
+      appBar: CustomAppBar(titleText: AppStrings.homeScreenTitle.tr()),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -80,11 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Recommended', style: AppTextStyles.heading2Medium),
+                  Text(AppStrings.recommendedSectionTitle.tr(), style: AppTextStyles.heading2Medium),
                   InkWell(
                     onTap: _goToSearchScreen,
                     child: Text(
-                      'See all',
+                      AppStrings.seeAllButton.tr(),
                       style: AppTextStyles.bodyLarge.copyWith(
                         color: AppColors.primary700,
                       ),
@@ -107,11 +109,11 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Top Locations', style: AppTextStyles.heading2Medium),
+                  Text(AppStrings.topLocationsSectionTitle.tr(), style: AppTextStyles.heading2Medium),
                   InkWell(
                     onTap: _goToLocationsScreen,
                     child: Text(
-                      'See all',
+                      AppStrings.seeAllButton.tr(),
                       style: AppTextStyles.bodyLarge.copyWith(
                         color: AppColors.primary700,
                       ),
@@ -123,11 +125,11 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Popular for you', style: AppTextStyles.heading2Medium),
+                  Text(AppStrings.popularForYouSectionTitle.tr(), style: AppTextStyles.heading2Medium),
                   InkWell(
                     onTap: _goToSearchScreen,
                     child: Text(
-                      'See all',
+                      AppStrings.seeAllButton.tr(),
                       style: AppTextStyles.bodyLarge.copyWith(
                         color: AppColors.primary700,
                       ),

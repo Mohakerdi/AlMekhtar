@@ -20,7 +20,6 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController logInPhone = TextEditingController();
   TextEditingController logInPassword = TextEditingController();
 
-  SignUpModel? user;
   XFile? profilePic;
 
   uploadProfilePic(XFile image) {

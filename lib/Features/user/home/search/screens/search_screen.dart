@@ -32,14 +32,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
-
-  final List<String> imageAssets = [
-    AppImages.kDamascus,
-    AppImages.kRefDemasheq,
-    AppImages.kDaraa,
-    AppImages.kQonaytera,
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

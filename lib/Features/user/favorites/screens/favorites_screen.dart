@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/favorites/widgets/favorites_property.dart';
 import 'package:mabeet/Features/user/CustomAppBar.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -9,7 +11,7 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(titleText: 'Favorites'),
+      appBar: CustomAppBar(titleText: AppStrings.favoritesScreenTitle.tr()),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: dummyProperties.length,
