@@ -114,10 +114,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 'History':
         screen = const HistoryScreen();
         break;
+      case 'السجل':
+        screen = const HistoryScreen();
+        break;
       case 'Edit Profile':
         screen = const EditProfileScreen();
         break;
+      case 'تعديل الملف الشخصي':
+        screen = const EditProfileScreen();
+        break;
       case 'About us':
+        screen = const AboutUsScreen();
+        break;
+      case 'عنا':
         screen = const AboutUsScreen();
         break;
       default:

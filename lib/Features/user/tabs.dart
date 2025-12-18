@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/bookings/screens/bookings_screen.dart';
-import 'package:mabeet/Features/user/favorites/screens/favorites_screen.dart';
-import 'package:mabeet/Features/user/profile/screens/main_profile/screens/profile_screen.dart';
-import 'package:mabeet/Features/user/rentals/screens/rentals_screen.dart';
-import 'package:mabeet/core/constants/icons.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
+import 'bookings/screens/bookings_screen.dart';
+import 'favorites/screens/favorites_screen.dart';
+import 'profile/screens/main_profile/screens/profile_screen.dart';
+import 'rentals/screens/rentals_screen.dart';
+import '../../core/constants/icons.dart';
+import '../../core/theme/app_colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'home/screens/home.dart';
 

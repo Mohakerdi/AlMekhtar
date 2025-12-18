@@ -76,12 +76,12 @@ class ProfileBodyWidget extends StatelessWidget {
               ProfileNavigationTile(
                 title: AppStrings.menuHistory.tr(),
                 icon: AppIcons.historyIcon,
-                onTap: () => onNavigate('History'),
+                onTap: () => onNavigate(AppStrings.menuEditProfile.tr()),
               ),
               ProfileNavigationTile(
                 title: AppStrings.menuEditProfile.tr(),
                 icon: AppIcons.editIcon,
-                onTap: () => onNavigate('Edit Profile'),
+                onTap: () => onNavigate(AppStrings.menuEditProfile.tr()),
               ),
               ProfileNavigationTile(
                 title: AppStrings.menuAboutUs.tr(),
