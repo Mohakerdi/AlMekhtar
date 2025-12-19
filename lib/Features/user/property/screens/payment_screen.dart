@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mabeet/Features/user/property/cubit/payment_cubit.dart';
-import 'package:mabeet/Features/user/property/cubit/payment_state.dart';
-import 'package:mabeet/core/constants/images.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/core/theme/text_styles.dart';
+import '../cubit/payment_cubit.dart';
+import '../cubit/payment_state.dart';
+import '../widgets/payment_card_widget.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/text_styles.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -23,6 +23,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return BlocConsumer<PaymentCubit, PaymentState>(
       listener: (context, state) {},
       builder: (context, state) {
+        final paymentCubit = context.watch<PaymentCubit>();
+        final cardNumber = paymentCubit.paymentCardNumber.text;
+        final cvv = paymentCubit.paymentCvv.text;
+
         return Scaffold(
           appBar: AppBar(
             title: Text(
@@ -37,36 +41,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Stack(
-                    children: [
-                      Image.asset(
-                        AppImages.kPaymentCard,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 26),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 100),
-                            Text(
-                              context.watch<PaymentCubit>().paymentCardNumber.text,
-                              style: AppTextStyles.bodyLarge.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(height: 50),
-                            Text(
-                              context.watch<PaymentCubit>().paymentCvv.text,
-                              style: AppTextStyles.bodyLarge.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  PaymentCardWidget(
+                    cardNumber: cardNumber,
+                    cvv: cvv,
                   ),
                   SizedBox(height: 20),
                   Text('Card Number', style: AppTextStyles.bodyLargeSemiBold),

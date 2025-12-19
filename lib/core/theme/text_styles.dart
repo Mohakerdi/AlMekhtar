@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 import 'font_weight_helper.dart';
+import 'package:term_glyph/term_glyph.dart' as glyph;
 
 class AppTextStyles {
   AppTextStyles._();
 
-  static const String _fontFamily = 'Inter';
+  static const _fontFamily = GoogleFonts.cairo;
 
   static TextStyle _style({
     required double size,
@@ -13,8 +15,7 @@ class AppTextStyles {
     Color color = AppColors.darkText,
     double? height,
   }) {
-    return TextStyle(
-      fontFamily: _fontFamily,
+    return _fontFamily(
       fontSize: size,
       fontWeight: weight,
       color: color,
@@ -102,6 +103,11 @@ class AppTextStyles {
   );
   static TextStyle get bodySmallMedium =>
       _style(size: 12.0, weight: FontWeightHelper.medium);
+
+  static TextStyle get cardDetailMonospace => GoogleFonts.monomaniacOne(
+    color: Colors.white,
+    fontSize: 18
+  );
 
   // 5. LABEL & CAPTION STYLES (Buttons, tags, small details)
   static TextStyle get labelButton =>

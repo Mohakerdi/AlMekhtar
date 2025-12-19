@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/profile/screens/main_profile/widgets/profile_navigation_tile.dart';
-import 'package:mabeet/Features/user/profile/screens/main_profile/widgets/profile_section_header.dart';
-import 'package:mabeet/core/constants/strings.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/core/theme/text_styles.dart';
+import 'profile_navigation_tile.dart';
+import 'profile_section_header.dart';
+import '../../../../../../core/constants/strings.dart';
+import '../../../../../../core/theme/app_colors.dart';
+import '../../../../../../core/theme/text_styles.dart';
 import '../../../../../../core/constants/icons.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
