@@ -28,14 +28,12 @@ class ProfileBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //padding: const EdgeInsets.all(16.0),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header Section
               const ProfileSectionWidget(
                 name: 'Hans Landa',
                 phoneNumber: '0987654321',
@@ -44,7 +42,6 @@ class ProfileBodyWidget extends StatelessWidget {
 
               const Divider(height: 30),
 
-              // Settings Section
               SwitchListTile(
                 secondary: Icon(
                   isDarkTheme ? AppIcons.darkIcon : AppIcons.lightIcon,
@@ -72,7 +69,6 @@ class ProfileBodyWidget extends StatelessWidget {
 
               const Divider(),
 
-              // Navigation Section
               ProfileNavigationTile(
                 title: AppStrings.menuHistory.tr(),
                 icon: AppIcons.historyIcon,

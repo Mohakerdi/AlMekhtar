@@ -25,5 +25,6 @@ class AppIcons{
  static const historyIcon = Icons.history;
  static const lightIcon = Icons.brightness_7;
  static const darkIcon = Icons.brightness_2;
+ static const exitIcon = Icons.close;
 
 }

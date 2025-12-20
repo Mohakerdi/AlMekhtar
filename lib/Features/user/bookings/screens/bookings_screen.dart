@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/bookings/widgets/booking_property.dart';
-import 'package:mabeet/Features/user/CustomAppBar.dart';
-import 'package:mabeet/core/constants/strings.dart';
-import 'package:mabeet/data/repos/dummy_properties.dart';
+import '../widgets/booking_property.dart';
+import '../../CustomAppBar.dart';
+import '../../../../core/constants/strings.dart';
+import '../../../../data/repos/dummy_properties.dart';
 
 class BookingsScreen extends StatelessWidget {
   const BookingsScreen({super.key});

@@ -45,7 +45,7 @@ class UserCubit extends Cubit<UserState> {
   logIn() async {
     emit(LogInLoading());
     final response = await userRepository.logIn(
-      phone: logInPhone.text,
+      credential: logInPhone.text,
       password: logInPassword.text,
     );
     response.fold(

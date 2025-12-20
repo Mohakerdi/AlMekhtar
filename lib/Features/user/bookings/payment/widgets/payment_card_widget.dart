@@ -51,7 +51,7 @@ class PaymentCardWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 85),
+              const SizedBox(height: 100),
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: Text(
@@ -59,8 +59,7 @@ class PaymentCardWidget extends StatelessWidget {
                   style: AppTextStyles.cardDetailMonospace
                 ),
               ),
-              const SizedBox(height: 50),
-              // CVV Display
+              const SizedBox(height: 40),
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: Text(

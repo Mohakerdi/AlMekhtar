@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/images.dart';
 import '../../../../core/theme/app_colors.dart';
 
-class Swiper extends StatefulWidget {
-  const Swiper({super.key});
+class HomeAdsSwiper extends StatefulWidget {
+  const HomeAdsSwiper({super.key});
 
   @override
-  State<Swiper> createState() => _SwiperState();
+  State<HomeAdsSwiper> createState() => _HomeAdsSwiperState();
 }
 
-class _SwiperState extends State<Swiper> {
+class _HomeAdsSwiperState extends State<HomeAdsSwiper> {
   final List<String> images = [
     AppImages.kSliderImage1,
     AppImages.kSliderImage2,

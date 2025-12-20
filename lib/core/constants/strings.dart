@@ -43,4 +43,10 @@ abstract class AppStrings {
   static const String aboutUsVisionTitle = 'about_us_vision_title';
   static const String aboutUsVisionBody = 'about_us_vision_body';
   static const String aboutUsValuesTitle = 'about_us_values_title';
+  // --- Property
+  static const String night = "night";
+  static const String enterYourCardTitle = 'enter_your_card_title';
+  static const String addCardButton = 'add_card_button';
+  static const String rentNowButton = 'rent_now_button';
+
 }

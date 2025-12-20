@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/property/screens/payment_screen.dart';
-import 'package:mabeet/Features/user/rentNow/widgets/rent_now_property_widget.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/data/models/property.dart';
+import '../../payment/screens/payment_screen.dart';
+import '../widgets/rent_now_property_widget.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../data/models/property.dart';
 
 class RentNowScreen extends StatefulWidget {
   final Property property;
