@@ -7,7 +7,6 @@ class AboutUsShowDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This Center widget and its children were moved here
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 24),
       child: Expanded(
@@ -27,7 +26,11 @@ class AboutUsShowDetails extends StatelessWidget {
               'What is the salary of a bigbasket?',
               textAlign: TextAlign.start,
               maxLines: 1,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(letterSpacing: 0.0, fontWeight: FontWeight.bold, fontFamily: 'Satoshi'),
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                letterSpacing: 0.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Satoshi',
+              ),
             ),
             SizedBox(height: 16),
             Text(
