@@ -7,12 +7,17 @@ part 'favorite_state.dart';
 
 class FavoriteCubit extends Cubit<FavoriteState> {
   final FavoriteRepository repo;
+
   FavoriteCubit(this.repo) : super(FavoriteInitial());
-  List<Property> favoritesList = [];
+
+  List favoritesList = [];
+
   void getFavorites() async {
     emit(FavoriteLoading());
+
     try {
       favoritesList = await repo.fetchFavorites();
+
       emit(FavoriteLoaded(List.from(favoritesList)));
     } catch (e) {
       emit(FavoriteError(e.toString()));
@@ -31,6 +36,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     } else {
       favoritesList.add(property);
     }
+
     emit(FavoriteLoaded(List.from(favoritesList)));
 
     try {
@@ -44,6 +50,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
         );
 
       emit(FavoriteLoaded(List.from(favoritesList)));
+
       emit(FavoriteError("error in favorite loading"));
     }
   }

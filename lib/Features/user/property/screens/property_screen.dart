@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/property/screens/payment_screen.dart';
+import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
 import 'package:mabeet/Features/user/rentNow/screens/rent_now_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/cost_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_details_widget.dart';
@@ -23,7 +24,7 @@ class PropertyScreen extends StatelessWidget {
         title: Text(property.title),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.share)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
+          FavoriteIconButton(property: property),
         ],
       ),
       body: SingleChildScrollView(
@@ -45,7 +46,11 @@ class PropertyScreen extends StatelessWidget {
                 ],
               ),
             ),
-            LocationWidget(govenorant: property.state, area: property.area, detailed: property.describedLocation,),
+            LocationWidget(
+              govenorant: property.state,
+              area: property.area,
+              detailed: property.describedLocation,
+            ),
             SizedBox(height: 30),
             PropertyDetails(),
             SizedBox(height: 25),

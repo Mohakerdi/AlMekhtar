@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
+import 'package:mabeet/Features/user/favorites/services/data/favorite_rep.dart';
+import 'package:mabeet/Features/user/favorites/services/data/favorite_webservices.dart';
 import 'package:mabeet/Features/user/property/cubit/payment_cubit.dart';
 import 'package:mabeet/data/repos/user_repo.dart';
 import 'Features/splash/splash_screen_handler.dart';
@@ -17,8 +20,9 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper.init();
   //Fix View To Vertical
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_,) {
-
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((
+    _,
+  ) {
     runApp(
       MultiBlocProvider(
         providers: [
@@ -26,7 +30,19 @@ void main() {
             create: (context) =>
                 UserCubit(UserRepository(api: DioConsumer(dio: Dio()))),
           ),
-          BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()..loadTheme()),
+
+          BlocProvider<FavoriteCubit>(
+            create: (context) {
+              final webService = FavoriteWebServices(
+                api: DioConsumer(dio: Dio()),
+              );
+              final repo = FavoriteRepository(webService);
+              return FavoriteCubit(repo)..getFavorites();
+            },
+          ),
+          BlocProvider<ThemeCubit>(
+            create: (context) => ThemeCubit()..loadTheme(),
+          ),
           BlocProvider<PaymentCubit>(create: (context) => PaymentCubit()),
         ],
         child: const MyApp(),
