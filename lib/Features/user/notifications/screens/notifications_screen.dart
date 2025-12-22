@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/data/models/card_model.dart';
+import 'package:mabeet/data/models/notification_model.dart';
 import 'package:mabeet/data/repos/dummy_card_data.dart';
 
 class NotificationsScreen extends StatelessWidget {
   NotificationsScreen({super.key});
 
-  final List<CardModel> cards = dummyCards;
+  final List<NotificationModel> cards = dummyCards;
 
   @override
   Widget build(BuildContext context) {

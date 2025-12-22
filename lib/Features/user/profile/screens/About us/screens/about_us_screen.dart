@@ -13,7 +13,7 @@ class AboutUsScreen extends StatelessWidget {
         title: const Text('About us'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      // The body now uses the new, separate widget
+
       body: const AboutUsShowDetails(),
     );
   }

@@ -5,7 +5,7 @@ import '../models/state.dart';
 
 final List<Property> dummyProperties = [
   Property(
-    id: '1',
+    propertyId: '1',
     title: 'Eagle Nest',
     imageURLs: [
       AppImages.kEagleNest,
@@ -16,14 +16,15 @@ final List<Property> dummyProperties = [
     costPerNight: 22.5,
     state: Location.Damascus,
     area: 'Al-Midan',
-    describedLocation: 'Berlin, 1944, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    describedLocation:
+        'Berlin, 1944, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
     description:
         'Perched high above the city, Eagle Nest offers a serene escape from the hustle and bustle of everyday life. Enjoy breathtaking panoramic views, cozy interiors, and a perfect spot for morning coffee or sunset relaxation. Ideal for couples or solo travelers looking for peace, quiet, and inspiration.',
     avgRate: 3.5,
   ),
 
   Property(
-    id: '2',
+    propertyId: '2',
     title: 'Twin Tower',
     imageURLs: [
       AppImages.kTwinTowers,
@@ -41,7 +42,7 @@ final List<Property> dummyProperties = [
   ),
 
   Property(
-    id: '3',
+    propertyId: '3',
     title: 'CJ\'s House',
     imageURLs: [
       AppImages.kGrooveStreet,
@@ -59,7 +60,7 @@ final List<Property> dummyProperties = [
   ),
 
   Property(
-    id: '4',
+    propertyId: '4',
     title: 'Foster\'s House for imaginary friends',
     imageURLs: [
       AppImages.kFosterHouse,
@@ -76,7 +77,7 @@ final List<Property> dummyProperties = [
     avgRate: 3.9,
   ),
   Property(
-    id: '1',
+    propertyId: '1',
     title: 'Eagle Nest',
     imageURLs: [
       AppImages.kEagleNest,
@@ -94,7 +95,7 @@ final List<Property> dummyProperties = [
   ),
 
   Property(
-    id: '2',
+    propertyId: '2',
     title: 'Twin Tower',
     imageURLs: [
       AppImages.kTwinTowers,
@@ -112,7 +113,7 @@ final List<Property> dummyProperties = [
   ),
 
   Property(
-    id: '3',
+    propertyId: '3',
     title: 'CJ\'s House',
     imageURLs: [
       AppImages.kGrooveStreet,
@@ -130,7 +131,7 @@ final List<Property> dummyProperties = [
   ),
 
   Property(
-    id: '4',
+    propertyId: '4',
     title: 'Foster\'s House for imaginary friends',
     imageURLs: [
       AppImages.kFosterHouse,
@@ -146,5 +147,4 @@ final List<Property> dummyProperties = [
         'Step into a whimsical world at Foster\'s House for imaginary friends, where imagination and fun come alive. This playful home is perfect for families, kids, or anyone young at heart. With colorful interiors, unique decorations, and cozy corners for reading or relaxing, every moment here is full of joy. Experience a stay unlike any other, where creativity and comfort blend seamlessly.',
     avgRate: 3.9,
   ),
-
 ];

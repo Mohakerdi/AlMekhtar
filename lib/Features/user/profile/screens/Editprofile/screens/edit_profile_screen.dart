@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/profile/screens/Editprofile/widgets/edit_profiledetails.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -11,9 +12,9 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Profile'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: AppColors.primary500,
       ),
-      // The body now uses the new, separate widget
+
       body: const EditProfileShowDetails(),
     );
   }
