@@ -1,7 +1,6 @@
-import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
-import '../../../../core/theme/text_styles.dart';
+import '../../../../../core/theme/text_styles.dart';
 
 import 'package:flutter/material.dart';
 

@@ -55,11 +55,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     Center(child: Image.asset(AppImages.kLogoPath, width: 70)),
                     Text('Welcome Back!', style: AppTextStyles.display2Bold),
                     Text(
-                      'Sign in with your phone number to continue',
+                      'Log in to continue',
                       style: AppTextStyles.bodyMedium,
                     ),
                     SizedBox(height: 60),
-                    Text('Phone Number', style: AppTextStyles.titleMedium),
+                    Text('Phone Number OR Email', style: AppTextStyles.titleMedium),
                     TextFormField(
                       controller: context.read<UserCubit>().logInPhone,
                       keyboardType: TextInputType.phone,
@@ -71,11 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             required bool isFocused,
                           }) => null,
                       decoration: InputDecoration(
-                        hintText: '09 ** *** ***',
+                        hintText: '09 ** | exam@gmail.com',
                         helperText: ' ',
                       ),
                       maxLength: 10,
-                      validator: _validatePhone,
                     ),
                     Text('Password', style: AppTextStyles.titleMedium),
                     TextFormField(
@@ -105,17 +104,6 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
-  }
-
-  String? _validatePhone(value) {
-    if (value == null || value.isEmpty) {
-      return 'Phone number is required.';
-    }
-    final phoneRegExp = RegExp(r'^09[0-9]{8}$');
-    if (!phoneRegExp.hasMatch(value)) {
-      return 'Enter a valid 10-digit phone number starting with 09.';
-    }
-    return null;
   }
 
   InputDecoration _passwordDecoration() {

@@ -1,6 +1,20 @@
+import 'package:mabeet/core/constants/images.dart';
+
 import 'state.dart';
 
 class Property {
+  final int propertyId;
+  final String title;
+  final List<String> imageURLs;
+  final String description;
+  final String describedLocation;
+  final double costPerNight;
+  final double area;
+  final Location state;
+  final String city;
+  final double avgRate;
+  final int floor;
+
   Property({
     required this.propertyId,
     required this.title,
@@ -8,37 +22,48 @@ class Property {
     required this.description,
     required this.describedLocation,
     required this.costPerNight,
-    required this.state,
     required this.area,
+    required this.state,
+    required this.city,
     required this.avgRate,
+    required this.floor,
   });
 
-  final String propertyId;
-  final String title;
-  final List<String> imageURLs;
-  final String description;
-  final String describedLocation;
-  final double costPerNight;
-  final Location state;
-  final String area;
-  final double avgRate;
-
   factory Property.fromJson(Map<String, dynamic> json) {
-    return Property(
-      propertyId: json['id'].toString(), //mabey it will need a change
-      title: json['title'] ?? '',
-      imageURLs: List<String>.from(json['image_urls'] ?? []),
-      description: json['description'] ?? '',
-      describedLocation: json['described_location'] ?? '',
-
-      costPerNight: (json['cost_per_night'] as num?)?.toDouble() ?? 0.0,
-      area: json['area']?.toString() ?? '',
-      avgRate: (json['avg_rate'] as num?)?.toDouble() ?? 0.0,
-
-      state: Location.values.firstWhere(
-        (e) => e.toString().split('.').last == json['state'],
+    Location mapState(String stateName) {
+      return Location.values.firstWhere(
+            (e) => e.name == stateName,
         orElse: () => Location.Damascus,
-      ),
+      );
+    }
+
+    return Property(
+      propertyId: json['id'] as int,
+      costPerNight: (json['price'] as num).toDouble(),
+      city: json['enCity'] as String,
+      state: mapState(json['enState'] as String),
+      floor: json['floor'] as int,
+      avgRate: (json['rate'] as num).toDouble(),
+      area: (json['area'] as num).toDouble(),
+
+      title: json['title'] as String,
+      imageURLs: json['images'] as List<String>,
+      description: json['description'] as String,
+      describedLocation: json['address_described'] as String,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'price': costPerNight,
+      'floor': floor,
+      'enCity': city,
+      'enState': state,
+      'images': imageURLs,
+      'description':description,
+      'address_described': describedLocation,
+      'area': area
+    };
   }
 }

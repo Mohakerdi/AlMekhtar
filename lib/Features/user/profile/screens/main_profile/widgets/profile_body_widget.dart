@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/profile/screens/main_profile/widgets/profile_navigation_tile.dart';
-import 'package:mabeet/Features/user/profile/screens/main_profile/widgets/profile_section_header.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/core/theme/text_styles.dart';
+import 'profile_navigation_tile.dart';
+import 'profile_section_header.dart';
+import '../../../../../../core/constants/strings.dart';
+import '../../../../../../core/theme/app_colors.dart';
+import '../../../../../../core/theme/text_styles.dart';
+import '../../../../../../core/constants/icons.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
   final bool isDarkTheme;
@@ -25,14 +28,12 @@ class ProfileBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //padding: const EdgeInsets.all(16.0),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header Section
               const ProfileSectionWidget(
                 name: 'Hans Landa',
                 phoneNumber: '0987654321',
@@ -41,45 +42,47 @@ class ProfileBodyWidget extends StatelessWidget {
 
               const Divider(height: 30),
 
-              // Settings Section
               SwitchListTile(
                 secondary: Icon(
-                  isDarkTheme ? Icons.brightness_4 : Icons.brightness_7,
+                  isDarkTheme ? AppIcons.darkIcon : AppIcons.lightIcon,
                   color: AppColors.primary800,
                 ),
-                title: const Text('Theme'),
-                subtitle: Text(isDarkTheme ? 'Dark Mode' : 'Light Mode'),
+                title: Text(AppStrings.theme.tr()),
+                subtitle: Text(isDarkTheme ? AppStrings.themeDark.tr() : AppStrings.themeLight.tr()),
                 value: isDarkTheme,
                 onChanged: onThemeChanged,
               ),
               SwitchListTile(
                 secondary: const Icon(
-                  Icons.language,
+                  AppIcons.langIcon,
                   color: AppColors.primary800,
                 ),
-                title: const Text('Languages'),
-                subtitle: Text(isEnglish ? 'English' : 'Arabic'),
+                title: Text(AppStrings.lang.tr()),
+                subtitle: Text(
+                  isEnglish
+                      ? AppStrings.localeEnglish.tr()
+                      : AppStrings.localeArabic.tr(),
+                ),
                 value: isEnglish,
                 onChanged: onLanguageChanged,
               ),
 
               const Divider(),
 
-              // Navigation Section
               ProfileNavigationTile(
-                title: 'History',
-                icon: Icons.history,
-                onTap: () => onNavigate('History'),
+                title: AppStrings.menuHistory.tr(),
+                icon: AppIcons.historyIcon,
+                onTap: () => onNavigate(AppStrings.menuEditProfile.tr()),
               ),
               ProfileNavigationTile(
-                title: 'Edit Profile',
-                icon: Icons.edit,
-                onTap: () => onNavigate('Edit Profile'),
+                title: AppStrings.menuEditProfile.tr(),
+                icon: AppIcons.editIcon,
+                onTap: () => onNavigate(AppStrings.menuEditProfile.tr()),
               ),
               ProfileNavigationTile(
-                title: 'About us',
-                icon: Icons.info_outline,
-                onTap: () => onNavigate('About us'),
+                title: AppStrings.menuAboutUs.tr(),
+                icon: AppIcons.aboutUsIcon,
+                onTap: () => onNavigate(AppStrings.menuAboutUs.tr()),
               ),
 
               const SizedBox(height: 20),
@@ -89,15 +92,14 @@ class ProfileBodyWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: ElevatedButton.icon(
                   onPressed: onSignOut,
-                  icon: const Icon(Icons.logout),
+                  icon: const Icon(AppIcons.signOutIcon),
                   label: Text(
-                    'Sign Out',
+                    AppStrings.signOutButton.tr(),
                     style: AppTextStyles.heading1MediumWhite,
                   ),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: AppColors
-                        .primary700, // Added background color for visibility
+                    backgroundColor: AppColors.primary700,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40),
                     ),

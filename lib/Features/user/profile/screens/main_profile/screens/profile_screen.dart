@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/constants/strings.dart';
+import '../../../../../../core/localization/localiztion_service.dart';
 import '../../../../CustomAppBar.dart';
 import '../../About%20us/screens/about_us_screen.dart';
 import '../../Editprofile/screens/edit_profile_screen.dart';
@@ -16,26 +19,60 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  bool _isEnglish = true;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         final isDark = state.themeMode == ThemeMode.dark;
+        bool isEnglish =
+            LocalizationService.getCurrentLanguageCode(context) == 'en';
+
         return Scaffold(
-          appBar: CustomAppBar(titleText: 'Profile Screen'),
+          appBar: CustomAppBar(titleText: AppStrings.profileScreenTitle.tr()),
           body: ProfileBodyWidget(
             isDarkTheme: isDark,
-            isEnglish: _isEnglish,
+            isEnglish: isEnglish,
             onThemeChanged: (val) => _handleThemeChange(),
-            onLanguageChanged: (val) => setState(() => _isEnglish = val),
+            onLanguageChanged: (val) => _handleLanguageChange(val),
             onNavigate: _navigateTo,
             onSignOut: _signOut,
           ),
         );
       },
     );
+  }
+
+  void _handleLanguageChange(bool isEnglish) async{
+    final screenContext = context;
+    showDialog(
+      context: screenContext,
+      barrierDismissible: false,
+      builder: (context) {
+        final currentLocale = LocalizationService.getCurrentLanguageCode(context);
+        final nextLocaleName = (currentLocale == 'en')
+            ? AppStrings.localeArabic.tr()
+            : AppStrings.localeEnglish.tr();
+
+        return AlertDialog(
+          content: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(width: 10),
+              Text('${AppStrings.localeChangingTo.tr()} $nextLocaleName'),
+            ],
+          ),
+        );
+      },
+    );
+    await Future.delayed(const Duration(milliseconds: 1000));
+    if (mounted) {
+      Navigator.of(screenContext, rootNavigator: true).pop();
+    }
+    if (mounted) {
+      LocalizationService.switchLanguage(context);
+      isEnglish = LocalizationService.getCurrentLanguageCode(context) == 'en';
+    }
   }
 
   void _handleThemeChange() async {
@@ -47,16 +84,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context) {
         final currentThemeMode = themeBloc.state.themeMode;
         final nextThemeName = (currentThemeMode == ThemeMode.dark)
-            ? 'Light'
-            : 'Dark';
+            ? AppStrings.themeLight.tr()
+            : AppStrings.themeDark.tr();
 
         return AlertDialog(
           content: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               const CircularProgressIndicator(),
-              const SizedBox(width: 20),
-              Text('Changing to $nextThemeName Theme...'),
+              const SizedBox(width: 10),
+              Text('${AppStrings.themeChangingTo.tr()} $nextThemeName'),
             ],
           ),
         );
@@ -77,10 +114,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 'History':
         screen = const HistoryScreen();
         break;
+      case 'السجل':
+        screen = const HistoryScreen();
+        break;
       case 'Edit Profile':
         screen = const EditProfileScreen();
         break;
+      case 'تعديل الملف الشخصي':
+        screen = const EditProfileScreen();
+        break;
       case 'About us':
+        screen = const AboutUsScreen();
+        break;
+      case 'عنا':
         screen = const AboutUsScreen();
         break;
       default:
@@ -91,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _signOut() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('User signed out successfully! (Demo)')),
+      SnackBar(content: Text(AppStrings.signOutSuccessMessage.tr())),
     );
   }
 }

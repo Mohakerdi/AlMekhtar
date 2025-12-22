@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/property/screens/payment_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
@@ -8,6 +9,7 @@ import 'package:mabeet/Features/user/property/widgets/description_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/location_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/property_details.dart';
 import 'package:mabeet/Features/user/property/widgets/title_widget.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import '../../../../data/models/property.dart';
 import '../widgets/details_slider.dart';
@@ -46,11 +48,7 @@ class PropertyScreen extends StatelessWidget {
                 ],
               ),
             ),
-            LocationWidget(
-              govenorant: property.state,
-              area: property.area,
-              detailed: property.describedLocation,
-            ),
+            LocationWidget(govenorant: property.state, area: property.city, detailed: property.describedLocation,),
             SizedBox(height: 30),
             PropertyDetails(),
             SizedBox(height: 25),
@@ -69,7 +67,7 @@ class PropertyScreen extends StatelessWidget {
             ),
           );
         },
-        label: Text("Rent now"),
+        label: Text(AppStrings.rentNowButton.tr()),
         backgroundColor: AppColors.primary700,
         extendedPadding: EdgeInsets.symmetric(horizontal: 130),
       ),

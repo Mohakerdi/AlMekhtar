@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/CustomAppBar.dart';
@@ -5,6 +6,8 @@ import 'package:mabeet/Features/user/rentals/screens/add_property_screen.dart';
 import 'package:mabeet/Features/user/rentals/services/rentals_cubit.dart';
 import 'package:mabeet/Features/user/rentals/services/rentals_state.dart';
 import 'package:mabeet/Features/user/rentals/widgets/rentals_property.dart';
+import 'package:mabeet/core/constants/strings.dart';
+import 'package:mabeet/data/repos/dummy_properties.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 
 class RentalsScreen extends StatelessWidget {

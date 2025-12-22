@@ -15,7 +15,7 @@ ThemeData get darkTheme {
 
     // 1. COLOR SCHEME
     colorScheme: const ColorScheme.dark(
-      primary: AppColors.primary300,
+      primary: AppColors.primary500,
       onPrimary: AppColors.gray900,
       secondary: AppColors.secondaryLight,
       onSecondary: AppColors.gray900,
@@ -62,7 +62,7 @@ ThemeData get darkTheme {
     // Elevated Button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary300,
+        backgroundColor: AppColors.primary500,
         foregroundColor: AppColors.gray900,
         textStyle: AppTextStyles.labelButton.copyWith(color: AppColors.gray900),
         minimumSize: const Size(double.infinity, 56),
@@ -91,7 +91,7 @@ ThemeData get darkTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_defaultRadius),
-        borderSide: const BorderSide(color: AppColors.primary300, width: 1.5),
+        borderSide: const BorderSide(color: AppColors.primary500, width: 1.5),
       ),
     ),
 

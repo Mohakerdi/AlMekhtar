@@ -22,7 +22,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final String buttonText = isLastPage ? 'Get Started' : 'Next';
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(),
       body: Column(
         children: [

@@ -1,17 +1,17 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/home/locations/screens/locations_screen.dart';
-import 'package:mabeet/Features/user/home/search/screens/search_screen.dart';
-import 'package:mabeet/Features/user/CustomAppBar.dart';
-import 'package:mabeet/Features/user/home/widgets/filter_overlay.dart';
-import 'package:mabeet/Features/user/home/locations/widgets/location_vector.dart';
-import 'package:mabeet/Features/user/home/widgets/locations_slider.dart';
-import 'package:mabeet/Features/user/home/widgets/properties_list.dart';
-import 'package:mabeet/Features/user/home/widgets/recommended_home_property.dart';
-import 'package:mabeet/Features/user/home/widgets/search_field.dart';
-import 'package:mabeet/Features/user/home/widgets/swiper.dart';
-import 'package:mabeet/core/theme/text_styles.dart';
-import 'package:mabeet/data/models/state.dart';
-import 'package:mabeet/data/repos/dummy_properties.dart';
+import '../locations/screens/locations_screen.dart';
+import '../search/screens/search_screen.dart';
+import '../../CustomAppBar.dart';
+import '../search/widgets/filter_overlay.dart';
+import '../widgets/locations_slider.dart';
+import '../widgets/properties_list.dart';
+import '../widgets/recommended_home_property.dart';
+import '../search/widgets/search_field.dart';
+import '../widgets/home_ads_swiper.dart';
+import '../../../../core/constants/strings.dart';
+import '../../../../core/theme/text_styles.dart';
+import '../../../../data/repos/dummy_properties.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -39,7 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
           topLeft: Radius.circular(20.0),
           topRight: Radius.circular(20.0),
         ),
-        child: FilterOverlay(),
+        child: FilterOverlay(
+          onApply: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (builder) => const SearchScreen(),
+            ),
+          );
+        },),
       ),
     );
   }
@@ -66,25 +73,25 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: CustomAppBar(titleText: 'Home Screen'),
+      appBar: CustomAppBar(titleText: AppStrings.homeScreenTitle.tr()),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SearchField(onBtnPressed: _showOverlay),
+              SearchField(onPressed: _showOverlay),
               const SizedBox(height: 25),
-              const Swiper(),
+              const HomeAdsSwiper(),
               const SizedBox(height: 25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Recommended', style: AppTextStyles.heading2Medium),
+                  Text(AppStrings.recommendedSectionTitle.tr(), style: AppTextStyles.heading2Medium),
                   InkWell(
                     onTap: _goToSearchScreen,
                     child: Text(
-                      'See all',
+                      AppStrings.seeAllButton.tr(),
                       style: AppTextStyles.bodyLarge.copyWith(
                         color: AppColors.primary700,
                       ),
@@ -107,11 +114,11 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Top Locations', style: AppTextStyles.heading2Medium),
+                  Text(AppStrings.topLocationsSectionTitle.tr(), style: AppTextStyles.heading2Medium),
                   InkWell(
                     onTap: _goToLocationsScreen,
                     child: Text(
-                      'See all',
+                      AppStrings.seeAllButton.tr(),
                       style: AppTextStyles.bodyLarge.copyWith(
                         color: AppColors.primary700,
                       ),
@@ -123,11 +130,11 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Popular for you', style: AppTextStyles.heading2Medium),
+                  Text(AppStrings.popularForYouSectionTitle.tr(), style: AppTextStyles.heading2Medium),
                   InkWell(
                     onTap: _goToSearchScreen,
                     child: Text(
-                      'See all',
+                      AppStrings.seeAllButton.tr(),
                       style: AppTextStyles.bodyLarge.copyWith(
                         color: AppColors.primary700,
                       ),

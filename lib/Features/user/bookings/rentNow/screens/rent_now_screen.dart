@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/property/screens/payment_screen.dart';
-import 'package:mabeet/Features/user/rentNow/widgets/rent_now_property_widget.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/data/models/property.dart';
+import '../../payment/screens/payment_screen.dart';
+import '../widgets/rent_now_property_widget.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../data/models/property.dart';
 
 class RentNowScreen extends StatefulWidget {
   final Property property;
@@ -100,9 +100,10 @@ class _RentNowScreenState extends State<RentNowScreen> {
                     final DateTimeRange? pickedRange =
                         await showDateRangePicker(
                           context: context,
-                          firstDate: DateTime(2000),
+                          firstDate: DateTime(2025),
                           lastDate: DateTime(3000),
                           initialDateRange: selectedDates,
+                          barrierDismissible: true,
                         );
 
                     if (pickedRange != null) {
@@ -115,7 +116,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
               ),
               Divider(),
               Text(
-                "Make sure to check your date before making anysort of payments",
+                "Make sure to check your date before making any sort of payments",
               ),
               SizedBox(height: 25),
               Text(

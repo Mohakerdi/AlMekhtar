@@ -18,5 +18,13 @@ class AppIcons{
  static const homeIcon = Icons.home;
  static const inactiveHomeIcon = Icons.home_outlined;
  static const upload = FeatherIcons.uploadCloud;
+ static const signOutIcon = Icons.logout;
+ static const aboutUsIcon = Icons.info_outline;
+ static const editIcon = Icons.edit;
+ static const langIcon = Icons.language;
+ static const historyIcon = Icons.history;
+ static const lightIcon = Icons.brightness_7;
+ static const darkIcon = Icons.brightness_2;
+ static const exitIcon = Icons.close;
 
 }

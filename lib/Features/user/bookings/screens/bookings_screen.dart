@@ -1,11 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../widgets/booking_property.dart';
+import '../../CustomAppBar.dart';
+import '../../../../core/constants/strings.dart';
+import '../../../../data/repos/dummy_properties.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/bookings/services/booking_cubit.dart';
 import 'package:mabeet/Features/user/bookings/services/booking_state.dart';
-import 'package:mabeet/Features/user/bookings/widgets/booking_property.dart';
-import 'package:mabeet/Features/user/CustomAppBar.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class BookingsScreen extends StatelessWidget {
   const BookingsScreen({super.key});
@@ -61,7 +63,7 @@ class BookingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(titleText: 'Bookings'),
+      appBar: CustomAppBar(titleText: AppStrings.bookingsScreenTitle.tr()),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: dummyProperties.length,

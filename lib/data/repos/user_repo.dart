@@ -29,7 +29,6 @@ class UserRepository {
         },
       );
       final user = SignUpModel.fromJson(response);
-      // final decodedToken = JwtDecoder.decode(user!.token);
       return Right(user);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -37,15 +36,20 @@ class UserRepository {
   }
 
   Future<Either<String, LogInModel>> logIn({
-    required String phone,
+    required String credential,
     required String password,
   }) async {
     try {
+      String credType = ApiKey.phone;
+      if (credential.contains('@'))credType = ApiKey.email;
+
       final response = await api.post(
         ApiConstants.login,
-        data: {ApiKey.phone: phone, ApiKey.password: password},
+        data: {credType: credential, ApiKey.password: password},
       );
+
       final model = LogInModel.fromJson(response);
+      // add cache helper to save token
       return Right(model);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
