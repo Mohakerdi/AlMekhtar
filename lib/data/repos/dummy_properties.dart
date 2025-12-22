@@ -83,5 +83,4 @@ final List<Property> dummyProperties = [
         'Step into a whimsical world at Foster\'s House for imaginary friends, where imagination and fun come alive. This playful home is perfect for families, kids, or anyone young at heart. With colorful interiors, unique decorations, and cozy corners for reading or relaxing, every moment here is full of joy. Experience a stay unlike any other, where creativity and comfort blend seamlessly.',
     avgRate: 3.9,
   ),
-
 ];

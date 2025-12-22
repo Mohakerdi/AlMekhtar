@@ -62,7 +62,7 @@ class Property {
       'enState': state,
       'images': imageURLs,
       'description':description,
-      'describedLocation': describedLocation,
+      'address_described': describedLocation,
       'area': area
     };
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
 
 class EditProfileShowDetails extends StatefulWidget {
   const EditProfileShowDetails({super.key});
@@ -28,7 +29,7 @@ class _EditProfileShowDetailsState extends State<EditProfileShowDetails> {
                   child: Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).primaryColor,
+                      color: AppColors.primary500,
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.edit, color: Colors.white),
@@ -47,7 +48,7 @@ class _EditProfileShowDetailsState extends State<EditProfileShowDetails> {
           ),
 
           const SizedBox(height: 20),
-          // ID Number Field
+
           TextFormField(
             keyboardType: TextInputType.phone,
             initialValue: '+963 ',
@@ -58,7 +59,7 @@ class _EditProfileShowDetailsState extends State<EditProfileShowDetails> {
             ),
           ),
           const SizedBox(height: 30),
-          // Save Button
+
           ElevatedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(

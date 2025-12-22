@@ -15,7 +15,7 @@ class AboutUsScreen extends StatelessWidget {
         title: Text(AppStrings.menuAboutUs.tr()),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      // The body now uses the new, separate widget
+
       body: const AboutUsShowDetails(),
     );
   }
