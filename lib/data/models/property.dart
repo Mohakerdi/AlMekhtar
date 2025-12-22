@@ -46,14 +46,10 @@ class Property {
       avgRate: (json['rate'] as num).toDouble(),
       area: (json['area'] as num).toDouble(),
 
-      // title: json['title'] as String,
-      // imageURLs: json['images'] as List<String>,
-      // description: json['description'] as String,
-      // describedLocation: json['describedLocation'] as String,
-      title: 'dummy title',
-      imageURLs: [AppImages.kDamascus],
-      description: 'hi',
-      describedLocation: 'hi',
+      title: json['title'] as String,
+      imageURLs: json['images'] as List<String>,
+      description: json['description'] as String,
+      describedLocation: json['address_described'] as String,
     );
   }
 

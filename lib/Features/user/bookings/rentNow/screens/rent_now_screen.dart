@@ -100,9 +100,10 @@ class _RentNowScreenState extends State<RentNowScreen> {
                     final DateTimeRange? pickedRange =
                         await showDateRangePicker(
                           context: context,
-                          firstDate: DateTime(2000),
+                          firstDate: DateTime(2025),
                           lastDate: DateTime(3000),
                           initialDateRange: selectedDates,
+                          barrierDismissible: true,
                         );
 
                     if (pickedRange != null) {
@@ -115,7 +116,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
               ),
               Divider(),
               Text(
-                "Make sure to check your date before making anysort of payments",
+                "Make sure to check your date before making any sort of payments",
               ),
               SizedBox(height: 25),
               Text(
