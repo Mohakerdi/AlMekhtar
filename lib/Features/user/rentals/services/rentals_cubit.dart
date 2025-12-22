@@ -6,6 +6,7 @@ import 'package:mabeet/data/repos/dummy_properties.dart';
 class RentalsCubit extends Cubit<RentalsState> {
   RentalsCubit() : super(RentalsInitial());
 
+
   void loadRentals() async {
     emit(RentalsLoading());
 

@@ -31,7 +31,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                 suffixIcon: Icon(AppIcons.homeIcon),
               ),
             ),
-            SizedBox(height: 12,),
+            SizedBox(height: 12),
             Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
@@ -66,10 +66,12 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                   onChanged: (value) {
                     setState(() {
                       _selectedGovernorat = value!;
-                      for(StateModel state in syrianStates){
-                        if(state.name == _selectedGovernorat.name){
+                      for (StateModel state in syrianStates) {
+                        if (state.name == _selectedGovernorat.name) {
                           availableAreas = state.areas;
-                          _selectedArea = availableAreas.isNotEmpty ? availableAreas[0] : '';
+                          _selectedArea = availableAreas.isNotEmpty
+                              ? availableAreas[0]
+                              : '';
                           break;
                         }
                       }
@@ -82,7 +84,9 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
               child: Card(
                 child: DropdownButton<String>(
-                  value: _selectedArea.isNotEmpty && availableAreas.contains(_selectedArea)
+                  value:
+                      _selectedArea.isNotEmpty &&
+                          availableAreas.contains(_selectedArea)
                       ? _selectedArea
                       : availableAreas.isNotEmpty
                       ? availableAreas[0]
@@ -93,10 +97,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                   icon: const Icon(Icons.arrow_drop_down),
                   borderRadius: BorderRadius.circular(12),
                   items: availableAreas.map((area) {
-                    return DropdownMenuItem(
-                      value: area,
-                      child: Text(area),
-                    );
+                    return DropdownMenuItem(value: area, child: Text(area));
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
