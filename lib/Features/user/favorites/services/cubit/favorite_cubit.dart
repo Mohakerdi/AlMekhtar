@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:mabeet/Features/user/favorites/services/data/favorite_rep.dart';
 import 'package:mabeet/data/models/property.dart';
-import 'package:meta/meta.dart';
 
 part 'favorite_state.dart';
 
@@ -59,7 +58,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     toggleFav(favoritesList.firstWhere((e) => e.propertyId == id));
   }
 
-  bool isFavorite(String id) {
+  bool isFavorite(int id) {
     return favoritesList.any((element) => element.propertyId == id);
   }
 }

@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/property/screens/payment_screen.dart';
+import 'package:mabeet/Features/user/bookings/rentNow/screens/rent_now_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
-import 'package:mabeet/Features/user/rentNow/screens/rent_now_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/cost_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_details_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/description_widget.dart';

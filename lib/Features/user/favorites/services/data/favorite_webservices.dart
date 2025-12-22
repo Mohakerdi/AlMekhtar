@@ -9,7 +9,7 @@ class FavoriteWebServices {
     return await api.get(ApiConstants.favorites);
   }
 
-  Future<dynamic> toggleFavorite(String id) async {
+  Future<dynamic> toggleFavorite(int id) async {
     return await api.post(
       ApiConstants.favorites,
       data: {ApiKey.propertyId: id},

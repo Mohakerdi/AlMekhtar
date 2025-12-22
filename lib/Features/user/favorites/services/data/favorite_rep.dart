@@ -11,7 +11,7 @@ class FavoriteRepository {
     return data.map((json) => Property.fromJson(json)).toList();
   }
 
-  Future<void> toggleFavorite(String propertyId) async {
+  Future<void> toggleFavorite(int propertyId) async {
     await webServices.toggleFavorite(propertyId);
   }
 }
