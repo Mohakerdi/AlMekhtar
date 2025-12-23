@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/rentals/widgets/add_button.dart';
-import 'package:mabeet/Features/user/rentals/widgets/location_description.dart';
-import 'package:mabeet/Features/user/rentals/widgets/property_cost.dart';
-import 'package:mabeet/Features/user/rentals/widgets/property_description.dart';
-import 'package:mabeet/Features/user/rentals/widgets/property_title.dart';
-import 'package:mabeet/Features/user/rentals/widgets/select%20_location.dart';
-import 'package:mabeet/Features/user/rentals/widgets/select_from_gallery.dart';
-import 'package:mabeet/core/constants/icons.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
-import 'package:mabeet/core/theme/text_styles.dart';
-import 'package:mabeet/data/models/state.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/add_button.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/location_description.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/property_cost.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/property_description.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/property_title.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/select%20_location.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/select_from_gallery.dart';
 
 class AddPropertyScreen extends StatefulWidget {
   const AddPropertyScreen({super.key});
