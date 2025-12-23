@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/rentals/widgets/add_button.dart';
+import 'package:mabeet/Features/user/rentals/widgets/location_description.dart';
+import 'package:mabeet/Features/user/rentals/widgets/property_cost.dart';
+import 'package:mabeet/Features/user/rentals/widgets/property_description.dart';
+import 'package:mabeet/Features/user/rentals/widgets/property_title.dart';
+import 'package:mabeet/Features/user/rentals/widgets/select%20_location.dart';
 import 'package:mabeet/Features/user/rentals/widgets/select_from_gallery.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
@@ -13,10 +19,6 @@ class AddPropertyScreen extends StatefulWidget {
 }
 
 class _AddPropertyScreenState extends State<AddPropertyScreen> {
-  Location _selectedGovernorat = Location.Damascus;
-  String _selectedArea = "Mazzeh";
-  List<String> availableAreas = syrianStates[0].areas;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,142 +27,18 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Enter your property title",
-                labelStyle: TextStyle(color: AppColors.gray400),
-                suffixIcon: Icon(AppIcons.homeIcon),
-              ),
-            ),
+            PropertyTitle(),
             SizedBox(height: 12),
             Divider(),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Select Location",
-                  style: AppTextStyles.heading2Medium
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-              child: Card(
-                child: DropdownButton<Location>(
-                  value: _selectedGovernorat,
-                  hint: const Text("  Select Location"),
-                  isExpanded: true,
-                  underline: const SizedBox(),
-                  icon: const Icon(Icons.arrow_drop_down),
-                  borderRadius: BorderRadius.circular(12),
-                  items: Location.values.map((location) {
-                    return DropdownMenuItem(
-                      value: location,
-                      child: Text("  ${location.name}"),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedGovernorat = value!;
-                      for (StateModel state in syrianStates) {
-                        if (state.name == _selectedGovernorat.name) {
-                          availableAreas = state.areas;
-                          _selectedArea = availableAreas.isNotEmpty
-                              ? availableAreas[0]
-                              : '';
-                          break;
-                        }
-                      }
-                    });
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-              child: Card(
-                child: DropdownButton<String>(
-                  value:
-                      _selectedArea.isNotEmpty &&
-                          availableAreas.contains(_selectedArea)
-                      ? _selectedArea
-                      : availableAreas.isNotEmpty
-                      ? availableAreas[0]
-                      : null,
-                  hint: const Text("  Select Area"),
-                  isExpanded: true,
-                  underline: const SizedBox(),
-                  icon: const Icon(Icons.arrow_drop_down),
-                  borderRadius: BorderRadius.circular(12),
-                  items: availableAreas.map((area) {
-                    return DropdownMenuItem(
-                      value: area,
-                      child: Text('  $area'),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedArea = value!;
-                    });
-                  },
-                ),
-              ),
-            ),
+            SelectLocation(),
             Divider(),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Add Photo Or Video",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.gray950,
-                  ),
-                ),
-              ),
-            ),
             SelectFromGallery(onSelectImage: (image) {}),
             Divider(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                maxLines: 10,
-                minLines: 3,
-                decoration: InputDecoration(
-                  labelText: "Enter your property location description",
-                  labelStyle: TextStyle(color: AppColors.gray400),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                maxLines: 10,
-                minLines: 3,
-                decoration: InputDecoration(
-                  labelText: "Enter your property description",
-                  labelStyle: TextStyle(color: AppColors.gray400),
-                ),
-              ),
-            ),
+            LocationDescription(),
+            PropertyDescription(),
             Divider(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                maxLines: 1,
-                decoration: InputDecoration(
-                  labelText: "Enter rent cost \$",
-                  labelStyle: TextStyle(color: AppColors.gray400),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(onPressed: () {}, child: Text("add")),
-            ),
+            PropertyCost(),
+            AddButton(),
           ],
         ),
       ),

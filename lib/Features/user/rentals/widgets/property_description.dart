@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
+
+class PropertyDescription extends StatelessWidget {
+  const PropertyDescription({super.key});
+
+  @override
+  Widget build(Object context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: TextField(
+        maxLines: 10,
+        minLines: 3,
+        decoration: InputDecoration(
+          labelText: "Enter your property description",
+          labelStyle: TextStyle(color: AppColors.gray400),
+        ),
+      ),
+    );
+  }
+}
