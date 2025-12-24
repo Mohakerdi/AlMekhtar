@@ -9,10 +9,11 @@ class FavoriteWebServices {
     return await api.get(ApiConstants.favorites);
   }
 
-  Future<dynamic> toggleFavorite(int id) async {
-    return await api.post(
-      ApiConstants.favorites,
-      data: {ApiKey.propertyId: id},
-    );
+  Future<dynamic> addFavorite(int id) async {
+    return await api.post('apartments/$id/favorites');
+  }
+
+  Future<dynamic> deleteFavorite(int id) async {
+    return await api.delete('apartments/$id/favorites');
   }
 }
