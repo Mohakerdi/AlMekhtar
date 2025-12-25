@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
+import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
 import '../../user/tabs.dart';
 import '../../../core/theme/app_colors.dart';
 import '../services/cubit/user_state.dart';
@@ -24,11 +26,19 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
-      listener: (BuildContext context, state) {
+      listener: (BuildContext context, state) async {
         if (state is LogInSuccess) {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text('Welcome Back!')));
+          await Future.delayed(const Duration(milliseconds: 500));
+          if (!context.mounted) return;
+          context.read<NotificationCubit>().getNotifications();
+
+          context
+              .read<FavoriteCubit>()
+              .getFavorites(); // new adding by steve to save
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => Tabs()),
@@ -54,12 +64,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Center(child: Image.asset(AppImages.kLogoPath, width: 70)),
                     Text('Welcome Back!', style: AppTextStyles.display2Bold),
-                    Text(
-                      'Log in to continue',
-                      style: AppTextStyles.bodyMedium,
-                    ),
+                    Text('Log in to continue', style: AppTextStyles.bodyMedium),
                     SizedBox(height: 60),
-                    Text('Phone Number OR Email', style: AppTextStyles.titleMedium),
+                    Text(
+                      'Phone Number OR Email',
+                      style: AppTextStyles.titleMedium,
+                    ),
                     TextFormField(
                       controller: context.read<UserCubit>().logInPhone,
                       keyboardType: TextInputType.phone,

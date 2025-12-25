@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
+import 'package:mabeet/core/api/api_constants.dart';
+import 'package:mabeet/core/cache/cache_helper.dart';
 import 'package:mabeet/data/models/sign_up_model.dart';
 import 'package:mabeet/data/repos/user_repo.dart';
 
@@ -50,7 +52,13 @@ class UserCubit extends Cubit<UserState> {
     );
     response.fold(
       (errorMessage) => emit(LogInFailure(errorMessage: errorMessage)),
-      (model) => emit(LogInSuccess()),
+      (model) {
+        CacheHelper.saveData(
+          key: ApiKey.token,
+          value: model.token,
+        ); // new adding by steve to save
+        emit(LogInSuccess());
+      },
     );
   }
 }

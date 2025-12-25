@@ -7,7 +7,7 @@ final List<Property> dummyProperties = [
   Property(
     floor: 1,
     propertyId: 1,
-    title: 'Eagle Nest',
+    title: 'kurdistan',
     imageURLs: [
       AppImages.kEagleNest,
       AppImages.kTwinTowers,
@@ -18,7 +18,8 @@ final List<Property> dummyProperties = [
     state: Location.Damascus,
     city: 'Al-Midan',
     area: 120.0,
-    describedLocation: 'Berlin, 1944, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    describedLocation:
+        'Berlin, 1944, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
     description:
         'Perched high above the city, Eagle Nest offers a serene escape from the hustle and bustle of everyday life. Enjoy breathtaking panoramic views, cozy interiors, and a perfect spot for morning coffee or sunset relaxation. Ideal for couples or solo travelers looking for peace, quiet, and inspiration.',
     avgRate: 3.5,
