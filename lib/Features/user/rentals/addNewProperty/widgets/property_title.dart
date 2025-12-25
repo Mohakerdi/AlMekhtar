@@ -8,12 +8,15 @@ class PropertyTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: "Enter your property title",
-        labelStyle: TextStyle(color: AppColors.gray400),
-        suffixIcon: Icon(AppIcons.homeIcon),
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0, right: 16),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: "Enter your property title",
+          labelStyle: TextStyle(color: AppColors.gray400),
+          suffixIcon: Icon(AppIcons.homeIcon),
+        ),
       ),
     );
   }

@@ -1,14 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mabeet/Features/user/rentals/services/rentals_state.dart';
+import 'package:mabeet/Features/user/rentals/rented/services/rented_state.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
-class RentalsCubit extends Cubit<RentalsState> {
-  RentalsCubit() : super(RentalsInitial());
-
+class RentedCubit extends Cubit<RentedState> {
+  RentedCubit() : super(RentedInitial());
 
   void loadRentals() async {
-    emit(RentalsLoading());
+    emit(RentedLoading());
 
     try {
       await Future.delayed(Duration(seconds: 2));
@@ -16,9 +15,9 @@ class RentalsCubit extends Cubit<RentalsState> {
       //throw Exception('Failed to load bookings');
 
       List<Property> rentals = dummyProperties;
-      emit(RentalsLoaded(rentals));
+      emit(RentedLoaded(rentals));
     } catch (e) {
-      emit(RentalsError('Failed to load rentals'));
+      emit(RentedError('Failed to load rentals'));
     }
   }
 }
