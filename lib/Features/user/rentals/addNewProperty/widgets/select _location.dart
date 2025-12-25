@@ -3,7 +3,9 @@ import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/data/models/state.dart';
 
 class SelectLocation extends StatefulWidget {
-  SelectLocation({super.key});
+  const SelectLocation({super.key, required this.onLocationChanged});
+
+  final void Function(Location state, String area) onLocationChanged;
 
   @override
   State<SelectLocation> createState() => _SelectLocationState();
@@ -56,6 +58,8 @@ class _SelectLocationState extends State<SelectLocation> {
                     }
                   }
                 });
+
+                widget.onLocationChanged(_selectedGovernorat, _selectedArea);
               },
             ),
           ),
@@ -83,6 +87,8 @@ class _SelectLocationState extends State<SelectLocation> {
                 setState(() {
                   _selectedArea = value!;
                 });
+
+                widget.onLocationChanged(_selectedGovernorat, _selectedArea);
               },
             ),
           ),
