@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 
-class PropertyCost extends StatelessWidget {
-  const PropertyCost({super.key});
+class AreaNumber extends StatelessWidget {
+  const AreaNumber({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +11,9 @@ class PropertyCost extends StatelessWidget {
       child: TextFormField(
         keyboardType: TextInputType.number,
         decoration: const InputDecoration(
-          labelText: 'Enter your propeety cost',
+          labelText: 'Area',
           labelStyle: TextStyle(color: AppColors.gray400),
-          suffixText: '\$',
+          suffixText: 'm²',
           suffixStyle: TextStyle(color: AppColors.gray400),
           border: OutlineInputBorder(),
         ),

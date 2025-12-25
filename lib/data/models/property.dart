@@ -32,7 +32,7 @@ class Property {
   factory Property.fromJson(Map<String, dynamic> json) {
     Location mapState(String stateName) {
       return Location.values.firstWhere(
-            (e) => e.name == stateName,
+        (e) => e.name == stateName,
         orElse: () => Location.Damascus,
       );
     }
@@ -61,9 +61,9 @@ class Property {
       'enCity': city,
       'enState': state,
       'images': imageURLs,
-      'description':description,
+      'description': description,
       'address_described': describedLocation,
-      'area': area
+      'area': area,
     };
   }
 }
