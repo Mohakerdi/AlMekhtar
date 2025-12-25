@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/auth/screens/create_account_screen.dart';
 import 'package:mabeet/Features/auth/screens/login_screen.dart';
+import 'package:mabeet/core/api/api_constants.dart';
+import 'package:mabeet/core/cache/cache_helper.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 
 class OnBoardingButton extends StatefulWidget {
@@ -24,8 +26,9 @@ class _OnBoardingButtonState extends State<OnBoardingButton> {
         width: double.infinity,
         height: 60,
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if (widget.isLastPage) {
+              await CacheHelper.saveData(key: ApiKey.onBoardingSeen, value: true);
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

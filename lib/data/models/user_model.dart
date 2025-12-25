@@ -1,19 +1,33 @@
-import 'package:mabeet/core/api/api_constants.dart';
-
 class UserModel {
   final String name;
   final String email;
   final String phone;
-  final String id;
+  final String? avatarUrl;
+  final String? idPhotoUrl;
+  final String? firstName;
+  final String? lastName;
+  final String? birthDate;
 
-  UserModel({required this.name, required this.email, required this.phone, required this.id});
+  UserModel({
+    required this.name,
+    required this.email,
+    required this.phone,
+    this.avatarUrl,
+    this.idPhotoUrl,
+    this.firstName,
+    this.lastName,
+    this.birthDate,
+  });
 
-  UserModel copyWith({String? email, String? phone}) {
+  factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      name: name,
-      email: email ?? this.email,
-      phone: phone ?? this.phone,
-      id: id
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      phone: json['phone'] ?? '',
+      avatarUrl: json['avatar_url'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      birthDate: json['birth_date'],
     );
   }
 }

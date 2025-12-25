@@ -3,6 +3,8 @@ class ApiConstants {
   static const String login = 'login';
   static const String create_account = 'register';
   static const String favorites = 'favorites';
+  static const String profile = 'profile';
+  static const String getUserProfile = 'profile'; // <-- FIX THIS
 }
 
 class ApiKey {
@@ -18,4 +20,5 @@ class ApiKey {
   static const String password = 'password';
   static const String password_confirmation = 'password_confirmation';
   static const String propertyId = 'property_id';
+  static const String onBoardingSeen = 'onBoardingSeen';
 }
