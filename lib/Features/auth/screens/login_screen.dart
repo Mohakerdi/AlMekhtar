@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
+import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
 import '../../user/tabs.dart';
 import '../../../core/theme/app_colors.dart';
 import '../services/cubit/user_state.dart';
@@ -32,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ).showSnackBar(SnackBar(content: Text('Welcome Back!')));
           await Future.delayed(const Duration(milliseconds: 500));
           if (!context.mounted) return;
+          context.read<NotificationCubit>().getNotifications();
+
           context
               .read<FavoriteCubit>()
               .getFavorites(); // new adding by steve to save

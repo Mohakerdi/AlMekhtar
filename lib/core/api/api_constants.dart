@@ -3,6 +3,7 @@ class ApiConstants {
   static const String login = 'login';
   static const String create_account = 'register';
   static const String favorites = 'apartments/favorites';
+  static const String notifications = 'notifications';
 }
 
 class ApiKey {

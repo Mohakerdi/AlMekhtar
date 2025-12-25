@@ -1,21 +1,28 @@
+import 'dart:convert';
+
 class NotificationModel {
-  final String title;
-  final DateTime date;
   final String id;
+  final String title;
+  final String message;
+  final DateTime date;
+
   NotificationModel({
-    required this.title,
-    required this.date,
     required this.id,
+    required this.title,
+    required this.message,
+    required this.date,
   });
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    final dynamic nestedData = json['data'];
+
     return NotificationModel(
       id: json['id'].toString(),
 
-      title: json['title'] ?? '',
-
-      date:
-          DateTime.tryParse(json['date'] ?? json['created_at'] ?? '') ??
-          DateTime.now(),
+      title: nestedData is Map
+          ? (nestedData['title'] ?? 'No Title')
+          : 'Notification',
+      message: nestedData is Map ? (nestedData['message'] ?? '') : '',
+      date: DateTime.tryParse(json['created_at'] ?? '') ?? DateTime.now(),
     );
   }
 }

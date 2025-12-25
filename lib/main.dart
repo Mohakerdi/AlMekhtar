@@ -7,6 +7,9 @@ import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dar
 import 'package:mabeet/Features/user/favorites/services/data/favorite_rep.dart';
 import 'package:mabeet/Features/user/favorites/services/data/favorite_webservices.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
+import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
+import 'package:mabeet/Features/user/notifications/services/data/notification_repo.dart';
+import 'package:mabeet/Features/user/notifications/services/data/notification_webservices.dart';
 import 'package:mabeet/core/localization/localiztion_service.dart';
 import 'package:mabeet/data/repos/search_repo.dart';
 import 'package:mabeet/data/repos/user_repo.dart';
@@ -57,6 +60,15 @@ void main() async {
                   FavoriteWebServices(api: DioConsumer(dio: dio)),
                 ),
               ),
+            ),
+            BlocProvider<NotificationCubit>(
+              create: (context) {
+                return NotificationCubit(
+                  NotificationRepo(
+                    NotificationWebServices(api: DioConsumer(dio: dio)),
+                  ),
+                );
+              },
             ),
           ],
           child: const MyApp(),
