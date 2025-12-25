@@ -9,11 +9,9 @@ import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class AddPropertyCubit extends Cubit<AddPropertyState> {
   AddPropertyCubit() : super(AddPropertyInitial()) {
-    // تهيئة افتراضية عشان لا يبقى selectedCity أو floors فارغة
-    // اختَرش القيمة اللي بتطابق ويدجت SelectLocation الافتراضية
     selectedState = Location.Damascus;
-    selectedCity = 'Mazzeh'; // نفس القيمة الافتراضية بالويدجت
-    floorsController.text = '1'; // SpinBox يعرض 1 بصرياً → خزّنه فعلياً
+    selectedCity = 'Mazzeh';
+    floorsController.text = '1';
   }
 
   TextEditingController titleController = TextEditingController();
@@ -35,26 +33,17 @@ class AddPropertyCubit extends Cubit<AddPropertyState> {
 
   void setStateLocation(Location state) {
     selectedState = state;
-    // عند تغيير المحافظة عادة نحدّث المنطقة الافتراضية:
     final stateModel = syrianStates.firstWhere((s) => s.name == state.name);
     selectedCity = stateModel.areas.isNotEmpty ? stateModel.areas[0] : '';
-    // إذا بدك تبعث state للـ UI:
     emit(AddPropertyImageSelected(selectedImage ?? File('')));
   }
 
   void setCity(String city) {
     selectedCity = city;
-    // emit لو بدك تعيد بناء الواجهة
     emit(AddPropertyImageSelected(selectedImage ?? File('')));
   }
 
   void addProperty() {
-    // — debug مساعد (شيّك القيم قبل الفحص)
-    //print أو استخدام logger عشان تشوف الvalues
-    print(
-      'title=${titleController.text}, desc=${descriptionController.text}, cost=${costController.text}, area=${areaController.text}, floors=${floorsController.text}, img=${selectedImage?.path}, city=$selectedCity',
-    );
-
     if (titleController.text.isEmpty ||
         descriptionController.text.isEmpty ||
         costController.text.isEmpty ||
