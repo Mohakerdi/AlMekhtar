@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mabeet/core/api/api_consumer.dart';
 import 'package:mabeet/core/api/api_interceptors.dart';
 import 'package:mabeet/core/errors/exceptions.dart';
@@ -83,17 +84,45 @@ class DioConsumer extends ApiConsumer {
     String path, {
     dynamic? data,
     Map<String, dynamic>? queryParameters,
-    bool isFormData = false,
+    bool isFormData = true,
   }) async {
     try {
+      dynamic finalData = data;
+      if (isFormData && data != null && data is Map<String, dynamic>) {
+        finalData = await _buildFormData(data);
+      }
       final response = await dio.post(
         path,
-        data: isFormData ? FormData.fromMap(data) : data,
+        data: finalData,
         queryParameters: queryParameters,
       );
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
     }
+  }
+
+  Future<FormData> _buildFormData(Map<String, dynamic> data) async {
+    Map<String, dynamic> formDataMap = {};
+
+    for (var entry in data.entries) {
+      if (entry.value is XFile) {
+        XFile file = entry.value as XFile;
+        String extension = file.path.split('.').last;
+        DioMediaType contentType = extension.isNotEmpty
+            ? DioMediaType('image', extension)
+            : DioMediaType('application', 'application/json');
+
+        formDataMap[entry.key] = await MultipartFile.fromFile(
+          file.path,
+          filename: file.name,
+          contentType: contentType,
+        );
+      } else {
+        formDataMap[entry.key] = entry.value;
+      }
+    }
+
+    return FormData.fromMap(formDataMap);
   }
 }
