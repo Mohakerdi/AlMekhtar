@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../core/constants/icons.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../../../../../core/constants/icons.dart';
+import '../../../../../core/theme/app_colors.dart';
 
 class SelectFromGallery extends StatefulWidget {
   const SelectFromGallery({super.key, required this.onSelectImage});
@@ -41,7 +41,7 @@ class _SelectFromGalleryState extends State<SelectFromGallery> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(AppIcons.upload, size: 45, color: AppColors.primary700,),
+            const Icon(AppIcons.upload, size: 45, color: AppColors.primary700),
             const Text('Click here to upload'),
           ],
         ),
@@ -62,17 +62,35 @@ class _SelectFromGalleryState extends State<SelectFromGallery> {
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 0.5,
-            color: Theme.of(context).colorScheme.primary,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Add Photo Or Video",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.gray950,
+                ),
+              ),
+            ),
           ),
-        ),
-        height: 250,
-        width: double.infinity,
-        alignment: Alignment.center,
-        child: content,
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 0.5,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            height: 250,
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: content,
+          ),
+        ],
       ),
     );
   }

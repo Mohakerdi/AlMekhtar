@@ -1,10 +1,11 @@
 class ApiConstants {
-  static const String BaseUrl = 'http://10.0.2.2:8000/api/';
+  static const String BaseUrl = "http://192.168.1.5:8000/api/";
   static const String login = 'login';
   static const String create_account = 'register';
-  static const String favorites = 'favorites';
   static const String profile = 'profile';
   static const String getUserProfile = 'profile'; // <-- FIX THIS
+  static const String favorites = 'apartments/favorites';
+  static const String notifications = 'notifications';
 }
 
 class ApiKey {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/Features/user/rentals/renttabs/screens/rent_tab_screen.dart';
 import 'bookings/screens/bookings_screen.dart';
 import 'favorites/screens/favorites_screen.dart';
 import 'profile/screens/main_profile/screens/profile_screen.dart';
-import 'rentals/screens/rentals_screen.dart';
+import 'rentals/rented/screens/rented_screen.dart';
 import '../../core/constants/icons.dart';
 import '../../core/theme/app_colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -24,7 +25,7 @@ class _TabsState extends State<Tabs> {
     return [
       HomeScreen(),
       BookingsScreen(),
-      RentalsScreen(),
+      RentTabScreen(),
       FavoritesScreen(),
       ProfileScreen(),
     ];

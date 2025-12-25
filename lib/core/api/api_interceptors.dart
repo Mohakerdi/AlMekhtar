@@ -10,6 +10,7 @@ class ApiInterceptor extends Interceptor {
     options.headers['Content-type'] = 'application/json';
 
     final String? token = CacheHelper.getData(key: ApiKey.token);
+
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }

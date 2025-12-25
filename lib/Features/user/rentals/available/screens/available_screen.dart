@@ -2,69 +2,59 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/CustomAppBar.dart';
-import 'package:mabeet/Features/user/rentals/screens/add_property_screen.dart';
-import 'package:mabeet/Features/user/rentals/services/rentals_cubit.dart';
-import 'package:mabeet/Features/user/rentals/services/rentals_state.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/screens/add_property_screen.dart';
+import 'package:mabeet/Features/user/rentals/available/services/available_cubit.dart';
+import 'package:mabeet/Features/user/rentals/available/services/available_state.dart';
 import 'package:mabeet/Features/user/rentals/widgets/rentals_property.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 
-class RentalsScreen extends StatelessWidget {
-  const RentalsScreen({super.key});
+class AvailableScreen extends StatelessWidget {
+  const AvailableScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => RentalsCubit()..loadRentals(),
+      create: (_) => AvailableCubit()..loadAvailable(),
       child: Scaffold(
-        appBar: CustomAppBar(titleText: 'Rentals'),
-        body: BlocConsumer<RentalsCubit, RentalsState>(
+        body: BlocConsumer<AvailableCubit, AvailableState>(
           listener: (context, state) {
-            if (state is RentalsError) {
+            if (state is AvailableError) {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(state.message)));
-            } else if (state is RentalsLoaded) {
+            } else if (state is AvailableLoaded) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Rentals loaded successfully!'),
+                  content: Text('Available rentals loaded successfully!'),
                   backgroundColor: AppColors.primary700,
                 ),
               );
             }
           },
           builder: (context, state) {
-            if (state is RentalsLoading) {
+            if (state is AvailableLoading) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            if (state is RentalsLoaded) {
+            if (state is AvailableLoaded) {
               return ListView.builder(
                 padding: const EdgeInsets.all(16),
-                itemCount: state.rentals.length,
+                itemCount: state.available.length,
                 itemBuilder: (context, index) {
-                  final property = state.rentals[index];
+                  final property = state.available[index];
                   return RentalsProperty(property: property);
                 },
               );
             }
 
-            if (state is RentalsError) {
+            if (state is AvailableError) {
               return Center(child: Text(state.message));
             }
 
             return Container();
           },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => AddPropertyScreen()),
-            );
-          },
-          child: const Icon(Icons.add),
         ),
       ),
     );

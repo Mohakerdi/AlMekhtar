@@ -1,29 +1,29 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/favorites/services/data/favorite_rep.dart';
 import 'package:mabeet/data/models/property.dart';
-
 part 'favorite_state.dart';
 
 class FavoriteCubit extends Cubit<FavoriteState> {
   final FavoriteRepository repo;
-
   FavoriteCubit(this.repo) : super(FavoriteInitial());
 
-  List favoritesList = [];
+  List<Property> favoritesList = [];
 
   void getFavorites() async {
     emit(FavoriteLoading());
-
+    print("🚀 1. Cubit: Starting getFavorites...");
     try {
       favoritesList = await repo.fetchFavorites();
-
+      print("✅ 4. Cubit: Data Arrived! Count: ${favoritesList.length}");
       emit(FavoriteLoaded(List.from(favoritesList)));
     } catch (e) {
+      print("🚨 Cubit Error: $e");
       emit(FavoriteError(e.toString()));
     }
   }
 
   void toggleFav(Property property) async {
+    //  print("📡 Sending Request for Property ID: ${property.propertyId}");
     final isExist = favoritesList.any(
       (item) => item.propertyId == property.propertyId,
     );
@@ -35,27 +35,33 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     } else {
       favoritesList.add(property);
     }
-
     emit(FavoriteLoaded(List.from(favoritesList)));
 
     try {
-      await repo.toggleFavorite(property.propertyId);
+      if (isExist) {
+        await repo.deleteFavorite(property.propertyId);
+      } else {
+        await repo.addFavorite(property.propertyId);
+      }
+      print("Success: Favorite updated on server");
     } catch (e) {
-      if (isExist)
+      print(" REAL ERROR: $e");
+      if (isExist) {
         favoritesList.add(property);
-      else
+      } else {
         favoritesList.removeWhere(
           (item) => item.propertyId == property.propertyId,
         );
+      }
 
       emit(FavoriteLoaded(List.from(favoritesList)));
-
-      emit(FavoriteError("error in favorite loading"));
+      emit(FavoriteError(e.toString()));
     }
   }
 
-  void removeWithSwipe(String id) async {
-    toggleFav(favoritesList.firstWhere((e) => e.propertyId == id));
+  void removeWithSwipe(int id) async {
+    final property = favoritesList.firstWhere((e) => e.propertyId == id);
+    toggleFav(property);
   }
 
   bool isFavorite(int id) {

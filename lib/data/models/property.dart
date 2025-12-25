@@ -30,26 +30,32 @@ class Property {
   });
 
   factory Property.fromJson(Map<String, dynamic> json) {
-    Location mapState(String stateName) {
+    // دالة مساعدة لتحويل النص إلى Enum بأمان
+    Location mapState(String? stateName) {
       return Location.values.firstWhere(
-            (e) => e.name == stateName,
+        (e) => e.name == stateName,
         orElse: () => Location.Damascus,
       );
     }
 
     return Property(
-      propertyId: json['id'] as int,
-      costPerNight: (json['price'] as num).toDouble(),
-      city: json['enCity'] as String,
-      state: mapState(json['enState'] as String),
-      floor: json['floor'] as int,
-      avgRate: (json['rate'] as num).toDouble(),
-      area: (json['area'] as num).toDouble(),
+      propertyId: int.tryParse(json['id'].toString()) ?? 0,
 
-      title: json['title'] as String,
-      imageURLs: json['images'] as List<String>,
-      description: json['description'] as String,
-      describedLocation: json['address_described'] as String,
+      costPerNight: double.tryParse(json['price'].toString()) ?? 0.0,
+      avgRate: double.tryParse(json['rate'].toString()) ?? 0.0,
+      area: double.tryParse(json['area'].toString()) ?? 0.0,
+      floor: int.tryParse(json['floor'].toString()) ?? 0,
+
+      city: json['enCity']?.toString() ?? '',
+      title: json['title']?.toString() ?? '',
+      description: json['description']?.toString() ?? '',
+      describedLocation: json['address_description']?.toString() ?? '',
+
+      state: mapState(json['enState']?.toString()),
+
+      imageURLs: json['images'] is List
+          ? List<String>.from(json['images'].map((item) => item.toString()))
+          : [],
     );
   }
 
@@ -61,9 +67,9 @@ class Property {
       'enCity': city,
       'enState': state,
       'images': imageURLs,
-      'description':description,
+      'description': description,
       'address_described': describedLocation,
-      'area': area
+      'area': area,
     };
   }
 }
