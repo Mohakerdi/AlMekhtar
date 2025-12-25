@@ -11,7 +11,6 @@ class ApiInterceptor extends Interceptor {
 
     final String? token = CacheHelper.getData(key: ApiKey.token);
 
-    print("🕵️‍♂️ INTERCEPTOR TOKEN: $token");
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }

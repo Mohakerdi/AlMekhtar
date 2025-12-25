@@ -11,15 +11,19 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
   void getFavorites() async {
     emit(FavoriteLoading());
+    print("🚀 1. Cubit: Starting getFavorites...");
     try {
       favoritesList = await repo.fetchFavorites();
+      print("✅ 4. Cubit: Data Arrived! Count: ${favoritesList.length}");
       emit(FavoriteLoaded(List.from(favoritesList)));
     } catch (e) {
+      print("🚨 Cubit Error: $e");
       emit(FavoriteError(e.toString()));
     }
   }
 
   void toggleFav(Property property) async {
+    //  print("📡 Sending Request for Property ID: ${property.propertyId}");
     final isExist = favoritesList.any(
       (item) => item.propertyId == property.propertyId,
     );
