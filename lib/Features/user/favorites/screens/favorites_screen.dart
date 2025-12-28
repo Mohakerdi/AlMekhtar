@@ -38,13 +38,21 @@ class FavoritesScreen extends StatelessWidget {
               final property = favorites[index];
               return Dismissible(
                 key: ValueKey(property.propertyId),
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  color: Colors.red,
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: const Icon(Icons.delete, color: Colors.white),
+
+                direction: DismissDirection.horizontal,
+
+                background: _buildSwipeBackground(
+                  alignment: Alignment.centerLeft,
+                  color: Colors.red.shade400,
+                  icon: Icons.delete_outline,
                 ),
+
+                secondaryBackground: _buildSwipeBackground(
+                  alignment: Alignment.centerRight,
+                  color: Colors.red.shade400,
+                  icon: Icons.delete_sweep,
+                ),
+
                 onDismissed: (direction) {
                   context.read<FavoriteCubit>().removeWithSwipe(
                     property.propertyId,
@@ -58,4 +66,20 @@ class FavoritesScreen extends StatelessWidget {
       ),
     ); //
   }
+}
+
+Widget _buildSwipeBackground({
+  required Alignment alignment,
+  required Color color,
+  required IconData icon,
+}) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 25),
+    alignment: alignment,
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Icon(icon, color: Colors.white, size: 30),
+  );
 }
