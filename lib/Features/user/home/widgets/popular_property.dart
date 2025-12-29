@@ -1,4 +1,5 @@
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
+import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -12,10 +13,10 @@ class PopularProperty extends StatelessWidget {
 
   void _goToPropertyScreen(BuildContext context) {
     PersistentNavBarNavigator.pushNewScreen(
-        context,
-        screen: PropertyScreen(property: property),
-        withNavBar: false,
-        pageTransitionAnimation: PageTransitionAnimation.scale
+      context,
+      screen: PropertyScreen(property: property),
+      withNavBar: false,
+      pageTransitionAnimation: PageTransitionAnimation.scale,
     );
   }
 
@@ -92,7 +93,7 @@ class PopularProperty extends StatelessWidget {
                         child: IconButton(
                           onPressed: () {},
                           color: Colors.red,
-                          icon: Icon(Icons.favorite_border),
+                          icon: FavoriteIconButton(property: property),
                           padding: EdgeInsets.all(0),
                         ),
                       ),
