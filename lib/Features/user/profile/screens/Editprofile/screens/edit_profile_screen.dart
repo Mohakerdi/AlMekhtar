@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mabeet/Features/user/profile/screens/main_profile/screens/profile_screen.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_cubit.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
@@ -17,6 +18,25 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final ImagePicker _picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    if (!widget.isCreationMode) {
+      _loadExistingProfileData();
+    }
+  }
+
+  void _loadExistingProfileData() {
+    final cubit = context.read<UserCubit>();
+    final profile = cubit.currentProfile;
+
+    if (profile != null) {
+      cubit.firstName.text = profile.firstName;
+      cubit.lastName.text = profile.lastName;
+      cubit.birthDate.text = profile.birthDate ?? '';
+    }
+  }
 
   void _pickImage(BuildContext context, bool isAvatar) async {
     final XFile? pickedFile = await _picker.pickImage(
@@ -48,22 +68,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     final cubit = context.read<UserCubit>();
     final isCreationMode = widget.isCreationMode;
+    final existingProfile = cubit.currentProfile;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(isCreationMode ? 'Create Profile' : 'Edit Profile'),
         backgroundColor: AppColors.primary500,
       ),
-
       body: BlocListener<UserCubit, UserState>(
         listener: (context, state) {
           if (state is ProfileCreationRequired) {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => const EditProfileScreen(isCreationMode: true),
+                builder: (context) =>
+                    const EditProfileScreen(isCreationMode: true),
               ),
             );
           }
+
           if (state is CreateProfileLoading) {
             ScaffoldMessenger.of(
               context,
@@ -72,9 +94,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Profile saved successfully!')),
             );
+            context.read<UserCubit>().getUserProfile();
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (builder) => ProfileScreen()),
+            );
           } else if (state is CreateProfileFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Error: ${state.errorMessage}')),
+            );
+          }
+
+          if (state is UpdateProfileLoading) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Updating profile...')),
+            );
+          } else if (state is UpdateProfileSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Profile updated successfully!')),
+            );
+            Navigator.of(context).pop();
+          } else if (state is UpdateProfileFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Update Error: ${state.errorMessage}')),
             );
           }
         },
@@ -86,19 +127,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Center(
                 child: BlocBuilder<UserCubit, UserState>(
                   buildWhen: (previous, current) =>
-                      current is UploadAvatarPic || current is UserInitial,
+                      current is UploadAvatarPic ||
+                      current is GetUserSuccess ||
+                      current is UpdateProfileSuccess,
                   builder: (context, state) {
                     final avatarFile = cubit.avatarPic;
+                    final networkAvatarUrl = existingProfile?.avatarUrl;
+
+                    ImageProvider imageSource;
+                    if (avatarFile != null) {
+                      imageSource = FileImage(File(avatarFile.path));
+                    } else if (networkAvatarUrl != null &&
+                        networkAvatarUrl.isNotEmpty) {
+                      imageSource = NetworkImage(networkAvatarUrl);
+                    } else {
+                      imageSource = const AssetImage(
+                        'assets/images/appprofile.jpg',
+                      );
+                    }
+
                     return Stack(
                       children: [
                         CircleAvatar(
                           radius: 80,
                           backgroundColor: Colors.grey[200],
-                          backgroundImage: avatarFile != null
-                              ? FileImage(File(avatarFile.path))
-                              : const AssetImage('assets/images/appprofile.jpg')
-                                    as ImageProvider,
-                          child: avatarFile == null
+                          backgroundImage: imageSource,
+                          child:
+                              (avatarFile == null &&
+                                  (networkAvatarUrl == null ||
+                                      networkAvatarUrl.isEmpty))
                               ? const Icon(
                                   Icons.person,
                                   size: 60,
@@ -125,7 +182,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   },
                 ),
               ),
-
               const SizedBox(height: 30),
               TextFormField(
                 controller: cubit.firstName,
@@ -136,7 +192,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-
               TextFormField(
                 controller: cubit.lastName,
                 decoration: const InputDecoration(
@@ -146,41 +201,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-
-              if (isCreationMode) ...[
-                TextFormField(
-                  controller: cubit.birthDate,
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    labelText: 'Date of Birth (YYYY-MM-DD)',
-                    prefixIcon: const Icon(Icons.calendar_today),
-                    border: const OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.edit_calendar),
-                      onPressed: () async {
-                        final DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime(2000),
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                        );
-                        if (pickedDate != null) {
-                          cubit.birthDate.text =
-                              '${pickedDate.year}-${pickedDate.month}-${pickedDate.day}';
-                        }
-                      },
-                    ),
-                  ),
+              TextFormField(
+                controller: cubit.birthDate,
+                readOnly: !widget.isCreationMode,
+                decoration: InputDecoration(
+                  labelText: 'Date of Birth (YYYY-MM-DD)',
+                  prefixIcon: const Icon(Icons.calendar_today),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: widget.isCreationMode
+                      ? IconButton(
+                          icon: const Icon(Icons.edit_calendar),
+                          onPressed: () async {
+                            final DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime(2000),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                            );
+                            if (pickedDate != null) {
+                              cubit.birthDate.text =
+                                  '${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}';
+                            }
+                          },
+                        )
+                      : null,
                 ),
-                const SizedBox(height: 30),
-              ],
+              ),
+              const SizedBox(height: 30),
               if (isCreationMode) ...[
                 Text(
                   'Upload ID Photo',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 10),
-
                 BlocBuilder<UserCubit, UserState>(
                   builder: (context, state) {
                     final idPhotoFile = cubit.idPhoto;
@@ -223,13 +276,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     );
                   },
                 ),
-
                 const SizedBox(height: 30),
               ],
-
               ElevatedButton.icon(
                 onPressed: () {
-                  cubit.createProfile();
+                  cubit.saveProfile(isCreation: isCreationMode);
                 },
                 icon: const Icon(Icons.save),
                 label: Text(isCreationMode ? 'Create Profile' : 'Save Changes'),

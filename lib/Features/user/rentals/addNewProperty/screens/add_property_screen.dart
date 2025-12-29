@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/services/add_cubit.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/services/add_state.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/select%20_location.dart';
@@ -12,7 +11,6 @@ import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/property_cos
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/floors_number.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/area_number.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/add_button.dart';
-import 'package:mabeet/data/models/state.dart';
 
 class AddPropertyScreen extends StatelessWidget {
   const AddPropertyScreen({super.key});

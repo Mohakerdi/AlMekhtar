@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/auth/screens/login_screen.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_cubit.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
+import 'package:mabeet/Features/user/profile/screens/main_profile/widgets/profile_body_skeleton.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../../../../core/constants/strings.dart';
 import '../../../../../../core/localization/localiztion_service.dart';
 import '../../../../CustomAppBar.dart';
-import '../../About%20us/screens/about_us_screen.dart';
+import '../../About us/screens/about_us_screen.dart';
 import '../../Editprofile/screens/edit_profile_screen.dart';
-import '../../history/screens/history_screen.dart';
 import '../widgets/profile_body_widget.dart';
 import '../../../../../../core/theme/bloc/theme_state.dart';
 import '../../../../../../core/theme/bloc/theme_cubit.dart';
@@ -53,17 +55,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
             builder: (context, userState) {
               final userCubit = context.read<UserCubit>();
-              if (userState is GetUserLoading &&
-                  userCubit.currentUser == null) {
-                return const Center(child: CircularProgressIndicator());
+              if (userState is GetUserLoading) {
+                return Shimmer.fromColors(
+                  baseColor: AppColors.gray300,
+                  highlightColor: AppColors.gray100,
+                  child: const ProfileBodySkeleton(),
+                );
               }
+
               if (userState is GetUserFailure) {
                 if (userCubit.currentUser == null) {
                   return Center(child: Text(AppStrings.errorMessage.tr()));
                 }
               }
               return ProfileBodyWidget(
-                user: userCubit.currentUser,
+                profile: userCubit.currentProfile,
                 isDarkTheme: isDark,
                 isEnglish: isEnglish,
                 onThemeChanged: (val) => _handleThemeChange(),
@@ -149,17 +155,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _navigateTo(String title) {
     Widget screen;
     switch (title) {
-      case 'History':
-        screen = const HistoryScreen();
-        break;
-      case 'السجل':
-        screen = const HistoryScreen();
-        break;
       case 'Edit Profile':
-        screen = const EditProfileScreen();
+        screen = const EditProfileScreen(isCreationMode: false,);
         break;
       case 'تعديل الملف الشخصي':
-        screen = const EditProfileScreen();
+        screen = const EditProfileScreen(isCreationMode: false);
         break;
       case 'About us':
         screen = const AboutUsScreen();
