@@ -7,8 +7,22 @@ import 'package:mabeet/Features/user/CustomAppBar.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
-class FavoritesScreen extends StatelessWidget {
+class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
+
+  @override
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
+}
+
+class _FavoritesScreenState extends State<FavoritesScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {// prevent inherited error
+      context.read<FavoriteCubit>().getFavorites();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
