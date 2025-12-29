@@ -4,6 +4,7 @@ import 'package:mabeet/core/cache/cache_helper.dart';
 import 'package:mabeet/core/errors/exceptions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mabeet/data/models/log_in_model.dart';
+import 'package:mabeet/data/models/profile_model.dart';
 import 'package:mabeet/data/models/sign_up_model.dart';
 import 'package:mabeet/data/models/user_model.dart';
 import '../../core/api/api_constants.dart';
@@ -93,18 +94,51 @@ class UserRepository {
     }
   }
 
-  Future<Either<String, UserModel>> getUserProfile() async {
+  Future<Either<String, ProfileModel>> getUserProfile() async {
     try {
       final response = await api.get(
         ApiConstants.getUserProfile,
       );
-
-      final user = UserModel.fromJson(response);
-      return Right(user);
+      final profile = ProfileModel.fromJson(response);
+      return Right(profile);
     } on ServerException catch (e) {
       if (e.errorModel.errorMessage.contains('Profile not found')) {
         return const Left('PROFILE_MISSING_ERROR');
       }
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  Future<Either<String, ProfileModel>> updateProfile({
+    required String firstName,
+    required String lastName,
+    String? birthDate,
+    XFile? avatarPic,
+
+  }) async {
+    try {
+      final Map<String, dynamic> data = {
+        'firstName': firstName,
+        'lastName': lastName,
+      };
+
+      if (birthDate != null && birthDate.isNotEmpty) {
+        data['birthDate'] = birthDate;
+      }
+
+      if (avatarPic != null) {
+        data['avatar'] = avatarPic;
+      }
+
+      final response = await api.patch(
+        ApiConstants.profile,
+        data: data,
+      );
+
+      final profile = ProfileModel.fromJson(response);
+      return Right(profile);
+
+    } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
   }

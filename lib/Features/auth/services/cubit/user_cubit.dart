@@ -5,6 +5,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
 import 'package:mabeet/core/api/api_constants.dart';
 import 'package:mabeet/core/cache/cache_helper.dart';
+import 'package:mabeet/data/models/profile_model.dart';
 import 'package:mabeet/data/models/sign_up_model.dart';
 import 'package:mabeet/data/models/user_model.dart';
 import 'package:mabeet/data/repos/user_repo.dart';
@@ -14,6 +15,7 @@ class UserCubit extends Cubit<UserState> {
 
   final UserRepository userRepository;
   UserModel? currentUser;
+  ProfileModel? currentProfile;
 
   TextEditingController signUpEmail = TextEditingController();
   TextEditingController signUpPhone = TextEditingController();
@@ -69,6 +71,8 @@ class UserCubit extends Cubit<UserState> {
     response.fold(
       (errorMessage) => emit(LogInFailure(errorMessage: errorMessage)),
       (model) {
+        currentUser = UserModel(name: model.name, email: model.email, phone: model.phone);
+        currentProfile = null;
         _resetAuthFields();
         emit(LogInSuccess());
       },
@@ -78,36 +82,50 @@ class UserCubit extends Cubit<UserState> {
   logOut() async {
     _resetAuthFields();
     currentUser = null;
+    currentProfile = null;
     emit(UserInitial());
     await userRepository.logout();
   }
 
-  createProfile() async {
-    if (avatarPic == null ||
-        idPhoto == null ||
-        firstName.text.isEmpty ||
-        lastName.text.isEmpty ||
-        birthDate.text.isEmpty) {
-      emit(CreateProfileFailure(errorMessage: 'Please fill all fields and upload photos.'));
+  Future<void> saveProfile({required bool isCreation}) async {
+
+    if (firstName.text.isEmpty || lastName.text.isEmpty || birthDate.text.isEmpty) {
+      emit(CreateProfileFailure(errorMessage: 'Please fill all required fields.'));
       return;
     }
 
-    emit(CreateProfileLoading());
+    if (isCreation && (avatarPic == null || idPhoto == null)) {
+      emit(CreateProfileFailure(errorMessage: 'Please upload both photos for creation.'));
+      return;
+    }
 
-    final response = await userRepository.createProfile(
+    emit(isCreation ? CreateProfileLoading() : UpdateProfileLoading());
+
+    final response = isCreation
+        ? await userRepository.createProfile(
       firstName: firstName.text,
       lastName: lastName.text,
       birthDate: birthDate.text,
       avatarPic: avatarPic!,
       idPhoto: idPhoto!,
+    )
+        : await userRepository.updateProfile(
+      firstName: firstName.text,
+      lastName: lastName.text,
+      birthDate: currentProfile!.birthDate,
+      avatarPic: avatarPic,
     );
 
     response.fold(
-          (errorMessage) => emit(CreateProfileFailure(errorMessage: errorMessage)),
-          (_) => emit(CreateProfileSuccess()),
+          (errorMessage) => emit(isCreation
+          ? CreateProfileFailure(errorMessage: errorMessage)
+          : UpdateProfileFailure(errorMessage: errorMessage)),
+          (_) async {
+            getUserProfile();
+        emit(isCreation ? CreateProfileSuccess() : UpdateProfileSuccess());
+      },
     );
   }
-
 
   Future<void> getUserProfile() async {
     emit(GetUserLoading());
@@ -121,9 +139,9 @@ class UserCubit extends Cubit<UserState> {
           emit(GetUserFailure(errorMessage: errorMessage));
         }
       },
-          (userModel) {
-        currentUser = userModel;
-        emit(GetUserSuccess(userModel));
+          (profileModel) {
+            currentProfile = profileModel;
+        emit(GetUserSuccess(profileModel));
       },
     );
   }

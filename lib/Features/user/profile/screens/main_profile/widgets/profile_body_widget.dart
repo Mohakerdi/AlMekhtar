@@ -1,21 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mabeet/data/models/profile_model.dart';
 import '../../../../../../core/constants/strings.dart';
 import '../../../../../../core/theme/app_colors.dart';
 import '../../../../../../core/theme/text_styles.dart';
 import '../../../../../../core/constants/icons.dart';
-import '../../../../../../data/models/user_model.dart';
 
 class ProfileSectionWidget extends StatelessWidget {
   final String name;
-  final String phoneNumber;
-  final ImageProvider imageSource;
+  final String? avatarUrl;
 
   const ProfileSectionWidget({
     super.key,
     required this.name,
-    required this.phoneNumber,
-    required this.imageSource,
+    required this.avatarUrl,
   });
 
   @override
@@ -27,15 +26,27 @@ class ProfileSectionWidget extends StatelessWidget {
           CircleAvatar(
             radius: 50,
             backgroundColor: AppColors.primary500,
-            backgroundImage: imageSource,
-            child:
-                imageSource == const AssetImage('assets/images/appprofile.jpg')
-                ? const Icon(Icons.person, size: 50, color: Colors.white)
-                : null,
+            child: ClipOval(
+              child: avatarUrl?.isNotEmpty == true
+                  ? CachedNetworkImage(
+                imageUrl: avatarUrl!,
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                const CircularProgressIndicator(color: Colors.white),
+                errorWidget: (context, url, error) =>
+                const Icon(Icons.person, size: 50, color: Colors.white),
+              )
+                  : const Icon(
+                Icons.person,
+                size: 50,
+                color: Colors.white,
+              ),
+            ),
           ),
           const SizedBox(height: 10),
           Text(name, style: AppTextStyles.heading1Bold),
-          Text(phoneNumber, style: AppTextStyles.heading2Regular),
         ],
       ),
     );
@@ -66,7 +77,7 @@ class ProfileNavigationTile extends StatelessWidget {
 }
 
 class ProfileBodyWidget extends StatelessWidget {
-  final UserModel? user;
+  final ProfileModel? profile;
   final bool isDarkTheme;
   final bool isEnglish;
   final ValueChanged<bool> onThemeChanged;
@@ -76,7 +87,7 @@ class ProfileBodyWidget extends StatelessWidget {
 
   const ProfileBodyWidget({
     super.key,
-    required this.user,
+    required this.profile,
     required this.isDarkTheme,
     required this.isEnglish,
     required this.onThemeChanged,
@@ -87,20 +98,9 @@ class ProfileBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fullName = (user?.firstName != null && user!.lastName != null)
-        ? '${user!.firstName} ${user!.lastName}'
-        : (user?.name ?? 'Loading Profile...');
-
-    final phoneNumber = user != null ? user!.phone : '...';
-
-    final imagePath = user?.avatarUrl?.isNotEmpty == true
-        ? user!.avatarUrl!
-        : 'assets/images/appprofile.jpg';
-
-    final isNetworkImage = user?.avatarUrl?.isNotEmpty == true;
-    final ImageProvider profileImage = isNetworkImage
-        ? NetworkImage(imagePath)
-        : AssetImage(imagePath) as ImageProvider;
+    final fullName = (profile?.firstName != null && profile!.lastName != null)
+        ? '${profile!.firstName} ${profile!.lastName}'
+        : 'Loading Profile...';
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -111,10 +111,8 @@ class ProfileBodyWidget extends StatelessWidget {
             children: [
               ProfileSectionWidget(
                 name: fullName,
-                phoneNumber: phoneNumber,
-                imageSource: profileImage,
+                avatarUrl: profile?.avatarUrl,
               ),
-
               const Divider(height: 30),
 
               SwitchListTile(
@@ -130,8 +128,10 @@ class ProfileBodyWidget extends StatelessWidget {
                 ),
                 value: isDarkTheme,
                 onChanged: onThemeChanged,
+                inactiveTrackColor: AppColors.primary600,
               ),
               SwitchListTile(
+                inactiveTrackColor: AppColors.primary600,
                 secondary: const Icon(
                   AppIcons.langIcon,
                   color: AppColors.primary800,
@@ -147,12 +147,6 @@ class ProfileBodyWidget extends StatelessWidget {
               ),
 
               const Divider(),
-
-              ProfileNavigationTile(
-                title: AppStrings.menuHistory.tr(),
-                icon: AppIcons.historyIcon,
-                onTap: () => onNavigate(AppStrings.menuEditProfile.tr()),
-              ),
               ProfileNavigationTile(
                 title: AppStrings.menuEditProfile.tr(),
                 icon: AppIcons.editIcon,

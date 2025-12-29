@@ -1,3 +1,4 @@
+import 'package:mabeet/data/models/profile_model.dart';
 import 'package:mabeet/data/models/user_model.dart';
 
 class UserState {}
@@ -41,7 +42,7 @@ final class CreateProfileFailure extends UserState {
 final class GetUserLoading extends UserState {}
 
 final class GetUserSuccess extends UserState {
-  final UserModel user;
+  final ProfileModel user;
   GetUserSuccess(this.user);
 }
 
@@ -51,3 +52,12 @@ final class GetUserFailure extends UserState {
 }
 
 final class ProfileCreationRequired extends UserState {}
+
+final class UpdateProfileSuccess extends UserState {}
+
+final class UpdateProfileLoading extends UserState {}
+
+final class UpdateProfileFailure extends UserState {
+  final String errorMessage;
+  UpdateProfileFailure({required this.errorMessage});
+}
