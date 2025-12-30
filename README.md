@@ -66,9 +66,7 @@ You will need the following installed:
 
 | Light Mode (English) | Dark Mode (Arabic) |
 | :---: | :---: |
-| ![Light Mode EN](https://via.placeholder.com/300x550?text=Light+Mode+Screenshot) | ![Dark Mode AR](https://via.placeholder.com/300x550?text=Dark+Mode+Arabic+Screenshot) |
-
----
+| <img width="200" alt="Light Mode EN" src="https://github.com/user-attachments/assets/7c7beb3c-8517-4f02-8a9e-14ba7f86aa4c" /> | <img width="200" alt="Dark Mode AR" src="https://github.com/user-attachments/assets/3b008c82-9d0a-4ddf-9670-b835b255c060" /> |---
 
 ## 🤝 The Development Team
 
