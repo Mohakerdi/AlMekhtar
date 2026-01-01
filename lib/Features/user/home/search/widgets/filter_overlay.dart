@@ -11,7 +11,7 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class FilterOverlay extends StatelessWidget {
 
-  final VoidCallback onApply;
+  final void Function() onApply;
 
   const FilterOverlay({super.key, required this.onApply});
 
@@ -221,10 +221,10 @@ class FilterOverlay extends StatelessWidget {
                               onPressed: () {
                                 cubit.resetFilters();
                               },
-                              child: const Text('Reset'),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.gray400,
                               ),
+                              child: const Text('Reset'),
                             ),
                           ),
                           const SizedBox(width: 10),

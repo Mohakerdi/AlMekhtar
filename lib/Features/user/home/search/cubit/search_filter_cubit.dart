@@ -76,4 +76,18 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
           ))
       );
   }
+
+  Future<void> selectGovernorate(Location newGovernorate) async {
+    final resetState = SearchFilterState.resetValues;
+
+    final newState = resetState.copyWith(
+      governorate: newGovernorate, // Apply the one filter
+      isLoading: true,
+      properties: null,
+      errorMessage: null,
+    );
+    emit(newState);
+
+    await applyFilters();
+  }
 }

@@ -6,7 +6,6 @@ import 'package:dartz/dartz.dart';
 import 'package:mabeet/data/models/log_in_model.dart';
 import 'package:mabeet/data/models/profile_model.dart';
 import 'package:mabeet/data/models/sign_up_model.dart';
-import 'package:mabeet/data/models/user_model.dart';
 import '../../core/api/api_constants.dart';
 
 class UserRepository {
@@ -23,13 +22,13 @@ class UserRepository {
   }) async {
     try {
       final response = await api.post(
-        ApiConstants.create_account,
+        ApiConstants.register,
         data: {
           ApiKey.email: email,
           ApiKey.name: name,
           ApiKey.phone: phone,
           ApiKey.password: password,
-          ApiKey.password_confirmation: passwordConfirmation,
+          ApiKey.passwordConfirmation: passwordConfirmation,
         },
       );
       final user = SignUpModel.fromJson(response);
@@ -80,11 +79,11 @@ class UserRepository {
       final response = await api.post(
         ApiConstants.profile,
         data: {
-          'avatar': avatarPic,
-          'idPhoto': idPhoto,
-          'firstName': firstName,
-          'lastName': lastName,
-          'birthDate': birthDate,
+          ApiKey.avatar: avatarPic,
+          ApiKey.idPhoto: idPhoto,
+          ApiKey.firstName: firstName,
+          ApiKey.lastName: lastName,
+          ApiKey.birthDate: birthDate,
         },
       );
 
@@ -118,16 +117,16 @@ class UserRepository {
   }) async {
     try {
       final Map<String, dynamic> data = {
-        'firstName': firstName,
-        'lastName': lastName,
+        ApiKey.firstName: firstName,
+        ApiKey.lastName: lastName,
       };
 
       if (birthDate != null && birthDate.isNotEmpty) {
-        data['birthDate'] = birthDate;
+        data[ApiKey.birthDate] = birthDate;
       }
 
       if (avatarPic != null) {
-        data['avatar'] = avatarPic;
+        data[ApiKey.avatar] = avatarPic;
       }
 
       final response = await api.patch(

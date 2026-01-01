@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/data/models/state.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import '../../search/cubit/search_filter_cubit.dart';
 import '../../search/screens/search_screen.dart';
 
 class CityCard extends StatelessWidget {
@@ -10,6 +12,8 @@ class CityCard extends StatelessWidget {
   final Location city;
 
   void _goToSearchScreen(BuildContext context) {
+
+    context.read<SearchFilterCubit>().selectGovernorate(city);
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: SearchScreen(),

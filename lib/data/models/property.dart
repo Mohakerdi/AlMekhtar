@@ -1,5 +1,6 @@
 import 'package:mabeet/core/constants/images.dart';
 
+import '../../core/api/api_constants.dart';
 import 'state.dart';
 
 class Property {
@@ -38,38 +39,43 @@ class Property {
       );
     }
 
+    String? getFullImageUrl(String? path) {
+      if (path == null || path.isEmpty) return null;
+      return '${ApiConstants.StorageBaseUrl}$path';
+    }
+
     return Property(
-      propertyId: int.tryParse(json['id'].toString()) ?? 0,
+      propertyId: int.tryParse(json[ApiKey.id].toString()) ?? 0,
 
-      costPerNight: double.tryParse(json['price'].toString()) ?? 0.0,
-      avgRate: double.tryParse(json['rate'].toString()) ?? 0.0,
-      area: double.tryParse(json['area'].toString()) ?? 0.0,
-      floor: int.tryParse(json['floor'].toString()) ?? 0,
+      costPerNight: double.tryParse(json[ApiKey.price].toString()) ?? 0.0,
+      avgRate: double.tryParse(json[ApiKey.rate].toString()) ?? 0.0,
+      area: double.tryParse(json[ApiKey.area].toString()) ?? 0.0,
+      floor: int.tryParse(json[ApiKey.floor].toString()) ?? 0,
 
-      city: json['enCity']?.toString() ?? '',
-      title: json['title']?.toString() ?? '',
-      description: json['description']?.toString() ?? '',
-      describedLocation: json['address_description']?.toString() ?? '',
+      city: json[ApiKey.city]?.toString() ?? '',
+      title: json[ApiKey.title]?.toString() ?? '',
+      description: json[ApiKey.description]?.toString() ?? '',
+      describedLocation: json[ApiKey.addressDescribed]?.toString() ?? '',
 
-      state: mapState(json['enState']?.toString()),
+      state: mapState(json[ApiKey.state]?.toString()),
 
-      imageURLs: json['images'] is List
-          ? List<String>.from(json['images'].map((item) => item.toString()))
+      imageURLs: json[ApiKey.images] is List
+          ? List<String>.from(json[ApiKey.images].map((item) => getFullImageUrl(item.toString())))
           : [],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'title': title,
-      'price': costPerNight,
-      'floor': floor,
-      'enCity': city,
-      'enState': state,
-      'images': imageURLs,
-      'description': description,
-      'address_described': describedLocation,
-      'area': area,
+      ApiKey.title: title,
+      ApiKey.price: costPerNight,
+      ApiKey.floor: floor,
+      ApiKey.city: city,
+      ApiKey.state: state,
+      ApiKey.images: imageURLs,
+      ApiKey.description: description,
+      ApiKey.addressDescribed: describedLocation,
+      ApiKey.area: area,
     };
   }
 }

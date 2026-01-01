@@ -14,16 +14,13 @@ class LocationsSlider extends StatelessWidget {
       child: Row(
         children: [
           LocationVector(
-            name: syrianStates[0].name,
-            image: syrianStates[0].locationEnum!.imagePath,
+            city: syrianStates[0].locationEnum!
           ),
           LocationVector(
-            name: syrianStates[3].name,
-            image: syrianStates[3].locationEnum!.imagePath,
+              city: syrianStates[3].locationEnum!
           ),
           LocationVector(
-            name: syrianStates[9].name,
-            image: syrianStates[9].locationEnum!.imagePath,
+              city: syrianStates[9].locationEnum!
           ),
         ],
       ),

@@ -7,7 +7,7 @@ final List<Property> dummyProperties = [
   Property(
     floor: 1,
     propertyId: 1,
-    title: 'kurdistan',
+    title: 'casablanca',
     imageURLs: [
       AppImages.kEagleNest,
       AppImages.kTwinTowers,

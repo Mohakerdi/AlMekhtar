@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
@@ -21,8 +22,7 @@ class BookingProperty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final String locationName = '${property.location.name}, ${property.describedLocation}';
-    final String locationName = property.describedLocation;
+    final String locationName = '${property.state.name}, ${property.city}';
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: InkWell(
@@ -37,12 +37,16 @@ class BookingProperty extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  property.imageURLs[0],
-                  fit: BoxFit.fill,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
+                child: CachedNetworkImage(
+                  imageUrl: property.imageURLs[0],
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                  const CircularProgressIndicator(color: Colors.white),
+                  errorWidget: (context, url, error) =>
+                  const Icon(Icons.home, size: 50, color: Colors.white),
+                )
               ),
             ),
             Expanded(
