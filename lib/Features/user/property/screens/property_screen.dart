@@ -8,6 +8,7 @@ import 'package:mabeet/Features/user/property/widgets/description_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/location_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/property_details.dart';
 import 'package:mabeet/Features/user/property/widgets/title_widget.dart';
+import 'package:mabeet/Features/user/rentals/editeProperty/screens/edit_property_screen.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import '../../../../data/models/property.dart';
@@ -47,7 +48,11 @@ class PropertyScreen extends StatelessWidget {
                 ],
               ),
             ),
-            LocationWidget(govenorant: property.state, area: property.city, detailed: property.describedLocation,),
+            LocationWidget(
+              govenorant: property.state,
+              area: property.city,
+              detailed: property.describedLocation,
+            ),
             SizedBox(height: 30),
             PropertyDetails(),
             SizedBox(height: 25),
@@ -62,7 +67,8 @@ class PropertyScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => RentNowScreen(property: property),
+              //builder: (context) => RentNowScreen(property: property),
+              builder: (context) => EditPropertyScreen(property: property),
             ),
           );
         },
