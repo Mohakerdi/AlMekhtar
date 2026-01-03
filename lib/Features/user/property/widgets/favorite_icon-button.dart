@@ -17,6 +17,7 @@ class FavoriteIconButton extends StatelessWidget {
         final bool isFav = cubit.isFavorite(property.propertyId);
 
         return IconButton(
+          padding: EdgeInsets.all(0),
           onPressed: () => cubit.toggleFav(property),
           icon: Icon(
             isFav ? Icons.favorite : Icons.favorite_border,

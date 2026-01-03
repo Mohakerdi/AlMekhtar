@@ -11,6 +11,12 @@ class SearchFilterState {
   final double minRate;
   final double maxRate;
   final String order;
+  static const double _initialMinCost = 0.0;
+  static const double _initialMaxCost = 100.0;
+  static const double _initialMinArea = 30.0;
+  static const double _initialMaxArea = 210.0;
+  static const double _initialMinRate = 0.0;
+  static const double _initialMaxRate = 5.0;
 
 
   final List<Property>? properties;
@@ -80,4 +86,23 @@ class SearchFilterState {
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+  static SearchFilterState get resetValues {
+    return SearchFilterState(
+      governorate: null,
+      area: null,
+      minCost: _initialMinCost,
+      maxCost: _initialMaxCost,
+      minArea: _initialMinArea,
+      maxArea: _initialMaxArea,
+      minRate: _initialMinRate,
+      maxRate: _initialMaxRate,
+
+      order: 'asc',
+
+      properties: null,
+      isLoading: false,
+      errorMessage: null,
+    );
+  }
+
 }

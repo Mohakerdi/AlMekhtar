@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
-import 'package:mabeet/core/api/api_constants.dart';
-import 'package:mabeet/core/cache/cache_helper.dart';
 import 'package:mabeet/data/models/profile_model.dart';
-import 'package:mabeet/data/models/sign_up_model.dart';
 import 'package:mabeet/data/models/user_model.dart';
 import 'package:mabeet/data/repos/user_repo.dart';
 
@@ -16,7 +12,6 @@ class UserCubit extends Cubit<UserState> {
   final UserRepository userRepository;
   UserModel? currentUser;
   ProfileModel? currentProfile;
-
   TextEditingController signUpEmail = TextEditingController();
   TextEditingController signUpPhone = TextEditingController();
   TextEditingController signUpPassword = TextEditingController();

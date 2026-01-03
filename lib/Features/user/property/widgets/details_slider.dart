@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -43,17 +44,21 @@ class _DetailsSliderState extends State<DetailsSlider> {
               return GestureDetector(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset(
-                    imagePath,
+                  child: CachedNetworkImage(
+                    imageUrl: imagePath,
+                    width: 380,
+                    height: 380,
                     fit: BoxFit.cover,
-                    width: double.infinity,
-                  ),
+                    placeholder: (context, url) =>
+                    const CircularProgressIndicator(color: Colors.white),
+                    errorWidget: (context, url, error) =>
+                    const Icon(Icons.home, size: 50, color: Colors.white),
+                  )
                 ),
               );
             },
             options: CarouselOptions(
               height: MediaQuery.of(context).size.height * 0.4,
-              // Set a fixed height based on aspect ratio (0.8)
               aspectRatio: 0.8,
               viewportFraction: 1.0,
               enableInfiniteScroll: true,
@@ -88,27 +93,29 @@ class _DetailsSliderState extends State<DetailsSlider> {
                   },
                   child: Container(
                     width: 50,
-                    // Match original thumbnailWidth
                     height: 65,
-                    // Match original thumbnailHeight
                     margin: const EdgeInsets.only(right: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      // Match original thumbnailBorderRadius
                       border: Border.all(
-                        // Highlight the current thumbnail (Match original thumbnailBorderColor)
                         color: _currentImageIndex == index
                             ? Colors.indigo
                             : Colors.grey.shade300,
-                        width: 1.5, // Match original thumbnailBorderWidth
+                        width: 1.5,
                       ),
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        widget.imageAssets[index],
+                      child: CachedNetworkImage(
+                        imageUrl: widget.imageAssets[index],
+                        width: 65,
+                        height: 65,
                         fit: BoxFit.cover,
-                      ),
+                        placeholder: (context, url) =>
+                        const CircularProgressIndicator(color: Colors.white),
+                        errorWidget: (context, url, error) =>
+                        const Icon(Icons.home, size: 50, color: Colors.white),
+                      )
                     ),
                   ),
                 );

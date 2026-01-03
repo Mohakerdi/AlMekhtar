@@ -5,8 +5,21 @@ import 'package:mabeet/Features/user/notifications/services/cubit/notifications_
 import 'package:mabeet/Features/user/notifications/services/cubit/notifications_state.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 
-class NotificationsScreen extends StatelessWidget {
+class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
+
+  @override
+  State<NotificationsScreen> createState() => _NotificationsScreenState();
+}
+
+class _NotificationsScreenState extends State<NotificationsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<NotificationCubit>().getNotifications();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

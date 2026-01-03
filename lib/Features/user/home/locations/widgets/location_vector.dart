@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
+import 'package:mabeet/data/models/state.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../search/screens/search_screen.dart';
@@ -7,14 +10,12 @@ import '../../search/screens/search_screen.dart';
 class LocationVector extends StatelessWidget {
   const LocationVector({
     super.key,
-    required this.name,
-    required this.image,
+    required this.city,
   });
-
-  final String name;
-  final String image;
+  final Location city;
 
   void _goToSearchScreen(BuildContext context) {
+    context.read<SearchFilterCubit>().selectGovernorate(city);
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: SearchScreen(),
@@ -47,7 +48,7 @@ class LocationVector extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(10),
                   child: Image.asset(
-                    this.image,
+                    city.imagePath,
                     fit: BoxFit.fill,
                     width: double.infinity,
                     height: double.infinity,
@@ -55,7 +56,7 @@ class LocationVector extends StatelessWidget {
                 ),
               ),
               Text(
-                '  ' + this.name,
+                '  ' + city.name,
                 style: AppTextStyles.titleMedium.copyWith(
                   color: AppColors.gray400,
                 ),

@@ -1,4 +1,5 @@
 import 'package:mabeet/Features/user/favorites/services/data/favorite_webservices.dart';
+import 'package:mabeet/core/api/api_constants.dart';
 import 'package:mabeet/data/models/property.dart';
 
 class FavoriteRepository {
@@ -9,7 +10,7 @@ class FavoriteRepository {
     print(" 2. Repo: Calling WebServices...");
     final response = await webServices.getFavorites();
     print("3. Repo: Raw Response: $response");
-    List<dynamic> data = response['favourites'] ?? [];
+    List<dynamic> data = response[ApiKey.favourites] ?? [];
     return data.map((json) => Property.fromJson(json)).toList();
   }
 

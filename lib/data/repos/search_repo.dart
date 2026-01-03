@@ -4,6 +4,8 @@ import 'package:mabeet/core/errors/exceptions.dart'; // Assuming this defines Se
 import 'package:mabeet/data/models/property.dart';
 import 'package:mabeet/data/models/search_model.dart';
 import 'package:mabeet/data/models/state.dart';
+
+import '../../core/api/api_constants.dart';
 class SearchRepository {
   final ApiConsumer api;
   SearchRepository({required this.api});
@@ -21,19 +23,19 @@ class SearchRepository {
   }) async {
     try {
       final data = {
-        'enState': governorate?.name,
-        'enCity': area,
-        'minPrice': minCost,
-        'maxPrice': maxCost,
-        'minArea': minArea,
-        'maxArea': maxArea,
-        'minRate': minRate,
-        'maxRate': maxRate,
-        'order': order,
+        ApiKey.state: governorate?.name,
+        ApiKey.city: area,
+        ApiKey.minPrice: minCost,
+        ApiKey.maxPrice: maxCost,
+        ApiKey.minArea: minArea,
+        ApiKey.maxArea: maxArea,
+        ApiKey.minRate: minRate,
+        ApiKey.maxRate: maxRate,
+        ApiKey.order: order,
       };
 
       final response = await api.get(
-        '/apartments/filter',
+        ApiConstants.filter,
         queryParameters: data,
       );
 

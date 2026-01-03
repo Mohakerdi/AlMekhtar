@@ -10,7 +10,7 @@ import 'package:mabeet/data/repos/dummy_properties.dart';
 class AddPropertyCubit extends Cubit<AddPropertyState> {
   AddPropertyCubit() : super(AddPropertyInitial()) {
     selectedState = Location.Damascus;
-    selectedCity = 'Mazzeh';
+    selectedCity = 'Old-Damascus';
     floorsController.text = '1';
   }
 

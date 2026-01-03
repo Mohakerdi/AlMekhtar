@@ -1,5 +1,4 @@
 import 'package:mabeet/data/models/profile_model.dart';
-import 'package:mabeet/data/models/user_model.dart';
 
 class UserState {}
 
