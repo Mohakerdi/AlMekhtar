@@ -101,15 +101,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
-        /*Widget startWidget;
+        Widget startWidget;
         if (!onBoardingSeen) {
           startWidget = const OnboardingScreen();
         } else if (isLoggedIn) {
           startWidget = const SplashHandler();
         } else {
           startWidget = const CreateAccountScreen();
-        }*/
-        Widget startWidget = const SplashHandler();
+        }
+        
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
