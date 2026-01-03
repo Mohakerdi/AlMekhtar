@@ -7,6 +7,7 @@ import 'package:mabeet/Features/user/bookings/payment/cubit/payment_cubit.dart';
 import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
 import 'package:mabeet/Features/user/favorites/services/data/favorite_rep.dart';
 import 'package:mabeet/Features/user/favorites/services/data/favorite_webservices.dart';
+import 'package:mabeet/Features/user/home/screens/home.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import 'package:mabeet/core/api/api_constants.dart';
 import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
@@ -35,7 +36,8 @@ void main() async {
   final String? token = CacheHelper.getData(key: ApiKey.token);
   final bool isLoggedIn = (token != null && token.isNotEmpty);
 
-  final bool onBoardingSeen = CacheHelper.getData(key: ApiKey.onBoardingSeen) ?? false;
+  final bool onBoardingSeen =
+      CacheHelper.getData(key: ApiKey.onBoardingSeen) ?? false;
 
   //Fix View To Vertical
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((
@@ -79,10 +81,7 @@ void main() async {
               },
             ),
           ],
-          child: MyApp(
-            isLoggedIn: isLoggedIn,
-            onBoardingSeen: onBoardingSeen,
-          ),
+          child: MyApp(isLoggedIn: isLoggedIn, onBoardingSeen: onBoardingSeen),
         ),
       ),
     );
@@ -90,23 +89,27 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.isLoggedIn, required this.onBoardingSeen});
+  const MyApp({
+    super.key,
+    required this.isLoggedIn,
+    required this.onBoardingSeen,
+  });
   final bool isLoggedIn;
   final bool onBoardingSeen;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
-
       builder: (context, state) {
-        Widget startWidget;
+        /*Widget startWidget;
         if (!onBoardingSeen) {
           startWidget = const OnboardingScreen();
         } else if (isLoggedIn) {
           startWidget = const SplashHandler();
         } else {
           startWidget = const CreateAccountScreen();
-        }
+        }*/
+        Widget startWidget = const SplashHandler();
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
@@ -117,7 +120,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
 
-          home: startWidget
+          home: startWidget,
         );
       },
     );
