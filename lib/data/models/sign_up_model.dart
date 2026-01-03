@@ -6,14 +6,14 @@ class SignUpModel {
   final String name;
   final String email;
   final String phone;
-  final int id;
+  // final int id;
 
   SignUpModel({
     required this.message,
     required this.name,
     required this.email,
     required this.phone,
-    required this.id,
+    // required this.id,
   });
 
   factory SignUpModel.fromJson(Map<String, dynamic> jsonData) {
@@ -25,7 +25,7 @@ class SignUpModel {
       name: userJson[ApiKey.name],
       email: userJson[ApiKey.email],
       phone: userJson[ApiKey.phone],
-      id: userJson[ApiKey.id],
+      // id: userJson[ApiKey.id],
     );
   }
 }

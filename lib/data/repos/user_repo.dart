@@ -77,7 +77,7 @@ class UserRepository {
   }) async {
     try {
       final response = await api.post(
-        ApiConstants.profile,
+        ApiConstants.createProfile,
         data: {
           ApiKey.avatar: avatarPic,
           ApiKey.idPhoto: idPhoto,
@@ -108,7 +108,7 @@ class UserRepository {
     }
   }
 
-  Future<Either<String, ProfileModel>> updateProfile({
+  Future<Either<String, void>> updateProfile({
     required String firstName,
     required String lastName,
     String? birthDate,
@@ -116,26 +116,18 @@ class UserRepository {
 
   }) async {
     try {
-      final Map<String, dynamic> data = {
-        ApiKey.firstName: firstName,
-        ApiKey.lastName: lastName,
-      };
 
-      if (birthDate != null && birthDate.isNotEmpty) {
-        data[ApiKey.birthDate] = birthDate;
-      }
-
-      if (avatarPic != null) {
-        data[ApiKey.avatar] = avatarPic;
-      }
-
-      final response = await api.patch(
-        ApiConstants.profile,
-        data: data,
+      final response = await api.put(
+        ApiConstants.updateProfile,
+        data: {
+          ApiKey.avatar: avatarPic,
+          ApiKey.firstName: firstName,
+          ApiKey.lastName: lastName,
+          ApiKey.birthDate: birthDate,
+        },
       );
 
-      final profile = ProfileModel.fromJson(response);
-      return Right(profile);
+      return Right(null);
 
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

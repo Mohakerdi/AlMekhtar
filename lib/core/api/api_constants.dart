@@ -8,7 +8,8 @@ class ApiConstants {
   static const String register = 'register';
 
   // User profile endpoints
-  static const String profile = 'profile';
+  static const String createProfile = 'profile/store';
+  static const String updateProfile = 'profile/update';
   static const String getUserProfile = 'profile';
 
   // Apartment-related endpoints
