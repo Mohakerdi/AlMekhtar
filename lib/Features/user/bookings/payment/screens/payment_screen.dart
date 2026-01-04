@@ -17,8 +17,6 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final _formKey = GlobalKey<FormState>();
-  String cardNumber = '';
-  String cvv = '';
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +115,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _sendForm() {
     if (_formKey.currentState!.validate()) {
+      context.read<PaymentCubit>().saveCardDetails();
+      Navigator.pop(context);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Payment Completed!')));
+      ).showSnackBar(SnackBar(content: Text('Card Added!'), duration: Duration(seconds: 1),));
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import '../../../../../core/theme/text_styles.dart';
@@ -27,12 +28,16 @@ class RentalsProperty extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  property.imageURLs[0],
-                  fit: BoxFit.fill,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
+                child: CachedNetworkImage(
+                  imageUrl: property.imageURLs[0],
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                  const CircularProgressIndicator(color: Colors.white),
+                  errorWidget: (context, url, error) =>
+                  const Icon(Icons.home, size: 50, color: Colors.white),
+                )
               ),
             ),
             Expanded(

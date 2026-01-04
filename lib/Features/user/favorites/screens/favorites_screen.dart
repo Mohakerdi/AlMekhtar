@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
 import 'package:mabeet/Features/user/favorites/widgets/favorites_property.dart';
 import 'package:mabeet/Features/user/CustomAppBar.dart';
+import 'package:mabeet/Features/user/favorites/widgets/shimmer_loading_favorites.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
@@ -39,7 +40,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         },
         builder: (context, state) {
           if (state is FavoriteLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return ListView.builder(
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return const FavoritesPropertyShimmer();
+              },
+            );
           }
           final favorites = context.read<FavoriteCubit>().favoritesList;
           if (favorites.isEmpty) {

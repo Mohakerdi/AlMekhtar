@@ -67,8 +67,8 @@ class PropertyScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              //builder: (context) => RentNowScreen(property: property),
-              builder: (context) => EditPropertyScreen(property: property),
+              builder: (context) => RentNowScreen(property: property),
+              // builder: (context) => EditPropertyScreen(property: property),
             ),
           );
         },

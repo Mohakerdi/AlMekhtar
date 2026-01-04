@@ -14,6 +14,7 @@ import 'package:mabeet/Features/user/notifications/services/cubit/notifications_
 import 'package:mabeet/Features/user/notifications/services/data/notification_repo.dart';
 import 'package:mabeet/Features/user/notifications/services/data/notification_webservices.dart';
 import 'package:mabeet/core/localization/localiztion_service.dart';
+import 'package:mabeet/data/repos/payment_repo.dart';
 import 'package:mabeet/data/repos/search_repo.dart';
 import 'package:mabeet/data/repos/user_repo.dart';
 import 'Features/splash/splash_screen_handler.dart';
@@ -58,7 +59,13 @@ void main() async {
             BlocProvider<ThemeCubit>(
               create: (context) => ThemeCubit()..loadTheme(),
             ),
-            BlocProvider<PaymentCubit>(create: (context) => PaymentCubit()),
+            BlocProvider<PaymentCubit>(
+              create: (context) => PaymentCubit(
+                paymentRepository: PaymentRepository(
+                  api: DioConsumer(dio: dio),
+                ),
+              ),
+            ),
             BlocProvider<SearchFilterCubit>(
               create: (context) => SearchFilterCubit(
                 searchRepo: SearchRepository(api: DioConsumer(dio: dio)),
@@ -94,6 +101,7 @@ class MyApp extends StatelessWidget {
     required this.isLoggedIn,
     required this.onBoardingSeen,
   });
+
   final bool isLoggedIn;
   final bool onBoardingSeen;
 
@@ -109,7 +117,7 @@ class MyApp extends StatelessWidget {
         } else {
           startWidget = const CreateAccountScreen();
         }
-        
+
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,

@@ -15,6 +15,8 @@ class ApiConstants {
   // Apartment-related endpoints
   static const String favorites = 'apartments/favorites';
   static const String filter = 'apartments/filter';
+  static const String apartment = 'apartments';
+  static const String offer = 'offer';
 
   // Notification endpoints
   static const String notifications = 'notifications';

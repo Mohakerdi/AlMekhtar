@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import '../locations/screens/locations_screen.dart';
 import '../search/screens/search_screen.dart';
 import '../../CustomAppBar.dart';
@@ -61,6 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _goToSearchScreen() {
+
+    context.read<SearchFilterCubit>().seeAllFilters();
+
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: SearchScreen(),

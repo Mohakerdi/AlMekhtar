@@ -46,6 +46,10 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
   void resetFilters() {
     emit(SearchFilterState.initial());
   }
+  void seeAllFilters() {
+    resetFilters();
+    applyFilters();
+  }
 
   Future<void> applyFilters() async {
     emit(state.copyWith(
