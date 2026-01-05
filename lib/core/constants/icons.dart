@@ -19,6 +19,7 @@ class AppIcons{
  static const homeIcon = Icons.home;
  static const inactiveHomeIcon = Icons.home_outlined;
  static const upload = FeatherIcons.uploadCloud;
+ static const star = Icons.star;
  static const signOutIcon = Icons.logout;
  static const aboutUsIcon = Icons.info_outline;
  static const editIcon = Icons.edit;
@@ -27,5 +28,9 @@ class AppIcons{
  static const lightIcon = Icons.brightness_7;
  static const darkIcon = Icons.brightness_2;
  static const exitIcon = Icons.close;
+ static const startDate = Icons.calendar_today;
+ static const endDate = Icons.calendar_month;
+ static const floor = Icons.layers_outlined;
+ static const area = Icons.square_foot_rounded;
 
 }

@@ -36,7 +36,7 @@ class SearchRepository {
 
       final response = await api.get(
         ApiConstants.filter,
-        queryParameters: data,
+        data: data,
       );
 
       final filterResponse = SearchModel.fromJson(response);

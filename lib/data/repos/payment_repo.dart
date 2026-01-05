@@ -30,7 +30,7 @@ class PaymentRepository {
         data: null,
       );
 
-      final message = response.data['message'] as String;
+      final message = response['message'] as String;
 
       return Right(message);
 

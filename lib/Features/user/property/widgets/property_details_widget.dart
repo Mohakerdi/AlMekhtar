@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 
@@ -16,37 +17,79 @@ class PropertyDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       padding: const EdgeInsets.all(16.0),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Floor: $floor',
-              textAlign: TextAlign.justify,
-              style: AppTextStyles.titleMedium.copyWith(
-                color: AppColors.primary400,
-              ),
-            ),
-            Text(
-              'Area: $area m^2',
-              textAlign: TextAlign.justify,
-              style: AppTextStyles.titleMedium.copyWith(
-                color: AppColors.primary400,
-              ),
-            ),
-            Text(
-              'Rate: $rate',
-              textAlign: TextAlign.justify,
-              style: AppTextStyles.titleMedium.copyWith(
-                color: AppColors.primary400,
-              ),
-            ),
-          ],
-        ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildDetailItem(
+            icon: AppIcons.floor,
+            label: 'Floor',
+            value: '$floor',
+          ),
+          _buildVerticalDivider(),
+          _buildDetailItem(
+            icon: AppIcons.area,
+            label: 'Area',
+            value: '$area m²',
+          ),
+          _buildVerticalDivider(),
+          _buildDetailItem(
+            icon: AppIcons.star,
+            label: 'Rating',
+            value: '$rate',
+            iconColor: AppColors.warning700,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailItem({
+    required IconData icon,
+    required String label,
+    required String value,
+    Color? iconColor,
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: iconColor ?? AppColors.primary400, size: 28),
+        const SizedBox(height: 8),
+        Text(
+          value,
+          style: AppTextStyles.titleMedium.copyWith(
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        Text(
+          label,
+          style: AppTextStyles.bodySmall.copyWith(
+            color: Colors.grey[600],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVerticalDivider() {
+    return Container(
+      height: 40,
+      width: 1,
+      color: Colors.grey[200],
     );
   }
 }

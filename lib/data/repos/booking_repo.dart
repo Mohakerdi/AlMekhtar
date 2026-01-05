@@ -69,14 +69,17 @@ class BookingRepository {
     }
   }
 
-  Future<List<Booking>> getBookingsByType(BookingType type) async {
-    switch (type) {
-      case BookingType.pending:
-        return getPendingAwaitingBookings();
-      case BookingType.active:
-        return getActiveAcceptedBookings();
-      case BookingType.history:
-        return getHistoryBookings();
+  Future<String> cancelBooking(int bookingId) async {
+    try {
+      final endpoint = 'apartments/reservations/$bookingId/cancel';
+      final response = await api.post(endpoint, data: {});
+      final message = response['message'] as String;
+
+      return message;
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw Exception('Failed to cancel booking: $e');
     }
   }
 }

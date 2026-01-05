@@ -80,4 +80,28 @@ class BookingCubit extends Cubit<BookingState> {
     }
   }
 
+  Future<String> cancelBooking(int bookingId) async {
+    try {
+      final message = await _bookingRepository.cancelBooking(bookingId);
+      final currentData = _currentStateData;
+
+      final updatedPending = currentData.pendingBookings
+          .where((b) => b.bookingId != bookingId)
+          .toList();
+      final updatedActive = currentData.activeBookings
+          .where((b) => b.bookingId != bookingId)
+          .toList();
+
+      emit(BookingLoaded(
+        pendingBookings: updatedPending,
+        activeBookings: updatedActive,
+        historyBookings: currentData.historyBookings,
+      ));
+      return message;
+    } catch (e) {
+      emit(BookingError('Failed to cancel booking ID $bookingId. Please try again.',
+      ));
+      rethrow;
+    }
+  }
 }
