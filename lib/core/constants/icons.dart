@@ -9,6 +9,7 @@ class AppIcons{
  static const filterIcon = FontAwesomeIcons.sliders;
  static const rentIcon = FontAwesomeIcons.buildingUser;
  static const inactiveRentIcon = FontAwesomeIcons.buildingUser;
+ static const location = Icons.location_on_outlined;
  static const favIcon = Icons.favorite;
  static const inactiveFavIcon = Icons.favorite_border;
  static const profileIcon = Icons.person;

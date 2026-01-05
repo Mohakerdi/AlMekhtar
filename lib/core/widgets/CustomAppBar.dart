@@ -6,10 +6,7 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
 
-  const CustomAppBar({
-    super.key,
-    required this.titleText,
-  });
+  const CustomAppBar({super.key, required this.titleText});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

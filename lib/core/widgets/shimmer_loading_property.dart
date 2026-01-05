@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../theme/app_colors.dart';
 
-class FavoritesPropertyShimmer extends StatelessWidget {
-  const FavoritesPropertyShimmer({super.key});
+class PropertyShimmer extends StatelessWidget {
+  const PropertyShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {

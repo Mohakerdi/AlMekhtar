@@ -7,6 +7,7 @@ import 'package:mabeet/Features/user/property/widgets/description_details_widget
 import 'package:mabeet/Features/user/property/widgets/description_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/location_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/property_details.dart';
+import 'package:mabeet/Features/user/property/widgets/property_details_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/title_widget.dart';
 import 'package:mabeet/Features/user/rentals/editeProperty/screens/edit_property_screen.dart';
 import 'package:mabeet/core/constants/strings.dart';
@@ -55,6 +56,7 @@ class PropertyScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
             PropertyDetails(),
+            PropertyDetailsWidget(floor: property.floor,area: property.area,rate: property.avgRate,),
             SizedBox(height: 25),
             DescriptionWidget(),
             DescriptionDetailsWidget(description: property.description),

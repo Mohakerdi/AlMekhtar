@@ -5,6 +5,7 @@ import 'package:mabeet/Features/user/bookings/widgets/bookings_property_shimmer.
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_state.dart';
 import 'package:mabeet/Features/user/home/search/widgets/search_field.dart';
+import 'package:mabeet/Features/user/home/widgets/popular_property.dart';
 import 'package:mabeet/data/models/property.dart';
 import '../widgets/filter_overlay.dart';
 
@@ -77,7 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: properties.length,
                     separatorBuilder: (ctx, idx) => const SizedBox(height: 15),
-                    itemBuilder: (ctx, index) => BookingProperty(property: properties[index]),
+                    itemBuilder: (ctx, index) => PopularProperty(property: properties[index]),
                   ),
               ],
             ),

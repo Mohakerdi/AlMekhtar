@@ -6,10 +6,10 @@ import 'package:mabeet/Features/auth/services/cubit/user_cubit.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
 import 'package:mabeet/Features/user/profile/screens/main_profile/widgets/profile_body_skeleton.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/core/widgets/CustomAppBar.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../../../core/constants/strings.dart';
 import '../../../../../../core/localization/localiztion_service.dart';
-import '../../../../CustomAppBar.dart';
 import '../../About us/screens/about_us_screen.dart';
 import '../../Editprofile/screens/edit_profile_screen.dart';
 import '../widgets/profile_body_widget.dart';
@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-      context.read<UserCubit>().getUserProfile();
+    context.read<UserCubit>().getUserProfile();
   }
 
   @override
@@ -45,11 +45,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               if (state is ProfileCreationRequired) {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => const EditProfileScreen(isCreationMode: true),
+                    builder: (context) =>
+                        const EditProfileScreen(isCreationMode: true),
                   ),
                 );
-              }
-              else if (state is CreateProfileSuccess) {
+              } else if (state is CreateProfileSuccess) {
                 context.read<UserCubit>().getUserProfile();
               }
             },
@@ -156,7 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Widget screen;
     switch (title) {
       case 'Edit Profile':
-        screen = const EditProfileScreen(isCreationMode: false,);
+        screen = const EditProfileScreen(isCreationMode: false);
         break;
       case 'تعديل الملف الشخصي':
         screen = const EditProfileScreen(isCreationMode: false);
@@ -177,12 +177,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     context.read<UserCubit>().logOut();
     if (mounted) {
       Navigator.of(context, rootNavigator: true).pop();
-      Navigator.of(
-        context,
-        rootNavigator: true,
-      ).pushAndRemoveUntil(
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => LoginScreen()),
-            (Route<dynamic> route) => false,
+        (Route<dynamic> route) => false,
       );
     }
   }

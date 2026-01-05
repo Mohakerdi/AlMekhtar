@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
 import 'package:mabeet/Features/user/favorites/widgets/favorites_property.dart';
-import 'package:mabeet/Features/user/CustomAppBar.dart';
-import 'package:mabeet/Features/user/favorites/widgets/shimmer_loading_favorites.dart';
+import 'package:mabeet/core/widgets/CustomAppBar.dart';
+import 'package:mabeet/core/widgets/shimmer_loading_property.dart';
 import 'package:mabeet/core/constants/strings.dart';
-import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -16,11 +15,11 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {// prevent inherited error
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // prevent inherited error
       context.read<FavoriteCubit>().getFavorites();
     });
   }
@@ -43,7 +42,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             return ListView.builder(
               itemCount: 3,
               itemBuilder: (context, index) {
-                return const FavoritesPropertyShimmer();
+                return const PropertyShimmer();
               },
             );
           }
