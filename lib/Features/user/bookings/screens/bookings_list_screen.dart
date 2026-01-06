@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/widgets/shimmer_loading_property.dart';
 import 'package:mabeet/data/models/booking_model.dart';
 import 'package:mabeet/data/repos/booking_repo.dart';
@@ -70,7 +72,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
 
           if (bookings.isEmpty) {
             return Center(
-              child: Text('No ${widget.type.name} bookings found.'),
+              child: Text('${AppStrings.emptyBookingsMsg.tr()} ${widget.type.name}.'),
             );
           }
 
@@ -86,17 +88,12 @@ class _BookingListScreenState extends State<BookingListScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Error: ${state.message}'),
-                ElevatedButton(
-                  onPressed: _fetchBookings,
-                  child: const Text('Try Again'),
-
-                ),
+                Text(state.message),
               ],
             ),
           );
         } else {
-          return const Center(child: Text('Select a tab to view bookings.'));
+          return const Center(child: Text(''));
         }
       },
     );

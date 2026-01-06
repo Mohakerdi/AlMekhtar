@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/font_weight_helper.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
@@ -98,7 +99,7 @@ class RecommendedHomeProperty extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.place_outlined,
+                                  AppIcons.location,
                                   color: AppColors.gray400,
                                 ),
                                 Text(

@@ -20,11 +20,17 @@ class ApiConstants {
 
   // Notification endpoints
   static const String notifications = 'notifications';
+
+  // Renter endpoints
+  static const String renterPending = 'apartments/renter/pending';
+  static const String renterActive = 'apartments/renter/active';
+  static const String renterHistory = 'apartments/renter/history';
 }
 
 class ApiKey {
   // API Response Keys
   static const String status = 'status';
+  static const String data = 'data';
   static const String message = 'message';
   static const String errorMessage = 'ErrorMessage';
 

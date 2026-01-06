@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/data/repos/payment_repo.dart';
 import 'payment_state.dart';
 
@@ -30,7 +31,7 @@ class PaymentCubit extends Cubit<PaymentState> {
         endTerm == null) {
       emit(
         PaymentFailure(
-          errorMessage: "Missing required booking or card details.",
+          errorMessage: AppStrings.paymentErrorMsg.tr(),
         ),
       );
       return;

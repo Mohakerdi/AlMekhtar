@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:mabeet/Features/user/bookings/payment/cubit/payment_cubit.dart';
 import 'package:mabeet/Features/user/bookings/payment/cubit/payment_state.dart';
 import 'package:mabeet/Features/user/bookings/payment/screens/payment_screen.dart';
+import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import '../widgets/rent_now_property_widget.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../data/models/property.dart';
@@ -83,7 +84,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
     if (cardDisplay != null) {
       return ListTile(
         contentPadding: EdgeInsets.symmetric(vertical: 5),
-        leading: Icon(Icons.credit_card, size: 35, color: AppColors.primary800),
+        leading: Icon(AppIcons.creditCard, size: 35, color: AppColors.primary800),
         title: Text(
           cardDisplay,
           style: TextStyle(color: AppColors.darkText, fontSize: 17),
@@ -91,7 +92,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
         trailing: TextButton(
           onPressed: _goToPaymentScreen,
           child: Text(
-            'Edit',
+            AppStrings.edit.tr(),
             style: TextStyle(color: AppColors.primary800, fontSize: 17),
           ),
         ),
@@ -100,13 +101,13 @@ class _RentNowScreenState extends State<RentNowScreen> {
 
     return ListTile(
       contentPadding: EdgeInsets.symmetric(vertical: 5),
-      leading: Icon(Icons.credit_card, size: 35, color: AppColors.primary800),
+      leading: Icon(AppIcons.creditCard, size: 35, color: AppColors.primary800),
       title: Text(
-        "Credit or Debit card",
+        AppStrings.creditOrDebt.tr(),
         style: TextStyle(color: AppColors.darkText, fontSize: 17),
       ),
       trailing: IconButton(
-        icon: Icon(Icons.add, color: AppColors.gray500, size: 35),
+        icon: Icon(AppIcons.add, color: AppColors.gray500, size: 35),
         onPressed: _goToPaymentScreen,
       ),
     );
@@ -142,7 +143,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: Text("Rent Now")),
+        appBar: AppBar(title: Text(AppStrings.rentNow.tr())),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
@@ -152,7 +153,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
                 RentalsProperty(property: widget.property),
                 SizedBox(height: 25),
                 Text(
-                  "Period",
+                  AppStrings.period.tr(),
                   style: TextStyle(
                     color: AppColors.darkText,
                     fontSize: 22,
@@ -165,7 +166,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("date", style: TextStyle(color: AppColors.gray400)),
+                      Text(AppStrings.date.tr(), style: TextStyle(color: AppColors.gray400)),
                       Text(
                         "${formatDatePretty(selectedDates.start)} - "
                         "${formatDatePretty(selectedDates.end)}",
@@ -177,14 +178,14 @@ class _RentNowScreenState extends State<RentNowScreen> {
                     ],
                   ),
                   leading: Icon(
-                    Icons.calendar_month,
+                    AppIcons.endDate,
                     size: 35,
                     color: AppColors.primary800,
                   ),
 
                   trailing: IconButton(
                     icon: Icon(
-                      Icons.chevron_right,
+                      AppIcons.rightArrow,
                       color: AppColors.gray500,
                       size: 35,
                     ),
@@ -214,11 +215,11 @@ class _RentNowScreenState extends State<RentNowScreen> {
                 ),
                 Divider(),
                 Text(
-                  "Make sure to check your date before making any sort of payments",
+                  AppStrings.checkDate.tr(),
                 ),
                 SizedBox(height: 25),
                 Text(
-                  "Payments",
+                  AppStrings.payments.tr(),
                   style: TextStyle(
                     color: AppColors.darkText,
                     fontSize: 22,
@@ -229,7 +230,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
                 Divider(),
                 SizedBox(height: 5),
                 Text(
-                  "Price Details",
+                  AppStrings.priceDetails.tr(),
                   style: TextStyle(
                     color: AppColors.darkText,
                     fontSize: 22,
@@ -249,14 +250,14 @@ class _RentNowScreenState extends State<RentNowScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Period time"),
-                                Text("${state.nights} Nights"),
+                                Text(AppStrings.period.tr()),
+                                Text("${state.nights} ${AppStrings.night.tr()}"),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Total"),
+                                Text(AppStrings.total.tr()),
                                 Text(
                                   "\$${state.total.toStringAsFixed(2)}",
                                   style: TextStyle(
@@ -278,7 +279,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
                 Divider(),
                 SizedBox(height: 5),
                 Text(
-                  "Terms and Conditions",
+                  AppStrings.terms.tr()+AppStrings.and.tr()+AppStrings.conditions.tr(),
                   style: TextStyle(
                     color: AppColors.darkText,
                     fontSize: 22,
@@ -290,9 +291,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
                   contentPadding: EdgeInsets.symmetric(vertical: 5),
 
                   title: Text(
-                    'Dear Guest,\n\n'
-                    'By making a payment and confirming your booking, you agree that if you cancel your reservation more than 3 days before the start date, you will receive a full refund. For cancellations made within 3 days of the start date, 90% of the payment will be refunded.\n\n'
-                    'We wish you a pleasant stay!',
+                    AppStrings.bookingTerms.tr(),
                     style: TextStyle(color: AppColors.darkText, fontSize: 14),
                   ),
                 ),
@@ -312,7 +311,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
                       splashRadius: 15,
                     ),
                     Text(
-                      "I agree",
+                      AppStrings.iAgree.tr(),
                       style: TextStyle(color: AppColors.darkText),
                     ),
                   ],
@@ -328,7 +327,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
             if (!isChecked) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text("You must agree to the terms and conditions"),
+                  content: Text(AppStrings.termsNotAgreed.tr()),
                   backgroundColor: AppColors.errorBase,
                 ),
               );
@@ -338,7 +337,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    "Please add a card before confirming the booking.",
+                    AppStrings.cardNotAdded.tr(),
                   ),
                   backgroundColor: AppColors.errorBase,
                 ),
@@ -357,7 +356,7 @@ class _RentNowScreenState extends State<RentNowScreen> {
 
             cubit.submitOfferPayment(apartmentId: widget.property.propertyId);
           },
-          label: Text("Confirm the booking"),
+          label: Text(AppStrings.confirmBooking.tr()),
           backgroundColor: AppColors.primary700,
           extendedPadding: EdgeInsets.symmetric(horizontal: 30),
         ),

@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
+import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import '../../../../core/theme/text_styles.dart';
@@ -43,7 +46,7 @@ class FavoritesProperty extends StatelessWidget {
                   placeholder: (context, url) =>
                   const CircularProgressIndicator(color: Colors.white),
                   errorWidget: (context, url, error) =>
-                  const Icon(Icons.home, size: 50, color: Colors.white),
+                  Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
                 )
               ),
             ),
@@ -67,7 +70,7 @@ class FavoritesProperty extends StatelessWidget {
                       Row(
                         children: [
                           Icon(
-                            Icons.location_on_outlined,
+                            AppIcons.location,
                             color: AppColors.gray400,
                           ),
                           Text(
@@ -81,7 +84,7 @@ class FavoritesProperty extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        '  \$${property.costPerNight}/night',
+                        '  \$${property.costPerNight}/${AppStrings.night.tr()}',
                         style: AppTextStyles.bodySmall,
                       ),
                     ],
@@ -101,7 +104,7 @@ class FavoritesProperty extends StatelessWidget {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.star,
+                                AppIcons.star,
                                 size: 18,
                                 color: AppColors.warning700,
                               ),

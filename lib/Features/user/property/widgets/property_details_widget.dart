@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 
@@ -36,19 +38,19 @@ class PropertyDetailsWidget extends StatelessWidget {
         children: [
           _buildDetailItem(
             icon: AppIcons.floor,
-            label: 'Floor',
+            label: AppStrings.floor.tr(),
             value: '$floor',
           ),
           _buildVerticalDivider(),
           _buildDetailItem(
             icon: AppIcons.area,
-            label: 'Area',
+            label: AppStrings.area.tr(),
             value: '$area m²',
           ),
           _buildVerticalDivider(),
           _buildDetailItem(
             icon: AppIcons.star,
-            label: 'Rating',
+            label: AppStrings.rate.tr(),
             value: '$rate',
             iconColor: AppColors.warning700,
           ),

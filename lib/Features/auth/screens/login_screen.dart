@@ -1,7 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
-import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
+import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import '../../user/tabs.dart';
 import '../../../core/theme/app_colors.dart';
 import '../services/cubit/user_state.dart';
@@ -30,15 +31,9 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is LogInSuccess) {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text('Welcome Back!')));
+          ).showSnackBar(SnackBar(content: Text(AppStrings.welcomeBack.tr())));
           await Future.delayed(const Duration(milliseconds: 500));
           if (!context.mounted) return;
-          context.read<NotificationCubit>().getNotifications();
-
-          context
-              .read<FavoriteCubit>()
-              .getFavorites(); // new adding by steve to save
-
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => Tabs()),
@@ -63,11 +58,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(child: Image.asset(AppImages.kLogoPath, width: 70)),
-                    Text('Welcome Back!', style: AppTextStyles.display2Bold),
-                    Text('Log in to continue', style: AppTextStyles.bodyMedium),
+                    Text(AppStrings.welcomeBack.tr(), style: AppTextStyles.display2Bold),
+                    Text(AppStrings.loginHeading.tr(), style: AppTextStyles.bodyMedium),
                     SizedBox(height: 60),
                     Text(
-                      'Phone Number OR Email',
+                      '${AppStrings.phone.tr()} | ${AppStrings.email.tr()}',
                       style: AppTextStyles.titleMedium,
                     ),
                     TextFormField(
@@ -86,24 +81,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       maxLength: 10,
                     ),
-                    Text('Password', style: AppTextStyles.titleMedium),
+                    Text(AppStrings.password.tr(), style: AppTextStyles.titleMedium),
                     TextFormField(
                       controller: context.read<UserCubit>().logInPassword,
                       decoration: _passwordDecoration(),
                       obscureText: passwordVisible,
-                      validator: _validatePassword,
                     ),
                     SizedBox(height: 161),
                     state is LogInLoading
                         ? CircularProgressIndicator()
                         : AuthButton(
-                            buttonsText: 'Login',
+                            buttonsText: AppStrings.login.tr(),
                             onBtnPressed: _sendForm,
                           ),
                     SizedBox(height: 40),
                     SwitchScreenText(
-                      txt: 'Don\'t have an account? ',
-                      logOrSign: 'SignUp',
+                      txt: AppStrings.dontHaveAcc.tr(),
+                      logOrSign: AppStrings.signUp.tr(),
                       onPressed: _goToSignup,
                     ),
                   ],
@@ -119,24 +113,17 @@ class _LoginScreenState extends State<LoginScreen> {
   InputDecoration _passwordDecoration() {
     return InputDecoration(
       helperText: ' ',
-      hintText: 'enter your password',
       suffixIcon: IconButton(
         onPressed: () {
           setState(() {
             passwordVisible = !passwordVisible;
           });
         },
-        icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+        icon: Icon(passwordVisible ? AppIcons.visible : AppIcons.notVisible),
       ),
     );
   }
 
-  String? _validatePassword(value) {
-    if (value == null || value.isEmpty || value.trim().length <= 7)
-      return 'Must be at least 8 characters';
-    else
-      return null;
-  }
 
   void _goToSignup() {
     _formKey.currentState!.reset();

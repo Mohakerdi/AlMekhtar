@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/data/models/property.dart';
 
 class FavoriteIconButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class FavoriteIconButton extends StatelessWidget {
           padding: EdgeInsets.all(0),
           onPressed: () => cubit.toggleFav(property),
           icon: Icon(
-            isFav ? Icons.favorite : Icons.favorite_border,
+            isFav ? AppIcons.favIcon : AppIcons.inactiveFavIcon,
             color: isFav ? Colors.red : Colors.grey,
           ),
         );

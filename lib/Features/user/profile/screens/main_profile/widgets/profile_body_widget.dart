@@ -36,10 +36,10 @@ class ProfileSectionWidget extends StatelessWidget {
                 placeholder: (context, url) =>
                 const CircularProgressIndicator(color: Colors.white),
                 errorWidget: (context, url, error) =>
-                const Icon(Icons.person, size: 50, color: Colors.white),
+                const Icon(AppIcons.profileIcon, size: 50, color: Colors.white),
               )
                   : const Icon(
-                Icons.person,
+                AppIcons.profileIcon,
                 size: 50,
                 color: Colors.white,
               ),
@@ -70,7 +70,7 @@ class ProfileNavigationTile extends StatelessWidget {
     return ListTile(
       leading: Icon(icon, color: AppColors.primary800),
       title: Text(title),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      trailing: const Icon(AppIcons.profilePageArrow, size: 16),
       onTap: onTap,
     );
   }

@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/data/repos/booking_repo.dart';
-import 'package:mabeet/data/models/booking_model.dart';
 import 'booking_state.dart';
 
 class BookingCubit extends Cubit<BookingState> {
@@ -33,8 +34,7 @@ class BookingCubit extends Cubit<BookingState> {
         historyBookings: currentData.historyBookings,
       ));
     } catch (e) {
-      final currentData = _currentStateData;
-      emit(BookingError('Failed to load pending bookings: $e',
+      emit(BookingError('${AppStrings.failedLoad.tr()} $e',
       ));
     }
   }
@@ -47,15 +47,13 @@ class BookingCubit extends Cubit<BookingState> {
 
       final currentData = _currentStateData;
 
-      // Emit the new state, preserving the existing pending and history data
       emit(BookingLoaded(
         pendingBookings: currentData.pendingBookings,
         activeBookings: active,
         historyBookings: currentData.historyBookings,
       ));
     } catch (e) {
-      final currentData = _currentStateData;
-      emit(BookingError('Failed to load active bookings: $e',
+      emit(BookingError('${AppStrings.failedLoad.tr()} $e',
       ));
     }
   }
@@ -74,8 +72,7 @@ class BookingCubit extends Cubit<BookingState> {
         historyBookings: history,
       ));
     } catch (e) {
-      final currentData = _currentStateData;
-      emit(BookingError('Failed to load history bookings: $e',
+      emit(BookingError('${AppStrings.failedLoad.tr()} $e',
       ));
     }
   }
@@ -85,12 +82,8 @@ class BookingCubit extends Cubit<BookingState> {
       final message = await _bookingRepository.cancelBooking(bookingId);
       final currentData = _currentStateData;
 
-      final updatedPending = currentData.pendingBookings
-          .where((b) => b.bookingId != bookingId)
-          .toList();
-      final updatedActive = currentData.activeBookings
-          .where((b) => b.bookingId != bookingId)
-          .toList();
+      final updatedPending = currentData.pendingBookings.where((b) => b.bookingId != bookingId).toList();
+      final updatedActive = currentData.activeBookings.where((b) => b.bookingId != bookingId).toList();
 
       emit(BookingLoaded(
         pendingBookings: updatedPending,
@@ -99,7 +92,7 @@ class BookingCubit extends Cubit<BookingState> {
       ));
       return message;
     } catch (e) {
-      emit(BookingError('Failed to cancel booking ID $bookingId. Please try again.',
+      emit(BookingError(AppStrings.bookingCancelError.tr(),
       ));
       rethrow;
     }

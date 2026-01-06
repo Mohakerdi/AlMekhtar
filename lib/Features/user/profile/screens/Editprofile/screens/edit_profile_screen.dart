@@ -1,8 +1,12 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mabeet/Features/user/profile/screens/main_profile/screens/profile_screen.dart';
+import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/images.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_cubit.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
@@ -54,7 +58,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget _buildImagePreview(XFile? file) {
     if (file == null) {
-      return const Icon(Icons.cloud_upload, size: 40, color: Colors.grey);
+      return const Icon(AppIcons.cloudUpload, size: 40, color: Colors.grey);
     }
     return Image.file(
       File(file.path),
@@ -72,7 +76,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isCreationMode ? 'Create Profile' : 'Edit Profile'),
+        title: Text(
+          isCreationMode
+              ? '${AppStrings.create.tr()} ${AppStrings.profileScreenTitle.tr()}'
+              : AppStrings.menuEditProfile.tr(),
+        ),
         backgroundColor: AppColors.primary500,
       ),
       body: BlocListener<UserCubit, UserState>(
@@ -86,37 +94,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             );
           }
 
-          if (state is CreateProfileLoading) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text('Saving profile...')));
-          } else if (state is CreateProfileSuccess) {
+          if (state is CreateProfileSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Profile saved successfully!')),
+              SnackBar(content: Text(AppStrings.profileSaveSuccess.tr())),
             );
             context.read<UserCubit>().getUserProfile();
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (builder) => ProfileScreen()),
             );
           } else if (state is CreateProfileFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Error: ${state.errorMessage}')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
           }
 
-          if (state is UpdateProfileLoading) {
+          if (state is UpdateProfileSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Updating profile...')),
-            );
-          } else if (state is UpdateProfileSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Profile updated successfully!')),
+              SnackBar(content: Text(AppStrings.profileUpdateSuccess.tr())),
             );
             Navigator.of(context).pop();
           } else if (state is UpdateProfileFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Update Error: ${state.errorMessage}')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
           }
         },
         child: SingleChildScrollView(
@@ -141,9 +141,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         networkAvatarUrl.isNotEmpty) {
                       imageSource = NetworkImage(networkAvatarUrl);
                     } else {
-                      imageSource = const AssetImage(
-                        'assets/images/appprofile.jpg',
-                      );
+                      imageSource = const AssetImage(AppImages.kLogoPath);
                     }
 
                     return Stack(
@@ -157,7 +155,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   (networkAvatarUrl == null ||
                                       networkAvatarUrl.isEmpty))
                               ? const Icon(
-                                  Icons.person,
+                                  AppIcons.profileIcon,
                                   size: 60,
                                   color: Colors.grey,
                                 )
@@ -172,7 +170,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               color: AppColors.primary500,
                             ),
                             child: IconButton(
-                              icon: const Icon(Icons.edit, color: Colors.white),
+                              icon: const Icon(
+                                AppIcons.editIcon,
+                                color: Colors.white,
+                              ),
                               onPressed: () => _pickImage(context, true),
                             ),
                           ),
@@ -185,18 +186,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 30),
               TextFormField(
                 controller: cubit.firstName,
-                decoration: const InputDecoration(
-                  labelText: 'First Name',
-                  prefixIcon: Icon(Icons.person_outline),
+                decoration:  InputDecoration(
+                  labelText: AppStrings.firstName.tr(),
+                  prefixIcon: Icon(AppIcons.inactiveProfileIcon),
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 15),
               TextFormField(
                 controller: cubit.lastName,
-                decoration: const InputDecoration(
-                  labelText: 'Last Name',
-                  prefixIcon: Icon(Icons.person_outline),
+                decoration: InputDecoration(
+                  labelText: AppStrings.lastName.tr(),
+                  prefixIcon: Icon(AppIcons.inactiveProfileIcon),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -205,12 +206,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 controller: cubit.birthDate,
                 readOnly: !widget.isCreationMode,
                 decoration: InputDecoration(
-                  labelText: 'Date of Birth (YYYY-MM-DD)',
-                  prefixIcon: const Icon(Icons.calendar_today),
+                  labelText: '${AppStrings.birthDate.tr()} (YYYY-MM-DD)',
+                  prefixIcon: const Icon(AppIcons.startDate),
                   border: const OutlineInputBorder(),
                   suffixIcon: widget.isCreationMode
                       ? IconButton(
-                          icon: const Icon(Icons.edit_calendar),
+                          icon: const Icon(AppIcons.editCalender),
                           onPressed: () async {
                             final DateTime? pickedDate = await showDatePicker(
                               context: context,
@@ -230,7 +231,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 30),
               if (isCreationMode) ...[
                 Text(
-                  'Upload ID Photo',
+                  AppStrings.uploadId.tr(),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 10),
@@ -257,14 +258,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     const Icon(
-                                      Icons.file_upload,
+                                      AppIcons.uploadFile,
                                       size: 40,
                                       color: Colors.grey,
                                     ),
                                     const SizedBox(height: 8),
-                                    const Text(
-                                      'Tap to upload ID Photo (required)',
-                                    ),
+                                    Text(AppStrings.uploadId.tr()),
                                   ],
                                 )
                               : ClipRRect(
@@ -282,8 +281,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 onPressed: () {
                   cubit.saveProfile(isCreation: isCreationMode);
                 },
-                icon: const Icon(Icons.save),
-                label: Text(isCreationMode ? 'Create Profile' : 'Save Changes'),
+                icon: const Icon(AppIcons.save),
+                label: Text(
+                  isCreationMode
+                      ? '${AppStrings.create.tr()} ${AppStrings.profileScreenTitle.tr()}'
+                      : AppStrings.saveChanges.tr(),
+                ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),
                   shape: RoundedRectangleBorder(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
 import 'package:mabeet/Features/user/favorites/widgets/favorites_property.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/widgets/CustomAppBar.dart';
 import 'package:mabeet/core/widgets/shimmer_loading_property.dart';
 import 'package:mabeet/core/constants/strings.dart';
@@ -27,7 +28,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(titleText: 'Favorites'),
+      appBar: CustomAppBar(titleText: AppStrings.favoritesScreenTitle.tr()),
 
       body: BlocConsumer<FavoriteCubit, FavoriteState>(
         listener: (context, state) {
@@ -48,7 +49,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           }
           final favorites = context.read<FavoriteCubit>().favoritesList;
           if (favorites.isEmpty) {
-            return const Center(child: Text("No Favorites yet"));
+            return Center(child: Text(AppStrings.emptyFav.tr()));
           }
           return ListView.builder(
             padding: const EdgeInsets.all(16),
@@ -63,13 +64,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 background: _buildSwipeBackground(
                   alignment: Alignment.centerLeft,
                   color: Colors.red.shade400,
-                  icon: Icons.delete_outline,
-                ),
-
-                secondaryBackground: _buildSwipeBackground(
-                  alignment: Alignment.centerRight,
-                  color: Colors.red.shade400,
-                  icon: Icons.delete_sweep,
+                  icon: AppIcons.delete,
                 ),
 
                 onDismissed: (direction) {

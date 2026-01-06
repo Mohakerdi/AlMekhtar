@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/bookings/services/booking_cubit.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/booking_model.dart';
 
@@ -130,7 +132,7 @@ class BookingProperty extends StatelessWidget {
                           children: [
                             // Price
                             Text(
-                              '\$${booking.apartment.costPerNight}/night',
+                              '\$${booking.apartment.costPerNight}/${AppStrings.night.tr()}',
                               style: textTheme.titleSmall!.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.primary900,
@@ -179,7 +181,7 @@ class BookingProperty extends StatelessWidget {
       children: [
         const Divider(),
         Text(
-          'Booking Period:',
+          '${AppStrings.period.tr()}: ',
           style: textTheme.labelLarge!.copyWith(
             fontWeight: FontWeight.bold,
             color: AppColors.gray300,
@@ -189,8 +191,8 @@ class BookingProperty extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildDateChip(context, AppIcons.startDate, 'Start:', startTerm),
-            _buildDateChip(context, AppIcons.endDate, 'End:', endTerm),
+            _buildDateChip(context, AppIcons.startDate, '${AppStrings.start.tr()}:', startTerm),
+            _buildDateChip(context, AppIcons.endDate, '${AppStrings.end.tr()}:', endTerm),
           ],
         ),
       ],

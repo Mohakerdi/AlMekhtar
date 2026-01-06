@@ -8,6 +8,8 @@ import 'package:mabeet/Features/user/notifications/widgets/notification_shimmer.
 import 'package:mabeet/core/api/dio_consumer.dart';
 import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
 import 'package:mabeet/Features/user/notifications/services/cubit/notifications_state.dart';
+import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -32,7 +34,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         return cubit;
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text("Notifications")),
+        appBar: AppBar(title: Text(AppStrings.notiScreenTitle.tr())),
 
         body: BlocBuilder<NotificationCubit, NotificationState>(
           builder: (context, state) {
@@ -51,13 +53,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               final cards = state.notifications;
 
               if (cards.isEmpty) {
-                return const Center(child: Text("No notifications yet"));
+                return Center(child: Text(AppStrings.emptyNotiMsg.tr()));
               }
               return ListView.builder(
                 itemCount: cards.length,
                 itemBuilder: (context, index) {
                   final item = cards[index];
-                  // Ensure your Notification model has a DateTime field named 'date'
                   final formattedDate = DateFormat.yMMMd().format(item.date);
                   return Card(
                     margin: const EdgeInsets.all(10),
@@ -74,7 +75,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         radius: 24,
                         backgroundColor: AppColors.primary700.withAlpha(30),
                         child: const Icon(
-                          Icons.notifications,
+                          AppIcons.notificationSolid,
                           color: AppColors.primary600,
                         ),
                       ),
@@ -84,7 +85,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         children: [
                           if (item.message.isNotEmpty) Text(item.message),
                           Text(
-                            "Date: $formattedDate",
+                            "${AppStrings.date.tr()}: $formattedDate",
                             style: const TextStyle(fontSize: 12),
                           ),
                         ],

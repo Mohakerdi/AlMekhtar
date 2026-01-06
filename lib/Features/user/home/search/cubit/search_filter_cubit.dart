@@ -60,7 +60,6 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
     results.fold(
             (errorMessage) => emit(state.copyWith(
           isLoading: false,
-          errorMessage: 'Failed to fetch search results.',
         )),
             (properties) =>emit(state.copyWith(
             isLoading: false,
@@ -90,7 +89,6 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
       results.fold(
           (errorMessage) => emit(state.copyWith(
             isLoading: false,
-            errorMessage: 'Failed to fetch search results.',
           )),
           (properties) =>emit(state.copyWith(
               isLoading: false,
@@ -114,7 +112,6 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
     results.fold(
             (errorMessage) => emit(state.copyWith(
           isLoading: false,
-          errorMessage: 'Failed to fetch search results.',
         )),
             (properties) =>emit(state.copyWith(
             isLoading: false,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/chat/screens/chat_screen.dart';
 import 'package:mabeet/Features/user/notifications/screens/notifications_screen.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -25,7 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );
           },
-          icon: const Icon(Icons.notifications_none),
+          icon: Icon(AppIcons.notificationRound),
         ),
 
         IconButton(
@@ -37,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );
           },
-          icon: const Icon(Icons.chat),
+          icon: const Icon(AppIcons.chat),
         ),
         const SizedBox(width: 8),
       ],

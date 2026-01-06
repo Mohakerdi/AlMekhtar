@@ -1,5 +1,3 @@
-// file: about_us_screen.dart
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/profile/screens/About%20us/widgets/about_us_details.dart';

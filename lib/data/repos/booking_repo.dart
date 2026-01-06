@@ -1,3 +1,4 @@
+import 'package:mabeet/core/api/api_constants.dart';
 import 'package:mabeet/core/api/api_consumer.dart';
 import 'package:mabeet/core/errors/exceptions.dart';
 import 'package:mabeet/data/models/booking_model.dart';
@@ -9,52 +10,37 @@ class BookingRepository {
 
   Future<List<Booking>> getPendingAwaitingBookings() async {
     try {
-      final response = await api.get('apartments/renter/pending');
-
-      if (response is Map<String, dynamic> && response['data'] is List) {
-        final List<dynamic> data = response['data'] ?? [];
-        return data.map((json) => Booking.fromJson(json as Map<String, dynamic>)).toList();
-      } else {
-        throw Exception('Invalid response format');
-      }
+      final response = await api.get(ApiConstants.renterPending);
+      final List<dynamic> data = response[ApiKey.data] ?? [];
+      return data
+          .map((json) => Booking.fromJson(json as Map<String, dynamic>))
+          .toList();
     } on ServerException {
       rethrow;
-    } catch (e) {
-      throw Exception('Failed to load pending bookings: $e');
     }
   }
 
   Future<List<Booking>> getActiveAcceptedBookings() async {
     try {
-      final response = await api.get('apartments/renter/active');
-
-      if (response is Map<String, dynamic> && response['data'] is List) {
-        final List<dynamic> data = response['data'] ?? [];
-        return data.map((json) => Booking.fromJson(json as Map<String, dynamic>)).toList();
-      } else {
-        throw Exception('Invalid response format');
-      }
+      final response = await api.get(ApiConstants.renterActive);
+      final List<dynamic> data = response[ApiKey.data] ?? [];
+      return data
+          .map((json) => Booking.fromJson(json as Map<String, dynamic>))
+          .toList();
     } on ServerException {
       rethrow;
-    } catch (e) {
-      throw Exception('Failed to load active bookings: $e');
     }
   }
 
   Future<List<Booking>> getHistoryBookings() async {
     try {
-      final response = await api.get('apartments/renter/history');
-
-      if (response is Map<String, dynamic> && response['data'] is List) {
-        final List<dynamic> data = response['data'] ?? [];
-        return data.map((json) => Booking.fromJson(json as Map<String, dynamic>)).toList();
-      } else {
-        throw Exception('Invalid response format');
-      }
+      final response = await api.get(ApiConstants.renterHistory);
+      final List<dynamic> data = response[ApiKey.data] ?? [];
+      return data
+          .map((json) => Booking.fromJson(json as Map<String, dynamic>))
+          .toList();
     } on ServerException {
       rethrow;
-    } catch (e) {
-      throw Exception('Failed to load history bookings: $e');
     }
   }
 
@@ -64,8 +50,8 @@ class BookingRepository {
       final active = await getActiveAcceptedBookings();
       final history = await getHistoryBookings();
       return [...pending, ...active, ...history];
-    } catch (e) {
-      throw Exception('Failed to load all bookings: $e');
+    } on ServerException {
+      rethrow;
     }
   }
 
@@ -73,19 +59,13 @@ class BookingRepository {
     try {
       final endpoint = 'apartments/reservations/$bookingId/cancel';
       final response = await api.post(endpoint, data: {});
-      final message = response['message'] as String;
+      final message = response[ApiKey.message] as String;
 
       return message;
     } on ServerException {
       rethrow;
-    } catch (e) {
-      throw Exception('Failed to cancel booking: $e');
     }
   }
 }
 
-enum BookingType {
-  pending,
-  active,
-  history,
-}
+enum BookingType { pending, active, history }

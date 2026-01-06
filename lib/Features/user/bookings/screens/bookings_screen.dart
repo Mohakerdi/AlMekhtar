@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
@@ -6,6 +7,7 @@ import 'package:mabeet/core/widgets/CustomAppBar.dart';
 import 'package:mabeet/data/repos/booking_repo.dart';
 import 'package:mabeet/Features/user/bookings/services/booking_cubit.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
+import '../../../../core/constants/strings.dart';
 import 'bookings_list_screen.dart';
 
 class BookingsScreen extends StatelessWidget {
@@ -23,14 +25,14 @@ class BookingsScreen extends StatelessWidget {
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: const CustomAppBar(titleText: 'Bookings'),
+          appBar: CustomAppBar(titleText: AppStrings.bookings.tr()),
           body: Column(
             children: [
-              const TabBar(
+              TabBar(
                 tabs: [
-                  Tab(text: "Pending"),
-                  Tab(text: "Active"),
-                  Tab(text: "History"),
+                  Tab(text: AppStrings.pending.tr()),
+                  Tab(text: AppStrings.active.tr()),
+                  Tab(text: AppStrings.history.tr()),
                 ],
                 indicatorColor: AppColors.primary800,
                 labelColor: AppColors.primary800,

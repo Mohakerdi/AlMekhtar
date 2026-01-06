@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mabeet/core/constants/icons.dart';
 
 class DetailsSlider extends StatefulWidget {
   const DetailsSlider({super.key, required this.imageAssets});
@@ -52,7 +53,7 @@ class _DetailsSliderState extends State<DetailsSlider> {
                     placeholder: (context, url) =>
                     const CircularProgressIndicator(color: Colors.white),
                     errorWidget: (context, url, error) =>
-                    const Icon(Icons.home, size: 50, color: Colors.white),
+                    const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
                   )
                 ),
               );
@@ -114,7 +115,7 @@ class _DetailsSliderState extends State<DetailsSlider> {
                         placeholder: (context, url) =>
                         const CircularProgressIndicator(color: Colors.white),
                         errorWidget: (context, url, error) =>
-                        const Icon(Icons.home, size: 50, color: Colors.white),
+                        const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
                       )
                     ),
                   ),

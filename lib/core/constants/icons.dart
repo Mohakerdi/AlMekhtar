@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class AppIcons{
@@ -28,9 +27,24 @@ class AppIcons{
  static const lightIcon = Icons.brightness_7;
  static const darkIcon = Icons.brightness_2;
  static const exitIcon = Icons.close;
+ static const add = Icons.add;
+ static const rightArrow = Icons.chevron_right;
  static const startDate = Icons.calendar_today;
  static const endDate = Icons.calendar_month;
  static const floor = Icons.layers_outlined;
  static const area = Icons.square_foot_rounded;
+ static const visible = Icons.visibility;
+ static const notVisible = Icons.visibility_off;
+ static const creditCard = Icons.credit_card;
+ static const delete = Icons.delete_outline;
+ static const notificationRound = Icons.notifications_none;
+ static const notificationSolid = Icons.notifications;
+ static const chat = Icons.chat;
+ static const share = Icons.share;
+ static const save = Icons.save;
+ static const uploadFile = Icons.file_upload;
+ static const editCalender = Icons.edit_calendar;
+ static const cloudUpload = Icons.cloud_upload;
+ static const profilePageArrow = Icons.arrow_forward_ios;
 
 }

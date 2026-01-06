@@ -46,7 +46,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     cvv: cvv,
                   ),
                   SizedBox(height: 20),
-                  Text('Card Number', style: AppTextStyles.bodyLargeSemiBold),
+                  Text(AppStrings.cardNumber.tr(), style: AppTextStyles.bodyLargeSemiBold),
                   TextFormField(
                     buildCounter:
                         (
@@ -57,7 +57,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         }) => null,
                     keyboardType: TextInputType.phone,
                     maxLength: 16,
-                    validator: _validateCardNumber,
                     decoration: InputDecoration(helperText: ' '),
                     controller: context.read<PaymentCubit>().paymentCardNumber,
                     onChanged: (val){
@@ -75,7 +74,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         }) => null,
                     keyboardType: TextInputType.phone,
                     maxLength: 3,
-                    validator: _validateCvv,
                     decoration: InputDecoration(helperText: ' '),
                     controller: context.read<PaymentCubit>().paymentCvv,
                     onChanged: (val){
@@ -99,27 +97,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  String? _validateCardNumber(value) {
-    if (value == null || value.isEmpty || value.length != 16) {
-      return 'Number must be 16 characters.';
-    }
-    return null;
-  }
-
-  String? _validateCvv(value) {
-    if (value == null || value.isEmpty || value.length != 3) {
-      return 'CVV must be 3 characters.';
-    }
-    return null;
-  }
-
   void _sendForm() {
     if (_formKey.currentState!.validate()) {
       context.read<PaymentCubit>().saveCardDetails();
       Navigator.pop(context);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Card Added!'), duration: Duration(seconds: 1),));
+      ).showSnackBar(SnackBar(content: Text(AppStrings.cardAdded.tr()), duration: Duration(seconds: 1),));
     }
   }
 }

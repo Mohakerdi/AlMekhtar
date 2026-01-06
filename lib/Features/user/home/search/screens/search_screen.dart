@@ -1,12 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mabeet/Features/user/bookings/widgets/booking_property.dart';
 import 'package:mabeet/Features/user/bookings/widgets/bookings_property_shimmer.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_state.dart';
 import 'package:mabeet/Features/user/home/search/widgets/search_field.dart';
 import 'package:mabeet/Features/user/home/widgets/popular_property.dart';
-import 'package:mabeet/data/models/property.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import '../widgets/filter_overlay.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search Results')),
+      appBar: AppBar(title: Text(AppStrings.searchResults.tr())),
       body: BlocBuilder<SearchFilterCubit, SearchFilterState>(
         builder: (context, state) {
           final properties = state.properties ?? [];
@@ -63,14 +63,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 100),
                     child: Text(
-                      'Error: ${state.errorMessage}',
+                      state.errorMessage!,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   )
                 else if (properties.isEmpty)
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 100),
-                    child: Text('No properties found matching your filters.'),
+                    child: Text(AppStrings.emptySearch.tr()),
                   )
                 else
                   ListView.separated(

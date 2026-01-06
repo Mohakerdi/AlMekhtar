@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 
 class DescriptionWidget extends StatelessWidget {
@@ -11,7 +13,7 @@ class DescriptionWidget extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          "Description",
+          AppStrings.description.tr(),
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
