@@ -77,7 +77,6 @@ class ApiKey {
   static const String maxRate = 'maxRate';
   static const String order = 'order';
 
-
   // Media Keys
   static const String images = 'images';
 

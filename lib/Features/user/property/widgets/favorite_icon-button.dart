@@ -18,11 +18,13 @@ class FavoriteIconButton extends StatelessWidget {
         final bool isFav = cubit.isFavorite(property.propertyId);
 
         return IconButton(
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.zero,
           onPressed: () => cubit.toggleFav(property),
-          icon: Icon(
-            isFav ? AppIcons.favIcon : AppIcons.inactiveFavIcon,
-            color: isFav ? Colors.red : Colors.grey,
+
+          icon: CustomPngIcon(
+            iconPath: isFav ? AppIcons.favActive : AppIcons.favInactive,
+
+            size: 40,
           ),
         );
       },
