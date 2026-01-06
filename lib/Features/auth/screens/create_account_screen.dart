@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import '../services/cubit/user_cubit.dart';
 import '../services/cubit/user_state.dart';
@@ -28,7 +31,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       listener: (context, state) {
         if (state is SignUpSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Account Created Successfully')),
+            SnackBar(content: Text(AppStrings.accCreatedSuccess.tr())),
           );
           Navigator.pushReplacement(
             context,
@@ -54,22 +57,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(child: Image.asset(AppImages.kLogoPath, width: 70)),
-                    Text('Create Account', style: AppTextStyles.display2Bold),
+                    Text(AppStrings.signUp.tr(), style: AppTextStyles.display2Bold),
                     Text(
-                      'Enter your credentials to start the experience!',
+                      AppStrings.createAccHeading.tr(),
                       style: AppTextStyles.bodyMedium,
                     ),
                     SizedBox(height: 60),
-                    Text('User Name', style: AppTextStyles.titleMedium),
+                    Text(AppStrings.userName.tr(), style: AppTextStyles.titleMedium),
                     TextFormField(
                       controller: context.read<UserCubit>().signUpName,
                       decoration: InputDecoration(
-                        hintText: 'Enter your name',
                         helperText: ' ',
                       ),
-                      validator: _validateName,
                     ),
-                    Text('Phone Number', style: AppTextStyles.titleMedium),
+                    Text(AppStrings.phone.tr(), style: AppTextStyles.titleMedium),
                     TextFormField(
                       controller: context.read<UserCubit>().signUpPhone,
                       buildCounter:
@@ -85,34 +86,26 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         helperText: ' ',
                       ),
                       maxLength: 10,
-                      validator: _validatePhone,
                     ),
-                    Text('Email', style: AppTextStyles.titleMedium),
+                    Text(AppStrings.email.tr(), style: AppTextStyles.titleMedium),
                     TextFormField(
                       controller: context.read<UserCubit>().signUpEmail,
                       decoration: InputDecoration(
-                        hintText: 'Enter your Email',
                         helperText: ' ',
                       ),
-                      validator: _validateEmail,
                     ),
-                    Text('Password', style: AppTextStyles.titleMedium),
+                    Text(AppStrings.password.tr(), style: AppTextStyles.titleMedium),
                     TextFormField(
                       controller: context.read<UserCubit>().signUpPassword,
                       decoration: _passwordDecoration(),
-                      validator: _validatePassword,
                       obscureText: passwordVisible,
                     ),
-                    Text('Confirm Password', style: AppTextStyles.titleMedium),
+                    Text(AppStrings.passwordConfirm.tr(), style: AppTextStyles.titleMedium),
                     TextFormField(
                       controller: context
                           .read<UserCubit>()
                           .signUpPasswordConfirmation,
                       decoration: _passwordDecoration(),
-                      validator: (val) => _validateConfirmPassword(
-                        val,
-                        context.read<UserCubit>().signUpPassword.text,
-                      ),
                       obscureText: passwordVisible,
                     ),
                     SizedBox(height: 10),
@@ -121,13 +114,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     state is SignUpLoading
                         ? CircularProgressIndicator()
                         : AuthButton(
-                            buttonsText: 'Sign up',
+                            buttonsText: AppStrings.signUp.tr(),
                             onBtnPressed: _sendForm,
                           ),
                     SizedBox(height: 40),
                     SwitchScreenText(
-                      txt: 'already have an account? ',
-                      logOrSign: 'LogIn',
+                      txt: AppStrings.alreadyHaveAcc.tr(),
+                      logOrSign: AppStrings.login.tr(),
                       onPressed: _goToLogin,
                     ),
                   ],
@@ -142,7 +135,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
   InputDecoration _passwordDecoration() {
     return InputDecoration(
-      hintText: 'at least 8 characters !',
+      hintText: AppStrings.atLeastEight.tr(),
       helperText: ' ',
       suffixIcon: IconButton(
         onPressed: () {
@@ -150,44 +143,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             passwordVisible = !passwordVisible;
           });
         },
-        icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+        icon: Icon(passwordVisible ? AppIcons.visible : AppIcons.notVisible),
       ),
     );
-  }
-
-  String? _validatePhone(value) {
-    if (value == null || value.isEmpty) {
-      return 'Phone number is required.';
-    }
-    final phoneRegExp = RegExp(r'^09[0-9]{8}$');
-    if (!phoneRegExp.hasMatch(value)) {
-      return 'Enter a valid 10-digit phone number starting with 09.';
-    }
-    return null;
-  }
-
-  String? _validateName(value) {
-    if (value == null || value.isEmpty)
-      return 'Enter your name';
-    else if (value.length < 8)
-      return 'name must be at least 8 characters';
-    else
-      return null;
-  }
-
-  String? _validatePassword(value) {
-    if (value == null || value.isEmpty) {
-      return 'Password is required.';
-    }
-    if (value.length < 8) {
-      return 'Password must be at least 8 characters long.';
-    }
-    const pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$';
-    final passwordRegExp = RegExp(pattern);
-    if (!passwordRegExp.hasMatch(value)) {
-      return 'Must include: uppercase, lowercase, number, and special character.';
-    }
-    return null;
   }
 
   void _goToLogin() {
@@ -205,7 +163,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       } else {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Terms Not Agreed!!!')));
+        ).showSnackBar(SnackBar(content: Text(AppStrings.termsNotAgreed.tr())));
       }
     }
   }
@@ -214,25 +172,5 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     setState(() {
       _termsAgreed = newValue;
     });
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email is required.';
-    }
-    const pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-    final emailRegExp = RegExp(pattern);
-
-    if (!emailRegExp.hasMatch(value)) {
-      return 'Enter a valid email address.';
-    }
-    return null;
-  }
-
-  String? _validateConfirmPassword(String? val, String text) {
-    if (val != text)
-      return 'Must be same as password';
-    else
-      return null;
   }
 }

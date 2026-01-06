@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:mabeet/data/models/state.dart';
@@ -16,7 +17,7 @@ class LocationWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 13),
       child: Row(
         children: [
-          Icon(Icons.location_on_outlined),
+          Icon(AppIcons.location),
           Expanded(
             child: Text(
               softWrap: true,

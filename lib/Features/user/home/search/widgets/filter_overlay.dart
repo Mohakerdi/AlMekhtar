@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_state.dart';
 import 'package:mabeet/Features/user/home/search/screens/search_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/data/models/state.dart';
@@ -29,7 +31,7 @@ class FilterOverlay extends StatelessWidget {
               automaticallyImplyLeading: false,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               title: Text(
-                'Filters',
+                AppStrings.filters.tr(),
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
@@ -62,7 +64,7 @@ class FilterOverlay extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text('Governorat: ', style: AppTextStyles.bodyLarge),
+                          Text('${AppStrings.governorat.tr()}: ', style: AppTextStyles.bodyLarge),
                           Expanded(
                             child: DropdownButtonFormField<Location>(
                               value: state.governorate,
@@ -88,7 +90,7 @@ class FilterOverlay extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'City:             ',
+                            '${AppStrings.city.tr()}:             ',
                             style: AppTextStyles.bodyLarge,
                           ),
                           Expanded(
@@ -115,7 +117,7 @@ class FilterOverlay extends StatelessWidget {
 
                       Row(
                         children: [
-                          Text('Cost Range: ', style: AppTextStyles.bodyLarge),
+                          Text('${AppStrings.costRange.tr()}: ', style: AppTextStyles.bodyLarge),
                           Expanded(
                             child: SfRangeSlider(
                               min: 0.0,
@@ -137,7 +139,7 @@ class FilterOverlay extends StatelessWidget {
 
                       Row(
                         children: [
-                          Text('Area Range: ', style: AppTextStyles.bodyLarge),
+                          Text('${AppStrings.areaRange.tr()}: ', style: AppTextStyles.bodyLarge),
                           Expanded(
                             child: SfRangeSlider(
                               min: 30.0,
@@ -159,7 +161,7 @@ class FilterOverlay extends StatelessWidget {
 
                       Row(
                         children: [
-                          Text('Rating Range: ', style: AppTextStyles.bodyLarge),
+                          Text('${AppStrings.rateRange.tr()}: ', style: AppTextStyles.bodyLarge),
                           Expanded(
                             child: SfRangeSlider(
                               min: 0.0,
@@ -185,10 +187,10 @@ class FilterOverlay extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Order: ', style: AppTextStyles.bodyLarge),
+                          Text('${AppStrings.order.tr()}: ', style: AppTextStyles.bodyLarge),
                           Expanded(
                             child: RadioListTile<String>(
-                              title: const Text('Asc'),
+                              title: Text(AppStrings.asc.tr()),
                               value: 'asc',
                               groupValue: state.order,
                               onChanged: (String? value) {
@@ -200,7 +202,7 @@ class FilterOverlay extends StatelessWidget {
                           ),
                           Expanded(
                             child: RadioListTile<String>(
-                              title: const Text('Desc'),
+                              title: Text(AppStrings.desc.tr()),
                               value: 'desc',
                               groupValue: state.order,
                               onChanged: (String? value) {
@@ -224,19 +226,19 @@ class FilterOverlay extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.gray400,
                               ),
-                              child: const Text('Reset'),
+                              child: Text(AppStrings.reset.tr()),
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                final BuildContext filterContext = context; // Capture the FilterOverlay's context
+                                final BuildContext filterContext = context;
                                 cubit.applyFilters();
                                 Navigator.of(filterContext).pop();
                                 onApply();
                               },
-                              child: const Text('Apply'),
+                              child: Text(AppStrings.apply.tr()),
                             ),
                           ),
                         ],

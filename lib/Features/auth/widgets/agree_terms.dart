@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mabeet/core/constants/strings.dart';
 
 import '../../../core/theme/text_styles.dart';
 
@@ -37,11 +39,11 @@ class _AgreeTermsState extends State<AgreeTerms> {
         RichText(
           text: TextSpan(
             children: [
-              TextSpan(text: 'Agree with', style: AppTextStyles.bodyLarge),
-              TextSpan(text: ' terms', style: AppTextStyles.bodyLargeSemiBold),
-              TextSpan(text: ' and', style: AppTextStyles.bodyLarge),
+              TextSpan(text: AppStrings.agreeWith.tr(), style: AppTextStyles.bodyLarge),
+              TextSpan(text: AppStrings.terms.tr(), style: AppTextStyles.bodyLargeSemiBold),
+              TextSpan(text: AppStrings.and.tr(), style: AppTextStyles.bodyLarge),
               TextSpan(
-                text: ' privacy',
+                text: AppStrings.privacy.tr(),
                 style: AppTextStyles.bodyLargeSemiBold,
               ),
             ],

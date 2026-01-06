@@ -7,7 +7,6 @@ class NotificationRepo {
 
   Future<List<NotificationModel>> fetchNotifications() async {
     final response = await webServices.getNotifications();
-    // print(" NOTIFICATION DATA: $response");
     final dynamic rawData = response['data']?['data'];
 
     if (rawData is List) {

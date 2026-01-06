@@ -1,3 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import '../../../../../core/theme/text_styles.dart';
@@ -27,12 +31,16 @@ class RentalsProperty extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  property.imageURLs[0],
-                  fit: BoxFit.fill,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
+                child: CachedNetworkImage(
+                  imageUrl: property.imageURLs[0],
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                  const CircularProgressIndicator(color: Colors.white),
+                  errorWidget: (context, url, error) =>
+                  const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
+                )
               ),
             ),
             Expanded(
@@ -55,7 +63,7 @@ class RentalsProperty extends StatelessWidget {
                       Row(
                         children: [
                           Icon(
-                            Icons.location_on_outlined,
+                            AppIcons.location,
                             color: AppColors.gray400,
                           ),
                           Text(
@@ -69,7 +77,7 @@ class RentalsProperty extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        '  \$${property.costPerNight}/night',
+                        '  \$${property.costPerNight}/${AppStrings.night.tr()}',
                         style: AppTextStyles.bodySmall,
                       ),
                     ],

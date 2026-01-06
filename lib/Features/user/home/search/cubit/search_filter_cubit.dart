@@ -47,6 +47,27 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
     emit(SearchFilterState.initial());
   }
 
+  void seeAllFilters() async{
+    emit(state.copyWith(
+      isLoading: true,
+      errorMessage: null,
+      properties: null,
+    ));
+    final results = await searchRepo.getFilteredResults(
+      order: state.order,
+    );
+
+    results.fold(
+            (errorMessage) => emit(state.copyWith(
+          isLoading: false,
+        )),
+            (properties) =>emit(state.copyWith(
+            isLoading: false,
+            properties: properties
+        ))
+    );
+  }
+
   Future<void> applyFilters() async {
     emit(state.copyWith(
       isLoading: true,
@@ -68,7 +89,6 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
       results.fold(
           (errorMessage) => emit(state.copyWith(
             isLoading: false,
-            errorMessage: 'Failed to fetch search results.',
           )),
           (properties) =>emit(state.copyWith(
               isLoading: false,
@@ -78,16 +98,25 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
   }
 
   Future<void> selectGovernorate(Location newGovernorate) async {
-    final resetState = SearchFilterState.resetValues;
-
-    final newState = resetState.copyWith(
-      governorate: newGovernorate, // Apply the one filter
+    emit(state.copyWith(
+      governorate: newGovernorate,
       isLoading: true,
-      properties: null,
       errorMessage: null,
+      properties: null,
+    ));
+    final results = await searchRepo.getFilteredResults(
+      governorate: state.governorate,
+      order: state.order,
     );
-    emit(newState);
 
-    await applyFilters();
+    results.fold(
+            (errorMessage) => emit(state.copyWith(
+          isLoading: false,
+        )),
+            (properties) =>emit(state.copyWith(
+            isLoading: false,
+            properties: properties
+        ))
+    );
   }
 }

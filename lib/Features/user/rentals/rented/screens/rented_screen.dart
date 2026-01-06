@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mabeet/Features/user/CustomAppBar.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/screens/add_property_screen.dart';
 import 'package:mabeet/Features/user/rentals/rented/services/rented_cubit.dart';
 import 'package:mabeet/Features/user/rentals/rented/services/rented_state.dart';

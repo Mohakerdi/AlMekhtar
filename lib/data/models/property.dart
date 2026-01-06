@@ -44,10 +44,23 @@ class Property {
       return '${ApiConstants.StorageBaseUrl}$path';
     }
 
+    double parsePrice(String? priceString) {
+      if (priceString == null) return 0.0;
+
+      String numericString = priceString.replaceAll(RegExp(r'[^\d\.]'), '');
+
+      final parts = numericString.split('.');
+      if (parts.length > 2) {
+        numericString = '${parts[0]}.${parts.sublist(1).join('')}';
+      }
+
+      return double.tryParse(numericString) ?? 0.0;
+    }
+
     return Property(
       propertyId: int.tryParse(json[ApiKey.id].toString()) ?? 0,
 
-      costPerNight: double.tryParse(json[ApiKey.price].toString()) ?? 0.0,
+      costPerNight: parsePrice(json[ApiKey.price]?.toString()),
       avgRate: double.tryParse(json[ApiKey.rate].toString()) ?? 0.0,
       area: double.tryParse(json[ApiKey.area].toString()) ?? 0.0,
       floor: int.tryParse(json[ApiKey.floor].toString()) ?? 0,
@@ -64,6 +77,7 @@ class Property {
           : [],
     );
   }
+
 
   Map<String, dynamic> toJson() {
     return {

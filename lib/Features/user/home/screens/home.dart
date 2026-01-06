@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
+import 'package:mabeet/core/widgets/CustomAppBar.dart';
 import '../locations/screens/locations_screen.dart';
 import '../search/screens/search_screen.dart';
-import '../../CustomAppBar.dart';
 import '../search/widgets/filter_overlay.dart';
 import '../widgets/locations_slider.dart';
 import '../widgets/properties_list.dart';
@@ -41,12 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: FilterOverlay(
           onApply: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (builder) => const SearchScreen(),
-            ),
-          );
-        },),
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (builder) => const SearchScreen()),
+            );
+          },
+        ),
       ),
     );
   }
@@ -61,6 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _goToSearchScreen() {
+    context.read<SearchFilterCubit>().seeAllFilters();
+
     PersistentNavBarNavigator.pushNewScreen(
       context,
       screen: SearchScreen(),
@@ -87,7 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(AppStrings.recommendedSectionTitle.tr(), style: AppTextStyles.heading2Medium),
+                  Text(
+                    AppStrings.recommendedSectionTitle.tr(),
+                    style: AppTextStyles.heading2Medium,
+                  ),
                   InkWell(
                     onTap: _goToSearchScreen,
                     child: Text(
@@ -114,7 +120,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(AppStrings.topLocationsSectionTitle.tr(), style: AppTextStyles.heading2Medium),
+                  Text(
+                    AppStrings.topLocationsSectionTitle.tr(),
+                    style: AppTextStyles.heading2Medium,
+                  ),
                   InkWell(
                     onTap: _goToLocationsScreen,
                     child: Text(
@@ -130,7 +139,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(AppStrings.popularForYouSectionTitle.tr(), style: AppTextStyles.heading2Medium),
+                  Text(
+                    AppStrings.popularForYouSectionTitle.tr(),
+                    style: AppTextStyles.heading2Medium,
+                  ),
                   InkWell(
                     onTap: _goToSearchScreen,
                     child: Text(

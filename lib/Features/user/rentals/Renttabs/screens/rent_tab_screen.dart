@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mabeet/Features/user/CustomAppBar.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/screens/add_property_screen.dart';
 import 'package:mabeet/Features/user/rentals/available/screens/available_screen.dart';
 import 'package:mabeet/Features/user/rentals/rented/screens/rented_screen.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/core/widgets/CustomAppBar.dart';
 
 class RentTabScreen extends StatelessWidget {
   const RentTabScreen({super.key});

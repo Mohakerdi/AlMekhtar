@@ -7,8 +7,10 @@ import 'package:mabeet/Features/user/property/widgets/description_details_widget
 import 'package:mabeet/Features/user/property/widgets/description_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/location_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/property_details.dart';
+import 'package:mabeet/Features/user/property/widgets/property_details_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/title_widget.dart';
 import 'package:mabeet/Features/user/rentals/editeProperty/screens/edit_property_screen.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import '../../../../data/models/property.dart';
@@ -25,7 +27,7 @@ class PropertyScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(property.title),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.share)),
+          IconButton(onPressed: () {}, icon: Icon(AppIcons.share)),
           FavoriteIconButton(property: property),
         ],
       ),
@@ -55,6 +57,7 @@ class PropertyScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
             PropertyDetails(),
+            PropertyDetailsWidget(floor: property.floor,area: property.area,rate: property.avgRate,),
             SizedBox(height: 25),
             DescriptionWidget(),
             DescriptionDetailsWidget(description: property.description),
@@ -67,8 +70,8 @@ class PropertyScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              //builder: (context) => RentNowScreen(property: property),
-              builder: (context) => EditPropertyScreen(property: property),
+              builder: (context) => RentNowScreen(property: property),
+              // builder: (context) => EditPropertyScreen(property: property),
             ),
           );
         },

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
+import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -37,12 +39,16 @@ class PopularProperty extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  property.imageURLs[0],
-                  fit: BoxFit.fill,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
+                child: CachedNetworkImage(
+                  imageUrl: property.imageURLs[0],
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                  const CircularProgressIndicator(color: Colors.white),
+                  errorWidget: (context, url, error) =>
+                  const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
+                )
               ),
             ),
             Expanded(
@@ -65,7 +71,7 @@ class PopularProperty extends StatelessWidget {
                       Row(
                         children: [
                           Icon(
-                            Icons.location_on_outlined,
+                            AppIcons.location,
                             color: AppColors.gray400,
                           ),
                           Text(
@@ -109,7 +115,7 @@ class PopularProperty extends StatelessWidget {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.star,
+                                AppIcons.star,
                                 size: 18,
                                 color: AppColors.warning700,
                               ),

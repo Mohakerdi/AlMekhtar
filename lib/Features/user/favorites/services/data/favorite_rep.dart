@@ -7,9 +7,7 @@ class FavoriteRepository {
   FavoriteRepository(this.webServices);
 
   Future<List<Property>> fetchFavorites() async {
-    print(" 2. Repo: Calling WebServices...");
     final response = await webServices.getFavorites();
-    print("3. Repo: Raw Response: $response");
     List<dynamic> data = response[ApiKey.favourites] ?? [];
     return data.map((json) => Property.fromJson(json)).toList();
   }
