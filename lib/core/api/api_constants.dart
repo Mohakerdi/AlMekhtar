@@ -1,6 +1,6 @@
 class ApiConstants {
   // Base URLs
-  static const String BaseUrl = "http://10.0.2.2:8000/api/";
+  static const String BaseUrl = "http://192.168.1.7/api/";
   static const String StorageBaseUrl = 'http://10.0.2.2:8000/storage/';
 
   // Authentication endpoints
@@ -68,7 +68,6 @@ class ApiKey {
   static const String minRate = 'minRate';
   static const String maxRate = 'maxRate';
   static const String order = 'order';
-
 
   // Media Keys
   static const String images = 'images';

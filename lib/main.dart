@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
         } else {
           startWidget = const CreateAccountScreen();
         }
-        
+
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
@@ -120,7 +120,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
 
-          home: startWidget,
+          home: SplashHandler(),
         );
       },
     );
