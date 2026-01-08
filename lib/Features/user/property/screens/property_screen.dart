@@ -9,7 +9,6 @@ import 'package:mabeet/Features/user/property/widgets/location_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/property_details.dart';
 import 'package:mabeet/Features/user/property/widgets/property_details_widget.dart';
 import 'package:mabeet/Features/user/property/widgets/title_widget.dart';
-import 'package:mabeet/Features/user/rentals/editeProperty/screens/edit_property_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
@@ -17,9 +16,10 @@ import '../../../../data/models/property.dart';
 import '../widgets/details_slider.dart';
 
 class PropertyScreen extends StatelessWidget {
-  const PropertyScreen({super.key, required this.property});
+  const PropertyScreen({super.key, required this.property, required this.isOwner});
 
   final Property property;
+  final bool isOwner;
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +65,12 @@ class PropertyScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton:isOwner?null: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => RentNowScreen(property: property),
-              // builder: (context) => EditPropertyScreen(property: property),
             ),
           );
         },

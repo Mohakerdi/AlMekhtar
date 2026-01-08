@@ -16,7 +16,7 @@ class PopularProperty extends StatelessWidget {
   void _goToPropertyScreen(BuildContext context) {
     PersistentNavBarNavigator.pushNewScreen(
       context,
-      screen: PropertyScreen(property: property),
+      screen: PropertyScreen(property: property, isOwner: false,),
       withNavBar: false,
       pageTransitionAnimation: PageTransitionAnimation.scale,
     );

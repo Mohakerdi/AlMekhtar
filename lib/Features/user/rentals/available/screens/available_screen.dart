@@ -1,12 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mabeet/Features/user/rentals/addNewProperty/screens/add_property_screen.dart';
+import 'package:mabeet/Features/user/home/widgets/popular_property.dart';
 import 'package:mabeet/Features/user/rentals/available/services/available_cubit.dart';
 import 'package:mabeet/Features/user/rentals/available/services/available_state.dart';
-import 'package:mabeet/Features/user/rentals/widgets/rentals_property.dart';
-import 'package:mabeet/core/constants/strings.dart';
-import 'package:mabeet/data/repos/dummy_properties.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 
 class AvailableScreen extends StatelessWidget {
@@ -43,7 +39,7 @@ class AvailableScreen extends StatelessWidget {
                 itemCount: state.available.length,
                 itemBuilder: (context, index) {
                   final property = state.available[index];
-                  return RentalsProperty(property: property);
+                  return PopularProperty(property: property);
                 },
               );
             }

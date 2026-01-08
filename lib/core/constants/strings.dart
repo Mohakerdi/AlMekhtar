@@ -126,5 +126,9 @@ abstract class AppStrings {
   static const String desc = 'desc';
   static const String reset = 'reset';
   static const String apply = 'apply';
+  static const String delete = 'delete';
+  static const String cancel = 'cancel';
+  static const String deletePropertyConfirmation = 'delete-property-confirmation';
+  static const String actionCannotBeUndone = 'action-cannot-be-undone';
 
 }

@@ -4,7 +4,6 @@ import 'text_styles.dart';
 
 ThemeData get darkTheme {
   const double _defaultRadius = 16.0;
-
   const Color darkScaffoldBg = AppColors.gray950;
   const Color darkSurface = AppColors.gray900;
   const Color darkBorder = AppColors.gray700;
@@ -15,56 +14,50 @@ ThemeData get darkTheme {
 
     // 1. COLOR SCHEME
     colorScheme: const ColorScheme.dark(
-      primary: AppColors.primary500,
-      onPrimary: AppColors.gray900,
-      secondary: AppColors.secondaryLight,
+      primary: AppColors.primary500, // Now Red
+      onPrimary: Colors.white, // White text on Red button
+      secondary: AppColors.secondaryLight, // Light Blue for accents
       onSecondary: AppColors.gray900,
       error: AppColors.error100,
       onError: AppColors.error900,
       surface: darkSurface,
-      onSurface: Colors.white
+      onSurface: Colors.white,
     ),
+
     scaffoldBackgroundColor: darkScaffoldBg,
 
     // 2. TEXT STYLES MAPPING
     textTheme: TextTheme(
-      // Heading Mappings
       displayLarge: AppTextStyles.display1Bold.copyWith(color: Colors.white),
       displayMedium: AppTextStyles.display2Bold.copyWith(color: Colors.white),
       headlineLarge: AppTextStyles.heading1Bold.copyWith(color: Colors.white),
       headlineMedium: AppTextStyles.heading2Bold.copyWith(color: Colors.white),
-
-      // Title Mappings
       titleLarge: AppTextStyles.heading2SemiBold.copyWith(color: Colors.white),
       titleMedium: AppTextStyles.bodyMedium.copyWith(color: Colors.white),
-
-      // Body Mappings
-      bodyLarge: AppTextStyles.bodyLarge.copyWith(color: AppColors.gray400),
-      bodyMedium: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray400),
-      bodySmall: AppTextStyles.caption.copyWith(color: AppColors.gray500),
-
-      // Label Mappings
-      labelLarge: AppTextStyles.labelButton.copyWith(color: AppColors.gray900),
+      bodyLarge: AppTextStyles.bodyLarge.copyWith(color: AppColors.gray200),
+      bodyMedium: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray200),
+      bodySmall: AppTextStyles.caption.copyWith(color: AppColors.gray200),
+      labelLarge: AppTextStyles.labelButton.copyWith(color: AppColors.gray200),
     ),
 
     // 3. COMPONENT THEMES
-    // AppBar
     appBarTheme: AppBarTheme(
       backgroundColor: darkSurface,
       foregroundColor: Colors.white,
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: false,
-      titleTextStyle: AppTextStyles.heading2SemiBold.copyWith(color: Colors.white),
+      titleTextStyle: AppTextStyles.heading2SemiBold.copyWith(
+        color: Colors.white,
+      ),
       iconTheme: const IconThemeData(color: Colors.white),
     ),
 
-    // Elevated Button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary500,
-        foregroundColor: AppColors.gray900,
-        textStyle: AppTextStyles.labelButton.copyWith(color: AppColors.gray900),
+        backgroundColor: AppColors.primary500, // Red Buttons
+        foregroundColor: Colors.white,
+        textStyle: AppTextStyles.labelButton.copyWith(color: Colors.white),
         minimumSize: const Size(double.infinity, 56),
         padding: const EdgeInsets.symmetric(horizontal: 24),
         shape: RoundedRectangleBorder(
@@ -74,13 +67,11 @@ ThemeData get darkTheme {
       ),
     ),
 
-    // Input Fields (TextField)
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: darkScaffoldBg,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray600),
-
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_defaultRadius),
         borderSide: const BorderSide(color: darkBorder),
@@ -95,13 +86,8 @@ ThemeData get darkTheme {
       ),
     ),
 
-    // Icon Theme
-    iconTheme: const IconThemeData(
-      color: AppColors.gray300,
-      size: 24,
-    ),
+    iconTheme: const IconThemeData(color: AppColors.gray300, size: 24),
 
-    // Divider Theme
     dividerTheme: const DividerThemeData(
       color: AppColors.gray700,
       thickness: 1,

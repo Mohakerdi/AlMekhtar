@@ -23,13 +23,12 @@ class PropertyDetailsWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withAlpha(15),
             blurRadius: 10,
-            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -72,16 +71,11 @@ class PropertyDetailsWidget extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           value,
-          style: AppTextStyles.titleMedium.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+          style: AppTextStyles.titleMedium
         ),
         Text(
           label,
-          style: AppTextStyles.bodySmall.copyWith(
-            color: Colors.grey[600],
-          ),
+          style: AppTextStyles.bodySmall
         ),
       ],
     );
@@ -91,7 +85,7 @@ class PropertyDetailsWidget extends StatelessWidget {
     return Container(
       height: 40,
       width: 1,
-      color: Colors.grey[200],
+      color: AppColors.gray200,
     );
   }
 }

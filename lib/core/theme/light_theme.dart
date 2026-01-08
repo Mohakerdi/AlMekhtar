@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
-import 'text_styles.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
 
 ThemeData get lightTheme {
   const double _defaultRadius = 16.0;
@@ -11,55 +11,52 @@ ThemeData get lightTheme {
 
     // 1. COLOR SCHEME
     colorScheme: const ColorScheme.light(
-      primary: AppColors.primary700,
+      primary: AppColors.primary500, // Bright Red
       onPrimary: Colors.white,
-      secondary: AppColors.secondary,
+      secondary: AppColors.secondary, // Navy Blue
       error: AppColors.errorBase,
-      onError: AppColors.errorBase,
+      onError: Colors.white,
       surface: Colors.white,
       onSurface: AppColors.gray900,
     ),
+
     scaffoldBackgroundColor: AppColors.background,
 
     // 2. TEXT STYLE MAPPING
     textTheme: TextTheme(
       displayLarge: AppTextStyles.display1Bold,
-      displayMedium: AppTextStyles.display2Bold,
+      displayMedium: AppTextStyles.display2Bold.copyWith(
+        color: AppColors.secondary,
+      ), // Use Navy for branding
       headlineLarge: AppTextStyles.heading1Bold,
       headlineMedium: AppTextStyles.heading2Bold,
-
-      // Title Mappings
       titleLarge: AppTextStyles.heading2SemiBold,
       titleMedium: AppTextStyles.bodyMedium,
-
-      // Body Mappings
       bodyLarge: AppTextStyles.bodyLarge,
       bodyMedium: AppTextStyles.bodyMedium,
       bodySmall: AppTextStyles.caption,
-
-      // Label Mappings (Buttons)
       labelLarge: AppTextStyles.labelButton,
     ),
 
     // 3. COMPONENT THEMES
-    // AppBar
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.background,
       foregroundColor: AppColors.gray900,
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: false,
-      titleTextStyle: AppTextStyles.heading2SemiBold.copyWith(color: AppColors.gray900),
+      titleTextStyle: AppTextStyles.heading2SemiBold.copyWith(
+        color: AppColors.gray900,
+      ),
       iconTheme: const IconThemeData(color: AppColors.gray900),
     ),
 
-    // Elevated Button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary700,
+        backgroundColor: AppColors.primary500, // Red
         foregroundColor: Colors.white,
         textStyle: AppTextStyles.labelButton,
-        minimumSize: const Size(double.infinity, 56), // Tall standard button
+        minimumSize: const Size(double.infinity, 56),
         padding: const EdgeInsets.symmetric(horizontal: 24),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_defaultRadius),
@@ -68,14 +65,12 @@ ThemeData get lightTheme {
       ),
     ),
 
-    // Input Fields
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.white,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       hintStyle: AppTextStyles.bodyLarge.copyWith(color: AppColors.gray300),
       errorMaxLines: 1,
-
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_defaultRadius),
         borderSide: const BorderSide(color: AppColors.gray200),
@@ -86,17 +81,12 @@ ThemeData get lightTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_defaultRadius),
-        borderSide: const BorderSide(color: AppColors.primary700, width: 1.5),
+        borderSide: const BorderSide(color: AppColors.primary500, width: 1.5),
       ),
     ),
 
-    // Icon Theme
-    iconTheme: const IconThemeData(
-      color: AppColors.gray600,
-      size: 24,
-    ),
+    iconTheme: const IconThemeData(color: AppColors.gray600, size: 24),
 
-    // Divider Theme
     dividerTheme: const DividerThemeData(
       color: AppColors.gray200,
       thickness: 1,

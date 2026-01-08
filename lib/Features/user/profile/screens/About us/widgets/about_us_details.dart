@@ -70,7 +70,7 @@ class AboutUsShowDetails extends StatelessWidget {
           // 6. VISION BODY
           Text(
             AppStrings.aboutUsVisionBody.tr(),
-            textAlign: TextAlign.justify,
+            textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
               fontFamily: 'Satoshi',
               color: AppColors.gray300,

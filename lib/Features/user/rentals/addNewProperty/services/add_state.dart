@@ -1,21 +1,30 @@
 import 'dart:io';
 
-import 'package:mabeet/data/models/state.dart';
-
 abstract class AddPropertyState {}
 
 class AddPropertyInitial extends AddPropertyState {}
 
-class AddPropertyImageSelected extends AddPropertyState {
-  final File image;
-  AddPropertyImageSelected(this.image);
+class AddPropertyImagesUpdated extends AddPropertyState {
 }
 
 class AddPropertyLoading extends AddPropertyState {}
 
-class AddPropertySuccess extends AddPropertyState {}
+class AddPropertySuccess extends AddPropertyState {
+  final String message;
+  AddPropertySuccess({required this.message});
+}
 
 class AddPropertyError extends AddPropertyState {
   final String message;
   AddPropertyError(this.message);
+}
+
+class AddPropertyLocationUpdated extends AddPropertyState {
+  final String state;
+  final String city;
+
+  AddPropertyLocationUpdated({
+    required this.state,
+    required this.city,
+  });
 }

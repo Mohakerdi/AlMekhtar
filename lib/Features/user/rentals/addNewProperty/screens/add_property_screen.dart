@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/services/add_cubit.dart';
@@ -11,14 +12,24 @@ import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/property_cos
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/floors_number.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/area_number.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/add_button.dart';
+import 'package:mabeet/core/api/dio_consumer.dart';
+import 'package:mabeet/data/models/property.dart';
+import 'package:mabeet/data/repos/owner_repo.dart';
 
 class AddPropertyScreen extends StatelessWidget {
-  const AddPropertyScreen({super.key});
+  final Property? propertyToEdit;
+  final bool isEditMode;
+
+  const AddPropertyScreen({super.key, this.propertyToEdit,})
+    : isEditMode = propertyToEdit != null;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AddPropertyCubit(),
+      create: (_) => AddPropertyCubit(
+        ownerRepository: OwnerRepository(api: DioConsumer(dio: Dio())),
+        initialProperty: propertyToEdit,
+      ),
       child: Scaffold(
         appBar: AppBar(title: Text('Add Your Property')),
         body: BlocConsumer<AddPropertyCubit, AddPropertyState>(
@@ -34,7 +45,7 @@ class AddPropertyScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            final cubit = context.read<AddPropertyCubit>();
+            final cubit = context.watch<AddPropertyCubit>();
 
             return SingleChildScrollView(
               padding: const EdgeInsets.all(12),
@@ -43,19 +54,27 @@ class AddPropertyScreen extends StatelessWidget {
                   PropertyTitle(controller: cubit.titleController),
                   SizedBox(height: 12),
                   Divider(),
-
+                  TextFormField(
+                    controller: cubit.cardNumberController,
+                    decoration: const InputDecoration(
+                      labelText: 'Bank Card Number',
+                      hintText: 'Enter your bank card number',
+                    ),
+                    keyboardType: TextInputType.number,
+                    maxLength: 16,
+                  ),
+                  Divider(),
                   SelectLocation(
                     onLocationChanged: (stateSelected, city) {
-                      cubit.setStateLocation(stateSelected);
-                      cubit.setCity(city);
+                      cubit.setLocation(state: stateSelected.name, city: city);
                     },
                   ),
                   Divider(),
-
                   SelectFromGallery(
-                    onSelectImage: (image) {
-                      cubit.selectImage(image);
-                    },
+                    isEditMode: isEditMode,
+                    selectedImages: cubit.selectedImages,
+                    existingImageUrls: cubit.existingImageUrls,
+                    onImagesChanged: cubit.selectImages,
                   ),
                   Divider(),
 
@@ -82,7 +101,7 @@ class AddPropertyScreen extends StatelessWidget {
 
                   AddButton(
                     onPressed: () {
-                      cubit.addProperty();
+                      cubit.addOrEditProperty(isEditMode);
                     },
                   ),
                 ],

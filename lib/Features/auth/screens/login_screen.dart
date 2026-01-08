@@ -68,18 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextFormField(
                       controller: context.read<UserCubit>().logInPhone,
                       keyboardType: TextInputType.phone,
-                      buildCounter:
-                          (
-                            BuildContext context, {
-                            required int currentLength,
-                            required int? maxLength,
-                            required bool isFocused,
-                          }) => null,
                       decoration: InputDecoration(
                         hintText: '09 ** | exam@gmail.com',
                         helperText: ' ',
                       ),
-                      maxLength: 10,
                     ),
                     Text(AppStrings.password.tr(), style: AppTextStyles.titleMedium),
                     TextFormField(

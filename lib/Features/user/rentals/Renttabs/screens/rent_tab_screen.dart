@@ -1,9 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/screens/add_property_screen.dart';
 import 'package:mabeet/Features/user/rentals/available/screens/available_screen.dart';
-import 'package:mabeet/Features/user/rentals/rented/screens/rented_screen.dart';
-import 'package:mabeet/core/constants/strings.dart';
+import 'package:mabeet/Features/user/rentals/myProperties/screens/my_properties_screen.dart';
+import 'package:mabeet/Features/user/rentals/requests/screens/requests_screen.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/widgets/CustomAppBar.dart';
 
@@ -15,13 +14,13 @@ class RentTabScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: const CustomAppBar(titleText: "Rentals"),
+        appBar: const CustomAppBar(titleText: "Owner"),
         body: Column(
           children: [
             const TabBar(
               tabs: [
-                Tab(text: "Rented"),
-                Tab(text: "Available"),
+                Tab(text: "Contracts"),
+                Tab(text: "My Properties"),
                 Tab(text: "Requests"),
               ],
               indicatorColor: AppColors.primary800,
@@ -31,9 +30,9 @@ class RentTabScreen extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  RentedScreen(),
                   AvailableScreen(),
-                  Center(child: Text("Requests Screen")),
+                  MyPropertiesScreen(),
+                  RequestsScreen()
                 ],
               ),
             ),

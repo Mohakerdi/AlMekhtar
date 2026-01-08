@@ -34,38 +34,28 @@ class _TabsState extends State<Tabs> {
     return [
       PersistentBottomNavBarItem(
         iconSize: 30,
-        icon: Icon(AppIcons.homeIcon),
-        inactiveIcon: Icon(AppIcons.inactiveHomeIcon),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: AppColors.gray400,
+        icon: CustomPngIcon(iconPath: AppIcons.homeTab),
+        inactiveIcon: CustomPngIcon(iconPath: AppIcons.homeTab),
       ),
       PersistentBottomNavBarItem(
         iconSize: 30,
-        icon: Icon(AppIcons.bookIcon),
-        inactiveIcon: Icon(AppIcons.inactiveBookIcon),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: AppColors.gray400,
+        icon: CustomPngIcon(iconPath: AppIcons.keyMe5tarIcon),
+        inactiveIcon: CustomPngIcon(iconPath: AppIcons.keyMe5tarIcon),
       ),
       PersistentBottomNavBarItem(
         iconSize: 30,
-        icon: Icon(AppIcons.rentIcon),
-        inactiveIcon: Icon(AppIcons.inactiveRentIcon),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: AppColors.gray400,
+        icon: CustomPngIcon(iconPath: AppIcons.owner),
+        inactiveIcon: CustomPngIcon(iconPath: AppIcons.owner),
       ),
       PersistentBottomNavBarItem(
         iconSize: 30,
-        icon: Icon(AppIcons.favIcon),
-        inactiveIcon: Icon(AppIcons.inactiveFavIcon),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: AppColors.gray400,
+        icon: CustomPngIcon(iconPath: AppIcons.favActive),
+        inactiveIcon: CustomPngIcon(iconPath: AppIcons.favActive),
       ),
       PersistentBottomNavBarItem(
         iconSize: 30,
-        icon: Icon(AppIcons.profileIcon),
-        inactiveIcon: Icon(AppIcons.inactiveProfileIcon),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: AppColors.gray400,
+        icon: CustomPngIcon(iconPath: AppIcons.idIcon),
+        inactiveIcon: CustomPngIcon(iconPath: AppIcons.idIcon),
       ),
     ];
   }
@@ -83,15 +73,10 @@ class _TabsState extends State<Tabs> {
           duration: Duration(milliseconds: 300),
           curve: Curves.ease,
         ),
-        screenTransitionAnimation: ScreenTransitionAnimationSettings(
-          animateTabTransition: true,
-          duration: Duration(milliseconds: 200),
-          screenTransitionAnimationType: ScreenTransitionAnimationType.slide,
-        ),
       ),
       confineToSafeArea: true,
       navBarHeight: 60,
-      navBarStyle: NavBarStyle.style3,
+      navBarStyle: NavBarStyle.style6,
     );
   }
 }

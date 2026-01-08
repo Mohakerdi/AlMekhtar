@@ -1,79 +1,96 @@
-import 'dart:io';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/services/add_state.dart';
-import 'package:mabeet/data/models/state.dart';
 import 'package:mabeet/data/models/property.dart';
-import 'package:mabeet/data/repos/dummy_properties.dart';
+import 'package:mabeet/data/repos/owner_repo.dart';
 
 class AddPropertyCubit extends Cubit<AddPropertyState> {
-  AddPropertyCubit() : super(AddPropertyInitial()) {
-    selectedState = Location.Damascus;
-    selectedCity = 'Old-Damascus';
-    floorsController.text = '1';
-  }
+  AddPropertyCubit({required this.ownerRepository,Property? initialProperty,})
+      : super(AddPropertyInitial()) {_initialize(initialProperty);}
 
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController locationDescriptionController = TextEditingController();
-  TextEditingController costController = TextEditingController();
-  TextEditingController areaController = TextEditingController();
-  TextEditingController floorsController = TextEditingController();
+  final OwnerRepository ownerRepository;
 
-  Location selectedState = Location.Damascus;
-  String selectedCity = '';
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final locationDescriptionController = TextEditingController();
+  final costController = TextEditingController();
+  final floorsController = TextEditingController();
+  final areaController = TextEditingController();
+  final cardNumberController = TextEditingController();
 
-  File? selectedImage;
+  final List<XFile> selectedImages = [];
+  final List<String> existingImageUrls = [];
 
-  selectImage(File image) {
-    selectedImage = image;
-    emit(AddPropertyImageSelected(image));
-  }
+  String? selectedState;
+  String? selectedCity;
 
-  void setStateLocation(Location state) {
-    selectedState = state;
-    final stateModel = syrianStates.firstWhere((s) => s.name == state.name);
-    selectedCity = stateModel.areas.isNotEmpty ? stateModel.areas[0] : '';
-    emit(AddPropertyImageSelected(selectedImage ?? File('')));
-  }
+  bool _initialized = false;
+  Property? _editingProperty;
 
-  void setCity(String city) {
-    selectedCity = city;
-    emit(AddPropertyImageSelected(selectedImage ?? File('')));
-  }
+  void _initialize(Property? property) {
+    if (_initialized) return;
 
-  void addProperty() {
-    if (titleController.text.isEmpty ||
-        descriptionController.text.isEmpty ||
-        costController.text.isEmpty ||
-        areaController.text.isEmpty ||
-        floorsController.text.isEmpty ||
-        selectedImage == null ||
-        selectedCity.isEmpty) {
-      emit(AddPropertyError('Please fill all fields'));
-      return;
+    if (property != null) {
+      _editingProperty = property;
+
+      titleController.text = property.title;
+      descriptionController.text = property.description;
+      locationDescriptionController.text = property.describedLocation;
+      costController.text = property.costPerNight.toString();
+      floorsController.text = property.floor.toString();
+      areaController.text = property.area.toString();
+
+      selectedState = property.state.name;
+      selectedCity = property.city;
+      existingImageUrls.addAll(property.imageURLs);
     }
 
+    _initialized = true;
+  }
+
+  void selectImages(List<XFile> images) {
+    selectedImages
+      ..clear()
+      ..addAll(images);
+    emit(AddPropertyImagesUpdated());
+  }
+
+  void setLocation({
+    required String state,
+    required String city,
+  }) {
+    selectedState = state;
+    selectedCity = city;
+    emit(AddPropertyLocationUpdated(state: state, city: city));
+  }
+
+
+  Future<String> addOrEditProperty(bool isEditMode) async {
+
     emit(AddPropertyLoading());
-
-    /*Property newProperty = Property(
-      propertyId: dummyProperties.length + 1,
+    final response = isEditMode
+        ? await ownerRepository.editProperty(
+      propertyId: _editingProperty!.propertyId,
       title: titleController.text,
-      imageURLs: [selectedImage!.path],
       description: descriptionController.text,
-      describedLocation: locationDescriptionController.text,
-      costPerNight: double.parse(costController.text),
-      area: double.parse(areaController.text),
-      floor: int.parse(floorsController.text),
-      avgRate: 0,
-      city: 'Damascus',
-      state: Location.Damascus,
-    );*/
+      addressDescription: locationDescriptionController.text,
+      price: costController.text
+    )
+        : await ownerRepository.addProperty(
+      title: titleController.text,
+      description: descriptionController.text,
+      addressDescription: locationDescriptionController.text,
+      price: costController.text,
+      floor: floorsController.text,
+      area: areaController.text,
+      state: selectedState!,
+      city: selectedCity!,
+      images: selectedImages,
+      cardNumber: cardNumberController.text
+    );
 
-    //dummyProperties.add(newProperty);
-
-    emit(AddPropertySuccess());
+    return response;
   }
 
   @override
@@ -82,8 +99,9 @@ class AddPropertyCubit extends Cubit<AddPropertyState> {
     descriptionController.dispose();
     locationDescriptionController.dispose();
     costController.dispose();
-    areaController.dispose();
     floorsController.dispose();
+    areaController.dispose();
+    cardNumberController.dispose();
     return super.close();
   }
 }

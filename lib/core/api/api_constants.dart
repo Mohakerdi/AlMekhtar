@@ -1,7 +1,7 @@
 class ApiConstants {
   // Base URLs
-  static const String BaseUrl = "http://192.168.43.181:8000/api/";
-  static const String StorageBaseUrl = 'http://192.168.43.181:8000/storage/';
+  static const String BaseUrl = "http://127.0.0.1:8000/api/";
+  static const String StorageBaseUrl = 'http://127.0.0.1:8000/storage/';
 
   // Authentication endpoints
   static const String login = 'login';
@@ -25,6 +25,10 @@ class ApiConstants {
   static const String renterPending = 'apartments/renter/pending';
   static const String renterActive = 'apartments/renter/active';
   static const String renterHistory = 'apartments/renter/history';
+
+  // Owner endpoints
+  static const String myProperties = 'apartments/owner';
+  static const String pendingReservations = '/apartments/reservations/pending';
 }
 
 class ApiKey {
@@ -33,6 +37,7 @@ class ApiKey {
   static const String data = 'data';
   static const String message = 'message';
   static const String errorMessage = 'ErrorMessage';
+  static const String cardNumber = 'cardNumber';
 
   // Authentication Keys
   static const String token = 'token';

@@ -8,16 +8,59 @@ import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/booking_model.dart';
+import 'package:mabeet/data/models/property.dart';
 
 class BookingProperty extends StatelessWidget {
   const BookingProperty({super.key, required this.booking});
 
   final Booking booking;
 
-  void _goToPropertyScreen(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (builder) => PropertyScreen(property: booking.apartment),
+  void _goToPropertyScreen(BuildContext context, Property? apartment) {
+    if (apartment != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (builder) => PropertyScreen(property: apartment, isOwner: false,),
+        ),
+      );
+    }
+  }
+
+  Widget _buildDeletedPropertyCard(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Deleted Property',
+                  style: textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.error700,
+                  ),
+                ),
+                _buildStatusChip(textTheme, booking.enStatus),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'This property is no longer available or has been removed by the owner.',
+              style: textTheme.bodyMedium!.copyWith(color: AppColors.gray600),
+            ),
+            const SizedBox(height: 12),
+            _buildDateSection(context, booking.startTerm, booking.endTerm),
+            if (booking.enStatus != 'Finished' && booking.enStatus != 'Cancelled')
+              _buildCancelButton(context),
+          ],
+        ),
       ),
     );
   }
@@ -25,11 +68,14 @@ class BookingProperty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final apartment = booking.apartment;
+    if (apartment == null) {
+      return _buildDeletedPropertyCard(context);
+    }
     final String locationName =
-        '${booking.apartment.state.name}, ${booking.apartment.city}';
-
+        '${apartment.state.name}, ${apartment.city}';
     return InkWell(
-      onTap: () => _goToPropertyScreen(context),
+      onTap: () => _goToPropertyScreen(context, apartment),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -51,7 +97,7 @@ class BookingProperty extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: CachedNetworkImage(
-                            imageUrl: booking.apartment.imageURLs[0],
+                            imageUrl: apartment.imageURLs[0],
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -71,7 +117,7 @@ class BookingProperty extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                booking.apartment.title,
+                                apartment.title,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: textTheme.titleMedium!.copyWith(
@@ -80,31 +126,7 @@ class BookingProperty extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: booking.enStatus == 'Pending' || booking.enStatus == 'AwaitingPayment'
-                                    ? AppColors.warning50
-                                    : booking.enStatus == 'Active'|| booking.enStatus == 'Accepted'
-                                    ? AppColors.success50
-                                    : AppColors.error50,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                booking.enStatus,
-                                style: textTheme.labelSmall!.copyWith(
-                                  color: booking.enStatus == 'Pending'|| booking.enStatus == 'AwaitingPayment'
-                                      ? AppColors.warning700
-                                      : booking.enStatus == 'Active'|| booking.enStatus == 'Accepted'
-                                      ? AppColors.success700
-                                      : AppColors.error700,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                            _buildStatusChip(textTheme, booking.enStatus),
                           ],
                         ),
                         const SizedBox(height: 4),
@@ -132,7 +154,7 @@ class BookingProperty extends StatelessWidget {
                           children: [
                             // Price
                             Text(
-                              '\$${booking.apartment.costPerNight}/${AppStrings.night.tr()}',
+                              '\$${apartment.costPerNight}/${AppStrings.night.tr()}',
                               style: textTheme.titleSmall!.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.primary900,
@@ -148,7 +170,7 @@ class BookingProperty extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  '${booking.apartment.avgRate}',
+                                  '${apartment.avgRate}',
                                   style: textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -170,11 +192,45 @@ class BookingProperty extends StatelessWidget {
     );
   }
 
+  Widget _buildStatusChip(TextTheme textTheme, String status) {
+    Color? backgroundColor;
+    Color? textColor;
+
+    if (status == 'Pending' || status == 'AwaitingPayment') {
+      backgroundColor = AppColors.warning50;
+      textColor = AppColors.warning700;
+    } else if (status == 'Active' || status == 'Accepted') {
+      backgroundColor = AppColors.success50;
+      textColor = AppColors.success700;
+    } else {
+      backgroundColor = AppColors.error50;
+      textColor = AppColors.error700;
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+        vertical: 4,
+      ),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        status,
+        style: textTheme.labelSmall!.copyWith(
+          color: textColor,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
   Widget _buildDateSection(
-    BuildContext context,
-    String startTerm,
-    String endTerm,
-  ) {
+      BuildContext context,
+      String startTerm,
+      String endTerm,
+      ) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,11 +256,11 @@ class BookingProperty extends StatelessWidget {
   }
 
   Widget _buildDateChip(
-    BuildContext context,
-    IconData icon,
-    String label,
-    String date,
-  ) {
+      BuildContext context,
+      IconData icon,
+      String label,
+      String date,
+      ) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Row(
       children: [
@@ -234,7 +290,6 @@ class BookingProperty extends StatelessWidget {
         child: OutlinedButton(
           onPressed: () {
             cubit.cancelBooking(booking.bookingId).then((successMessage) {
-              // Use the actual success message from the API response
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(successMessage)));

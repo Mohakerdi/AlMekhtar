@@ -12,7 +12,7 @@ class AppTextStyles {
   static TextStyle _style({
     required double size,
     required FontWeight weight,
-    Color color = AppColors.darkText,
+    Color color = AppColors.gray400,
     double? height,
   }) {
     return _fontFamily(

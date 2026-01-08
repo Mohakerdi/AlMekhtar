@@ -21,10 +21,10 @@ class FavoriteIconButton extends StatelessWidget {
           padding: EdgeInsets.zero,
           onPressed: () => cubit.toggleFav(property),
 
-          icon: CustomPngIcon(
-            iconPath: isFav ? AppIcons.favActive : AppIcons.favInactive,
+          icon: Icon(
+             isFav ? AppIcons.favIcon : AppIcons.inactiveFavIcon,
 
-            size: 40,
+            size: 25,
           ),
         );
       },

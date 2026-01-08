@@ -1,97 +1,136 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../../core/constants/icons.dart';
-import '../../../../../core/theme/app_colors.dart';
 
-class SelectFromGallery extends StatefulWidget {
-  const SelectFromGallery({super.key, required this.onSelectImage});
+class SelectFromGallery extends StatelessWidget {
+  final List<XFile> selectedImages;
+  final List<String> existingImageUrls;
+  final Function(List<XFile>) onImagesChanged;
+  final bool isEditMode;
 
-  final void Function(File image) onSelectImage;
+  const SelectFromGallery({
+    required this.selectedImages,
+    required this.existingImageUrls,
+    required this.onImagesChanged,
+    required this.isEditMode,
+    super.key,
+  });
 
-  @override
-  State<SelectFromGallery> createState() => _SelectFromGalleryState();
-}
+  List<Object> get currentImages => [...existingImageUrls, ...selectedImages];
 
-class _SelectFromGalleryState extends State<SelectFromGallery> {
-  File? _selectedImage;
-
-  void _getPicture() async {
-    final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 600,
-    );
-
-    if (pickedImage == null) {
-      return;
-    }
-    setState(() {
-      _selectedImage = File(pickedImage.path);
-    });
-
-    widget.onSelectImage(_selectedImage!);
-  }
+  final int maxImages = 4;
 
   @override
   Widget build(BuildContext context) {
-    Widget content = InkWell(
-      onTap: _getPicture,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    final int itemCount = !isEditMode && currentImages.length < maxImages
+        ? currentImages.length + 1
+        : currentImages.length;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Property Images'),
+        const SizedBox(height: 8),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+          itemCount: itemCount,
+          itemBuilder: (context, index) {
+            if (index == currentImages.length && !isEditMode && currentImages.length<maxImages) {
+              return _buildAddButton(context);
+            }
+            return _buildImageTile(context, index);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImageTile(BuildContext context, int index) {
+    final Object imageSource = currentImages[index];
+
+    return InkWell(
+      onTap: !isEditMode? (){_removeImage(index);_pickImage(context);}:null,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Stack(
+          fit: StackFit.expand,
           children: [
-            const Icon(AppIcons.upload, size: 45, color: AppColors.primary700),
-            const Text('Click here to upload'),
+            if (imageSource is String)
+              CachedNetworkImage(
+                imageUrl: imageSource,
+                fit: BoxFit.cover,
+              )
+            else if (imageSource is XFile)
+              Image.file(
+                File(imageSource.path),
+                fit: BoxFit.cover,
+              ),
+            if (!isEditMode)
+              Positioned(
+                top: 6,
+                right: 6,
+                child: GestureDetector(
+                  onTap: () => _removeImage(index),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: Colors.black54,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.close,
+                      size: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
     );
+  }
 
-    if (_selectedImage != null) {
-      content = GestureDetector(
-        onTap: _getPicture,
-        child: Image.file(
-          _selectedImage!,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
+  Widget _buildAddButton(BuildContext context) {
+    return InkWell(
+      onTap: () => _pickImage(context),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Theme.of(context).primaryColor, width: 2),
         ),
-      );
-    }
-
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Add Photo Or Video",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.gray950,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 0.5,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            height: 250,
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: content,
-          ),
-        ],
+        child: const Center(
+          child: Icon(Icons.add_a_photo, size: 40, color: Colors.grey),
+        ),
       ),
     );
   }
+
+  void _pickImage(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    final List<XFile> pickedFiles = await picker.pickMultiImage(
+      limit: maxImages - currentImages.length + 1,
+    );
+
+    if (pickedFiles.isNotEmpty) {
+      final List<XFile> newFiles = pickedFiles.map((x) => XFile(x.path)).toList();
+      final List<XFile> updatedSelectedImages = [...selectedImages, ...newFiles];
+      onImagesChanged(updatedSelectedImages);
+    }
+  }
+
+  void _removeImage(int index) {
+    if (index < existingImageUrls.length) return;
+    final int localIndex = index - existingImageUrls.length;
+    final updated = List<XFile>.from(selectedImages)..removeAt(localIndex);
+    onImagesChanged(updated);
+  }
+
 }

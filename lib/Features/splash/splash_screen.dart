@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         child: SizedBox(
                           width: 200,
                           height: 200,
-                          child: Image.asset(AppImages.kLogoWhitePath),
+                          child: Image.asset(AppImages.kLogoPath),
                         ),
                       ),
                       const SizedBox(height: 24),

@@ -16,7 +16,7 @@ class FavoritesProperty extends StatelessWidget {
   void _goToPropertyScreen(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (builder) => PropertyScreen(property: property),
+        builder: (builder) => PropertyScreen(property: property, isOwner: false,),
       ),
     );
   }

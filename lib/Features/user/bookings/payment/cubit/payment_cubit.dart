@@ -64,7 +64,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     required DateTime end,
     required double costPerNight,
   }) {
-    final nights = end.difference(start).inDays;
+    final nights = end.difference(start).inDays + 1;
     final total = nights * costPerNight + 10;
 
     startTerm = DateFormat('yyyy-M-d').format(start);

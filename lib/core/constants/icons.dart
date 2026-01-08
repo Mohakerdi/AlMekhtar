@@ -7,6 +7,13 @@ class AppIcons{
   static const String path = 'assets/icon';
   static const String favActive = '$path/FavIcon.png';
   static const String favInactive = '$path/InFavIcon.png';
+  static const String idIcon = '$path/idIcon.png';
+  static const String keyMe5tarIcon = '$path/keyMe5tarIcon.png';
+  static const String owner = '$path/owner.png';
+  static const String homeTab = '$path/homeTab.png';
+  static const String searchMe5tar = '$path/searchMe5tar.png';
+  static const String notiMe5tar = '$path/notiMe5tar.png';
+  static const String chatMe5tar = '$path/chatMe5tar.png';
  static const searchIcon = FeatherIcons.search;
  static const filterIcon = FontAwesomeIcons.sliders;
  static const rentIcon = FontAwesomeIcons.buildingUser;
@@ -49,27 +56,6 @@ class AppIcons{
  static const editCalender = Icons.edit_calendar;
  static const cloudUpload = Icons.cloud_upload;
  static const profilePageArrow = Icons.arrow_forward_ios;
-  static const searchIcon = FeatherIcons.search;
-  static const filterIcon = FontAwesomeIcons.sliders;
-  static const rentIcon = FontAwesomeIcons.buildingUser;
-  static const inactiveRentIcon = FontAwesomeIcons.buildingUser;
-  static const favIcon = Icons.favorite;
-  static const inactiveFavIcon = Icons.favorite_border;
-  static const profileIcon = Icons.person;
-  static const inactiveProfileIcon = Icons.person_outlined;
-  static const bookIcon = Icons.vpn_key;
-  static const inactiveBookIcon = Icons.vpn_key_outlined;
-  static const homeIcon = Icons.home;
-  static const inactiveHomeIcon = Icons.home_outlined;
-  static const upload = FeatherIcons.uploadCloud;
-  static const signOutIcon = Icons.logout;
-  static const aboutUsIcon = Icons.info_outline;
-  static const editIcon = Icons.edit;
-  static const langIcon = Icons.language;
-  static const historyIcon = Icons.history;
-  static const lightIcon = Icons.brightness_7;
-  static const darkIcon = Icons.brightness_2;
-  static const exitIcon = Icons.close;
 }
 
 class CustomPngIcon extends StatelessWidget {
@@ -80,7 +66,7 @@ class CustomPngIcon extends StatelessWidget {
   const CustomPngIcon({
     super.key,
     required this.iconPath,
-    this.size = 24.0,
+    this.size = 50.0,
     this.color,
   });
 

@@ -1,5 +1,5 @@
 class AppImages{
- static const kLogoPath = 'assets/images/app-logo.png';
+ static const kLogoPath = 'assets/icon/appIcon.png';
  static const kLogoWhitePath = 'assets/images/app-logo-white.png';
  static const kSliderImage1 = 'assets/images/slider-image1.png';
  static const kSliderImage2 = 'assets/images/slider-image2.png';

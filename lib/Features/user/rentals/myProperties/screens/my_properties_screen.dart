@@ -1,0 +1,72 @@
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/rentals/myProperties/widgets/owner_property.dart';
+import 'package:mabeet/Features/user/rentals/services/owner_cubit.dart';
+import 'package:mabeet/Features/user/rentals/services/owner_state.dart';
+import 'package:mabeet/core/api/dio_consumer.dart';
+import 'package:mabeet/core/constants/strings.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/data/repos/owner_repo.dart';
+
+class MyPropertiesScreen extends StatefulWidget {
+  const MyPropertiesScreen({super.key});
+
+  @override
+  State<MyPropertiesScreen> createState() => _MyPropertiesScreenState();
+}
+
+class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => OwnerCubit(ownerRepository: OwnerRepository(api: DioConsumer(dio: Dio())))..loadMyProperties(),
+      child: Scaffold(
+        body: BlocConsumer<OwnerCubit, OwnerState>(
+          listener: (context, state) {
+            if (state is OwnerError) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.message)));
+            } else if (state is OwnerLoaded) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Rentals loaded successfully!'),
+                  backgroundColor: AppColors.primary700,
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is OwnerLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (state is OwnerLoaded) {
+              if(state.myProperties.isEmpty){
+                return Center(
+                  child: Text('${AppStrings.emptyBookingsMsg.tr()} .'),
+                );
+              }
+              return ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: state.myProperties.length,
+                itemBuilder: (context, index) {
+                  final property = state.myProperties[index];
+                  return OwnerProperty(property: property);
+                },
+              );
+            }
+
+            if (state is OwnerError) {
+              return Center(child: Text(state.message));
+            }
+
+            return Container();
+          },
+        ),
+      ),
+    );
+  }
+}

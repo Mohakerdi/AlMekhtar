@@ -41,7 +41,7 @@
   "terms_not_agreed": "لم توافق على الشروط!!!",
   "at_least_eight": "على الأقل 8 محارف",
   "login": "تسجيل الدخول",
-  "signUp": "اشاء حساب",
+  "sign_up": "اشاء حساب",
   "already_have_acc": "لديك حساب بالفعل؟ ",
   "acc_created_success": "تم إنشاء الحساب!",
   "create_acc_heading": "ادخل بياناتك لتبدأ بالتجربة!",
@@ -114,5 +114,9 @@
   "asc": "تصاعدي",
   "desc": "تنازلي",
   "apply": "تطبيق",
-  "reset": "اعادة ضبط"
+  "reset": "اعادة ضبط",
+  "delete": "حذف",
+  "cancel": "تراجع",
+  "delete-property-confirmation": "هل تريد حذف هذه الشقة من التطبيق",
+  "action-cannot-be-undone": "يرجى ملاحظة أنه لا يمكنك التراجع في حال الموفقة"
 }
