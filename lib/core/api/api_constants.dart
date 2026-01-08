@@ -17,6 +17,7 @@ class ApiConstants {
   static const String filter = 'apartments/filter';
   static const String apartment = 'apartments';
   static const String offer = 'offer';
+  static const String evaluate = 'evaluate';
 
   // Notification endpoints
   static const String notifications = 'notifications';
@@ -25,6 +26,8 @@ class ApiConstants {
   static const String renterPending = 'apartments/renter/pending';
   static const String renterActive = 'apartments/renter/active';
   static const String renterHistory = 'apartments/renter/history';
+  static const String reservations = 'apartments/reservations';
+  static const String finalPayment = 'final-payment';
 
   // Owner endpoints
   static const String myProperties = 'apartments/owner';
@@ -71,7 +74,7 @@ class ApiKey {
   // Location Keys
   static const String city = 'enCity';
   static const String state = 'enState';
-  static const String addressDescribed = 'address_described';
+  static const String addressDescribed = 'address_description';
 
   // Filter Keys
   static const String minPrice = 'minPrice';

@@ -23,7 +23,6 @@ class _BookingListScreenState extends State<BookingListScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      //delay to ensure data is available
       _fetchBookings();
     });
   }

@@ -41,4 +41,34 @@ class PaymentRepository {
     }
   }
 
+  Future<Either<String, String>> finalPayment({
+    required int bookingId,
+    required String cardNumber,
+    required String cvv,
+  }) async {
+    try {
+      final path = '${ApiConstants.reservations}/$bookingId/${ApiConstants.finalPayment}';
+      final queryParams = {
+        'cardNumber': int.parse(cardNumber),
+        'cvv': int.parse(cvv),
+      };
+
+      final response = await api.post(
+        path,
+        queryParameters: queryParams,
+        isFormData: false,
+        data: null,
+      );
+
+      final message = response['message'] as String;
+
+      return Right(message);
+
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left('Offer request failed: ${e.toString()}');
+    }
+  }
+
 }

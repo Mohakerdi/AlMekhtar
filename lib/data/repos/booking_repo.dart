@@ -66,6 +66,23 @@ class BookingRepository {
       rethrow;
     }
   }
+
+  Future<String> rateBooking({required int id, required double rate}) async {
+    try {
+      final endpoint = '${ApiConstants.apartment}/$id/${ApiConstants.evaluate}';
+      final queryParams = {'rate': rate};
+
+      final response = await api.post(
+        endpoint,
+        data: {},
+        queryParameters: queryParams,
+      );
+      final message = response[ApiKey.message] as String;
+      return message;
+    } on ServerException {
+      rethrow;
+    }
+  }
 }
 
 enum BookingType { pending, active, history }

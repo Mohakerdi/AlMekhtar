@@ -23,3 +23,15 @@ class BookingError extends BookingState {
   final String message;
   BookingError(this.message);
 }
+
+class RateBookingLoading extends BookingState {}
+
+class RateBookingSuccess extends BookingState {
+  final String message;
+  RateBookingSuccess(this.message);
+}
+
+class RateBookingError extends BookingState {
+  final String message;
+  RateBookingError(this.message);
+}

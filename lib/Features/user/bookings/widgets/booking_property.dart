@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mabeet/Features/user/bookings/services/booking_cubit.dart';
+import 'package:mabeet/Features/user/bookings/payment/screens/payment_screen.dart';
+import 'package:mabeet/Features/user/bookings/widgets/cancel_button.dart';
+import 'package:mabeet/Features/user/bookings/widgets/rating_button.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/data/models/booking_model.dart';
 import 'package:mabeet/data/models/property.dart';
 
@@ -19,14 +21,25 @@ class BookingProperty extends StatelessWidget {
     if (apartment != null) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (builder) => PropertyScreen(property: apartment, isOwner: false,),
+          builder: (builder) =>
+              PropertyScreen(property: apartment, isOwner: false),
+        ),
+      );
+    }
+  }
+
+  void _goToFinalPaymentScreen(BuildContext context, Booking? booking) {
+    if (booking != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (builder) =>
+              PaymentScreen(isFinalPayment: true, bookingId: booking.bookingId),
         ),
       );
     }
   }
 
   Widget _buildDeletedPropertyCard(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
@@ -37,28 +50,14 @@ class BookingProperty extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Deleted Property',
-                  style: textTheme.titleMedium!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.error700,
-                  ),
-                ),
-                _buildStatusChip(textTheme, booking.enStatus),
-              ],
-            ),
+            _buildStatusChip(booking.enStatus),
             const SizedBox(height: 8),
             Text(
               'This property is no longer available or has been removed by the owner.',
-              style: textTheme.bodyMedium!.copyWith(color: AppColors.gray600),
+              style: AppTextStyles.bodyMedium
             ),
             const SizedBox(height: 12),
             _buildDateSection(context, booking.startTerm, booking.endTerm),
-            if (booking.enStatus != 'Finished' && booking.enStatus != 'Cancelled')
-              _buildCancelButton(context),
           ],
         ),
       ),
@@ -72,10 +71,15 @@ class BookingProperty extends StatelessWidget {
     if (apartment == null) {
       return _buildDeletedPropertyCard(context);
     }
-    final String locationName =
-        '${apartment.state.name}, ${apartment.city}';
+    final String locationName = '${apartment.state.name}, ${apartment.city}';
     return InkWell(
-      onTap: () => _goToPropertyScreen(context, apartment),
+      onTap: () {
+        if (booking.enStatus == 'AwaitingPayment') {
+          _goToFinalPaymentScreen(context, booking);
+        } else {
+          _goToPropertyScreen(context, apartment);
+        }
+      },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -102,7 +106,10 @@ class BookingProperty extends StatelessWidget {
                           ),
                         ),
                       ),
-                      _buildCancelButton(context),
+                      CancelBookingButton(
+                        bookingId: booking.bookingId,
+                        status: booking.enStatus,
+                      ),
                     ],
                   ),
                   const SizedBox(width: 12),
@@ -126,7 +133,7 @@ class BookingProperty extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            _buildStatusChip(textTheme, booking.enStatus),
+                            _buildStatusChip(booking.enStatus),
                           ],
                         ),
                         const SizedBox(height: 4),
@@ -179,6 +186,8 @@ class BookingProperty extends StatelessWidget {
                             ),
                           ],
                         ),
+                        SizedBox(height: 8,),
+                        _buildRateButton(context)
                       ],
                     ),
                   ),
@@ -192,7 +201,7 @@ class BookingProperty extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusChip(TextTheme textTheme, String status) {
+  Widget _buildStatusChip(String status) {
     Color? backgroundColor;
     Color? textColor;
 
@@ -208,47 +217,46 @@ class BookingProperty extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 4,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
         status,
-        style: textTheme.labelSmall!.copyWith(
+        style: AppTextStyles.bodySmall.copyWith(
           color: textColor,
-          fontWeight: FontWeight.bold,
         ),
       ),
     );
   }
 
   Widget _buildDateSection(
-      BuildContext context,
-      String startTerm,
-      String endTerm,
-      ) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    BuildContext context,
+    String startTerm,
+    String endTerm,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(),
-        Text(
-          '${AppStrings.period.tr()}: ',
-          style: textTheme.labelLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-            color: AppColors.gray300,
-          ),
-        ),
+        Text('${AppStrings.period.tr()}: ', style: AppTextStyles.labelButton),
         const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildDateChip(context, AppIcons.startDate, '${AppStrings.start.tr()}:', startTerm),
-            _buildDateChip(context, AppIcons.endDate, '${AppStrings.end.tr()}:', endTerm),
+            _buildDateChip(
+              context,
+              AppIcons.startDate,
+              '${AppStrings.start.tr()}:',
+              startTerm,
+            ),
+            _buildDateChip(
+              context,
+              AppIcons.endDate,
+              '${AppStrings.end.tr()}:',
+              endTerm,
+            ),
           ],
         ),
       ],
@@ -256,56 +264,29 @@ class BookingProperty extends StatelessWidget {
   }
 
   Widget _buildDateChip(
-      BuildContext context,
-      IconData icon,
-      String label,
-      String date,
-      ) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    BuildContext context,
+    IconData icon,
+    String label,
+    String date,
+  ) {
     return Row(
       children: [
         Icon(icon, size: 16, color: AppColors.gray700),
         const SizedBox(width: 4),
-        Text(
-          '$label $date',
-          style: textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600),
-        ),
+        Text('$label $date', style: AppTextStyles.bodySmall),
       ],
     );
   }
 
-  Widget _buildCancelButton(BuildContext context) {
-    final BookingCubit cubit = context.read<BookingCubit>();
-    final bool canCancel =
-        booking.enStatus != 'Finished' && booking.enStatus != 'Cancelled';
+  Widget _buildRateButton(BuildContext context) {
+    final bool canRate =
+        (booking.enStatus == 'Finished' || booking.enStatus == 'Accepted') &&
+            booking.apartment != null;
 
-    if (!canCancel) {
+    if (!canRate) {
       return const SizedBox.shrink();
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: SizedBox(
-        width: 80,
-        child: OutlinedButton(
-          onPressed: () {
-            cubit.cancelBooking(booking.bookingId).then((successMessage) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(successMessage)));
-            });
-          },
-          style: OutlinedButton.styleFrom(
-            foregroundColor: AppColors.error700,
-            side: const BorderSide(color: AppColors.error700),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            padding: const EdgeInsets.all(4),
-          ),
-          child: const Icon(AppIcons.exitIcon, size: 20),
-        ),
-      ),
-    );
+    return RatingButton(propertyId: booking.apartment!.propertyId);
   }
 }

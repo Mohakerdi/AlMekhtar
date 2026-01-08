@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/services/add_state.dart';
+import 'package:mabeet/core/api/api_constants.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:mabeet/data/repos/owner_repo.dart';
 
@@ -90,6 +91,7 @@ class AddPropertyCubit extends Cubit<AddPropertyState> {
       cardNumber: cardNumberController.text
     );
 
+    emit(AddPropertySuccess(message: response));
     return response;
   }
 

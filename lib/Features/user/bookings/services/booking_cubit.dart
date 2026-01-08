@@ -8,8 +8,8 @@ class BookingCubit extends Cubit<BookingState> {
   final BookingRepository _bookingRepository;
 
   BookingCubit({required BookingRepository bookingRepository})
-      : _bookingRepository = bookingRepository,
-        super(BookingInitial());
+    : _bookingRepository = bookingRepository,
+      super(BookingInitial());
 
   BookingLoaded get _currentStateData {
     if (state is BookingLoaded) {
@@ -28,14 +28,15 @@ class BookingCubit extends Cubit<BookingState> {
     try {
       final pending = await _bookingRepository.getPendingAwaitingBookings();
       final currentData = _currentStateData;
-      emit(BookingLoaded(
-        pendingBookings: pending,
-        activeBookings: currentData.activeBookings,
-        historyBookings: currentData.historyBookings,
-      ));
+      emit(
+        BookingLoaded(
+          pendingBookings: pending,
+          activeBookings: currentData.activeBookings,
+          historyBookings: currentData.historyBookings,
+        ),
+      );
     } catch (e) {
-      emit(BookingError('${AppStrings.failedLoad.tr()} $e',
-      ));
+      emit(BookingError('${AppStrings.failedLoad.tr()} $e'));
     }
   }
 
@@ -47,14 +48,15 @@ class BookingCubit extends Cubit<BookingState> {
 
       final currentData = _currentStateData;
 
-      emit(BookingLoaded(
-        pendingBookings: currentData.pendingBookings,
-        activeBookings: active,
-        historyBookings: currentData.historyBookings,
-      ));
+      emit(
+        BookingLoaded(
+          pendingBookings: currentData.pendingBookings,
+          activeBookings: active,
+          historyBookings: currentData.historyBookings,
+        ),
+      );
     } catch (e) {
-      emit(BookingError('${AppStrings.failedLoad.tr()} $e',
-      ));
+      emit(BookingError('${AppStrings.failedLoad.tr()} $e'));
     }
   }
 
@@ -66,14 +68,15 @@ class BookingCubit extends Cubit<BookingState> {
 
       final currentData = _currentStateData;
 
-      emit(BookingLoaded(
-        pendingBookings: currentData.pendingBookings,
-        activeBookings: currentData.activeBookings,
-        historyBookings: history,
-      ));
+      emit(
+        BookingLoaded(
+          pendingBookings: currentData.pendingBookings,
+          activeBookings: currentData.activeBookings,
+          historyBookings: history,
+        ),
+      );
     } catch (e) {
-      emit(BookingError('${AppStrings.failedLoad.tr()} $e',
-      ));
+      emit(BookingError('${AppStrings.failedLoad.tr()} $e'));
     }
   }
 
@@ -82,18 +85,36 @@ class BookingCubit extends Cubit<BookingState> {
       final message = await _bookingRepository.cancelBooking(bookingId);
       final currentData = _currentStateData;
 
-      final updatedPending = currentData.pendingBookings.where((b) => b.bookingId != bookingId).toList();
-      final updatedActive = currentData.activeBookings.where((b) => b.bookingId != bookingId).toList();
+      final updatedPending = currentData.pendingBookings
+          .where((b) => b.bookingId != bookingId)
+          .toList();
+      final updatedActive = currentData.activeBookings
+          .where((b) => b.bookingId != bookingId)
+          .toList();
 
-      emit(BookingLoaded(
-        pendingBookings: updatedPending,
-        activeBookings: updatedActive,
-        historyBookings: currentData.historyBookings,
-      ));
+      emit(
+        BookingLoaded(
+          pendingBookings: updatedPending,
+          activeBookings: updatedActive,
+          historyBookings: currentData.historyBookings,
+        ),
+      );
       return message;
     } catch (e) {
-      emit(BookingError(AppStrings.bookingCancelError.tr(),
-      ));
+      emit(BookingError(AppStrings.bookingCancelError.tr()));
+      rethrow;
+    }
+  }
+
+  Future<String> rateBooking(int id, double rate) async {
+    emit(RateBookingLoading());
+    try {
+      final message = await _bookingRepository.rateBooking(id: id, rate: rate);
+      emit(RateBookingSuccess(message));
+      return message;
+    } catch (e) {
+      emit(RateBookingError(e.toString()));
+
       rethrow;
     }
   }

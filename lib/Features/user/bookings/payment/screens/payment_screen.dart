@@ -9,8 +9,10 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/text_styles.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+  const PaymentScreen({super.key, this.isFinalPayment=false, this.bookingId=0});
 
+  final bool isFinalPayment;
+  final int bookingId;
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
@@ -100,6 +102,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void _sendForm() {
     if (_formKey.currentState!.validate()) {
       context.read<PaymentCubit>().saveCardDetails();
+      if(widget.isFinalPayment){
+        context.read<PaymentCubit>().submitFinalPayment(bookingId: widget.bookingId);
+      }
       Navigator.pop(context);
       ScaffoldMessenger.of(
         context,
