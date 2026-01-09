@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
+import 'package:mabeet/Features/user/home/search/cubit/search_filter_state.dart';
 import 'package:mabeet/core/widgets/CustomAppBar.dart';
 import '../locations/screens/locations_screen.dart';
 import '../search/screens/search_screen.dart';
@@ -73,94 +74,132 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    context.read<SearchFilterCubit>().seeAllFilters();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(titleText: AppStrings.homeScreenTitle.tr()),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SearchField(onPressed: _showOverlay),
-              const SizedBox(height: 25),
-              const HomeAdsSwiper(),
-              const SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppStrings.recommendedSectionTitle.tr(),
-                    style: AppTextStyles.heading2Medium,
-                  ),
-                  InkWell(
-                    onTap: _goToSearchScreen,
-                    child: Text(
-                      AppStrings.seeAllButton.tr(),
-                      style: AppTextStyles.bodyLarge.copyWith(
-                        color: AppColors.primary700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SingleChildScrollView(
-                padding: EdgeInsets.all(10),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  spacing: 20,
+      body: BlocBuilder<SearchFilterCubit, SearchFilterState>(
+        builder: (context, state) {
+          final properties = state.properties;
+          final recommendedItems = properties?.take(3).toList();
+          final popularItems = properties?.take(3).toList();
+
+          return RefreshIndicator(
+            onRefresh: () async =>
+                context.read<SearchFilterCubit>().seeAllFilters(),
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 10,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    RecommendedHomeProperty(property: dummyProperties[0]),
-                    RecommendedHomeProperty(property: dummyProperties[3]),
-                    RecommendedHomeProperty(property: dummyProperties[1]),
+                    SearchField(onPressed: _showOverlay),
+                    const SizedBox(height: 25),
+                    const HomeAdsSwiper(),
+                    const SizedBox(height: 25),
+
+                    // --- RECOMMENDED SECTION ---
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppStrings.recommendedSectionTitle.tr(),
+                          style: AppTextStyles.heading2Medium,
+                        ),
+                        InkWell(
+                          onTap: _goToSearchScreen,
+                          child: Text(
+                            AppStrings.seeAllButton.tr(),
+                            style: AppTextStyles.bodyLarge.copyWith(
+                              color: AppColors.secondaryLight,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    state.isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: recommendedItems!
+                                  .map(
+                                    (prop) => Padding(
+                                      padding: const EdgeInsets.only(right: 20),
+                                      child: RecommendedHomeProperty(
+                                        property: prop,
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+
+                    const SizedBox(height: 25),
+
+                    // --- TOP LOCATIONS SECTION ---
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppStrings.topLocationsSectionTitle.tr(),
+                          style: AppTextStyles.heading2Medium,
+                        ),
+                        InkWell(
+                          onTap: _goToLocationsScreen,
+                          child: Text(
+                            AppStrings.seeAllButton.tr(),
+                            style: AppTextStyles.bodyLarge.copyWith(
+                              color: AppColors.secondaryLight,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const LocationsSlider(),
+
+                    const SizedBox(height: 25),
+
+                    // --- POPULAR FOR YOU SECTION ---
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppStrings.popularForYouSectionTitle.tr(),
+                          style: AppTextStyles.heading2Medium,
+                        ),
+                        InkWell(
+                          onTap: _goToSearchScreen,
+                          child: Text(
+                            AppStrings.seeAllButton.tr(),
+                            style: AppTextStyles.bodyLarge.copyWith(
+                              color: AppColors.secondaryLight,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    state.isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : PropertiesList(items: popularItems!),
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppStrings.topLocationsSectionTitle.tr(),
-                    style: AppTextStyles.heading2Medium,
-                  ),
-                  InkWell(
-                    onTap: _goToLocationsScreen,
-                    child: Text(
-                      AppStrings.seeAllButton.tr(),
-                      style: AppTextStyles.bodyLarge.copyWith(
-                        color: AppColors.primary700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              LocationsSlider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppStrings.popularForYouSectionTitle.tr(),
-                    style: AppTextStyles.heading2Medium,
-                  ),
-                  InkWell(
-                    onTap: _goToSearchScreen,
-                    child: Text(
-                      AppStrings.seeAllButton.tr(),
-                      style: AppTextStyles.bodyLarge.copyWith(
-                        color: AppColors.primary700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: PropertiesList(),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

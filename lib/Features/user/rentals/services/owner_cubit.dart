@@ -7,18 +7,15 @@ import 'owner_state.dart';
 class OwnerCubit extends Cubit<OwnerState> {
   final OwnerRepository _ownerRepository;
 
-
   OwnerCubit({required OwnerRepository ownerRepository})
-      : _ownerRepository = ownerRepository,
-        super(OwnerInitial());
+    : _ownerRepository = ownerRepository,
+      super(OwnerInitial());
 
   OwnerLoaded get _currentStateData {
     if (state is OwnerLoaded) {
       return state as OwnerLoaded;
     }
-    return OwnerLoaded(
-      myProperties: []
-    );
+    return OwnerLoaded(myProperties: []);
   }
 
   Future<void> loadMyProperties() async {
@@ -26,12 +23,9 @@ class OwnerCubit extends Cubit<OwnerState> {
 
     try {
       final properties = await _ownerRepository.getMyProperties();
-      emit(OwnerLoaded(
-        myProperties: properties,
-      ));
+      emit(OwnerLoaded(myProperties: properties));
     } catch (e) {
-      emit(OwnerError('${AppStrings.failedLoad.tr()} $e',
-      ));
+      emit(OwnerError('${AppStrings.failedLoad.tr()} $e'));
     }
   }
 
@@ -40,15 +34,14 @@ class OwnerCubit extends Cubit<OwnerState> {
       final message = await _ownerRepository.deleteProperty(id);
       final currentData = _currentStateData;
 
-      final updatedProperty = currentData.myProperties.where((b) => b.propertyId != id).toList();
+      final updatedProperty = currentData.myProperties
+          .where((b) => b.propertyId != id)
+          .toList();
 
-      emit(OwnerLoaded(
-        myProperties: updatedProperty
-      ));
+      emit(OwnerLoaded(myProperties: updatedProperty));
       return message;
     } catch (e) {
-      emit(OwnerError(AppStrings.bookingCancelError.tr(),
-      ));
+      emit(OwnerError(AppStrings.bookingCancelError.tr()));
       rethrow;
     }
   }
@@ -62,10 +55,12 @@ class OwnerCubit extends Cubit<OwnerState> {
       final requests = await _ownerRepository.getPendingBookingRequests();
       final currentData = _currentStateData;
 
-      emit(OwnerLoaded(
-        myProperties: currentData.myProperties,
-        pendingRequests: requests,
-      ));
+      emit(
+        OwnerLoaded(
+          myProperties: currentData.myProperties,
+          pendingRequests: requests,
+        ),
+      );
     } catch (e) {
       emit(OwnerError('${AppStrings.failedLoad.tr()} $e'));
     }
@@ -79,18 +74,20 @@ class OwnerCubit extends Cubit<OwnerState> {
           .where((b) => b.bookingId != bookingId)
           .toList();
 
-      emit(OwnerLoaded(
-        myProperties: currentData.myProperties,
-        pendingRequests: updatedRequests,
-      ));
+      emit(
+        OwnerLoaded(
+          myProperties: currentData.myProperties,
+          pendingRequests: updatedRequests,
+        ),
+      );
 
       return message;
     } catch (e) {
-      emit(OwnerError(AppStrings.failedLoad.tr(),
-      ));
+      emit(OwnerError(AppStrings.failedLoad.tr()));
       rethrow;
     }
   }
+
   Future<String> rejectRequest(int bookingId) async {
     try {
       final message = await _ownerRepository.rejectBooking(bookingId);
@@ -99,16 +96,43 @@ class OwnerCubit extends Cubit<OwnerState> {
           .where((b) => b.bookingId != bookingId)
           .toList();
 
-      emit(OwnerLoaded(
-        myProperties: currentData.myProperties,
-        pendingRequests: updatedRequests,
-      ));
+      emit(
+        OwnerLoaded(
+          myProperties: currentData.myProperties,
+          pendingRequests: updatedRequests,
+        ),
+      );
 
       return message;
     } catch (e) {
-      emit(OwnerError(AppStrings.failedLoad.tr(),
-      ));
+      emit(OwnerError(AppStrings.failedLoad.tr()));
       rethrow;
+    }
+  }
+
+  Future<void> loadContracts() async {
+    if (_currentStateData.pendingRequests.isEmpty && state is! OwnerLoading) {
+      emit(OwnerLoading());
+    }
+
+    try {
+      final contracts = await _ownerRepository.getContracts();
+      final filterdContracts = contracts.where(
+        (c) =>
+            (c.enStatus == 'Finished' ||
+            c.enStatus == 'Accepted' ||
+            c.enStatus == 'Active'),
+      ).toList();
+      final currentData = _currentStateData;
+
+      emit(
+        OwnerLoaded(
+          myProperties: currentData.myProperties,
+          contracts: filterdContracts,
+        ),
+      );
+    } catch (e) {
+      emit(OwnerError('${AppStrings.failedLoad.tr()} $e'));
     }
   }
 }

@@ -135,6 +135,19 @@ class OwnerRepository {
     }
   }
 
+  Future<List<Booking>> getContracts() async {
+    try {
+      final response = await api.get(ApiConstants.allReservations);
+      final List<dynamic> data = response[ApiKey.data] ?? [];
+
+      return data
+          .map((json) => Booking.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } on ServerException {
+      rethrow;
+    }
+  }
+
   Future<String> acceptBooking(int bookingId) async {
     try {
       final endpoint = '${ApiConstants.reservations}/$bookingId/${ApiConstants.awaitingPayment}';

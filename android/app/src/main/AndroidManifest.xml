@@ -4,7 +4,7 @@
 
     <application
         android:label="Al-Mekhtar"
-        android:name="${applicationName}"
+        android:name="Al-Mekhtar"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"> 
 

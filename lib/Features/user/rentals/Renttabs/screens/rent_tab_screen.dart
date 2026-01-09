@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/screens/add_property_screen.dart';
-import 'package:mabeet/Features/user/rentals/available/screens/available_screen.dart';
+import 'package:mabeet/Features/user/rentals/contracts/screens/contracts_screen.dart';
 import 'package:mabeet/Features/user/rentals/myProperties/screens/my_properties_screen.dart';
 import 'package:mabeet/Features/user/rentals/requests/screens/requests_screen.dart';
 import 'package:mabeet/core/constants/strings.dart';
@@ -32,9 +32,9 @@ class RentTabScreen extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  AvailableScreen(),
+                  ContractsScreen(),
                   MyPropertiesScreen(),
-                  RequestsScreen()
+                  RequestsScreen(),
                 ],
               ),
             ),

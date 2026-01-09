@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
@@ -42,11 +43,15 @@ class RecommendedHomeProperty extends StatelessWidget {
           },
           child: Stack(
             children: [
-              Image.asset(
-                property.imageURLs[0],
-                fit: BoxFit.fill,
+              CachedNetworkImage(
+                imageUrl: property.imageURLs[0],
                 width: double.infinity,
                 height: double.infinity,
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                const CircularProgressIndicator(color: Colors.white),
+                errorWidget: (context, url, error) =>
+                const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
               ),
               Padding(
                 padding: EdgeInsets.only(

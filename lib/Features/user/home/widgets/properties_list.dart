@@ -4,9 +4,9 @@ import 'package:mabeet/data/models/property.dart';
 import 'package:mabeet/data/repos/dummy_properties.dart';
 
 class PropertiesList extends StatelessWidget {
-  PropertiesList({super.key});
+  const PropertiesList({super.key, required this.items});
 
-  final List<Property> items = dummyProperties;
+  final List<Property> items;
 
   @override
   Widget build(BuildContext context) {

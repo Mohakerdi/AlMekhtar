@@ -10,9 +10,11 @@ class OwnerLoading extends OwnerState {}
 class OwnerLoaded extends OwnerState {
   final List<Property> myProperties;
   final List<Booking> pendingRequests;
+  final List<Booking> contracts;
   OwnerLoaded({
     required this.myProperties,
     this.pendingRequests = const [],
+    this.contracts = const [],
   });
 }
 
