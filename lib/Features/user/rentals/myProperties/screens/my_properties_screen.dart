@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/rentals/myProperties/widgets/owner_property.dart';
+import 'package:mabeet/Features/user/rentals/myProperties/widgets/owner_property_shimmer.dart';
 import 'package:mabeet/Features/user/rentals/services/owner_cubit.dart';
 import 'package:mabeet/Features/user/rentals/services/owner_state.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
@@ -40,7 +41,13 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
           },
           builder: (context, state) {
             if (state is OwnerLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return OwnerPropertyShimmer();
+                },
+              );
             }
 
             if (state is OwnerLoaded) {

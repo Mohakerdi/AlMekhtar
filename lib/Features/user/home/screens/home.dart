@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_state.dart';
+import 'package:mabeet/Features/user/home/widgets/shimmer_widgets/recommended_home_property_shimmer.dart';
 import 'package:mabeet/core/widgets/CustomAppBar.dart';
 import '../locations/screens/locations_screen.dart';
 import '../search/screens/search_screen.dart';
@@ -129,7 +130,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 10),
                     state.isLoading
-                        ? const Center(child: CircularProgressIndicator())
+                        ? SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children:[RecommendedHomePropertyShimmer(),RecommendedHomePropertyShimmer(),RecommendedHomePropertyShimmer(),]
+                            ),
+                          )
                         : SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(

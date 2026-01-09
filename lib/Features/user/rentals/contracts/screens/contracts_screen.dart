@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/rentals/requests/widgets/rent_request_widget.dart';
+import 'package:mabeet/Features/user/rentals/requests/widgets/rent_request_widget_shimmer.dart';
 import 'package:mabeet/Features/user/rentals/services/owner_cubit.dart';
 import 'package:mabeet/Features/user/rentals/services/owner_state.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
@@ -33,7 +34,13 @@ class ContractsScreen extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is OwnerLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return RequestWidgetShimmer(showActions: false,);
+                },
+              );
             }
 
             if (state is OwnerLoaded) {
