@@ -91,4 +91,24 @@ class OwnerCubit extends Cubit<OwnerState> {
       rethrow;
     }
   }
+  Future<String> rejectRequest(int bookingId) async {
+    try {
+      final message = await _ownerRepository.rejectBooking(bookingId);
+      final currentData = _currentStateData;
+      final updatedRequests = currentData.pendingRequests
+          .where((b) => b.bookingId != bookingId)
+          .toList();
+
+      emit(OwnerLoaded(
+        myProperties: currentData.myProperties,
+        pendingRequests: updatedRequests,
+      ));
+
+      return message;
+    } catch (e) {
+      emit(OwnerError(AppStrings.failedLoad.tr(),
+      ));
+      rethrow;
+    }
+  }
 }

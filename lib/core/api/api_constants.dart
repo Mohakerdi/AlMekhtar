@@ -32,6 +32,8 @@ class ApiConstants {
   // Owner endpoints
   static const String myProperties = 'apartments/owner';
   static const String pendingReservations = '/apartments/reservations/pending';
+  static const String awaitingPayment = 'awaiting-payment';
+  static const String reject = 'reject';
 }
 
 class ApiKey {

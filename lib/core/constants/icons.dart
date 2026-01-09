@@ -56,6 +56,7 @@ class AppIcons{
  static const editCalender = Icons.edit_calendar;
  static const cloudUpload = Icons.cloud_upload;
  static const profilePageArrow = Icons.arrow_forward_ios;
+ static const phone = Icons.phone;
 }
 
 class CustomPngIcon extends StatelessWidget {

@@ -37,7 +37,7 @@ class _RatingDialogState extends State<RatingDialog> {
         }
       },
       child: AlertDialog(
-        title: Text('AppStrings.rateYourBooking.tr()'),
+        title: Text(AppStrings.rateYourBooking.tr()),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -73,7 +73,7 @@ class _RatingDialogState extends State<RatingDialog> {
           ),
 
           ElevatedButton(
-            child: Text('AppStrings.submit.tr()'),
+            child: Text(AppStrings.submit.tr()),
             onPressed: () {
               context.read<BookingCubit>().rateBooking(
                 widget.propertyId,

@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/bookings/services/booking_cubit.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
-
-import '../../../../core/constants/icons.dart';
+import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/strings.dart';
 
 class CancelBookingButton extends StatelessWidget {
   final int bookingId;
@@ -28,7 +29,7 @@ class CancelBookingButton extends StatelessWidget {
       child: SizedBox(
         width: 80,
         child: OutlinedButton(
-          onPressed: () => _handleCancel(context),
+          onPressed: () => _showConfirmationDialog(context),
           style: OutlinedButton.styleFrom(
             foregroundColor: AppColors.error700,
             side: const BorderSide(color: AppColors.error700),
@@ -43,7 +44,38 @@ class CancelBookingButton extends StatelessWidget {
     );
   }
 
-  void _handleCancel(BuildContext context) {
+  void _showConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text(AppStrings.cancelBookingConfirmationTitle.tr()),
+          content: Text(AppStrings.cancelBookingConfirmationBody.tr()),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+              child: Text(AppStrings.cancel.tr()),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+                _executeCancellation(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.error700,
+                foregroundColor: Colors.white,
+              ),
+              child: Text(AppStrings.submit.tr()),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _executeCancellation(BuildContext context) {
     final cubit = context.read<BookingCubit>();
 
     cubit.cancelBooking(bookingId).then((successMessage) {
@@ -56,7 +88,6 @@ class CancelBookingButton extends StatelessWidget {
         );
       }
     }).catchError((error) {
-
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

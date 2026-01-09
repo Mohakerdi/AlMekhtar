@@ -128,7 +128,19 @@ abstract class AppStrings {
   static const String apply = 'apply';
   static const String delete = 'delete';
   static const String cancel = 'cancel';
-  static const String deletePropertyConfirmation = 'delete-property-confirmation';
-  static const String actionCannotBeUndone = 'action-cannot-be-undone';
+  static const String deletePropertyConfirmation = 'delete_property_confirmation';
+  static const String actionCannotBeUndone = 'action_cannot_be_undone';
+  static const String rateYourBooking = 'rate_your_booking';
+  static const String submit = 'submit';
+  static const String cancelBookingConfirmationTitle = 'cancel_booking_confirmation_title';
+  static const String cancelBookingConfirmationBody = 'cancel_booking_confirmation_body';
+  static const String deletedPropertyPlaceHolder = 'deleted_property_place_holder';
+  static const String accept = 'accept';
+  static const String reject = 'reject';
+  static const String renter = 'renter';
+  static const String ownerTitle = 'owner_title';
+  static const String myProperties = 'my_properties';
+  static const String requests = 'requests';
+  static const String contracts = 'contracts';
 
 }

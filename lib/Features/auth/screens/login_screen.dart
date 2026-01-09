@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/auth/widgets/loading_button.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import '../../user/tabs.dart';
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 161),
                     state is LogInLoading
-                        ? CircularProgressIndicator()
+                        ? LoadingButton()
                         : AuthButton(
                             buttonsText: AppStrings.login.tr(),
                             onBtnPressed: _sendForm,

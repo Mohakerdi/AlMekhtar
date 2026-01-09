@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/auth/widgets/loading_button.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
@@ -112,7 +113,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     AgreeTerms(onTermsChanged: _handleTermsChange),
                     SizedBox(height: 20),
                     state is SignUpLoading
-                        ? CircularProgressIndicator()
+                        ? LoadingButton()
                         : AuthButton(
                             buttonsText: AppStrings.signUp.tr(),
                             onBtnPressed: _sendForm,

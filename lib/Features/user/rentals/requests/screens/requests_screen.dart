@@ -52,6 +52,10 @@ class _RequestsScreenState extends State<RequestsScreen> {
                       context.read<OwnerCubit>().acceptRequest(booking.bookingId);
                       context.read<OwnerCubit>().loadPendingRequests();
                     },
+                    onReject: () {
+                      context.read<OwnerCubit>().rejectRequest(booking.bookingId);
+                      context.read<OwnerCubit>().loadPendingRequests();
+                    },
                   );
                 },
               );

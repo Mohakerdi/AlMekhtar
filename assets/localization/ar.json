@@ -117,6 +117,26 @@
   "reset": "اعادة ضبط",
   "delete": "حذف",
   "cancel": "تراجع",
-  "delete-property-confirmation": "هل تريد حذف هذه الشقة من التطبيق",
-  "action-cannot-be-undone": "يرجى ملاحظة أنه لا يمكنك التراجع في حال الموفقة"
+  "delete_property_confirmation": "هل تريد حذف هذه الشقة من التطبيق",
+  "action_cannot_be_undone": "يرجى ملاحظة أنه لا يمكنك التراجع في حال الموفقة",
+  "rate_your_booking": "قيم هذه الشقة",
+  "submit": "إرسال",
+  "cancel_booking_confirmation_title": "الغاء هذا الحجز",
+  "cancel_booking_confirmation_body": "هل تريد حقاً الإلغاء؟\nانتبه أنه إذا ألغيت الحجز قبل أقل من 3 أيام من البداية, لن يتم إعادة الرعبون",
+  "deleted_property_place_holder": "هذه الشقة أصبحت غير متوفرة أو تم إزالتها من قبل المالك",
+  "Pending": "معلّق",
+  "AwaitingPayment": "بانتظار الدفع",
+  "Active": "فعال",
+  "Accepted": "مقبول",
+  "Finished": "منتهي",
+  "Cancelled": "ملغي",
+  "accept": "قبول",
+  "reject": "رفض",
+  "renter": "المُستأجِر",
+  "owner_title": "الشقق الخاصة بك",
+  "contracts": "العقود",
+  "requests": "الطلبات",
+  "my_properties": "شققي"
+
+
 }

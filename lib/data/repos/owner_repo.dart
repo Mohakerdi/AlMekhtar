@@ -137,7 +137,17 @@ class OwnerRepository {
 
   Future<String> acceptBooking(int bookingId) async {
     try {
-      final endpoint = 'apartments/reservations/$bookingId/awaiting-payment';
+      final endpoint = '${ApiConstants.reservations}/$bookingId/${ApiConstants.awaitingPayment}';
+      final response = await api.post(endpoint, data: {});
+      final message = response[ApiKey.message] as String;
+      return message;
+    } on ServerException {
+      rethrow;
+    }
+  }
+  Future<String> rejectBooking(int bookingId) async {
+    try {
+      final endpoint = '${ApiConstants.reservations}/$bookingId/${ApiConstants.reject}';
       final response = await api.post(endpoint, data: {});
       final message = response[ApiKey.message] as String;
       return message;

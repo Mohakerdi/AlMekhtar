@@ -53,7 +53,7 @@ class BookingProperty extends StatelessWidget {
             _buildStatusChip(booking.enStatus),
             const SizedBox(height: 8),
             Text(
-              'This property is no longer available or has been removed by the owner.',
+              AppStrings.deletedPropertyPlaceHolder.tr(),
               style: AppTextStyles.bodyMedium
             ),
             const SizedBox(height: 12),
@@ -211,6 +211,9 @@ class BookingProperty extends StatelessWidget {
     } else if (status == 'Active' || status == 'Accepted') {
       backgroundColor = AppColors.success50;
       textColor = AppColors.success700;
+    } else if (status == 'Finished') {
+      backgroundColor = AppColors.gray50;
+      textColor = AppColors.gray700;
     } else {
       backgroundColor = AppColors.error50;
       textColor = AppColors.error700;
@@ -223,7 +226,7 @@ class BookingProperty extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
-        status,
+        status.tr(),
         style: AppTextStyles.bodySmall.copyWith(
           color: textColor,
         ),

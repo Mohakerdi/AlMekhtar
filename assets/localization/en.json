@@ -115,6 +115,25 @@
   "reset": "Reset",
   "delete": "Delete",
   "cancel": "Cancel",
-  "delete-property-confirmation": "Do you confirm to delete this property from the system",
-  "action-cannot-be-undone": "Note that this action cannot be undone!"
+  "delete_property_confirmation": "Do you confirm to delete this property from the system",
+  "action_cannot_be_undone": "Note that this action cannot be undone!",
+  "rate_your_booking": "Rate This Property",
+  "submit": "submit",
+  "cancel_booking_confirmation_title": "Cancel this booking",
+  "cancel_booking_confirmation_body": "are you sure to cancel?\nNote that if you cancel within three days of duration, you wont get refunded",
+  "deleted_property_place_holder": "This property is no longer available or has been removed by the owner.",
+  "Pending": "Pending",
+  "AwaitingPayment": "Awaiting Payment",
+  "Active": "Active",
+  "Accepted": "Accepted",
+  "Finished": "Finished",
+  "Cancelled": "Cancelled",
+  "accept": "Accept",
+  "reject": "Reject",
+  "renter": "Renter",
+  "owner_title": "Owned Properties",
+  "contracts": "Contracts",
+  "requests": "Requests",
+  "my_properties": "My Properties"
+
 }
