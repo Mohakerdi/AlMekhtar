@@ -30,7 +30,7 @@ class RecommendedHomeProperty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String locationName =
-        '${property.state.name}, ${property.area}';
+        '${property.state.name}, ${property.city}';
 
     return SizedBox(
       width: 240,
@@ -67,7 +67,6 @@ class RecommendedHomeProperty extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Card(
-                          shadowColor: Colors.transparent,
                           child: Padding(
                             padding: EdgeInsets.all(5),
                             child: Row(

@@ -109,7 +109,7 @@ class FavoritesProperty extends StatelessWidget {
                                 color: AppColors.warning700,
                               ),
                               Text(
-                                '${property.avgRate}',
+                                '${property.avgRate.toStringAsFixed(1)}',
                                 style: AppTextStyles.bodyMediumBold,
                               ),
                             ],

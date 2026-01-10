@@ -177,7 +177,7 @@ class BookingProperty extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  '${apartment.avgRate}',
+                                  '${apartment.avgRate.toStringAsFixed(1)}',
                                   style: textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -284,7 +284,7 @@ class BookingProperty extends StatelessWidget {
   Widget _buildRateButton(BuildContext context) {
     final bool canRate =
         (booking.enStatus == 'Finished' || booking.enStatus == 'Accepted') &&
-            booking.apartment != null;
+            (booking.apartment != null && booking.rate == 0);
 
     if (!canRate) {
       return const SizedBox.shrink();

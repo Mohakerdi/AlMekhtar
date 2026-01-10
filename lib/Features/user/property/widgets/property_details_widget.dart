@@ -50,7 +50,7 @@ class PropertyDetailsWidget extends StatelessWidget {
           _buildDetailItem(
             icon: AppIcons.star,
             label: AppStrings.rate.tr(),
-            value: '$rate',
+            value: '${rate.toStringAsFixed(1)}',
             iconColor: AppColors.warning700,
           ),
         ],

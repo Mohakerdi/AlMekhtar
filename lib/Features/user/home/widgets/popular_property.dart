@@ -24,7 +24,7 @@ class PopularProperty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String locationName = '${property.state.name}, ${property.area}';
+    final String locationName = '${property.state.name}, ${property.city}';
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: InkWell(
@@ -120,7 +120,7 @@ class PopularProperty extends StatelessWidget {
                                 color: AppColors.warning700,
                               ),
                               Text(
-                                '${property.avgRate}',
+                                '${property.avgRate.toStringAsFixed(1)}',
                                 style: AppTextStyles.bodyMediumBold,
                               ),
                             ],

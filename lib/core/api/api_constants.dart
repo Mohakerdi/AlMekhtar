@@ -1,7 +1,7 @@
 class ApiConstants {
   // Base URLs
-  static const String BaseUrl = "http://127.0.0.1:8000/api/";
-  static const String StorageBaseUrl = 'http://127.0.0.1:8000/storage/';
+  static const String BaseUrl = "http://192.168.43.181:8000/api/";
+  static const String StorageBaseUrl = 'http://192.168.43.181:8000/storage/';
 
   // Authentication endpoints
   static const String login = 'login';
@@ -71,7 +71,7 @@ class ApiKey {
   static const String price = 'price';
   static const String area = 'area';
   static const String floor = 'floor';
-  static const String rate = 'address_described';
+  static const String rate = 'rate';
   static const String propertyId = 'property_id';
 
   // Location Keys

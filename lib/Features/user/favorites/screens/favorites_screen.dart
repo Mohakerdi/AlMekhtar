@@ -20,7 +20,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // prevent inherited error
       context.read<FavoriteCubit>().getFavorites();
     });
   }
@@ -56,23 +55,28 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             itemCount: favorites.length,
             itemBuilder: (context, index) {
               final property = favorites[index];
-              return Dismissible(
-                key: ValueKey(property.propertyId),
+              return Column(
+                children: [
+                  Dismissible(
+                    key: ValueKey(property.propertyId),
 
-                direction: DismissDirection.horizontal,
+                    direction: DismissDirection.horizontal,
 
-                background: _buildSwipeBackground(
-                  alignment: Alignment.centerLeft,
-                  color: Colors.red.shade400,
-                  icon: AppIcons.delete,
-                ),
+                    background: _buildSwipeBackground(
+                      alignment: Alignment.centerLeft,
+                      color: Colors.red.shade400,
+                      icon: AppIcons.delete,
+                    ),
 
-                onDismissed: (direction) {
-                  context.read<FavoriteCubit>().removeWithSwipe(
-                    property.propertyId,
-                  );
-                },
-                child: FavoritesProperty(property: property),
+                    onDismissed: (direction) {
+                      context.read<FavoriteCubit>().removeWithSwipe(
+                        property.propertyId,
+                      );
+                    },
+                    child: FavoritesProperty(property: property),
+                  ),
+                  if(index != favorites.length-1) Divider()
+                ],
               );
             },
           );

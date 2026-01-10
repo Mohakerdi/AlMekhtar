@@ -6,6 +6,7 @@ import 'package:mabeet/Features/user/bookings/payment/cubit/payment_state.dart';
 import 'package:mabeet/Features/user/bookings/payment/screens/payment_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/strings.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../widgets/rent_now_property_widget.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../data/models/property.dart';
@@ -54,22 +55,10 @@ class _RentNowScreenState extends State<RentNowScreen> {
   }
 
   String _maskCardNumber(String fullNumber) {
-    if (fullNumber.length < 4) {
-      return fullNumber;
-    }
-    final maskedPart = '*' * (fullNumber.length - 4);
-    final lastFour = fullNumber.substring(fullNumber.length - 4);
-    final maskedCard = '$maskedPart $lastFour';
-    String formattedMasked = '';
-    for (int i = 0; i < maskedPart.length; i++) {
-      formattedMasked += maskedPart[i];
-      if ((i + 1) % 4 == 0) {
-        formattedMasked += ' ';
-      }
-    }
-
-    formattedMasked = formattedMasked.trim();
-    return '$formattedMasked $lastFour';
+    String clean = fullNumber.replaceAll(' ', '');
+    if (clean.length < 4) return clean;
+    String lastFour = clean.substring(clean.length - 4);
+    return "**** **** **** $lastFour";
   }
 
   void _goToPaymentScreen() async {
@@ -139,11 +128,22 @@ class _RentNowScreenState extends State<RentNowScreen> {
               backgroundColor: AppColors.primary700,
             ),
           );
-          Navigator.of(context).pop();
+          Future.delayed(Duration.zero, () {
+            if (mounted) {
+              Navigator.of(context).pop();
+            }
+          });
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: Text(AppStrings.rentNow.tr())),
+        appBar: AppBar(
+          title: Text(AppStrings.rentNow.tr()),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            tooltip: '',
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
@@ -190,26 +190,53 @@ class _RentNowScreenState extends State<RentNowScreen> {
                       size: 35,
                     ),
                     onPressed: () async {
-                      final DateTimeRange? pickedRange =
-                          await showDateRangePicker(
-                            context: context,
-                            firstDate: DateTime(2025),
-                            lastDate: DateTime(3000),
-                            initialDateRange: selectedDates,
-                            barrierDismissible: true,
+                      await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            contentPadding: EdgeInsets.zero,
+                            content: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: SfDateRangePicker(
+                                view: DateRangePickerView.month,
+                                selectionMode: DateRangePickerSelectionMode.range,
+                                initialSelectedRange: PickerDateRange(
+                                  selectedDates.start,
+                                  selectedDates.end,
+                                ),
+                                minDate: DateTime.now(),
+                                maxDate: DateTime(3000),
+                                onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+                                  if (args.value is PickerDateRange) {
+                                    final PickerDateRange range = args.value;
+                                    if (range.startDate != null && range.endDate != null) {
+                                      setState(() {
+                                        selectedDates = DateTimeRange(
+                                          start: range.startDate!,
+                                          end: range.endDate!.add(Duration(days: 0)),
+                                        );
+                                      });
+                                    }
+                                  }
+                                },
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: Text(AppStrings.submit.tr()),
+                              ),
+                            ],
                           );
+                        },
+                      );
 
-                      if (pickedRange != null) {
-                        setState(() {
-                          selectedDates = pickedRange;
-                        });
-
-                        context.read<PaymentCubit>().updateDates(
-                          start: pickedRange.start,
-                          end: pickedRange.end,
-                          costPerNight: widget.property.costPerNight,
-                        );
-                      }
+                      context.read<PaymentCubit>().updateDates(
+                        start: selectedDates.start,
+                        end: selectedDates.end,
+                        costPerNight: widget.property.costPerNight,
+                      );
                     },
                   ),
                 ),

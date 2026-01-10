@@ -1,4 +1,4 @@
-import 'package:mabeet/data/models/profile_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'property.dart';
 
@@ -6,7 +6,7 @@ class Booking {
   final int bookingId;
   final String enType;
   final String enStatus;
-  final String rate;
+  final rate;
   final String startTerm;
   final String endTerm;
   final Property? apartment;
@@ -36,17 +36,31 @@ class Booking {
     final userJson = json['user'] as Map<String, dynamic>?;
     final profileJson = userJson?['profile'] as Map<String, dynamic>?;
 
+    String status = json['enStatus'] as String;
+    final now = DateFormat('yyyy-MM-d').format(DateTime.now());
+    final start = json['startTerm'] as String;
+    final end = json['endTerm'] as String;
+    if (status == "Accepted") {
+      if (now.compareTo(start) >= 0 && now.compareTo(end) <= 0) {
+        status = "Active";
+      }
+      else if(now.compareTo(end)>0){
+        status = "Finished";
+      }
+    }
+
     return Booking(
       bookingId: json['booking_id'] as int,
       enType: json['enType'] as String,
-      enStatus: json['enStatus'] as String,
-      rate: json['rate'] as String,
-      startTerm: json['startTerm'] as String,
-      endTerm: json['endTerm'] as String,
+      enStatus: status,
+      rate: json['rate'] is String ? 0.0 : json['rate'],
+      startTerm: start,
+      endTerm: end,
       apartment: propertyJson != null ? Property.fromJson(propertyJson) : null,
       phone: userJson?['phone'],
-      renterFullName: profileJson?['firstName'] +' '+ profileJson?['lastName'],
-      renterImage: profileJson?['avatar']
+      renterFullName:
+          profileJson?['firstName'] + ' ' + profileJson?['lastName'],
+      renterImage: profileJson?['avatar'],
     );
   }
 }
