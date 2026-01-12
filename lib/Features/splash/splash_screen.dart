@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        'Mabeet',
+                        'Al Mekhtar',
                         style: AppTextStyles.display1Regular.copyWith(color: Colors.white),
                       ),
                     ],

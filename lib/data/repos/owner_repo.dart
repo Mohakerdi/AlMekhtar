@@ -116,7 +116,7 @@ class OwnerRepository {
 
     final response = await api.patch(
       '${ApiConstants.apartment}/$propertyId',
-      data: data,
+      queryParameters: data,
     );
 
     return response[ApiKey.message] as String;

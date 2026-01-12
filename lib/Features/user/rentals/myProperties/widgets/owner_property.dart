@@ -123,7 +123,7 @@ class OwnerProperty extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  '${property.avgRate}',
+                                  '${property.avgRate.toStringAsFixed(1)}',
                                   style: textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),

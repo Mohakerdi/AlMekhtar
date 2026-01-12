@@ -93,6 +93,7 @@ class AddPropertyScreen extends StatelessWidget {
                     onChanged: (value) {
                       cubit.floorsController.text = value.toInt().toString();
                     },
+                    controller: cubit.floorsController,
                   ),
                   Divider(),
 
@@ -103,6 +104,7 @@ class AddPropertyScreen extends StatelessWidget {
                     onPressed: () {
                       cubit.addOrEditProperty(isEditMode);
                     },
+                    isEdit: isEditMode,
                   ),
                 ],
               ),

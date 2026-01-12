@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AddButton extends StatelessWidget {
   final VoidCallback onPressed;
-  const AddButton({super.key, required this.onPressed});
+  final bool isEdit;
+  const AddButton({super.key, required this.onPressed, required this.isEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class AddButton extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ElevatedButton(
         onPressed: onPressed,
-        child: const Text('Add Property'),
+        child: Text(isEdit?'Edit':'Add Property'),
       ),
     );
   }
