@@ -15,7 +15,8 @@ class PaymentRepository {
     required String cvv,
   }) async {
     try {
-      final path = '${ApiConstants.apartment}/$apartmentId/${ApiConstants.offer}';
+      final path =
+          '${ApiConstants.apartment}/$apartmentId/${ApiConstants.offer}';
       final queryParams = {
         'startTerm': startTerm,
         'endTerm': endTerm,
@@ -33,7 +34,6 @@ class PaymentRepository {
       final message = response['message'] as String;
 
       return Right(message);
-
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
@@ -47,7 +47,8 @@ class PaymentRepository {
     required String cvv,
   }) async {
     try {
-      final path = '${ApiConstants.reservations}/$bookingId/${ApiConstants.finalPayment}';
+      final path =
+          '${ApiConstants.reservations}/$bookingId/${ApiConstants.finalPayment}';
       final queryParams = {
         'cardNumber': int.parse(cardNumber),
         'cvv': int.parse(cvv),
@@ -63,7 +64,6 @@ class PaymentRepository {
       final message = response['message'] as String;
 
       return Right(message);
-
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
@@ -71,4 +71,36 @@ class PaymentRepository {
     }
   }
 
+  Future<Either<String, String>> edit({
+    required int bookingId,
+    required String startTerm,
+    required String endTerm,
+    required String cardNumber,
+    required String cvv,
+  }) async {
+    try {
+      final path = '${ApiConstants.editBooking}/$bookingId';
+      final queryParams = {
+        'cardNumber': int.parse(cardNumber),
+        'cvv': int.parse(cvv),
+        'startTerm': startTerm,
+        'endTerm': endTerm,
+      };
+
+      final response = await api.patch(
+        path,
+        queryParameters: queryParams,
+        isFormData: false,
+        data: null,
+      );
+
+      final message = response['message'] as String;
+
+      return Right(message);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left('${e.toString()}');
+    }
+  }
 }

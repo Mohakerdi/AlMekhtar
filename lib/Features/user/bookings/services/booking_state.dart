@@ -18,7 +18,6 @@ class BookingLoaded extends BookingState {
   });
 }
 
-
 class BookingError extends BookingState {
   final String message;
   BookingError(this.message);
@@ -34,4 +33,16 @@ class RateBookingSuccess extends BookingState {
 class RateBookingError extends BookingState {
   final String message;
   RateBookingError(this.message);
+}
+
+class EditBookingLoading extends BookingState {}
+
+class EditBookingSuccess extends BookingState {
+  final String message;
+  EditBookingSuccess(this.message);
+}
+
+class EditBookingError extends BookingState {
+  final String message;
+  EditBookingError(this.message);
 }

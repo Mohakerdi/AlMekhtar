@@ -6,7 +6,11 @@ class FloorsNumber extends StatelessWidget {
   final void Function(double value) onChanged;
   final TextEditingController controller;
 
-  const FloorsNumber({super.key, required this.onChanged, required this.controller});
+  const FloorsNumber({
+    super.key,
+    required this.onChanged,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class FloorsNumber extends StatelessWidget {
       child: SpinBox(
         min: 1,
         max: 50,
-        value: double.tryParse(controller.text)!,
+        value: double.tryParse(controller.text) ?? 1,
         decoration: const InputDecoration(
           labelText: 'Number of Floors',
           labelStyle: TextStyle(color: AppColors.gray400),

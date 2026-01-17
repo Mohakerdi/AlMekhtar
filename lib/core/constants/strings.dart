@@ -36,7 +36,8 @@ abstract class AppStrings {
   static const String recommendedSectionTitle = 'recommended_section_title';
   static const String seeAllButton = 'see_all_button';
   static const String topLocationsSectionTitle = 'top_locations_section_title';
-  static const String popularForYouSectionTitle = 'popular_for_you_section_title';
+  static const String popularForYouSectionTitle =
+      'popular_for_you_section_title';
   static const String searchFieldHint = 'search_field_hint';
 
   // --- ProfileScreen
@@ -79,6 +80,7 @@ abstract class AppStrings {
   static const String cardNotAdded = "card_not_added";
   static const String iAgree = "i_agree";
   static const String bookingTerms = "booking_terms";
+  static const String paymentTerms = "payment_terms";
   static const String edit = "edit";
   static const String creditOrDebt = "credit_or_debt";
   static const String rentNow = "rent_now";
@@ -128,13 +130,17 @@ abstract class AppStrings {
   static const String apply = 'apply';
   static const String delete = 'delete';
   static const String cancel = 'cancel';
-  static const String deletePropertyConfirmation = 'delete_property_confirmation';
+  static const String deletePropertyConfirmation =
+      'delete_property_confirmation';
   static const String actionCannotBeUndone = 'action_cannot_be_undone';
   static const String rateYourBooking = 'rate_your_booking';
   static const String submit = 'submit';
-  static const String cancelBookingConfirmationTitle = 'cancel_booking_confirmation_title';
-  static const String cancelBookingConfirmationBody = 'cancel_booking_confirmation_body';
-  static const String deletedPropertyPlaceHolder = 'deleted_property_place_holder';
+  static const String cancelBookingConfirmationTitle =
+      'cancel_booking_confirmation_title';
+  static const String cancelBookingConfirmationBody =
+      'cancel_booking_confirmation_body';
+  static const String deletedPropertyPlaceHolder =
+      'deleted_property_place_holder';
   static const String accept = 'accept';
   static const String reject = 'reject';
   static const String renter = 'renter';
@@ -142,5 +148,4 @@ abstract class AppStrings {
   static const String myProperties = 'my_properties';
   static const String requests = 'requests';
   static const String contracts = 'contracts';
-
 }

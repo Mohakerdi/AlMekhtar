@@ -36,6 +36,7 @@ class ApiConstants {
   static const String renterActive = 'apartments/renter/active';
   static const String renterHistory = 'apartments/renter/history';
   static const String reservations = 'apartments/reservations';
+  static const String editBooking = 'apartments/update/reservations';
   static const String finalPayment = 'final-payment';
 
   // Owner endpoints

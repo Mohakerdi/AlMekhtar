@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/services/add_cubit.dart';
@@ -13,6 +14,8 @@ import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/floors_numbe
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/area_number.dart';
 import 'package:mabeet/Features/user/rentals/addNewProperty/widgets/add_button.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
+import 'package:mabeet/core/constants/strings.dart';
+import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:mabeet/data/repos/owner_repo.dart';
 
@@ -20,7 +23,7 @@ class AddPropertyScreen extends StatelessWidget {
   final Property? propertyToEdit;
   final bool isEditMode;
 
-  const AddPropertyScreen({super.key, this.propertyToEdit,})
+  const AddPropertyScreen({super.key, this.propertyToEdit})
     : isEditMode = propertyToEdit != null;
 
   @override
@@ -39,9 +42,13 @@ class AddPropertyScreen extends StatelessWidget {
                 context,
               ).showSnackBar(SnackBar(content: Text(state.message)));
             } else if (state is AddPropertySuccess) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text('Property added!')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    isEditMode ? 'Property Edited' : 'Property added!',
+                  ),
+                ),
+              );
             }
           },
           builder: (context, state) {
@@ -98,6 +105,27 @@ class AddPropertyScreen extends StatelessWidget {
                   Divider(),
 
                   AreaNumber(controller: cubit.areaController),
+                  Divider(),
+                  SizedBox(height: 5),
+                  Text(
+                    AppStrings.terms.tr() +
+                        AppStrings.and.tr() +
+                        AppStrings.conditions.tr(),
+                    style: TextStyle(
+                      color: AppColors.darkText,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  ListTile(
+                    contentPadding: EdgeInsets.symmetric(vertical: 5),
+
+                    title: Text(
+                      AppStrings.bookingTerms.tr(),
+                      style: TextStyle(color: AppColors.darkText, fontSize: 14),
+                    ),
+                  ),
                   Divider(),
 
                   AddButton(

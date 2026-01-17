@@ -44,7 +44,7 @@ class UserRepository {
   }) async {
     try {
       String credType = ApiKey.phone;
-      if (credential.contains('@'))credType = ApiKey.email;
+      if (credential.contains('@')) credType = ApiKey.email;
 
       final response = await api.post(
         ApiConstants.login,
@@ -53,10 +53,7 @@ class UserRepository {
 
       final model = LogInModel.fromJson(response);
 
-      await CacheHelper.saveData(
-        key: ApiKey.token,
-        value: model.token,
-      );
+      await CacheHelper.saveData(key: ApiKey.token, value: model.token);
 
       return Right(model);
     } on ServerException catch (e) {
@@ -95,9 +92,7 @@ class UserRepository {
 
   Future<Either<String, ProfileModel>> getUserProfile() async {
     try {
-      final response = await api.get(
-        ApiConstants.getUserProfile,
-      );
+      final response = await api.get(ApiConstants.getUserProfile);
       final profile = ProfileModel.fromJson(response);
       return Right(profile);
     } on ServerException catch (e) {
@@ -113,10 +108,8 @@ class UserRepository {
     required String lastName,
     String? birthDate,
     XFile? avatarPic,
-
   }) async {
     try {
-
       final response = await api.put(
         ApiConstants.updateProfile,
         data: {
@@ -128,10 +121,8 @@ class UserRepository {
       );
 
       return Right(null);
-
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
   }
-
 }

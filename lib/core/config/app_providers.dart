@@ -14,6 +14,7 @@ import 'package:mabeet/Features/user/favorites/services/data/favorite_webservice
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
 import 'package:mabeet/core/cache/cache_helper.dart';
+import 'package:mabeet/core/notifications_service/local_notification_service.dart';
 import 'package:mabeet/core/theme/bloc/theme_cubit.dart';
 import 'package:mabeet/data/repos/payment_repo.dart';
 import 'package:mabeet/data/repos/search_repo.dart';
@@ -60,6 +61,7 @@ class AppProviders extends StatelessWidget {
 Future<void> initializeApp() async {
   // 1. Core Bindings
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotificationService.init();
   await EasyLocalization.ensureInitialized();
 
   // 2. Caching

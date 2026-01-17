@@ -59,8 +59,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(child: Image.asset(AppImages.kLogoPath, width: 70)),
-                    Text(AppStrings.welcomeBack.tr(), style: AppTextStyles.display2Bold),
-                    Text(AppStrings.loginHeading.tr(), style: AppTextStyles.bodyMedium),
+                    Text(
+                      AppStrings.welcomeBack.tr(),
+                      style: AppTextStyles.display2Bold,
+                    ),
+                    Text(
+                      AppStrings.loginHeading.tr(),
+                      style: AppTextStyles.bodyMedium,
+                    ),
                     SizedBox(height: 60),
                     Text(
                       '${AppStrings.phone.tr()} | ${AppStrings.email.tr()}',
@@ -68,13 +74,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFormField(
                       controller: context.read<UserCubit>().logInPhone,
-                      keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         hintText: '09 ** | exam@gmail.com',
                         helperText: ' ',
                       ),
                     ),
-                    Text(AppStrings.password.tr(), style: AppTextStyles.titleMedium),
+                    Text(
+                      AppStrings.password.tr(),
+                      style: AppTextStyles.titleMedium,
+                    ),
                     TextFormField(
                       controller: context.read<UserCubit>().logInPassword,
                       decoration: _passwordDecoration(),
@@ -116,7 +124,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 
   void _goToSignup() {
     _formKey.currentState!.reset();

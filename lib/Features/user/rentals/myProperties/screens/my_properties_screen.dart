@@ -8,7 +8,6 @@ import 'package:mabeet/Features/user/rentals/services/owner_cubit.dart';
 import 'package:mabeet/Features/user/rentals/services/owner_state.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
 import 'package:mabeet/core/constants/strings.dart';
-import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/repos/owner_repo.dart';
 
 class MyPropertiesScreen extends StatefulWidget {
@@ -22,7 +21,9 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => OwnerCubit(ownerRepository: OwnerRepository(api: DioConsumer(dio: Dio())))..loadMyProperties(),
+      create: (_) => OwnerCubit(
+        ownerRepository: OwnerRepository(api: DioConsumer(dio: Dio())),
+      )..loadMyProperties(),
       child: Scaffold(
         body: BlocConsumer<OwnerCubit, OwnerState>(
           listener: (context, state) {
@@ -30,13 +31,6 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(state.message)));
-            } else if (state is OwnerLoaded) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Rentals loaded successfully!'),
-                  backgroundColor: AppColors.primary700,
-                ),
-              );
             }
           },
           builder: (context, state) {
@@ -51,7 +45,7 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
             }
 
             if (state is OwnerLoaded) {
-              if(state.myProperties.isEmpty){
+              if (state.myProperties.isEmpty) {
                 return Center(
                   child: Text('${AppStrings.emptyBookingsMsg.tr()} .'),
                 );

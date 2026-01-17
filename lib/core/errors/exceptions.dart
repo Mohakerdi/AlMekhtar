@@ -2,14 +2,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mabeet/core/errors/error_model.dart';
 
-
 class ServerException implements Exception {
   final ErrorModel errorModel;
 
   ServerException({required this.errorModel});
 
   @override
-  String toString() => 'ServerException: ${errorModel.errorMessage}';
+  String toString() => '${errorModel.errorMessage}';
 }
 
 ErrorModel _handleNonResponseError(DioException e) {
@@ -19,7 +18,8 @@ ErrorModel _handleNonResponseError(DioException e) {
       e.type == DioExceptionType.connectionError) {
     return const ErrorModel(
       status: 0,
-      errorMessage: 'Connection error. Please check your internet connection and try again.',
+      errorMessage:
+          'Connection error. Please check your internet connection and try again.',
     );
   }
 
@@ -35,16 +35,14 @@ void handleDioExceptions(DioException e) {
       throw ServerException(
         errorModel: const ErrorModel(
           status: 0,
-          errorMessage: 'No Internet Connection. Please connect to the internet and try again.',
+          errorMessage:
+              'No Internet Connection. Please connect to the internet and try again.',
         ),
       );
     }
 
-    throw ServerException(
-      errorModel: _handleNonResponseError(e),
-    );
-  }
-  else {
+    throw ServerException(errorModel: _handleNonResponseError(e));
+  } else {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:

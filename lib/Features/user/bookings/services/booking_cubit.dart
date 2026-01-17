@@ -1,15 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/data/repos/booking_repo.dart';
 import 'booking_state.dart';
 
 class BookingCubit extends Cubit<BookingState> {
   final BookingRepository _bookingRepository;
+  // final NotificationCubit notificationCubit;
 
-  BookingCubit({required BookingRepository bookingRepository})
-    : _bookingRepository = bookingRepository,
-      super(BookingInitial());
+  BookingCubit({
+    required BookingRepository bookingRepository,
+    required NotificationCubit noticubit,
+  }) : _bookingRepository = bookingRepository,
+       //  notificationCubit = noticubit,
+       super(BookingInitial());
 
   BookingLoaded get _currentStateData {
     if (state is BookingLoaded) {
@@ -99,6 +104,8 @@ class BookingCubit extends Cubit<BookingState> {
           historyBookings: currentData.historyBookings,
         ),
       );
+      // await notificationCubit.getNotifications();
+
       return message;
     } catch (e) {
       emit(BookingError(AppStrings.bookingCancelError.tr()));

@@ -29,11 +29,7 @@ class PaymentCubit extends Cubit<PaymentState> {
         savedCvv == null ||
         startTerm == null ||
         endTerm == null) {
-      emit(
-        PaymentFailure(
-          errorMessage: AppStrings.paymentErrorMsg.tr(),
-        ),
-      );
+      emit(PaymentFailure(errorMessage: AppStrings.paymentErrorMsg.tr()));
       return;
     }
 
@@ -59,23 +55,23 @@ class PaymentCubit extends Cubit<PaymentState> {
     );
   }
 
-  void updateDates({required DateTime start,required DateTime end,required double costPerNight,}) {
+  void updateDates({
+    required DateTime start,
+    required DateTime end,
+    required double costPerNight,
+  }) {
     final nights = end.difference(start).inDays + 1;
     final total = nights * costPerNight + 10;
 
     startTerm = DateFormat('yyyy-M-d').format(start);
-    endTerm   = DateFormat('yyyy-M-d').format(end);
+    endTerm = DateFormat('yyyy-M-d').format(end);
 
     emit(PaymentPriceUpdated(nights: nights, total: total));
   }
 
   Future<void> submitFinalPayment({required int bookingId}) async {
-    if (fullSavedCardNumber == null ||savedCvv == null) {
-      emit(
-        PaymentFailure(
-          errorMessage: AppStrings.paymentErrorMsg.tr(),
-        ),
-      );
+    if (fullSavedCardNumber == null || savedCvv == null) {
+      emit(PaymentFailure(errorMessage: AppStrings.paymentErrorMsg.tr()));
       return;
     }
 
@@ -88,10 +84,38 @@ class PaymentCubit extends Cubit<PaymentState> {
     );
 
     response.fold(
-          (errorMessage) {
+      (errorMessage) {
         emit(PaymentFailure(errorMessage: errorMessage));
       },
-          (successMessage) {
+      (successMessage) {
+        fullSavedCardNumber = null;
+        savedCvv = null;
+        emit(PaymentSuccess(message: successMessage));
+      },
+    );
+  }
+
+  Future<void> submitEditBooking({required int bookingId}) async {
+    if (fullSavedCardNumber == null || savedCvv == null) {
+      emit(PaymentFailure(errorMessage: AppStrings.paymentErrorMsg.tr()));
+      return;
+    }
+
+    emit(PaymentLoading());
+
+    final response = await paymentRepository.edit(
+      bookingId: bookingId,
+      cardNumber: fullSavedCardNumber!,
+      startTerm: startTerm!,
+      endTerm: endTerm!,
+      cvv: savedCvv!,
+    );
+
+    response.fold(
+      (errorMessage) {
+        emit(PaymentFailure(errorMessage: errorMessage));
+      },
+      (successMessage) {
         fullSavedCardNumber = null;
         savedCvv = null;
         emit(PaymentSuccess(message: successMessage));

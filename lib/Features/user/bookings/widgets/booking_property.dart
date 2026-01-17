@@ -1,16 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/bookings/payment/cubit/payment_cubit.dart';
 import 'package:mabeet/Features/user/bookings/payment/screens/payment_screen.dart';
 import 'package:mabeet/Features/user/bookings/widgets/cancel_button.dart';
+import 'package:mabeet/Features/user/bookings/widgets/edit_booking_dialog.dart';
 import 'package:mabeet/Features/user/bookings/widgets/rating_button.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
+import 'package:mabeet/Features/user/rentals/addNewProperty/screens/add_property_screen.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/data/models/booking_model.dart';
 import 'package:mabeet/data/models/property.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class BookingProperty extends StatelessWidget {
   const BookingProperty({super.key, required this.booking});
@@ -40,7 +45,6 @@ class BookingProperty extends StatelessWidget {
   }
 
   Widget _buildDeletedPropertyCard(BuildContext context) {
-
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -50,11 +54,11 @@ class BookingProperty extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildStatusChip(booking.enStatus),
+            //_buildStatusChip(booking.enStatus),
             const SizedBox(height: 8),
             Text(
               AppStrings.deletedPropertyPlaceHolder.tr(),
-              style: AppTextStyles.bodyMedium
+              style: AppTextStyles.bodyMedium,
             ),
             const SizedBox(height: 12),
             _buildDateSection(context, booking.startTerm, booking.endTerm),
@@ -133,7 +137,7 @@ class BookingProperty extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            _buildStatusChip(booking.enStatus),
+                            //_buildStatusChip(booking.enStatus),
                           ],
                         ),
                         const SizedBox(height: 4),
@@ -167,29 +171,40 @@ class BookingProperty extends StatelessWidget {
                                 color: AppColors.primary900,
                               ),
                             ),
-                            // Rating
-                            Row(
-                              children: [
-                                Icon(
-                                  AppIcons.star,
-                                  size: 18,
-                                  color: AppColors.warning700,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '${apartment.avgRate.toStringAsFixed(1)}',
-                                  style: textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
                           ],
                         ),
-                        SizedBox(height: 8,),
-                        _buildRateButton(context)
+                        SizedBox(height: 10),
+                        _buildRateButton(context),
                       ],
                     ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildStatusChip(booking.enStatus),
+                      SizedBox(height: 25),
+                      // Rating
+                      Row(
+                        children: [
+                          Icon(
+                            AppIcons.star,
+                            size: 18,
+                            color: AppColors.warning700,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            '${apartment.avgRate.toStringAsFixed(1)}',
+                            style: textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      if (booking.enStatus == 'Pending' ||
+                          booking.enStatus == 'AwaitingPayment')
+                        _buildEditButton(context, booking),
+                    ],
                   ),
                 ],
               ),
@@ -227,9 +242,7 @@ class BookingProperty extends StatelessWidget {
       ),
       child: Text(
         status.tr(),
-        style: AppTextStyles.bodySmall.copyWith(
-          color: textColor,
-        ),
+        style: AppTextStyles.bodySmall.copyWith(color: textColor),
       ),
     );
   }
@@ -284,7 +297,7 @@ class BookingProperty extends StatelessWidget {
   Widget _buildRateButton(BuildContext context) {
     final bool canRate =
         (booking.enStatus == 'Finished' || booking.enStatus == 'Accepted') &&
-            (booking.apartment != null && booking.rate == 0);
+        (booking.apartment != null && booking.rate == 0);
 
     if (!canRate) {
       return const SizedBox.shrink();
@@ -292,4 +305,36 @@ class BookingProperty extends StatelessWidget {
 
     return RatingButton(propertyId: booking.apartment!.propertyId);
   }
+}
+
+Widget _buildEditButton(BuildContext context, Booking booking) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: SizedBox(
+      width: 80,
+      child: OutlinedButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) {
+              return BlocProvider.value(
+                value: context.read<PaymentCubit>(),
+                child: EditBookingDialog(
+                  booking: booking,
+                  costPerNight: booking.apartment!.costPerNight,
+                ),
+              );
+            },
+          );
+        },
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.edit,
+          side: const BorderSide(color: AppColors.edit),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          padding: const EdgeInsets.all(4),
+        ),
+        child: const Icon(AppIcons.editIcon, size: 20),
+      ),
+    ),
+  );
 }

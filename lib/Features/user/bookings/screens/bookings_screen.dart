@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
+import 'package:mabeet/Features/user/notifications/services/data/notification_repo.dart';
+import 'package:mabeet/Features/user/notifications/services/data/notification_webservices.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
 import 'package:mabeet/core/widgets/CustomAppBar.dart';
 import 'package:mabeet/data/repos/booking_repo.dart';
@@ -19,6 +22,11 @@ class BookingsScreen extends StatelessWidget {
       create: (context) {
         final cubit = BookingCubit(
           bookingRepository: BookingRepository(api: DioConsumer(dio: Dio())),
+          noticubit: NotificationCubit(
+            NotificationRepo(
+              NotificationWebServices(api: DioConsumer(dio: Dio())),
+            ),
+          ),
         );
         return cubit;
       },

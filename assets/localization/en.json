@@ -24,7 +24,7 @@
   "rentals_screen_title": "Your Properties",
   "bookings_screen_title": "Bookings",
 
-  "about_us_welcome_title": "Mabeet: The Future of Property",
+  "about_us_welcome_title": "Al Mekhtar: The Future of Property",
   "about_us_welcome_body": "Your trusted partner in finding the perfect home or investment. We are dedicated to making property transactions transparent, efficient, and tailored to your unique needs across the region.",
   "about_us_mission_title": "Our Mission: Empowering Decisions",
   "about_us_mission_body": "To empower every user with innovative tools and accurate data, transforming the often-complex process of buying, selling, or renting property into a simple, confident experience.",
@@ -80,7 +80,7 @@
   "active": "Active",
   "history": "History",
   "booking_cancel_error": "Failed to cancel booking . Please try again.",
-  "failed_laod": "Failed to load",
+  "failed_load": "Failed to load",
   "start": "Start",
   "end": "End",
   "empty_fav": "No Favorites yet",
@@ -134,6 +134,7 @@
   "owner_title": "Owned Properties",
   "contracts": "Contracts",
   "requests": "Requests",
-  "my_properties": "My Properties"
+  "my_properties": "My Properties",
+  "payment_terms": "By using this card, you confirm that it belongs to you personally.\nIn the event of a booking cancellation or a failed transaction for any reason, the refunded amount may be returned to one of the payment cards saved in your account within the application."
 
 }
