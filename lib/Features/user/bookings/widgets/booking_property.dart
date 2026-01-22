@@ -296,7 +296,9 @@ class BookingProperty extends StatelessWidget {
 
   Widget _buildRateButton(BuildContext context) {
     final bool canRate =
-        (booking.enStatus == 'Finished' || booking.enStatus == 'Accepted') &&
+        (booking.enStatus == 'Finished' ||
+            booking.enStatus == 'Accepted' ||
+            booking.enStatus == 'Active') &&
         (booking.apartment != null && booking.rate == 0);
 
     if (!canRate) {

@@ -1,16 +1,16 @@
 class ApiConstants {
   // Base URLs
   //mobile hotspot{differs}
-  // static const String BaseUrl = "http://192.168.43.181:8000/api/";
-  // static const String StorageBaseUrl = 'http://192.168.43.181:8000/storage/';
+  static const String BaseUrl = "http://192.168.154.156:8000/api/";
+  static const String StorageBaseUrl = 'http://192.168.154.156:8000/storage/';
 
   //mobile emulator
   // static const String BaseUrl = "http://10.0.0.2:8000/api/";
   // static const String StorageBaseUrl = 'http://10.0.0.2:8000/storage/';
 
   //windows run
-  static const String BaseUrl = "http://127.0.0.1:8000/api/";
-  static const String StorageBaseUrl = 'http://127.0.0.1:8000/storage/';
+  // static const String BaseUrl = "http://127.0.0.1:8000/api/";
+  // static const String StorageBaseUrl = 'http://127.0.0.1:8000/storage/';
 
   // Authentication endpoints
   static const String login = 'login';
