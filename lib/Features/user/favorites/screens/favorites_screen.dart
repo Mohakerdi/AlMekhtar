@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/favorites/services/cubit/favorite_cubit.dart';
 import 'package:mabeet/Features/user/favorites/widgets/favorites_property.dart';
 import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/images.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/core/widgets/CustomAppBar.dart';
 import 'package:mabeet/core/widgets/shimmer_loading_property.dart';
 import 'package:mabeet/core/constants/strings.dart';
@@ -48,7 +50,18 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           }
           final favorites = context.read<FavoriteCubit>().favoritesList;
           if (favorites.isEmpty) {
-            return Center(child: Text(AppStrings.emptyFav.tr()));
+            return Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(AppImages.kEmptyFavorites),
+                    Text(AppStrings.emptyFav.tr(),style: AppTextStyles.heading2Medium,),
+                  ],
+                ),
+              ),
+            );
           }
           return ListView.builder(
             padding: const EdgeInsets.all(16),
@@ -75,7 +88,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     },
                     child: FavoritesProperty(property: property),
                   ),
-                  if(index != favorites.length-1) Divider()
+                  if (index != favorites.length - 1) Divider(),
                 ],
               );
             },

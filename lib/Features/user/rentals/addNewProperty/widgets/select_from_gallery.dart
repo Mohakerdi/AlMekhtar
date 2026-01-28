@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mabeet/core/config/image_utils.dart';
 
 class SelectFromGallery extends StatelessWidget {
   final List<XFile> selectedImages;
@@ -115,15 +117,35 @@ class SelectFromGallery extends StatelessWidget {
 
   void _pickImage(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
+
     final List<XFile> pickedFiles = await picker.pickMultiImage(
       limit: maxImages - currentImages.length + 1,
     );
+    if (pickedFiles.isEmpty) return;
 
-    if (pickedFiles.isNotEmpty) {
-      final List<XFile> newFiles = pickedFiles.map((x) => XFile(x.path)).toList();
-      final List<XFile> updatedSelectedImages = [...selectedImages, ...newFiles];
-      onImagesChanged(updatedSelectedImages);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Optimizing images...'), duration: Duration(seconds: 3)),
+    );
+
+    final List<XFile> compressedFiles = [];
+    for (final file in pickedFiles) {
+      final XFile? compressed = await ImageUtils.compressImage(
+        file,
+        quality: 72,
+        maxWidth: 1400,
+        maxHeight: 1400,
+        format: CompressFormat.jpeg,
+      );
+
+      if (compressed != null) {
+        compressedFiles.add(compressed);
+      } else {
+        compressedFiles.add(file);
+      }
     }
+
+    final List<XFile> updatedSelectedImages = [...selectedImages, ...compressedFiles];
+    onImagesChanged(updatedSelectedImages);
   }
 
   void _removeImage(int index) {

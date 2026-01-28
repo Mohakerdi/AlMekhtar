@@ -7,7 +7,10 @@ import 'package:mabeet/Features/user/rentals/myProperties/widgets/owner_property
 import 'package:mabeet/Features/user/rentals/services/owner_cubit.dart';
 import 'package:mabeet/Features/user/rentals/services/owner_state.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
+import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/constants/strings.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
+import 'package:mabeet/core/widgets/internet_error_widget.dart';
 import 'package:mabeet/data/repos/owner_repo.dart';
 
 class MyPropertiesScreen extends StatefulWidget {
@@ -26,13 +29,7 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
       )..loadMyProperties(),
       child: Scaffold(
         body: BlocConsumer<OwnerCubit, OwnerState>(
-          listener: (context, state) {
-            if (state is OwnerError) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(state.message)));
-            }
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             if (state is OwnerLoading) {
               return ListView.builder(
@@ -47,7 +44,7 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
             if (state is OwnerLoaded) {
               if (state.myProperties.isEmpty) {
                 return Center(
-                  child: Text('${AppStrings.emptyBookingsMsg.tr()} .'),
+                  child: Text('${AppStrings.noResultsSearch.tr()} .'),
                 );
               }
               return ListView.builder(
@@ -61,7 +58,7 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
             }
 
             if (state is OwnerError) {
-              return Center(child: Text(state.message));
+              return InternetErrorWidget(message: state.message, onRetry: context.read<OwnerCubit>().loadMyProperties);
             }
 
             return Container();

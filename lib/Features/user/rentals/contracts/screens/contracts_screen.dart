@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/Features/user/rentals/requests/widgets/rent_request_widget.dart';
@@ -6,7 +7,9 @@ import 'package:mabeet/Features/user/rentals/requests/widgets/rent_request_widge
 import 'package:mabeet/Features/user/rentals/services/owner_cubit.dart';
 import 'package:mabeet/Features/user/rentals/services/owner_state.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
+import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/core/widgets/internet_error_widget.dart';
 import 'package:mabeet/data/repos/owner_repo.dart';
 
 class ContractsScreen extends StatelessWidget {
@@ -19,18 +22,7 @@ class ContractsScreen extends StatelessWidget {
       child: Scaffold(
         body: BlocConsumer<OwnerCubit, OwnerState>(
           listener: (context, state) {
-            if (state is OwnerError) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(state.message)));
-            } else if (state is OwnerLoaded) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Owner rentals loaded successfully!'),
-                  backgroundColor: AppColors.primary700,
-                ),
-              );
-            }
+
           },
           builder: (context, state) {
             if (state is OwnerLoading) {
@@ -44,6 +36,11 @@ class ContractsScreen extends StatelessWidget {
             }
 
             if (state is OwnerLoaded) {
+              if (state.myProperties.isEmpty) {
+                return Center(
+                  child: Text('${AppStrings.noResultsSearch.tr()} .'),
+                );
+              }
               return ListView.builder(
                 padding: const EdgeInsets.all(16),
                 itemCount: state.contracts.length,
@@ -54,7 +51,7 @@ class ContractsScreen extends StatelessWidget {
             }
 
             if (state is OwnerError) {
-              return Center(child: Text(state.message));
+              return InternetErrorWidget(message: state.message, onRetry: context.read<OwnerCubit>().loadContracts,);
             }
 
             return Container();

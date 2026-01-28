@@ -62,7 +62,7 @@ class OwnerCubit extends Cubit<OwnerState> {
         ),
       );
     } catch (e) {
-      emit(OwnerError('${AppStrings.failedLoad.tr()} $e'));
+      emit(OwnerError('$e'));
     }
   }
 
@@ -132,7 +132,7 @@ class OwnerCubit extends Cubit<OwnerState> {
         ),
       );
     } catch (e) {
-      emit(OwnerError('${AppStrings.failedLoad.tr()} $e'));
+      emit(OwnerError('$e'));
     }
   }
 }

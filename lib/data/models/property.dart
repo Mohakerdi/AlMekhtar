@@ -74,7 +74,7 @@ class Property {
 
       imageURLs: json[ApiKey.images] is List
           ? List<String>.from(json[ApiKey.images].map((item) => getFullImageUrl(item.toString())))
-          : [],
+          : ['empty'],
     );
   }
 

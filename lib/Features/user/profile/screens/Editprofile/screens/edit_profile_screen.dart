@@ -2,8 +2,10 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mabeet/Features/user/profile/screens/main_profile/screens/profile_screen.dart';
+import 'package:mabeet/core/config/image_utils.dart';
 import 'package:mabeet/core/constants/icons.dart';
 import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/constants/strings.dart';
@@ -43,17 +45,31 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void _pickImage(BuildContext context, bool isAvatar) async {
-    final XFile? pickedFile = await _picker.pickImage(
+    final XFile? picked = await _picker.pickImage(
       source: ImageSource.gallery,
-      imageQuality: 80,
+      imageQuality: 90,
+    );
+    if (picked == null) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Optimizing image...'), duration: Duration(seconds: 2)),
     );
 
-    if (pickedFile != null) {
-      context.read<UserCubit>().selectImage(
-        image: pickedFile,
-        isAvatar: isAvatar,
-      );
+    final XFile? compressed = await ImageUtils.compressImage(
+      picked,
+      quality: isAvatar ? 82 : 72,
+      maxWidth: isAvatar ? 900 : 1400,
+      maxHeight: isAvatar ? 900 : 1400,
+      format: CompressFormat.jpeg,
+    );
+
+    if (compressed == null) {
+      return;
     }
+
+    context.read<UserCubit>().selectImage(
+      image: compressed,
+      isAvatar: isAvatar,
+    );
   }
 
   Widget _buildImagePreview(XFile? file) {

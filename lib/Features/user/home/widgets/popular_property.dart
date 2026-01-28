@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
 import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/data/models/property.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -16,7 +17,7 @@ class PopularProperty extends StatelessWidget {
   void _goToPropertyScreen(BuildContext context) {
     PersistentNavBarNavigator.pushNewScreen(
       context,
-      screen: PropertyScreen(property: property, isOwner: false,),
+      screen: PropertyScreen(property: property, isOwner: false),
       withNavBar: false,
       pageTransitionAnimation: PageTransitionAnimation.scale,
     );
@@ -39,16 +40,23 @@ class PopularProperty extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  imageUrl: property.imageURLs[0],
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                  const CircularProgressIndicator(color: Colors.white),
-                  errorWidget: (context, url, error) =>
-                  const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
-                )
+                child: property.imageURLs[0] == 'empty'
+                    ? Image.asset(
+                        AppImages.kNoImages,
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      )
+                    : CachedNetworkImage(
+                        imageUrl: property.imageURLs[0],
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                      ),
               ),
             ),
             Expanded(
@@ -70,10 +78,7 @@ class PopularProperty extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(
-                            AppIcons.location,
-                            color: AppColors.gray400,
-                          ),
+                          Icon(AppIcons.location, color: AppColors.gray400),
                           Text(
                             locationName.length > 15
                                 ? '${locationName.substring(0, 13)}...'

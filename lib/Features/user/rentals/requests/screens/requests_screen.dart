@@ -7,6 +7,7 @@ import 'package:mabeet/Features/user/rentals/services/owner_cubit.dart';
 import 'package:mabeet/Features/user/rentals/services/owner_state.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
 import 'package:mabeet/core/constants/strings.dart';
+import 'package:mabeet/core/widgets/internet_error_widget.dart';
 import 'package:mabeet/data/repos/owner_repo.dart';
 import '../widgets/rent_request_widget.dart';
 
@@ -37,13 +38,13 @@ class _RequestsScreenState extends State<RequestsScreen> {
               );
             }
             if (state is OwnerError) {
-              return Center(child: Text(state.message));
+              return InternetErrorWidget(message: state.message, onRetry: context.read<OwnerCubit>().loadPendingRequests);
             }
 
             if (state is OwnerLoaded) {
               if (state.pendingRequests.isEmpty) {
                 return Center(
-                  child: Text('${AppStrings.emptyBookingsMsg.tr()}.'),
+                  child: Text('${AppStrings.noResultsSearch.tr()}.'),
                 );
               }
 

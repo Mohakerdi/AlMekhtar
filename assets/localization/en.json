@@ -101,6 +101,7 @@
   "profile_update_success": "Profile updated successfully!",
   "locations_title": "Discover New Places !!",
   "empty_search": "No properties found matching your filters.",
+  "no_results_found": "No Results Found",
   "search_results": "Search Results",
   "filters": "Filters",
   "governorat": "Governorat",
@@ -135,6 +136,7 @@
   "contracts": "Contracts",
   "requests": "Requests",
   "my_properties": "My Properties",
-  "payment_terms": "By using this card, you confirm that it belongs to you personally.\nIn the event of a booking cancellation or a failed transaction for any reason, the refunded amount may be returned to one of the payment cards saved in your account within the application."
+  "payment_terms": "By using this card, you confirm that it belongs to you personally.\nIn the event of a booking cancellation or a failed transaction for any reason, the refunded amount may be returned to one of the payment cards saved in your account within the application.",
+  "error_message": "Error With Connection"
 
 }

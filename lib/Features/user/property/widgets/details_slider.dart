@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/images.dart';
 
 class DetailsSlider extends StatefulWidget {
   const DetailsSlider({super.key, required this.imageAssets});
@@ -45,16 +46,28 @@ class _DetailsSliderState extends State<DetailsSlider> {
               return GestureDetector(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: CachedNetworkImage(
-                    imageUrl: imagePath,
-                    width: 380,
-                    height: 380,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                    const CircularProgressIndicator(color: Colors.white),
-                    errorWidget: (context, url, error) =>
-                    const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
-                  )
+                  child: widget.imageAssets[0] == 'empty'
+                      ? Image.asset(
+                          AppImages.kNoImages,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: imagePath,
+                          width: 380,
+                          height: 380,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                          errorWidget: (context, url, error) => const Icon(
+                            AppIcons.homeIcon,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                        ),
                 ),
               );
             },
@@ -107,16 +120,28 @@ class _DetailsSliderState extends State<DetailsSlider> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: CachedNetworkImage(
-                        imageUrl: widget.imageAssets[index],
-                        width: 65,
-                        height: 65,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) =>
-                        const CircularProgressIndicator(color: Colors.white),
-                        errorWidget: (context, url, error) =>
-                        const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
-                      )
+                      child: widget.imageAssets[0] == 'empty'
+                          ? Image.asset(
+                              AppImages.kNoImages,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            )
+                          : CachedNetworkImage(
+                              imageUrl: widget.imageAssets[index],
+                              width: 65,
+                              height: 65,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                              errorWidget: (context, url, error) => const Icon(
+                                AppIcons.homeIcon,
+                                size: 50,
+                                color: Colors.white,
+                              ),
+                            ),
                     ),
                   ),
                 );

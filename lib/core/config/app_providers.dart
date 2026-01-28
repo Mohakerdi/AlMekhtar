@@ -59,15 +59,9 @@ class AppProviders extends StatelessWidget {
 }
 
 Future<void> initializeApp() async {
-  // 1. Core Bindings
   WidgetsFlutterBinding.ensureInitialized();
-  // await LocalNotificationService.init();
   await EasyLocalization.ensureInitialized();
-
-  // 2. Caching
   await CacheHelper.init();
-
-  // 3. System Overrides
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 

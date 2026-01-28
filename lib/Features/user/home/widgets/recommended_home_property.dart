@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mabeet/Features/user/property/screens/property_screen.dart';
 import 'package:mabeet/Features/user/property/widgets/favorite_icon-button.dart';
 import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
 import 'package:mabeet/core/theme/font_weight_helper.dart';
 import 'package:mabeet/core/theme/text_styles.dart';
@@ -11,26 +12,22 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../../data/models/property.dart';
 
 class RecommendedHomeProperty extends StatelessWidget {
-  const RecommendedHomeProperty({
-    super.key,
-    required this.property,
-  });
+  const RecommendedHomeProperty({super.key, required this.property});
 
   final Property property;
 
   void _goToPropertyScreen(BuildContext context) {
     PersistentNavBarNavigator.pushNewScreen(
       context,
-      screen: PropertyScreen(property: property, isOwner: false,),
+      screen: PropertyScreen(property: property, isOwner: false),
       withNavBar: false,
-      pageTransitionAnimation: PageTransitionAnimation.scale
+      pageTransitionAnimation: PageTransitionAnimation.scale,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final String locationName =
-        '${property.state.name}, ${property.city}';
+    final String locationName = '${property.state.name}, ${property.city}';
 
     return SizedBox(
       width: 240,
@@ -43,16 +40,21 @@ class RecommendedHomeProperty extends StatelessWidget {
           },
           child: Stack(
             children: [
-              CachedNetworkImage(
-                imageUrl: property.imageURLs[0],
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                const CircularProgressIndicator(color: Colors.white),
-                errorWidget: (context, url, error) =>
-                const Icon(AppIcons.homeIcon, size: 50, color: Colors.white),
-              ),
+              property.imageURLs[0] == 'empty'
+                  ? Image.asset(
+                      AppImages.kNoImages,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: property.imageURLs[0],
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(color: Colors.white),
+                    ),
               Padding(
                 padding: EdgeInsets.only(
                   left: 15,

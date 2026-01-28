@@ -34,4 +34,12 @@ class AppImages{
  static const kOnBoarding1 = 'assets/images/onBorading1.png';
  static const kOnBoarding2 = 'assets/images/onBorading2.png';
  static const kOnBoarding3 = 'assets/images/onBorading3.png';
+
+ //ErrorMessages
+ static const kEmptyNotifications = 'assets/images/empty_notifications.png';
+ static const kEmptyFavorites = 'assets/images/empty_favorites.png';
+ static const kEmptySearch = 'assets/images/empty_search.png';
+ static const kNoInternet = 'assets/images/no_internet.png';
+ static const kNoImages = 'assets/images/no_image.png';
+
 }

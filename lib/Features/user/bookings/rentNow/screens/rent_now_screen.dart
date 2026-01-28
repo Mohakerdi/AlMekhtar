@@ -375,10 +375,8 @@ class _RentNowScreenState extends State<RentNowScreen> {
             }
 
             final cubit = context.read<PaymentCubit>();
-            final String start = DateFormat(
-              'yyyy-M-d',
-            ).format(selectedDates.start);
-            final String end = DateFormat('yyyy-M-d').format(selectedDates.end);
+            final String start = DateFormat('yyyy-M-d','en').format(selectedDates.start);
+            final String end = DateFormat('yyyy-M-d','en').format(selectedDates.end);
 
             cubit.startTerm = start;
             cubit.endTerm = end;

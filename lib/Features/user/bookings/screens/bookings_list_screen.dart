@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mabeet/core/constants/strings.dart';
+import 'package:mabeet/core/widgets/internet_error_widget.dart';
 import 'package:mabeet/core/widgets/shimmer_loading_property.dart';
 import 'package:mabeet/data/models/booking_model.dart';
 import 'package:mabeet/data/repos/booking_repo.dart';
@@ -83,14 +84,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
             },
           );
         } else if (state is BookingError) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(state.message),
-              ],
-            ),
-          );
+          return InternetErrorWidget(message: state.message, onRetry: _fetchBookings,);
         } else {
           return const Center(child: Text(''));
         }

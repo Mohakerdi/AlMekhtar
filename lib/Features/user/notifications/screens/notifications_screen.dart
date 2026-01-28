@@ -9,8 +9,10 @@ import 'package:mabeet/core/api/dio_consumer.dart';
 import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
 import 'package:mabeet/Features/user/notifications/services/cubit/notifications_state.dart';
 import 'package:mabeet/core/constants/icons.dart';
+import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/constants/strings.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -47,7 +49,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               );
             }
             if (state is NotificationError) {
-              return Center(child: Text(state.message));
+              return Center(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(AppImages.kEmptyNotifications),
+                  Text(AppStrings.emptyNotiMsg.tr(),style: AppTextStyles.titleLarge, textAlign: TextAlign.center,),
+                ],
+              ));
             }
             if (state is NotificationLoaded) {
               final cards = state.notifications;

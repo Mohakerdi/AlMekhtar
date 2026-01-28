@@ -87,17 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: CustomAppBar(titleText: AppStrings.homeScreenTitle.tr()),
       body: BlocBuilder<SearchFilterCubit, SearchFilterState>(
         builder: (context, state) {
-          final properties = state.properties;
-          final recommendedItems = properties?.take(3).toList();
-          final popularItems = properties?.take(3).toList();
+          final properties = state.properties ?? [];
+          final recommendedItems = properties.take(3).toList();
+          final popularItems = properties.take(3).toList();
 
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -137,10 +134,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         )
+                      : recommendedItems == []
+                      ? Row(children: [Text('data')])
                       : SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: recommendedItems!
+                            children: recommendedItems
                                 .map(
                                   (prop) => Padding(
                                     padding: const EdgeInsets.only(right: 20),
@@ -200,7 +199,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 10),
                   state.isLoading
                       ? const Center(child: CircularProgressIndicator())
-                      : PropertiesList(items: popularItems!),
+                      : popularItems == []
+                      ? Row(children: [Text('data')])
+                      : PropertiesList(items: popularItems),
                 ],
               ),
             ),

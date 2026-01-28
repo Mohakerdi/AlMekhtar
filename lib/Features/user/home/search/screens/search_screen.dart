@@ -6,11 +6,14 @@ import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart'
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_state.dart';
 import 'package:mabeet/Features/user/home/search/widgets/search_field.dart';
 import 'package:mabeet/Features/user/home/widgets/popular_property.dart';
+import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/constants/strings.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
 import '../widgets/filter_overlay.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
+
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
@@ -69,8 +72,22 @@ class _SearchScreenState extends State<SearchScreen> {
                   )
                 else if (properties.isEmpty)
                   Padding(
-                    padding: EdgeInsets.only(top: 100),
-                    child: Text(AppStrings.emptySearch.tr()),
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+                    child: Column(
+                      children: [
+                        Text(
+                          AppStrings.noResultsSearch.tr(),
+                          style: AppTextStyles.display2Medium,
+                          textAlign: TextAlign.center,
+                        ),
+                        Image.asset(AppImages.kEmptySearch),
+                        Text(
+                          AppStrings.emptySearch.tr(),
+                          style: AppTextStyles.heading2Medium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   )
                 else
                   ListView.separated(
@@ -78,7 +95,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: properties.length,
                     separatorBuilder: (ctx, idx) => const SizedBox(height: 15),
-                    itemBuilder: (ctx, index) => PopularProperty(property: properties[index]),
+                    itemBuilder: (ctx, index) =>
+                        PopularProperty(property: properties[index]),
                   ),
               ],
             ),

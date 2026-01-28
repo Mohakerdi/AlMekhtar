@@ -30,6 +30,7 @@ abstract class AppStrings {
   static const String notiScreenTitle = 'noti_screen_title';
   static const String emptyFav = 'empty_fav';
   static const String emptySearch = 'empty_search';
+  static const String noResultsSearch = 'no_results_found';
   static const String searchResults = 'search_results';
 
   // --- HomeScreen

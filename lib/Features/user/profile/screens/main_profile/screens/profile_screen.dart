@@ -5,8 +5,11 @@ import 'package:mabeet/Features/auth/screens/login_screen.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_cubit.dart';
 import 'package:mabeet/Features/auth/services/cubit/user_state.dart';
 import 'package:mabeet/Features/user/profile/screens/main_profile/widgets/profile_body_skeleton.dart';
+import 'package:mabeet/core/constants/images.dart';
 import 'package:mabeet/core/theme/app_colors.dart';
+import 'package:mabeet/core/theme/text_styles.dart';
 import 'package:mabeet/core/widgets/CustomAppBar.dart';
+import 'package:mabeet/core/widgets/internet_error_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../../../core/constants/strings.dart';
 import '../../../../../../core/localization/localiztion_service.dart';
@@ -65,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               if (userState is GetUserFailure) {
                 if (userCubit.currentUser == null) {
-                  return Center(child: Text(AppStrings.errorMessage.tr()));
+                  return InternetErrorWidget(message: AppStrings.errorMessage.tr(), onRetry: userCubit.getUserProfile,);
                 }
               }
               return ProfileBodyWidget(
