@@ -20,7 +20,6 @@ class SelectFromGallery extends StatelessWidget {
   });
 
   List<Object> get currentImages => [...existingImageUrls, ...selectedImages];
-
   final int maxImages = 4;
 
   @override

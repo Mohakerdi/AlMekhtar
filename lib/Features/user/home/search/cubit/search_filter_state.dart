@@ -20,6 +20,9 @@ class SearchFilterState {
 
 
   final List<Property>? properties;
+  final List<Property>? homeRecommended;
+  final List<Property>? homePopular;
+
   final bool isLoading;
   final String? errorMessage;
 
@@ -35,6 +38,8 @@ class SearchFilterState {
     required this.order,
 
     this.properties,
+    this.homeRecommended,
+    this.homePopular,
     this.isLoading = false,
     this.errorMessage,
   });
@@ -51,6 +56,8 @@ class SearchFilterState {
       maxRate: _initialMaxRate,
       order: 'asc',
       properties: null,
+      homeRecommended: null,
+      homePopular: null,
       isLoading: false,
       errorMessage: null,
     );
@@ -67,6 +74,8 @@ class SearchFilterState {
     double? maxRate,
     String? order,
     List<Property>? properties,
+    List<Property>? homeRecommended,
+    List<Property>? homePopular,
     bool? isLoading,
     String? errorMessage,
   }) {
@@ -82,11 +91,13 @@ class SearchFilterState {
       order: order ?? this.order,
 
       properties: properties ?? this.properties,
+      homeRecommended: homeRecommended ?? this.homeRecommended,
+      homePopular: homePopular ?? this.homePopular,
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
-  static SearchFilterState get resetValues {
+  SearchFilterState get resetValues {
     return SearchFilterState(
       governorate: null,
       area: null,
@@ -100,6 +111,8 @@ class SearchFilterState {
       order: 'asc',
 
       properties: null,
+      homeRecommended: this.homeRecommended,
+      homePopular: this.homePopular,
       isLoading: false,
       errorMessage: null,
     );

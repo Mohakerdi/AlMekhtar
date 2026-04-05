@@ -1,26 +1,24 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mabeet/data/models/property.dart';
 import '../../../../../data/repos/search_repo.dart';
 import '../../../../../data/models/state.dart';
 import 'search_filter_state.dart';
 
 class SearchFilterCubit extends Cubit<SearchFilterState> {
-
-  SearchFilterCubit({required this.searchRepo}) : super(SearchFilterState.initial());
+  SearchFilterCubit({required this.searchRepo})
+    : super(SearchFilterState.initial());
 
   final SearchRepository searchRepo;
 
   void updateGovernorate(Location newGovernorate) {
     final stateModel = syrianStates.firstWhere(
-          (state) => state.name == newGovernorate.name,
+      (state) => state.name == newGovernorate.name,
       orElse: () => syrianStates[0],
     );
 
     final newArea = stateModel.areas.isNotEmpty ? stateModel.areas[0] : null;
 
-    emit(state.copyWith(
-      governorate: newGovernorate,
-      area: newArea,
-    ));
+    emit(state.copyWith(governorate: newGovernorate, area: newArea));
   }
 
   void updateArea(String newArea) {
@@ -47,76 +45,75 @@ class SearchFilterCubit extends Cubit<SearchFilterState> {
     emit(SearchFilterState.initial());
   }
 
-  void seeAllFilters() async{
-    emit(state.copyWith(
-      isLoading: true,
-      errorMessage: null,
-      properties: null,
-    ));
-    final results = await searchRepo.getFilteredResults(
-      order: state.order,
-    );
+  void seeAllFilters() async {
+    emit(state.copyWith(isLoading: true, errorMessage: null, properties: null));
+    final results = await searchRepo.getFilteredResults(order: state.order);
 
     results.fold(
-            (errorMessage) => emit(state.copyWith(
-          isLoading: false,
-        )),
-            (properties) =>emit(state.copyWith(
-            isLoading: false,
-            properties: properties
-        ))
+      (errorMessage) => emit(state.copyWith(isLoading: false)),
+      (properties) =>
+          emit(state.copyWith(isLoading: false, properties: properties)),
     );
   }
 
   Future<void> applyFilters() async {
-    emit(state.copyWith(
-      isLoading: true,
-      errorMessage: null,
-      properties: null,
-    ));
-      final results = await searchRepo.getFilteredResults(
-        governorate: state.governorate,
-        area: state.area,
-        minCost: state.minCost,
-        maxCost: state.maxCost,
-        minArea: state.minArea,
-        maxArea: state.maxArea,
-        minRate: state.minRate,
-        maxRate: state.maxRate,
-        order: state.order,
-      );
-      
-      results.fold(
-          (errorMessage) => emit(state.copyWith(
-            isLoading: false,
-          )),
-          (properties) =>emit(state.copyWith(
-              isLoading: false,
-              properties: properties
-          ))
-      );
+    emit(state.copyWith(isLoading: true, errorMessage: null, properties: null));
+    final results = await searchRepo.getFilteredResults(
+      governorate: state.governorate,
+      area: state.area,
+      minCost: state.minCost,
+      maxCost: state.maxCost,
+      minArea: state.minArea,
+      maxArea: state.maxArea,
+      minRate: state.minRate,
+      maxRate: state.maxRate,
+      order: state.order,
+    );
+
+    results.fold(
+      (errorMessage) => emit(state.copyWith(isLoading: false)),
+      (properties) =>
+          emit(state.copyWith(isLoading: false, properties: properties)),
+    );
   }
 
   Future<void> selectGovernorate(Location newGovernorate) async {
-    emit(state.copyWith(
-      governorate: newGovernorate,
-      isLoading: true,
-      errorMessage: null,
-      properties: null,
-    ));
+    emit(
+      state.copyWith(
+        governorate: newGovernorate,
+        isLoading: true,
+        errorMessage: null,
+        properties: null,
+      ),
+    );
     final results = await searchRepo.getFilteredResults(
       governorate: state.governorate,
       order: state.order,
     );
 
     results.fold(
-            (errorMessage) => emit(state.copyWith(
-          isLoading: false,
-        )),
-            (properties) =>emit(state.copyWith(
-            isLoading: false,
-            properties: properties
-        ))
+      (errorMessage) => emit(state.copyWith(isLoading: false)),
+      (properties) =>
+          emit(state.copyWith(isLoading: false, properties: properties)),
     );
+  }
+
+  Future<void> loadHomeProperties() async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final res = await searchRepo.getFilteredResults();
+      res.fold(
+        (ifLeft) => emit(state.copyWith(isLoading: false)),
+        (prop) => emit(
+          state.copyWith(
+            isLoading: false,
+            homeRecommended: prop.take(3).toList(),
+            homePopular: prop.take(3).toList(),
+          ),
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
+    }
   }
 }

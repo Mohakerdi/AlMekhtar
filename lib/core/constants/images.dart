@@ -6,6 +6,7 @@ class AppImages{
  static const kSliderImage3 = 'assets/images/slider-image3.jpg';
  static const kSliderImage4 = 'assets/images/slider-image4.jpg';
  static const kPaymentCard = 'assets/images/card.png';
+ static const kAboutUs = 'assets/images/about_us.png';
 
  //Properties
  static const kDyarImage = 'assets/images/dyar.png';

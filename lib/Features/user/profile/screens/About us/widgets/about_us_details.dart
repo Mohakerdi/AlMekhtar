@@ -16,7 +16,7 @@ class AboutUsShowDetails extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(12)),
             child: Image.asset(
-              AppImages.kDamascus,
+              AppImages.kAboutUs,
               height: 168,
               width: 388,
               fit: BoxFit.cover,

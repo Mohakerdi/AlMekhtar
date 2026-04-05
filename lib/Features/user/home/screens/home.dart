@@ -77,7 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<SearchFilterCubit>().seeAllFilters();
+    final currentState = context.read<SearchFilterCubit>().state;
+    if (currentState.homeRecommended == null || currentState.homeRecommended!.isEmpty) {
+      context.read<SearchFilterCubit>().loadHomeProperties();
+    }
   }
 
   @override
@@ -87,9 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: CustomAppBar(titleText: AppStrings.homeScreenTitle.tr()),
       body: BlocBuilder<SearchFilterCubit, SearchFilterState>(
         builder: (context, state) {
-          final properties = state.properties ?? [];
-          final recommendedItems = properties.take(3).toList();
-          final popularItems = properties.take(3).toList();
+          final recommendedItems = state.homeRecommended ?? [];
+          final popularItems = state.homePopular ?? [];
 
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
