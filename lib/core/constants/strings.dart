@@ -92,6 +92,7 @@ abstract class AppStrings {
   static const String total = "total";
   static const String emptyBookingsMsg = "empty_bookings_msg";
   static const String emptyNotiMsg = "empty_noti_msg";
+  static const String latestNotification = "latest_notification";
   static const String bookingCancelError = "booking_cancel_error";
   static const String failedLoad = "failed_load";
 

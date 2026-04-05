@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:mabeet/Features/user/notifications/services/data/notification_repo.dart';
 import 'package:mabeet/Features/user/notifications/services/data/notification_webservices.dart';
+import 'package:mabeet/Features/user/notifications/widgets/latest_notification_shade.dart';
 import 'package:mabeet/Features/user/notifications/widgets/notification_shimmer.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
 import 'package:mabeet/Features/user/notifications/services/cubit/notifications_cubit.dart';
@@ -66,6 +67,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               return ListView.builder(
                 itemCount: cards.length,
                 itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return LatestNotificationShade(notification: cards.first);
+                  }
                   final item = cards[index];
                   final formattedDate = DateFormat.yMMMd().format(item.date);
                   return Card(
