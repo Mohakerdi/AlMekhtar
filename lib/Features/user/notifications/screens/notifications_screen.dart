@@ -32,7 +32,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         final cubit = NotificationCubit(
           NotificationRepo(NotificationWebServices(api: DioConsumer(dio: dio))),
         );
-        cubit.getNotifications();
+        cubit.getNotifications(showFirstAsLocal: true);
 
         return cubit;
       },

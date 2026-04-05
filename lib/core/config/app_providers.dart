@@ -14,6 +14,7 @@ import 'package:mabeet/Features/user/favorites/services/data/favorite_webservice
 import 'package:mabeet/Features/user/home/search/cubit/search_filter_cubit.dart';
 import 'package:mabeet/core/api/dio_consumer.dart';
 import 'package:mabeet/core/cache/cache_helper.dart';
+import 'package:mabeet/core/localization/localiztion_service.dart';
 import 'package:mabeet/core/notifications_service/local_notification_service.dart';
 import 'package:mabeet/core/theme/bloc/theme_cubit.dart';
 import 'package:mabeet/data/repos/payment_repo.dart';
@@ -62,6 +63,20 @@ Future<void> initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
+  await LocalNotificationService.init();
+
+  // Pick reminder strings based on the user's saved locale (CacheHelper is
+  // already initialised at this point, so getSavedLocale() works without a
+  // BuildContext, which is not available before runApp).
+  final isArabic =
+      LocalizationService.getSavedLocale()?.languageCode == 'ar';
+  await LocalNotificationService.scheduleRepeatingNotifications(
+    title: isArabic ? 'المختار' : 'Al-Mekhtar',
+    body: isArabic
+        ? 'لقد مضى وقت طويل، اشتقنا إليك!'
+        : "It's been a while, we missed you!",
+  );
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
