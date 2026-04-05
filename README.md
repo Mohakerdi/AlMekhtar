@@ -1,4 +1,4 @@
-## 🏡 Mabeet: Your Next Rental Awaits
+Al-Mekhtar: Your Next Rental Awaits
 
 A modern Android application built as a university project to provide a simple, localized, and feature-rich platform for finding and listing rental properties.
 
@@ -20,7 +20,7 @@ Mabeet is built with best practices in mind, leveraging the latest Android devel
 
 ## ✨ Core Features
 
-Mabeet is designed to be accessible and easy to use, supporting multiple languages and themes right out of the box.
+Al-Mekhtar is designed to be accessible and easy to use, supporting multiple languages and themes right out of the box.
 
 * **🔍 Property Discovery:** Intuitive browsing and detailed views for available rental listings.
 * **👤 Basic Authentication:** Secure user registration and login functionalities.
@@ -66,7 +66,7 @@ You will need the following installed:
 
 | Light Mode (English) | Dark Mode (Arabic) |
 | :---: | :---: |
-| <img width="200" alt="Light Mode EN" src="https://github.com/user-attachments/assets/7c7beb3c-8517-4f02-8a9e-14ba7f86aa4c" /> | <img width="200" alt="Dark Mode AR" src="https://github.com/user-attachments/assets/3b008c82-9d0a-4ddf-9670-b835b255c060" /> |---
+| <img width="200" height="650" alt="Screenshot_20260204_174625" src="https://github.com/user-attachments/assets/6fc16c39-b5fa-4a51-83f9-fe195626f469" /> | <img width="200" height="650" alt="Screenshot_20260204_174820" src="https://github.com/user-attachments/assets/193fe1f2-2b2b-4026-aba5-10104df3f749" />|---
 
 ## 🤝 The Development Team
 
