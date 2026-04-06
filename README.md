@@ -1,64 +1,88 @@
-Al-Mekhtar: Your Next Rental Awaits
+<div align="center">
 
-A modern Android application built as a university project to provide a simple, localized, and feature-rich platform for finding and listing rental properties.
+# 🏠 Al-Mekhtar
+
+### *Your Next Rental Awaits*
+
+A modern, cross-platform rental property app built with Flutter — designed to make finding and listing properties simple, fast, and accessible to everyone.
+
+<br/>
+
+[![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/)
+[![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/)
+[![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
+[![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=white)](https://developer.apple.com/)
+
+</div>
 
 ---
 
-## 🌟 Technologies Used
+## 📖 About
 
-Mabeet is built with best practices in mind, leveraging the latest Android development tools.
+**Al-Mekhtar** is a university project rental platform that connects property seekers with property owners. Built with Flutter for true cross-platform support, it offers a seamless experience on both Android and iOS, with full Arabic and English localization.
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+| :--- | :--- |
+| 🔍 **Property Discovery** | Browse and search available rental listings with an intuitive interface |
+| 💬 **In-App Chat** | Communicate directly with property owners or renters |
+| ❤️ **Favorites** | Save and manage your favorite listings |
+| 📅 **Bookings** | Request and track property bookings end-to-end |
+| 🏘️ **My Rentals** | Manage your own listed properties |
+| 🔔 **Notifications** | Stay updated with real-time alerts |
+| 👤 **Authentication** | Secure user registration and login with JWT |
+| 🌙 **Adaptive Theming** | Seamless Dark & Light mode based on system settings |
+| 🌍 **Full Localization** | Complete support for **English (EN)** and **Arabic (AR)** |
+
+---
+
+## 🛠️ Tech Stack
 
 | Category | Tools & Libraries |
 | :--- | :--- |
-| **Platform** | [![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/) |
-| **Language** | [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/) [![Dart](https://img.shields.io/badge/Dart-02569B?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/) |
-| **Architecture** | [![MVVM](https://img.shields.io/badge/Architecture-MVVM-FFA500?style=for-the-badge&logoColor=white)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) |
-| **Build Tool** | [![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)](https://gradle.org/) |
-| **UI/UX** | [![Material Design](https://img.shields.io/badge/UI/UX-Material%20Design-757575?style=for-the-badge&logo=google-material-design)](https://material.io/components/android) |
-
----
-
-## ✨ Core Features
-
-Al-Mekhtar is designed to be accessible and easy to use, supporting multiple languages and themes right out of the box.
-
-* **🔍 Property Discovery:** Intuitive browsing and detailed views for available rental listings.
-* **👤 Basic Authentication:** Secure user registration and login functionalities.
-* **🌙 Adaptive Theming:** Automatic switching between **Dark Mode** and **Light Mode** based on system settings.
-* **🌍 Full Localization:** Complete support for two major locales:
-    * English (EN)
-    * Arabic (AR)
-* **⚙️ Basic Management:** Features for adding and viewing personal property listings.
+| **Framework** | Flutter 3.x |
+| **Language** | Dart 3.x |
+| **State Management** | flutter_bloc (BLoC pattern) |
+| **Navigation** | GetX (`get`) |
+| **Networking** | Dio |
+| **Local Storage** | shared_preferences |
+| **Localization** | easy_localization |
+| **UI Components** | Material Design 3, Google Fonts, Syncfusion Sliders & DatePicker |
+| **Media** | image_picker, cached_network_image, carousel_slider, gallery_zoom_slides |
+| **Auth** | jwt_decoder |
+| **Notifications** | flutter_local_notifications |
 
 ---
 
 ## 🚀 Getting Started
 
-Follow these steps to set up the project locally and start development.
-
 ### Prerequisites
 
-You will need the following installed:
-
-* **Android Studio** (Latest stable version is recommended)
-* **Android SDK** (API 30+)
-* Git
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) (Dart SDK `^3.8.1`)
+- Android Studio or VS Code with Flutter plugin
+- Android SDK (API 30+) or an iOS Simulator
 
 ### Installation
 
-1.  **Clone the Repository**
-    ```bash
-    git clone [https://github.com/your-org-or-username/mabeet.git](https://github.com/your-org-or-username/mabeet.git)
-    ```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Mohakerdi/AlMekhtar.git
+   cd AlMekhtar
+   ```
 
-2.  **Open in Android Studio**
-    * Launch Android Studio and select **Open**.
-    * Navigate to the cloned `mabeet` directory and select it.
-    * Wait for the Gradle build to sync and resolve all dependencies.
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
 
-3.  **Run the App**
-    * Select your desired AVD (emulator) or connect a physical device.
-    * Click the **Run** button (▶️).
+3. **Run the app**
+   ```bash
+   flutter run
+   ```
+   > Select your desired emulator/simulator or connect a physical device.
 
 ---
 
@@ -66,16 +90,22 @@ You will need the following installed:
 
 | Light Mode (English) | Dark Mode (Arabic) |
 | :---: | :---: |
-| <img width="200" height="650" alt="Screenshot_20260204_174625" src="https://github.com/user-attachments/assets/6fc16c39-b5fa-4a51-83f9-fe195626f469" /> | <img width="200" height="650" alt="Screenshot_20260204_174820" src="https://github.com/user-attachments/assets/193fe1f2-2b2b-4026-aba5-10104df3f749" />|---
-
-## 🤝 The Development Team
-
-This project was developed by:
-
-| Name | Connect |
-| :--- | :--- |
-| **Moha Kerdi** | [![GitHub Badge](https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github)](https://github.com/Mohakerdi) |
-| **Mo ZeaLnoun** | [![GitHub Badge](https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github)](https://github.com/MoZealnoun) |
-| **Steve Code** | [![GitHub Badge](https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github)](https://github.com/steve-codesy) |
+| <img width="200" height="650" alt="Light Mode" src="https://github.com/user-attachments/assets/6fc16c39-b5fa-4a51-83f9-fe195626f469" /> | <img width="200" height="650" alt="Dark Mode" src="https://github.com/user-attachments/assets/193fe1f2-2b2b-4026-aba5-10104df3f749" /> |
 
 ---
+
+## 👥 The Development Team
+
+| Name | GitHub |
+| :--- | :--- |
+| **Moha Kerdi** | [![GitHub](https://img.shields.io/badge/Mohakerdi-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Mohakerdi) |
+| **Mo ZeaLnoun** | [![GitHub](https://img.shields.io/badge/MoZealnoun-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/MoZealnoun) |
+| **Steve Code** | [![GitHub](https://img.shields.io/badge/steve--codesy-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/steve-codesy) |
+
+---
+
+<div align="center">
+
+Made with ❤️ using Flutter
+
+</div>
