@@ -15,11 +15,10 @@ class NotificationCubit extends Cubit<NotificationState> {
 
       emit(NotificationLoaded(notifications));
 
-      /// 🔔 عرض أول إشعار
+      /// 🔔 Show the latest notification in the device's notification shade
       if (showFirstAsLocal && notifications.isNotEmpty) {
         final first = notifications.first;
-
-        // first.showAsLocalNotification();
+        first.showAsLocalNotification();
       }
     } catch (e) {
       emit(NotificationError(e.toString()));
