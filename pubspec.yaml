@@ -61,7 +61,6 @@ dependencies:
   flutter_spinbox: ^0.13.1
   cached_network_image: ^3.4.1
   timezone: ^0.10.1
-  flutter_local_notifications: ^18.0.1
   flutter_image_compress: ^2.4.0
 
 dev_dependencies:
